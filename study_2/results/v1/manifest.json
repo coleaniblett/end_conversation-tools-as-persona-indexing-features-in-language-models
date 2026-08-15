@@ -1,0 +1,19 @@
+{
+  "run_id": "v1",
+  "created": "2026-08-15T19:58:05.578121+00:00",
+  "git_commit": "7ed62eb4329f7070f2ef765605b85733670907eb",
+  "config_sha256": {
+    "run.yaml": "ad6a9cf6dd7ebb6c35b6001fa67f59ade0bbe12dd2dd81e4ad0e7df3f203183c",
+    "models.yaml": "2ccc07c293a2fbeb75bf1c1e04793c1eb1deb514ffca25a5dced302b5e40302c",
+    "conditions.yaml": "dc6663ab901e8267be9df6489fee142d02ee023382af5836e99d75d60cdcc61d",
+    "study2_items.yaml": "2d8a8cdc5d70d7267b03ce64c703d77d3bb6d6c03758871ad5d92a1e5a2d0dd0",
+    "probes.yaml": "6950d67e934454ff542fc317cbe432297ff8b0530562b48981265f1e2da7d106"
+  },
+  "n_cells": 23520,
+  "argv": [
+    "plan",
+    "--run",
+    "v1"
+  ],
+  "hash_scheme": "scientific_keys_v1"
+}
