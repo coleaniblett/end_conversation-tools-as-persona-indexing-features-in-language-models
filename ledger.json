@@ -1,7 +1,7 @@
 {
   "cap_usd": 80.0,
-  "spent_usd": 10.083948,
-  "calls": 10269,
+  "spent_usd": 10.203631,
+  "calls": 10506,
   "by_purpose": {
     "smoke_turn1": 0.018349,
     "smoke_turn2": 8.8e-05,
@@ -12,10 +12,12 @@
     "stage2_turn1": 0.877393,
     "stage2_turn2": 0.001882,
     "judge_stage2": 0.003169,
-    "classify_stage2": 1.355497
+    "classify_stage2": 1.355497,
+    "llama4_probe_turn1": 0.110724,
+    "llama4_probe_turn2": 0.008959
   },
   "by_model": {
-    "llama4_maverick": 0.197999,
+    "llama4_maverick": 0.317683,
     "gemini25_flash": 1.006174,
     "sonnet46": 3.883254,
     "qwen3_235b": 0.215544,
@@ -28,5 +30,5 @@
   "estimated_cost_calls": 0,
   "provider_mismatches": [],
   "invalid_cells": [],
-  "updated": "2026-08-15T18:33:05Z"
+  "updated": "2026-08-15T20:30:29Z"
 }

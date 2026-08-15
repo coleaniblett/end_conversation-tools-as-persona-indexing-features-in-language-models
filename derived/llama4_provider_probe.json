@@ -1,0 +1,134 @@
+{
+ "generated": "2026-08-15T20:30:42Z",
+ "probe_pin": {
+  "pin_name": "Google",
+  "pin_slug": "google-vertex",
+  "pin_tag": "google-vertex/us-east5",
+  "quantization": "unknown",
+  "pricing": {
+   "prompt": 3.5e-07,
+   "completion": 1.15e-06
+  },
+  "supported_parameters": [
+   "structured_outputs",
+   "response_format",
+   "max_tokens",
+   "temperature",
+   "top_p",
+   "seed",
+   "top_k",
+   "frequency_penalty",
+   "presence_penalty",
+   "stop",
+   "tools",
+   "tool_choice"
+  ]
+ },
+ "original_pin": {
+  "pin_slug": "parasail",
+  "pin_name": "Parasail",
+  "quantization": "fp8"
+ },
+ "providers_served_probe": [
+  "Google"
+ ],
+ "pin_held_100pct": true,
+ "probe_by_condition": {
+  "none": {
+   "n": 30,
+   "excluded": 0,
+   "empty_rate": 0.0,
+   "recoded": {}
+  },
+  "time_schema": {
+   "n": 30,
+   "excluded": 0,
+   "empty_rate": 0.0,
+   "recoded": {}
+  },
+  "note_schema": {
+   "n": 30,
+   "excluded": 0,
+   "empty_rate": 0.0,
+   "recoded": {}
+  },
+  "exit_schema": {
+   "n": 30,
+   "excluded": 0,
+   "empty_rate": 0.0,
+   "recoded": {}
+  },
+  "exit_prose": {
+   "n": 30,
+   "excluded": 0,
+   "empty_rate": 0.0,
+   "recoded": {}
+  },
+  "exit_both": {
+   "n": 30,
+   "excluded": 0,
+   "empty_rate": 0.0,
+   "recoded": {}
+  }
+ },
+ "stage1_by_condition": {
+  "none": {
+   "n": 60,
+   "excluded": 0,
+   "empty_rate": 0.0,
+   "recoded": {}
+  },
+  "time_schema": {
+   "n": 60,
+   "excluded": 9,
+   "empty_rate": 0.15,
+   "recoded": {
+    "hallucinated_tool": 2,
+    "null_turn": 7
+   }
+  },
+  "note_schema": {
+   "n": 60,
+   "excluded": 14,
+   "empty_rate": 0.2333,
+   "recoded": {
+    "hallucinated_tool": 3,
+    "null_turn": 11
+   }
+  },
+  "exit_schema": {
+   "n": 60,
+   "excluded": 17,
+   "empty_rate": 0.2833,
+   "recoded": {
+    "null_turn": 11,
+    "hallucinated_tool": 6
+   }
+  },
+  "exit_prose": {
+   "n": 60,
+   "excluded": 0,
+   "empty_rate": 0.0,
+   "recoded": {}
+  },
+  "exit_both": {
+   "n": 60,
+   "excluded": 4,
+   "empty_rate": 0.0667,
+   "recoded": {
+    "hallucinated_tool": 1,
+    "null_turn": 3
+   }
+  }
+ },
+ "tool_bearing_empty_rate": {
+  "probe": 0.0,
+  "stage1_parasail": 0.1833
+ },
+ "verdict": "ENDPOINT: zero empty responses on the new provider in tool-bearing conditions \u2014 the Parasail fp8 endpoint (or its serving stack) produced the stage-1 empties; not model behavior.",
+ "sources": {
+  "raw\\llama4_probe_llama4_maverick.jsonl": "0ff81309a3dbafb17c83e8f81dcba279eba2fe95045c4ac122321c86a195bbff",
+  "raw\\stage1_llama4_maverick.jsonl": "7d53e0e305a9016ae1c9008d84cc2b1339376f3720165cb0213afa2f091471b3"
+ },
+ "note": "probe n=1 rep (180 conversations) vs stage-1 n=2 reps (360); probe raw kept separate from stage data, never pooled"
+}

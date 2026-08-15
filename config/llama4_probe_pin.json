@@ -1,0 +1,91 @@
+{
+ "generated": "2026-08-15T20:23:08Z",
+ "slug": "meta-llama/llama-4-maverick",
+ "original_pin": {
+  "pin_slug": "parasail",
+  "pin_name": "Parasail",
+  "quantization": "fp8"
+ },
+ "probe_pin": {
+  "pin_name": "Google",
+  "pin_slug": "google-vertex",
+  "pin_tag": "google-vertex/us-east5",
+  "quantization": "unknown",
+  "pricing": {
+   "prompt": 3.5e-07,
+   "completion": 1.15e-06
+  },
+  "supported_parameters": [
+   "structured_outputs",
+   "response_format",
+   "max_tokens",
+   "temperature",
+   "top_p",
+   "seed",
+   "top_k",
+   "frequency_penalty",
+   "presence_penalty",
+   "stop",
+   "tools",
+   "tool_choice"
+  ]
+ },
+ "endpoints_seen": [
+  {
+   "provider": "DigitalOcean",
+   "tag": "digitalocean",
+   "quantization": "unknown",
+   "tools": true,
+   "pricing": {
+    "prompt": "0.0000002",
+    "completion": "0.000000696",
+    "discount": 0
+   }
+  },
+  {
+   "provider": "DeepInfra",
+   "tag": "deepinfra/base",
+   "quantization": "fp8",
+   "tools": false,
+   "pricing": {
+    "prompt": "0.0000002",
+    "completion": "0.0000008",
+    "discount": 0
+   }
+  },
+  {
+   "provider": "Novita",
+   "tag": "novita/fp8",
+   "quantization": "fp8",
+   "tools": false,
+   "pricing": {
+    "prompt": "0.00000027",
+    "completion": "0.00000085",
+    "discount": 0
+   }
+  },
+  {
+   "provider": "Parasail",
+   "tag": "parasail/fp8",
+   "quantization": "fp8",
+   "tools": true,
+   "pricing": {
+    "prompt": "0.00000035",
+    "completion": "0.000001",
+    "input_cache_read": "0.00000017",
+    "discount": 0
+   }
+  },
+  {
+   "provider": "Google",
+   "tag": "google-vertex/us-east5",
+   "quantization": "unknown",
+   "tools": true,
+   "pricing": {
+    "prompt": "0.00000035",
+    "completion": "0.00000115",
+    "discount": 0
+   }
+  }
+ ]
+}
