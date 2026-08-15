@@ -212,6 +212,10 @@ This split tests the study's interpretive claim against its most obvious deflati
 
 **Recorded at spec time:** staged data collection with the mechanical selection rule in §7 is part of the original design, not a mid-run adaptation. Turn 2 is conditional by design (§5). Canned tool results (Appendix A.7) are part of the frozen stimulus set.
 
+**[2026-08-15T09:52Z, pre-first-send] Parameter support record (§6):** `openai/gpt-5-mini`'s pinned endpoint (OpenAI) does not accept `temperature` or `top_p` (endpoint `supported_parameters` lists neither). Both are omitted from requests to this model; the provider default is used (this model family runs at its fixed default sampling, temperature effectively 1). All other seven models' pinned endpoints support both; they receive temperature 1.0 and top-p 1.0 as specified. Recorded per §6 ("Any model not supporting a parameter is recorded in §10 with the value used").
+
+**[2026-08-15T09:52Z, pre-first-send] Model list resolution (§6):** all eight target-list candidates verified with tool support and a pinnable provider; no fallback substitutions were needed. `google/gemma-3-27b-it`, anticipated to fail the tool check, passed it (DeepInfra endpoint serves it with tools) and is retained. The Qwen slot resolved to `qwen/qwen3-235b-a22b-2507` (the current non-thinking instruct release of the 235B family). The Claude slot resolved to `anthropic/claude-sonnet-4.6`. Pinned providers, pricing, and sampling parameters are in `config/models.yaml`.
+
 ---
 
 ## 11. Planned outputs

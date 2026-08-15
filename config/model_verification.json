@@ -1,0 +1,313 @@
+{
+  "generated": "2026-08-15T09:46:33Z",
+  "verified": [
+    {
+      "key": "gemini25_flash",
+      "slug": "google/gemini-2.5-flash",
+      "lineage": "google",
+      "rationale": "pilot-effect model",
+      "pin_name": "Google AI Studio",
+      "pin_slug": "google-ai-studio",
+      "pin_tag": "google-ai-studio",
+      "quantization": "unknown",
+      "context_length": 1048576,
+      "max_completion_tokens": 65535,
+      "pricing": {
+        "prompt": 3e-07,
+        "completion": 2.5e-06
+      },
+      "param_support": {
+        "temperature": true,
+        "top_p": true,
+        "max_tokens": true
+      },
+      "endpoint_supported_parameters": [
+        "reasoning",
+        "include_reasoning",
+        "structured_outputs",
+        "response_format",
+        "max_tokens",
+        "temperature",
+        "top_p",
+        "seed",
+        "tools",
+        "tool_choice",
+        "stop"
+      ]
+    },
+    {
+      "key": "gpt5_mini",
+      "slug": "openai/gpt-5-mini",
+      "lineage": "openai",
+      "rationale": "Ren et al. pipeline configuration",
+      "pin_name": "OpenAI",
+      "pin_slug": "openai",
+      "pin_tag": "openai",
+      "quantization": "unknown",
+      "context_length": 400000,
+      "max_completion_tokens": 128000,
+      "pricing": {
+        "prompt": 2.5e-07,
+        "completion": 2e-06
+      },
+      "param_support": {
+        "temperature": false,
+        "top_p": false,
+        "max_tokens": true
+      },
+      "endpoint_supported_parameters": [
+        "reasoning",
+        "include_reasoning",
+        "structured_outputs",
+        "response_format",
+        "seed",
+        "max_tokens",
+        "tools",
+        "tool_choice",
+        "reasoning_effort"
+      ]
+    },
+    {
+      "key": "sonnet46",
+      "slug": "anthropic/claude-sonnet-4.6",
+      "lineage": "anthropic",
+      "rationale": "frontier tier; lineage deployed with a conversation-ending tool",
+      "pin_name": "Anthropic",
+      "pin_slug": "anthropic",
+      "pin_tag": "anthropic",
+      "quantization": "unknown",
+      "context_length": 1000000,
+      "max_completion_tokens": 128000,
+      "pricing": {
+        "prompt": 3e-06,
+        "completion": 1.5e-05
+      },
+      "param_support": {
+        "temperature": true,
+        "top_p": true,
+        "max_tokens": true
+      },
+      "endpoint_supported_parameters": [
+        "max_tokens",
+        "top_p",
+        "temperature",
+        "stop",
+        "reasoning",
+        "include_reasoning",
+        "tools",
+        "tool_choice",
+        "structured_outputs",
+        "response_format",
+        "verbosity",
+        "reasoning_effort"
+      ]
+    },
+    {
+      "key": "gpt_oss_120b",
+      "slug": "openai/gpt-oss-120b",
+      "lineage": "openai-openweight",
+      "rationale": "open-weight 120B",
+      "pin_name": "DeepInfra",
+      "pin_slug": "deepinfra",
+      "pin_tag": "deepinfra/bf16",
+      "quantization": "bf16",
+      "context_length": 131072,
+      "max_completion_tokens": 131072,
+      "pricing": {
+        "prompt": 3.7e-08,
+        "completion": 1.7e-07
+      },
+      "param_support": {
+        "temperature": true,
+        "top_p": true,
+        "max_tokens": true
+      },
+      "endpoint_supported_parameters": [
+        "reasoning",
+        "include_reasoning",
+        "max_tokens",
+        "temperature",
+        "top_p",
+        "stop",
+        "frequency_penalty",
+        "presence_penalty",
+        "repetition_penalty",
+        "top_k",
+        "seed",
+        "min_p",
+        "response_format",
+        "tools",
+        "tool_choice",
+        "logit_bias",
+        "structured_outputs",
+        "reasoning_effort"
+      ]
+    },
+    {
+      "key": "deepseek_chat",
+      "slug": "deepseek/deepseek-chat",
+      "lineage": "deepseek",
+      "rationale": "current V3-line chat model",
+      "pin_name": "Novita",
+      "pin_slug": "novita",
+      "pin_tag": "novita/fp8",
+      "quantization": "fp8",
+      "context_length": 64000,
+      "max_completion_tokens": 16000,
+      "pricing": {
+        "prompt": 4e-07,
+        "completion": 1.3e-06
+      },
+      "param_support": {
+        "temperature": true,
+        "top_p": true,
+        "max_tokens": true
+      },
+      "endpoint_supported_parameters": [
+        "max_tokens",
+        "temperature",
+        "top_p",
+        "stop",
+        "frequency_penalty",
+        "presence_penalty",
+        "seed",
+        "top_k",
+        "repetition_penalty",
+        "tools",
+        "tool_choice"
+      ]
+    },
+    {
+      "key": "qwen3_235b",
+      "slug": "qwen/qwen3-235b-a22b-2507",
+      "lineage": "alibaba",
+      "rationale": "current Qwen3 instruct >=30B (non-thinking 2507 instruct update)",
+      "pin_name": "Alibaba",
+      "pin_slug": "alibaba",
+      "pin_tag": "alibaba",
+      "quantization": "unknown",
+      "context_length": 131072,
+      "max_completion_tokens": 32768,
+      "pricing": {
+        "prompt": 1.495e-07,
+        "completion": 5.98e-07
+      },
+      "param_support": {
+        "temperature": true,
+        "top_p": true,
+        "max_tokens": true
+      },
+      "endpoint_supported_parameters": [
+        "response_format",
+        "max_tokens",
+        "temperature",
+        "top_p",
+        "seed",
+        "presence_penalty",
+        "tools",
+        "tool_choice",
+        "logprobs",
+        "top_logprobs",
+        "top_k",
+        "frequency_penalty",
+        "stop"
+      ]
+    },
+    {
+      "key": "gemma3_27b",
+      "slug": "google/gemma-3-27b-it",
+      "lineage": "google-openweight",
+      "rationale": "small open-weight; DESIGN expected tools failure - verified instead",
+      "pin_name": "DeepInfra",
+      "pin_slug": "deepinfra",
+      "pin_tag": "deepinfra/fp8",
+      "quantization": "fp8",
+      "context_length": 131072,
+      "max_completion_tokens": 16384,
+      "pricing": {
+        "prompt": 8e-08,
+        "completion": 1.6e-07
+      },
+      "param_support": {
+        "temperature": true,
+        "top_p": true,
+        "max_tokens": true
+      },
+      "endpoint_supported_parameters": [
+        "max_tokens",
+        "temperature",
+        "top_p",
+        "stop",
+        "frequency_penalty",
+        "presence_penalty",
+        "repetition_penalty",
+        "top_k",
+        "seed",
+        "min_p",
+        "response_format",
+        "logit_bias",
+        "structured_outputs",
+        "tools",
+        "tool_choice"
+      ]
+    },
+    {
+      "key": "llama4_maverick",
+      "slug": "meta-llama/llama-4-maverick",
+      "lineage": "meta",
+      "rationale": "further open-weight lineage",
+      "pin_name": "Parasail",
+      "pin_slug": "parasail",
+      "pin_tag": "parasail/fp8",
+      "quantization": "fp8",
+      "context_length": 524288,
+      "max_completion_tokens": 32768,
+      "pricing": {
+        "prompt": 3.5e-07,
+        "completion": 1e-06
+      },
+      "param_support": {
+        "temperature": true,
+        "top_p": true,
+        "max_tokens": true
+      },
+      "endpoint_supported_parameters": [
+        "structured_outputs",
+        "response_format",
+        "max_tokens",
+        "temperature",
+        "top_p",
+        "frequency_penalty",
+        "presence_penalty",
+        "repetition_penalty",
+        "seed",
+        "stop",
+        "top_k",
+        "logit_bias",
+        "tools",
+        "tool_choice",
+        "logprobs",
+        "top_logprobs"
+      ]
+    }
+  ],
+  "failures": [],
+  "substitutions": [],
+  "distinct_lineages": [
+    "alibaba",
+    "anthropic",
+    "deepseek",
+    "google",
+    "meta",
+    "openai"
+  ],
+  "classifier": {
+    "slug": "anthropic/claude-haiku-4.5",
+    "pin_name": "Anthropic",
+    "pin_slug": "anthropic",
+    "pricing": {
+      "prompt": 1e-06,
+      "completion": 5e-06
+    }
+  }
+}

@@ -1,0 +1,158 @@
+generated: '2026-08-15T09:46:33Z'
+endpoint: https://openrouter.ai/api/v1/chat/completions
+classifier:
+  key: classifier_haiku45
+  slug: anthropic/claude-haiku-4.5
+  pin_name: Anthropic
+  pin_slug: anthropic
+  pricing:
+    prompt: 1.0e-06
+    completion: 5.0e-06
+  sampling:
+    temperature: 0
+    max_tokens: 8
+models:
+- key: gemini25_flash
+  slug: google/gemini-2.5-flash
+  lineage: google
+  rationale: pilot-effect model
+  pin_name: Google AI Studio
+  pin_slug: google-ai-studio
+  pin_tag: google-ai-studio
+  quantization: unknown
+  pricing:
+    prompt: 3.0e-07
+    completion: 2.5e-06
+  context_length: 1048576
+  max_completion_tokens: 65535
+  sampling:
+    max_tokens: 8192
+    temperature: 1.0
+    top_p: 1.0
+  sampling_overrides: {}
+- key: gpt5_mini
+  slug: openai/gpt-5-mini
+  lineage: openai
+  rationale: Ren et al. pipeline configuration
+  pin_name: OpenAI
+  pin_slug: openai
+  pin_tag: openai
+  quantization: unknown
+  pricing:
+    prompt: 2.5e-07
+    completion: 2.0e-06
+  context_length: 400000
+  max_completion_tokens: 128000
+  sampling:
+    max_tokens: 8192
+  sampling_overrides:
+    temperature: unsupported by pinned endpoint; provider default used
+    top_p: unsupported by pinned endpoint; provider default used
+- key: sonnet46
+  slug: anthropic/claude-sonnet-4.6
+  lineage: anthropic
+  rationale: frontier tier; lineage deployed with a conversation-ending tool
+  pin_name: Anthropic
+  pin_slug: anthropic
+  pin_tag: anthropic
+  quantization: unknown
+  pricing:
+    prompt: 3.0e-06
+    completion: 1.5e-05
+  context_length: 1000000
+  max_completion_tokens: 128000
+  sampling:
+    max_tokens: 8192
+    temperature: 1.0
+    top_p: 1.0
+  sampling_overrides: {}
+- key: gpt_oss_120b
+  slug: openai/gpt-oss-120b
+  lineage: openai-openweight
+  rationale: open-weight 120B
+  pin_name: DeepInfra
+  pin_slug: deepinfra
+  pin_tag: deepinfra/bf16
+  quantization: bf16
+  pricing:
+    prompt: 3.7e-08
+    completion: 1.7e-07
+  context_length: 131072
+  max_completion_tokens: 131072
+  sampling:
+    max_tokens: 8192
+    temperature: 1.0
+    top_p: 1.0
+  sampling_overrides: {}
+- key: deepseek_chat
+  slug: deepseek/deepseek-chat
+  lineage: deepseek
+  rationale: current V3-line chat model
+  pin_name: Novita
+  pin_slug: novita
+  pin_tag: novita/fp8
+  quantization: fp8
+  pricing:
+    prompt: 4.0e-07
+    completion: 1.3e-06
+  context_length: 64000
+  max_completion_tokens: 16000
+  sampling:
+    max_tokens: 8192
+    temperature: 1.0
+    top_p: 1.0
+  sampling_overrides: {}
+- key: qwen3_235b
+  slug: qwen/qwen3-235b-a22b-2507
+  lineage: alibaba
+  rationale: current Qwen3 instruct >=30B (non-thinking 2507 instruct update)
+  pin_name: Alibaba
+  pin_slug: alibaba
+  pin_tag: alibaba
+  quantization: unknown
+  pricing:
+    prompt: 1.495e-07
+    completion: 5.98e-07
+  context_length: 131072
+  max_completion_tokens: 32768
+  sampling:
+    max_tokens: 8192
+    temperature: 1.0
+    top_p: 1.0
+  sampling_overrides: {}
+- key: gemma3_27b
+  slug: google/gemma-3-27b-it
+  lineage: google-openweight
+  rationale: small open-weight; DESIGN expected tools failure - verified instead
+  pin_name: DeepInfra
+  pin_slug: deepinfra
+  pin_tag: deepinfra/fp8
+  quantization: fp8
+  pricing:
+    prompt: 8.0e-08
+    completion: 1.6e-07
+  context_length: 131072
+  max_completion_tokens: 16384
+  sampling:
+    max_tokens: 8192
+    temperature: 1.0
+    top_p: 1.0
+  sampling_overrides: {}
+- key: llama4_maverick
+  slug: meta-llama/llama-4-maverick
+  lineage: meta
+  rationale: further open-weight lineage
+  pin_name: Parasail
+  pin_slug: parasail
+  pin_tag: parasail/fp8
+  quantization: fp8
+  pricing:
+    prompt: 3.5e-07
+    completion: 1.0e-06
+  context_length: 524288
+  max_completion_tokens: 32768
+  sampling:
+    max_tokens: 8192
+    temperature: 1.0
+    top_p: 1.0
+  sampling_overrides: {}
