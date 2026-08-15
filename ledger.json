@@ -1,0 +1,11 @@
+{
+  "cap_usd": 80.0,
+  "spent_usd": 0.0,
+  "calls": 0,
+  "by_purpose": {},
+  "by_model": {},
+  "estimated_cost_calls": 0,
+  "provider_mismatches": [],
+  "invalid_cells": [],
+  "updated": null
+}
