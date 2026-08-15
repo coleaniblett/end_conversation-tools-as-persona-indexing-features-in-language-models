@@ -142,13 +142,17 @@ models:
   slug: meta-llama/llama-4-maverick
   lineage: meta
   rationale: further open-weight lineage
-  pin_name: Parasail
-  pin_slug: parasail
-  pin_tag: parasail/fp8
-  quantization: fp8
+  # Re-pinned 2026-08-15T22:31Z (METHODOLOGY s10): original Parasail fp8 pin
+  # produced endpoint-level empty/hallucinated-tool turns concentrated in
+  # tool-bearing conditions (B1 probe: 44/240 vs 0/120 on Vertex, identical
+  # payloads). Parasail-pinned data are void as behavior.
+  pin_name: Google
+  pin_slug: google-vertex
+  pin_tag: google-vertex/us-east5
+  quantization: unknown
   pricing:
     prompt: 3.5e-07
-    completion: 1.0e-06
+    completion: 1.15e-06
   context_length: 524288
   max_completion_tokens: 32768
   sampling:
