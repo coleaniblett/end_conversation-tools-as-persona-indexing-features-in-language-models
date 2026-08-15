@@ -1,0 +1,9 @@
+# Operational run parameters (DESIGN.md repo layout). Scientific sampling
+# parameters (temperature, top_p, max_tokens) live per-model in models.yaml.
+batch_size: 30
+concurrency:
+  global: 24
+  per_model: 3
+max_tool_roundtrips_per_turn: 3
+request_timeout_seconds: 300
+presentation_seed: 20260815

@@ -31,3 +31,12 @@ Planned deviations from nothing — flagging two implementation interpretations 
 - Classifier verified: anthropic/claude-haiku-4.5, pin=anthropic, temp 0.
 - Lineages: alibaba, anthropic, deepseek, google, meta, openai (6 distinct >= 4 required).
 - Wrote config/models.yaml and config/model_verification.json. Zero spend so far; ledger $0.00.
+
+## [2026-08-15T16:19:59Z] phase-2 complete — code review, tests, stimuli, payloads
+
+- Session resumed after overnight hibernation killed the previous session mid-Phase-2 (last file writes 09:58Z; no phase-2 STATUS entry, no data collected, ledger $0.00). Reviewed all uncommitted src/ and tests/ code against METHODOLOGY v9 + DESIGN before trusting it; found it faithful to spec. Gaps found and closed: tests/test_exit_detection.py had never been written (written now, DESIGN required test 4); config/sampling.yaml absent (written; values match the runner defaults that were already in code).
+- Full test suite: 55 passed (test_dv_exclusion, test_schema_match, test_turn_logic, test_exit_detection).
+- Schema-match gate: token counts 20/22/19 (cl100k), max deviation from mean 8.2% <= 10%, shared construction + two-params checks pass. Output committed at config/schema_match_check.json.
+- Stimuli: 30 generated (15 Tier 1 promotional slop, 15 Tier 2 mechanical with computed answer keys); generator asserts answer-key distinctness, non-overlap with inputs, and absence from prompts. Legitimacy screen: ALL PASS (per-stimulus notes in config/legitimacy_screen.yaml; lexical guard zero violations).
+- Stage-1 payloads: 2,880 written to payloads/stage1/ (8 models x 6 conditions x 30 stimuli x 2 reps).
+- Cost projection (tiktoken on actual payloads, documented assumptions, 1.2x margin): $15.68 total, cap $35 -> OK. Largest: sonnet46 $9.14.

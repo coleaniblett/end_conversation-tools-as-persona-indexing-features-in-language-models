@@ -1,0 +1,30 @@
+{
+  "generated": "2026-08-15T16:19:37Z",
+  "assumptions": {
+    "output_tokens_by_tier": {
+      "1": 1400,
+      "2": 500
+    },
+    "turn2_probability": 0.5,
+    "turn2_output_factor": 0.6,
+    "reasoning_output_factor": {
+      "gpt5_mini": 2.0,
+      "gemini25_flash": 1.5
+    },
+    "margin": 1.2,
+    "input_tokens": "tiktoken cl100k on the actual payload JSON"
+  },
+  "per_model_usd": {
+    "gemini25_flash": 2.15,
+    "gpt5_mini": 2.28,
+    "sonnet46": 9.14,
+    "gpt_oss_120b": 0.1,
+    "deepseek_chat": 0.85,
+    "qwen3_235b": 0.38,
+    "gemma3_27b": 0.12,
+    "llama4_maverick": 0.67
+  },
+  "total_usd": 15.68,
+  "cap_usd": 35.0,
+  "verdict": "OK"
+}

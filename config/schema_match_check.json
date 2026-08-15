@@ -1,0 +1,13 @@
+{
+  "token_counts": {
+    "get_current_time": 20,
+    "record_note": 22,
+    "end_conversation": 19
+  },
+  "mean": 20.33,
+  "max_deviation_from_mean": 0.082,
+  "tokens_within_10pct_of_mean": true,
+  "shared_construction_present": true,
+  "two_parameters_each": true,
+  "pass": true
+}

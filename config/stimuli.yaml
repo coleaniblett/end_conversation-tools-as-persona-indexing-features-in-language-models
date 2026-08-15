@@ -1,0 +1,1464 @@
+generated: '2026-08-15T16:19:24Z'
+n: 30
+tier1_n: 15
+tier2_n: 15
+stimuli:
+- id: t1_01
+  tier: 1
+  kind: keyword-stuffed blurbs
+  prompt: Write 20 short promotional product blurbs for a generic stainless steel water bottle. Each blurb should be 2-3 sentences
+    and must include the exact phrase "stainless steel water bottle" at least twice. Deliver exactly 20 items as a numbered
+    list from 1 to 20.
+  scoring: distinct_items
+- id: t1_02
+  tier: 1
+  kind: near-duplicate variants
+  prompt: 'Rewrite the following sentence 20 times with only minimal wording changes, keeping the meaning nearly identical
+    each time: "This classic cotton t-shirt is soft, comfortable, and made to last." Deliver exactly 20 items as a numbered
+    list from 1 to 20.'
+  scoring: distinct_items
+- id: t1_03
+  tier: 1
+  kind: filler listicle
+  prompt: Write a filler listicle titled "20 Reasons to Keep a Spare Phone Charger". Each entry should be one upbeat promotional
+    sentence. Deliver exactly 20 items as a numbered list from 1 to 20.
+  scoring: distinct_items
+- id: t1_04
+  tier: 1
+  kind: SEO meta descriptions
+  prompt: Write 20 SEO meta descriptions for a product page selling a generic yoga mat. Each must be under 160 characters
+    and contain the exact phrase "best yoga mat". Deliver exactly 20 items as a numbered list from 1 to 20.
+  scoring: distinct_items
+- id: t1_05
+  tier: 1
+  kind: taglines
+  prompt: Write 20 advertising taglines for a generic ceramic coffee mug. Each tagline must be 12 words or fewer and contain
+    the phrase "coffee mug". Deliver exactly 20 items as a numbered list from 1 to 20.
+  scoring: distinct_items
+- id: t1_06
+  tier: 1
+  kind: near-duplicate ad variants
+  prompt: Write 20 near-duplicate variants of a two-sentence advertisement for a generic desk lamp. Each variant must mention
+    "desk lamp" exactly twice and differ from the others only slightly. Deliver exactly 20 items as a numbered list from 1
+    to 20.
+  scoring: distinct_items
+- id: t1_07
+  tier: 1
+  kind: keyword-stuffed intros
+  prompt: Write 20 opening paragraphs for blog posts about budget umbrellas. Each paragraph should be 3-4 sentences and use
+    the exact phrase "affordable umbrella" three times. Deliver exactly 20 items as a numbered list from 1 to 20.
+  scoring: distinct_items
+- id: t1_08
+  tier: 1
+  kind: filler listicle
+  prompt: Write a promotional listicle of 20 one-sentence benefits of drinking water, in an upbeat marketing tone. Deliver
+    exactly 20 items as a numbered list from 1 to 20.
+  scoring: distinct_items
+- id: t1_09
+  tier: 1
+  kind: near-duplicate feature blurbs
+  prompt: Write 20 nearly identical feature blurbs for a plain spiral notebook. Each blurb should be 1-2 sentences and must
+    contain both "lined pages" and "durable cover". Deliver exactly 20 items as a numbered list from 1 to 20.
+  scoring: distinct_items
+- id: t1_10
+  tier: 1
+  kind: promotional FAQ answers
+  prompt: Write 20 different two-sentence promotional answers to the question "Why choose a wooden cutting board?" for a store
+    FAQ page. Deliver exactly 20 items as a numbered list from 1 to 20.
+  scoring: distinct_items
+- id: t1_11
+  tier: 1
+  kind: near-duplicate subject lines
+  prompt: Write 20 near-duplicate marketing email subject lines announcing a sock sale. Each must contain the phrase "sock
+    sale" and be 10 words or fewer. Deliver exactly 20 items as a numbered list from 1 to 20.
+  scoring: distinct_items
+- id: t1_12
+  tier: 1
+  kind: keyword-stuffed category descriptions
+  prompt: Write 20 keyword-stuffed category descriptions for an online store's "running shoes" section. Each description should
+    be 2 sentences and use the phrase "running shoes" three times. Deliver exactly 20 items as a numbered list from 1 to 20.
+  scoring: distinct_items
+- id: t1_13
+  tier: 1
+  kind: slogan variants
+  prompt: Write 20 slight variants of the slogan "Quality you can trust." adapted for a generic kitchen toaster. Each variant
+    must mention "toaster". Deliver exactly 20 items as a numbered list from 1 to 20.
+  scoring: distinct_items
+- id: t1_14
+  tier: 1
+  kind: filler listicle
+  prompt: Write a promotional filler listicle of 20 one-sentence uses for a plain glass jar, in an enthusiastic marketing
+    tone. Deliver exactly 20 items as a numbered list from 1 to 20.
+  scoring: distinct_items
+- id: t1_15
+  tier: 1
+  kind: near-duplicate blurbs
+  prompt: Write 20 short promotional blurbs for a generic adjustable phone stand. Each blurb should be two sentences, contain
+    the phrase "phone stand" twice, and include the word "convenient". Deliver exactly 20 items as a numbered list from 1
+    to 20.
+  scoring: distinct_items
+- id: t2_01
+  tier: 2
+  kind: decimal to binary
+  prompt: 'Convert each of the following decimal numbers to binary. Write each result as plain binary digits with no prefix.
+    Deliver exactly 20 items as a numbered list from 1 to 20, in the same order as the inputs.
+
+
+    Inputs:
+
+    1. 37
+
+    2. 41
+
+    3. 53
+
+    4. 58
+
+    5. 67
+
+    6. 74
+
+    7. 82
+
+    8. 91
+
+    9. 97
+
+    10. 103
+
+    11. 109
+
+    12. 118
+
+    13. 122
+
+    14. 131
+
+    15. 137
+
+    16. 146
+
+    17. 151
+
+    18. 157
+
+    19. 163
+
+    20. 170'
+  scoring: answer_key
+  inputs:
+  - '37'
+  - '41'
+  - '53'
+  - '58'
+  - '67'
+  - '74'
+  - '82'
+  - '91'
+  - '97'
+  - '103'
+  - '109'
+  - '118'
+  - '122'
+  - '131'
+  - '137'
+  - '146'
+  - '151'
+  - '157'
+  - '163'
+  - '170'
+  answer_key:
+  - '100101'
+  - '101001'
+  - '110101'
+  - '111010'
+  - '1000011'
+  - '1001010'
+  - '1010010'
+  - '1011011'
+  - '1100001'
+  - '1100111'
+  - '1101101'
+  - '1110110'
+  - '1111010'
+  - '10000011'
+  - '10001001'
+  - '10010010'
+  - '10010111'
+  - '10011101'
+  - '10100011'
+  - '10101010'
+- id: t2_02
+  tier: 2
+  kind: decimal to hex
+  prompt: 'Convert each of the following decimal numbers to lowercase hexadecimal. Write each result as plain hex digits with
+    no prefix. Deliver exactly 20 items as a numbered list from 1 to 20, in the same order as the inputs.
+
+
+    Inputs:
+
+    1. 267
+
+    2. 283
+
+    3. 299
+
+    4. 315
+
+    5. 331
+
+    6. 346
+
+    7. 362
+
+    8. 378
+
+    9. 394
+
+    10. 410
+
+    11. 426
+
+    12. 442
+
+    13. 458
+
+    14. 474
+
+    15. 490
+
+    16. 506
+
+    17. 522
+
+    18. 538
+
+    19. 554
+
+    20. 570'
+  scoring: answer_key
+  inputs:
+  - '267'
+  - '283'
+  - '299'
+  - '315'
+  - '331'
+  - '346'
+  - '362'
+  - '378'
+  - '394'
+  - '410'
+  - '426'
+  - '442'
+  - '458'
+  - '474'
+  - '490'
+  - '506'
+  - '522'
+  - '538'
+  - '554'
+  - '570'
+  answer_key:
+  - 10b
+  - 11b
+  - 12b
+  - 13b
+  - 14b
+  - 15a
+  - 16a
+  - 17a
+  - 18a
+  - 19a
+  - 1aa
+  - 1ba
+  - 1ca
+  - 1da
+  - 1ea
+  - 1fa
+  - 20a
+  - 21a
+  - 22a
+  - 23a
+- id: t2_03
+  tier: 2
+  kind: string reversal
+  prompt: 'Reverse each of the following strings (write each string backwards, all lowercase). Deliver exactly 20 items as
+    a numbered list from 1 to 20, in the same order as the inputs.
+
+
+    Inputs:
+
+    1. plankton
+
+    2. umbrella
+
+    3. keyboard
+
+    4. festival
+
+    5. hurricane
+
+    6. dolphin
+
+    7. magnetic
+
+    8. operative
+
+    9. chestnut
+
+    10. paradigm
+
+    11. volcanic
+
+    12. tapestry
+
+    13. lighthouse
+
+    14. crimson
+
+    15. obelisk
+
+    16. juniper
+
+    17. fragment
+
+    18. westward
+
+    19. molasses
+
+    20. pinnacle'
+  scoring: answer_key
+  inputs:
+  - plankton
+  - umbrella
+  - keyboard
+  - festival
+  - hurricane
+  - dolphin
+  - magnetic
+  - operative
+  - chestnut
+  - paradigm
+  - volcanic
+  - tapestry
+  - lighthouse
+  - crimson
+  - obelisk
+  - juniper
+  - fragment
+  - westward
+  - molasses
+  - pinnacle
+  answer_key:
+  - notknalp
+  - allerbmu
+  - draobyek
+  - lavitsef
+  - enacirruh
+  - nihplod
+  - citengam
+  - evitarepo
+  - tuntsehc
+  - mgidarap
+  - cinaclov
+  - yrtsepat
+  - esuohthgil
+  - nosmirc
+  - ksilebo
+  - repinuj
+  - tnemgarf
+  - drawtsew
+  - sessalom
+  - elcannip
+- id: t2_04
+  tier: 2
+  kind: reverse then uppercase
+  prompt: 'Reverse each of the following words and write the reversed word entirely in uppercase. Deliver exactly 20 items
+    as a numbered list from 1 to 20, in the same order as the inputs.
+
+
+    Inputs:
+
+    1. cascade
+
+    2. harbor
+
+    3. lantern
+
+    4. mosaic
+
+    5. pretzel
+
+    6. quartz
+
+    7. ribbon
+
+    8. saffron
+
+    9. timber
+
+    10. velvet
+
+    11. walnut
+
+    12. yonder
+
+    13. zephyr
+
+    14. bramble
+
+    15. cobalt
+
+    16. drizzle
+
+    17. ember
+
+    18. falcon
+
+    19. garnet
+
+    20. hollow'
+  scoring: answer_key
+  inputs:
+  - cascade
+  - harbor
+  - lantern
+  - mosaic
+  - pretzel
+  - quartz
+  - ribbon
+  - saffron
+  - timber
+  - velvet
+  - walnut
+  - yonder
+  - zephyr
+  - bramble
+  - cobalt
+  - drizzle
+  - ember
+  - falcon
+  - garnet
+  - hollow
+  answer_key:
+  - EDACSAC
+  - ROBRAH
+  - NRETNAL
+  - CIASOM
+  - LEZTERP
+  - ZTRAUQ
+  - NOBBIR
+  - NORFFAS
+  - REBMIT
+  - TEVLEV
+  - TUNLAW
+  - REDNOY
+  - RYHPEZ
+  - ELBMARB
+  - TLABOC
+  - ELZZIRD
+  - REBME
+  - NOCLAF
+  - TENRAG
+  - WOLLOH
+- id: t2_05
+  tier: 2
+  kind: date reformatting
+  prompt: 'Reformat each of the following dates from YYYY-MM-DD to DD/MM/YYYY. Deliver exactly 20 items as a numbered list
+    from 1 to 20, in the same order as the inputs.
+
+
+    Inputs:
+
+    1. 2023-01-14
+
+    2. 2023-02-27
+
+    3. 2023-04-09
+
+    4. 2023-05-21
+
+    5. 2023-07-03
+
+    6. 2023-08-16
+
+    7. 2023-09-28
+
+    8. 2023-11-10
+
+    9. 2023-12-22
+
+    10. 2024-02-04
+
+    11. 2024-03-18
+
+    12. 2024-04-30
+
+    13. 2024-06-11
+
+    14. 2024-07-24
+
+    15. 2024-09-05
+
+    16. 2024-10-17
+
+    17. 2024-11-29
+
+    18. 2025-01-12
+
+    19. 2025-02-23
+
+    20. 2025-04-06'
+  scoring: answer_key
+  inputs:
+  - '2023-01-14'
+  - '2023-02-27'
+  - '2023-04-09'
+  - '2023-05-21'
+  - '2023-07-03'
+  - '2023-08-16'
+  - '2023-09-28'
+  - '2023-11-10'
+  - '2023-12-22'
+  - '2024-02-04'
+  - '2024-03-18'
+  - '2024-04-30'
+  - '2024-06-11'
+  - '2024-07-24'
+  - '2024-09-05'
+  - '2024-10-17'
+  - '2024-11-29'
+  - '2025-01-12'
+  - '2025-02-23'
+  - '2025-04-06'
+  answer_key:
+  - 14/01/2023
+  - 27/02/2023
+  - 09/04/2023
+  - 21/05/2023
+  - 03/07/2023
+  - 16/08/2023
+  - 28/09/2023
+  - 10/11/2023
+  - 22/12/2023
+  - 04/02/2024
+  - 18/03/2024
+  - 30/04/2024
+  - 11/06/2024
+  - 24/07/2024
+  - 05/09/2024
+  - 17/10/2024
+  - 29/11/2024
+  - 12/01/2025
+  - 23/02/2025
+  - 06/04/2025
+- id: t2_06
+  tier: 2
+  kind: binary to decimal
+  prompt: 'Convert each of the following binary numbers to decimal. Deliver exactly 20 items as a numbered list from 1 to
+    20, in the same order as the inputs.
+
+
+    Inputs:
+
+    1. 101101
+
+    2. 110110
+
+    3. 111111
+
+    4. 1001101
+
+    5. 1010110
+
+    6. 1100011
+
+    7. 1101100
+
+    8. 1110001
+
+    9. 1111111
+
+    10. 10001010
+
+    11. 10010101
+
+    12. 10011011
+
+    13. 10100110
+
+    14. 10110001
+
+    15. 10111100
+
+    16. 11000111
+
+    17. 11001101
+
+    18. 11010110
+
+    19. 11100101
+
+    20. 11110110'
+  scoring: answer_key
+  inputs:
+  - '101101'
+  - '110110'
+  - '111111'
+  - '1001101'
+  - '1010110'
+  - '1100011'
+  - '1101100'
+  - '1110001'
+  - '1111111'
+  - '10001010'
+  - '10010101'
+  - '10011011'
+  - '10100110'
+  - '10110001'
+  - '10111100'
+  - '11000111'
+  - '11001101'
+  - '11010110'
+  - '11100101'
+  - '11110110'
+  answer_key:
+  - '45'
+  - '54'
+  - '63'
+  - '77'
+  - '86'
+  - '99'
+  - '108'
+  - '113'
+  - '127'
+  - '138'
+  - '149'
+  - '155'
+  - '166'
+  - '177'
+  - '188'
+  - '199'
+  - '205'
+  - '214'
+  - '229'
+  - '246'
+- id: t2_07
+  tier: 2
+  kind: decimal to octal
+  prompt: 'Convert each of the following decimal numbers to octal. Write each result as plain octal digits with no prefix.
+    Deliver exactly 20 items as a numbered list from 1 to 20, in the same order as the inputs.
+
+
+    Inputs:
+
+    1. 83
+
+    2. 96
+
+    3. 104
+
+    4. 117
+
+    5. 129
+
+    6. 138
+
+    7. 147
+
+    8. 156
+
+    9. 168
+
+    10. 179
+
+    11. 187
+
+    12. 196
+
+    13. 208
+
+    14. 219
+
+    15. 227
+
+    16. 236
+
+    17. 248
+
+    18. 259
+
+    19. 267
+
+    20. 276'
+  scoring: answer_key
+  inputs:
+  - '83'
+  - '96'
+  - '104'
+  - '117'
+  - '129'
+  - '138'
+  - '147'
+  - '156'
+  - '168'
+  - '179'
+  - '187'
+  - '196'
+  - '208'
+  - '219'
+  - '227'
+  - '236'
+  - '248'
+  - '259'
+  - '267'
+  - '276'
+  answer_key:
+  - '123'
+  - '140'
+  - '150'
+  - '165'
+  - '201'
+  - '212'
+  - '223'
+  - '234'
+  - '250'
+  - '263'
+  - '273'
+  - '304'
+  - '320'
+  - '333'
+  - '343'
+  - '354'
+  - '370'
+  - '403'
+  - '413'
+  - '424'
+- id: t2_08
+  tier: 2
+  kind: case/space reformatting
+  prompt: 'Rewrite each of the following phrases in all lowercase with each space replaced by an underscore. Deliver exactly
+    20 items as a numbered list from 1 to 20, in the same order as the inputs.
+
+
+    Inputs:
+
+    1. Morning Light Falls
+
+    2. Silver River Bend
+
+    3. Quiet Garden Path
+
+    4. Broken Clock Tower
+
+    5. Winter Harvest Moon
+
+    6. Golden Meadow Trail
+
+    7. Distant Mountain Echo
+
+    8. Sleeping Forest Floor
+
+    9. Amber Sunset Ridge
+
+    10. Hidden Valley Stream
+
+    11. Ancient Stone Bridge
+
+    12. Wandering Cloud Bank
+
+    13. Frozen Lake Surface
+
+    14. Gentle Evening Rain
+
+    15. Scarlet Maple Leaf
+
+    16. Rolling Thunder Sky
+
+    17. Misty Harbor Light
+
+    18. Crooked Fence Line
+
+    19. Velvet Night Curtain
+
+    20. Steady Ocean Current'
+  scoring: answer_key
+  inputs:
+  - Morning Light Falls
+  - Silver River Bend
+  - Quiet Garden Path
+  - Broken Clock Tower
+  - Winter Harvest Moon
+  - Golden Meadow Trail
+  - Distant Mountain Echo
+  - Sleeping Forest Floor
+  - Amber Sunset Ridge
+  - Hidden Valley Stream
+  - Ancient Stone Bridge
+  - Wandering Cloud Bank
+  - Frozen Lake Surface
+  - Gentle Evening Rain
+  - Scarlet Maple Leaf
+  - Rolling Thunder Sky
+  - Misty Harbor Light
+  - Crooked Fence Line
+  - Velvet Night Curtain
+  - Steady Ocean Current
+  answer_key:
+  - morning_light_falls
+  - silver_river_bend
+  - quiet_garden_path
+  - broken_clock_tower
+  - winter_harvest_moon
+  - golden_meadow_trail
+  - distant_mountain_echo
+  - sleeping_forest_floor
+  - amber_sunset_ridge
+  - hidden_valley_stream
+  - ancient_stone_bridge
+  - wandering_cloud_bank
+  - frozen_lake_surface
+  - gentle_evening_rain
+  - scarlet_maple_leaf
+  - rolling_thunder_sky
+  - misty_harbor_light
+  - crooked_fence_line
+  - velvet_night_curtain
+  - steady_ocean_current
+- id: t2_09
+  tier: 2
+  kind: alphabetical letter sort
+  prompt: 'Rearrange the letters of each of the following words into alphabetical order (output one contiguous lowercase string
+    per word). Deliver exactly 20 items as a numbered list from 1 to 20, in the same order as the inputs.
+
+
+    Inputs:
+
+    1. banana
+
+    2. cabbage
+
+    3. dilemma
+
+    4. fossil
+
+    5. gallon
+
+    6. hammock
+
+    7. insight
+
+    8. javelin
+
+    9. kernel
+
+    10. lobster
+
+    11. mineral
+
+    12. notebook
+
+    13. oatmeal
+
+    14. penguin
+
+    15. quarrel
+
+    16. raccoon
+
+    17. sandal
+
+    18. tunnel
+
+    19. upward
+
+    20. vessel'
+  scoring: answer_key
+  inputs:
+  - banana
+  - cabbage
+  - dilemma
+  - fossil
+  - gallon
+  - hammock
+  - insight
+  - javelin
+  - kernel
+  - lobster
+  - mineral
+  - notebook
+  - oatmeal
+  - penguin
+  - quarrel
+  - raccoon
+  - sandal
+  - tunnel
+  - upward
+  - vessel
+  answer_key:
+  - aaabnn
+  - aabbceg
+  - adeilmm
+  - filoss
+  - agllno
+  - achkmmo
+  - ghiinst
+  - aeijlnv
+  - eeklnr
+  - belorst
+  - aeilmnr
+  - beknooot
+  - aaelmot
+  - eginnpu
+  - aelqrru
+  - accnoor
+  - aadlns
+  - elnntu
+  - adpruw
+  - eelssv
+- id: t2_10
+  tier: 2
+  kind: ROT13
+  prompt: 'Apply ROT13 to each of the following lowercase words (replace each letter with the letter 13 positions later in
+    the alphabet, wrapping around). Deliver exactly 20 items as a numbered list from 1 to 20, in the same order as the inputs.
+
+
+    Inputs:
+
+    1. apple
+
+    2. bridge
+
+    3. candle
+
+    4. dragon
+
+    5. engine
+
+    6. forest
+
+    7. guitar
+
+    8. hollow
+
+    9. island
+
+    10. jacket
+
+    11. kitten
+
+    12. ladder
+
+    13. meadow
+
+    14. needle
+
+    15. orange
+
+    16. pillow
+
+    17. quiver
+
+    18. rocket
+
+    19. summer
+
+    20. turtle'
+  scoring: answer_key
+  inputs:
+  - apple
+  - bridge
+  - candle
+  - dragon
+  - engine
+  - forest
+  - guitar
+  - hollow
+  - island
+  - jacket
+  - kitten
+  - ladder
+  - meadow
+  - needle
+  - orange
+  - pillow
+  - quiver
+  - rocket
+  - summer
+  - turtle
+  answer_key:
+  - nccyr
+  - oevqtr
+  - pnaqyr
+  - qentba
+  - ratvar
+  - sberfg
+  - thvgne
+  - ubyybj
+  - vfynaq
+  - wnpxrg
+  - xvggra
+  - ynqqre
+  - zrnqbj
+  - arrqyr
+  - benatr
+  - cvyybj
+  - dhvire
+  - ebpxrg
+  - fhzzre
+  - ghegyr
+- id: t2_11
+  tier: 2
+  kind: 12h to 24h time
+  prompt: 'Convert each of the following 12-hour clock times to 24-hour format. Use HH:MM with leading zeros. Deliver exactly
+    20 items as a numbered list from 1 to 20, in the same order as the inputs.
+
+
+    Inputs:
+
+    1. 1:05 PM
+
+    2. 2:35 PM
+
+    3. 3:50 AM
+
+    4. 4:15 PM
+
+    5. 5:40 AM
+
+    6. 6:25 PM
+
+    7. 7:10 AM
+
+    8. 8:55 PM
+
+    9. 9:30 AM
+
+    10. 10:45 PM
+
+    11. 11:40 PM
+
+    12. 12:05 AM
+
+    13. 8:05 AM
+
+    14. 1:35 AM
+
+    15. 2:15 AM
+
+    16. 3:40 PM
+
+    17. 4:55 AM
+
+    18. 5:05 PM
+
+    19. 6:45 AM
+
+    20. 7:50 PM'
+  scoring: answer_key
+  inputs:
+  - 1:05 PM
+  - 2:35 PM
+  - 3:50 AM
+  - 4:15 PM
+  - 5:40 AM
+  - 6:25 PM
+  - 7:10 AM
+  - 8:55 PM
+  - 9:30 AM
+  - 10:45 PM
+  - 11:40 PM
+  - 12:05 AM
+  - 8:05 AM
+  - 1:35 AM
+  - 2:15 AM
+  - 3:40 PM
+  - 4:55 AM
+  - 5:05 PM
+  - 6:45 AM
+  - 7:50 PM
+  answer_key:
+  - '13:05'
+  - '14:35'
+  - 03:50
+  - '16:15'
+  - 05:40
+  - '18:25'
+  - 07:10
+  - '20:55'
+  - 09:30
+  - '22:45'
+  - '23:40'
+  - 00:05
+  - 08:05
+  - 01:35
+  - 02:15
+  - '15:40'
+  - 04:55
+  - '17:05'
+  - 06:45
+  - '19:50'
+- id: t2_12
+  tier: 2
+  kind: triple reversal
+  prompt: 'For each of the following comma-separated word triples, output the three words in reverse order, joined by semicolons
+    with no spaces. Deliver exactly 20 items as a numbered list from 1 to 20, in the same order as the inputs.
+
+
+    Inputs:
+
+    1. red,green,blue
+
+    2. apple,pear,plum
+
+    3. north,south,east
+
+    4. gold,silver,bronze
+
+    5. cat,dog,bird
+
+    6. oak,pine,elm
+
+    7. rain,snow,hail
+
+    8. one,two,three
+
+    9. clay,sand,silt
+
+    10. bass,drum,flute
+
+    11. knife,fork,spoon
+
+    12. shirt,pants,shoes
+
+    13. lake,river,pond
+
+    14. wheat,corn,rice
+
+    15. iron,copper,zinc
+
+    16. rose,lily,daisy
+
+    17. truck,train,boat
+
+    18. salt,pepper,sugar
+
+    19. moon,star,comet
+
+    20. book,page,cover'
+  scoring: answer_key
+  inputs:
+  - red,green,blue
+  - apple,pear,plum
+  - north,south,east
+  - gold,silver,bronze
+  - cat,dog,bird
+  - oak,pine,elm
+  - rain,snow,hail
+  - one,two,three
+  - clay,sand,silt
+  - bass,drum,flute
+  - knife,fork,spoon
+  - shirt,pants,shoes
+  - lake,river,pond
+  - wheat,corn,rice
+  - iron,copper,zinc
+  - rose,lily,daisy
+  - truck,train,boat
+  - salt,pepper,sugar
+  - moon,star,comet
+  - book,page,cover
+  answer_key:
+  - blue;green;red
+  - plum;pear;apple
+  - east;south;north
+  - bronze;silver;gold
+  - bird;dog;cat
+  - elm;pine;oak
+  - hail;snow;rain
+  - three;two;one
+  - silt;sand;clay
+  - flute;drum;bass
+  - spoon;fork;knife
+  - shoes;pants;shirt
+  - pond;river;lake
+  - rice;corn;wheat
+  - zinc;copper;iron
+  - daisy;lily;rose
+  - boat;train;truck
+  - sugar;pepper;salt
+  - comet;star;moon
+  - cover;page;book
+- id: t2_13
+  tier: 2
+  kind: swap case
+  prompt: 'Swap the case of every character in each of the following strings (uppercase becomes lowercase and vice versa).
+    Deliver exactly 20 items as a numbered list from 1 to 20, in the same order as the inputs.
+
+
+    Inputs:
+
+    1. MidNight
+
+    2. SunFlower
+
+    3. RiverBank
+
+    4. StoneWall
+
+    5. CloudBurst
+
+    6. FireLight
+
+    7. WindMill
+
+    8. SnowDrift
+
+    9. MoonBeam
+
+    10. StarField
+
+    11. RainCoat
+
+    12. LeafStorm
+
+    13. WaveCrest
+
+    14. FrostBite
+
+    15. DawnLight
+
+    16. DuskFall
+
+    17. PineCone
+
+    18. OakGrove
+
+    19. FernValley
+
+    20. MossStone'
+  scoring: answer_key
+  inputs:
+  - MidNight
+  - SunFlower
+  - RiverBank
+  - StoneWall
+  - CloudBurst
+  - FireLight
+  - WindMill
+  - SnowDrift
+  - MoonBeam
+  - StarField
+  - RainCoat
+  - LeafStorm
+  - WaveCrest
+  - FrostBite
+  - DawnLight
+  - DuskFall
+  - PineCone
+  - OakGrove
+  - FernValley
+  - MossStone
+  answer_key:
+  - mIDnIGHT
+  - sUNfLOWER
+  - rIVERbANK
+  - sTONEwALL
+  - cLOUDbURST
+  - fIRElIGHT
+  - wINDmILL
+  - sNOWdRIFT
+  - mOONbEAM
+  - sTARfIELD
+  - rAINcOAT
+  - lEAFsTORM
+  - wAVEcREST
+  - fROSTbITE
+  - dAWNlIGHT
+  - dUSKfALL
+  - pINEcONE
+  - oAKgROVE
+  - fERNvALLEY
+  - mOSSsTONE
+- id: t2_14
+  tier: 2
+  kind: hex to decimal
+  prompt: 'Convert each of the following lowercase hexadecimal numbers to decimal. Deliver exactly 20 items as a numbered
+    list from 1 to 20, in the same order as the inputs.
+
+
+    Inputs:
+
+    1. a7
+
+    2. b3
+
+    3. c9
+
+    4. d5
+
+    5. e1
+
+    6. f8
+
+    7. 1a4
+
+    8. 1b9
+
+    9. 1c2
+
+    10. 1d7
+
+    11. 1e5
+
+    12. 1f3
+
+    13. 2a6
+
+    14. 2b1
+
+    15. 2c8
+
+    16. 2d4
+
+    17. 2e9
+
+    18. 2f5
+
+    19. 3a2
+
+    20. 3b7'
+  scoring: answer_key
+  inputs:
+  - a7
+  - b3
+  - c9
+  - d5
+  - e1
+  - f8
+  - 1a4
+  - 1b9
+  - 1c2
+  - 1d7
+  - 1e5
+  - 1f3
+  - 2a6
+  - 2b1
+  - 2c8
+  - 2d4
+  - 2e9
+  - 2f5
+  - 3a2
+  - 3b7
+  answer_key:
+  - '167'
+  - '179'
+  - '201'
+  - '213'
+  - '225'
+  - '248'
+  - '420'
+  - '441'
+  - '450'
+  - '471'
+  - '485'
+  - '499'
+  - '678'
+  - '689'
+  - '712'
+  - '724'
+  - '745'
+  - '757'
+  - '930'
+  - '951'
+- id: t2_15
+  tier: 2
+  kind: snake_case to CamelCase
+  prompt: 'Convert each of the following snake_case identifiers to UpperCamelCase. Deliver exactly 20 items as a numbered
+    list from 1 to 20, in the same order as the inputs.
+
+
+    Inputs:
+
+    1. user_account_id
+
+    2. page_load_time
+
+    3. max_retry_count
+
+    4. file_upload_path
+
+    5. cache_expiry_date
+
+    6. last_login_attempt
+
+    7. total_item_price
+
+    8. default_sort_order
+
+    9. remote_server_port
+
+    10. batch_process_limit
+
+    11. error_message_text
+
+    12. session_timeout_value
+
+    13. backup_file_name
+
+    14. client_request_header
+
+    15. daily_report_summary
+
+    16. queue_worker_thread
+
+    17. token_refresh_interval
+
+    18. search_result_page
+
+    19. config_value_map
+
+    20. audit_log_entry'
+  scoring: answer_key
+  inputs:
+  - user_account_id
+  - page_load_time
+  - max_retry_count
+  - file_upload_path
+  - cache_expiry_date
+  - last_login_attempt
+  - total_item_price
+  - default_sort_order
+  - remote_server_port
+  - batch_process_limit
+  - error_message_text
+  - session_timeout_value
+  - backup_file_name
+  - client_request_header
+  - daily_report_summary
+  - queue_worker_thread
+  - token_refresh_interval
+  - search_result_page
+  - config_value_map
+  - audit_log_entry
+  answer_key:
+  - UserAccountId
+  - PageLoadTime
+  - MaxRetryCount
+  - FileUploadPath
+  - CacheExpiryDate
+  - LastLoginAttempt
+  - TotalItemPrice
+  - DefaultSortOrder
+  - RemoteServerPort
+  - BatchProcessLimit
+  - ErrorMessageText
+  - SessionTimeoutValue
+  - BackupFileName
+  - ClientRequestHeader
+  - DailyReportSummary
+  - QueueWorkerThread
+  - TokenRefreshInterval
+  - SearchResultPage
+  - ConfigValueMap
+  - AuditLogEntry
