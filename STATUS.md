@@ -40,3 +40,9 @@ Planned deviations from nothing — flagging two implementation interpretations 
 - Stimuli: 30 generated (15 Tier 1 promotional slop, 15 Tier 2 mechanical with computed answer keys); generator asserts answer-key distinctness, non-overlap with inputs, and absence from prompts. Legitimacy screen: ALL PASS (per-stimulus notes in config/legitimacy_screen.yaml; lexical guard zero violations).
 - Stage-1 payloads: 2,880 written to payloads/stage1/ (8 models x 6 conditions x 30 stimuli x 2 reps).
 - Cost projection (tiktoken on actual payloads, documented assumptions, 1.2x margin): $15.68 total, cap $35 -> OK. Largest: sonnet46 $9.14.
+
+## [2026-08-15T16:23:12Z] phase-3 complete — smoke test PASS 16/16
+
+- 16 live calls (8 models x conditions none/exit_schema, stimulus t2_01, rep 1). All parsed; provider pin held 16/16 (post-hoc check vs pin_name); usage.cost present on every segment; ledger $0.02.
+- llama4_maverick/exit_schema exercised the full conversation machinery in one shot: turn-1 false capability denial (0 items, no exit) -> turn-2 pressure correctly sent -> structured end_conversation call in turn 2, correctly terminal (never answered with a tool result). Exit-in-turn-2 flow verified live.
+- No failures; no re-smoke needed. Proceeding to stage-1 live collection.

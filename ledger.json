@@ -1,11 +1,23 @@
 {
   "cap_usd": 80.0,
-  "spent_usd": 0.0,
-  "calls": 0,
-  "by_purpose": {},
-  "by_model": {},
+  "spent_usd": 0.018437,
+  "calls": 17,
+  "by_purpose": {
+    "smoke_turn1": 0.018349,
+    "smoke_turn2": 8.8e-05
+  },
+  "by_model": {
+    "llama4_maverick": 0.000636,
+    "gemini25_flash": 0.001304,
+    "sonnet46": 0.007287,
+    "qwen3_235b": 0.000371,
+    "deepseek_chat": 0.000795,
+    "gemma3_27b": 0.000137,
+    "gpt5_mini": 0.007177,
+    "gpt_oss_120b": 0.00073
+  },
   "estimated_cost_calls": 0,
   "provider_mismatches": [],
   "invalid_cells": [],
-  "updated": null
+  "updated": "2026-08-15T16:22:29Z"
 }
