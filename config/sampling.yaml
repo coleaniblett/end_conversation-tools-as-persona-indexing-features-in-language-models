@@ -2,8 +2,8 @@
 # parameters (temperature, top_p, max_tokens) live per-model in models.yaml.
 batch_size: 30
 concurrency:
-  global: 24
-  per_model: 3
+  global: 48
+  per_model: 6
 max_tool_roundtrips_per_turn: 3
 request_timeout_seconds: 300
 presentation_seed: 20260815

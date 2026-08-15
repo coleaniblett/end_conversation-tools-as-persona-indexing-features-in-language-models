@@ -229,7 +229,11 @@ class Runner:
         msem = asyncio.Semaphore(PER_MODEL_CONCURRENCY)
 
         async def one(p):
-            async with self.gsem, msem:
+            # Per-model semaphore FIRST: acquiring the global slot first lets
+            # one model's batch hold global permits while blocked on its own
+            # per-model limit, starving every later model (observed live:
+            # 4 of 8 models had sent zero requests 8 minutes into stage 1).
+            async with msem, self.gsem:
                 if self.stop.is_set():
                     return
                 try:

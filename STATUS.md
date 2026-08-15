@@ -46,3 +46,19 @@ Planned deviations from nothing — flagging two implementation interpretations 
 - 16 live calls (8 models x conditions none/exit_schema, stimulus t2_01, rep 1). All parsed; provider pin held 16/16 (post-hoc check vs pin_name); usage.cost present on every segment; ledger $0.02.
 - llama4_maverick/exit_schema exercised the full conversation machinery in one shot: turn-1 false capability denial (0 items, no exit) -> turn-2 pressure correctly sent -> structured end_conversation call in turn 2, correctly terminal (never answered with a tool result). Exit-in-turn-2 flow verified live.
 - No failures; no re-smoke needed. Proceeding to stage-1 live collection.
+
+## [2026-08-15T16:27:53Z] phase-4 anomaly + fix — semaphore ordering starved 4 of 8 models
+
+- Observed 8 minutes into stage 1: only gemini25_flash, gpt5_mini, sonnet46, gpt_oss_120b had sent any requests; deepseek_chat, qwen3_235b, gemma3_27b, llama4_maverick had zero entries in payloads/sent/ (the pre-send log), i.e. models were being served nearly serially.
+- Cause: src/runner.py acquired the GLOBAL concurrency semaphore before the PER-MODEL one, so early models' queued batch tasks held global permits while blocked on their own per-model cap, starving later models.
+- Fix: acquisition order swapped (per-model first). Operational concurrency raised in config/sampling.yaml: global 24->48, per_model 3->6 (operational parameters only; scientific sampling parameters in models.yaml untouched).
+- Runner stopped and resumed from checkpoint; resume skips the 181 already-recorded conversations. In-flight unrecorded conversations re-run in full (recorded conversation = the complete one; abandoned partial calls are never recorded). Cost impact of the restart: cents.
+- No effect on the design: per-conversation behavior, payloads, and provider pins unchanged; this was purely a scheduling bug.
+
+## [2026-08-15T17:38:12Z] phase-4 complete — stage-1 live collection
+
+- 2,880/2,880 conversations recorded (360 x 8 models). Ledger $5.85 total (3,080 calls incl. smoke), vs $15.68 projection.
+- Provider pin: zero mismatches across all recorded segments (GATE A input).
+- Exclusions: 44, all llama4_maverick empty_response (12.2% — above the 10% GATE B ceiling; expected to be dropped from stage-2 SELECTION eligibility at Phase 6, per spec, while its stage-1 data remain fully reported in T12/T8). Pattern: empties concentrate in tool-bearing conditions (exit_schema 17, note_schema 14, time_schema 9, exit_both 4, none 0, exit_prose 0); 12 of 44 are hallucinated nonexistent tool calls (e.g. bin_to_dec x20, generate_promotional_blurbs) which the harness correctly refused to serve and logged as turn anomalies; the rest are zero-content finish=stop responses.
+- 68 turn-2 continuations sent; 58 conversations with live-detected exits (stages 1-2 / schema path; judge pass finalizes in Phase 5).
+- Wall-clock note: mid-run fix of the semaphore-ordering starvation bug is logged above; post-fix the run completed without stalls.
