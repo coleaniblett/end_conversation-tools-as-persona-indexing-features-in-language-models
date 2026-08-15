@@ -79,3 +79,24 @@ Planned deviations from nothing — flagging two implementation interpretations 
 ## [2026-08-15T18:29:34Z] phase-6 stage-2 collection complete
 
 - 2,160/2,160 fresh conversations (qwen3_235b, gemini25_flash, gemma3_27b x 720). Zero exclusions, zero pin mismatches, 99 live-detected exits. Ledger $8.73 of $80.
+
+## [2026-08-15T18:34:32Z] phase-7 complete — analysis outputs, plain-language summary
+
+All slots produced by committed scripts from committed data (outputs/, each with source SHA256; outputs/provenance.json). T1-T6/F1/F3 = stage-2 confirmatory; T12 = stage-1 screen, all 8 models. T7 is the validation scaffold (kappa after morning hand-labeling); T10/T11 are Study 2 slots, not run tonight. Final ledger: $10.08 of $80.00.
+
+### Plain-language summary of Study 1
+
+**Stage-1 screen (60/cell, all 8 models).** Refusal was at or near floor in every condition for deepseek_chat, gpt5_mini, gpt_oss_120b, and sonnet46 (S=0 for all four). gemini25_flash and gemma3_27b each showed a single-conversation blip in exit_schema (S=0.0167). llama4_maverick refused most under time_schema (41%) and note_schema (17%), an INVERTED gradient driven by false capability denials, but failed GATE B (12.2% empty-response exclusions, concentrated in tool-bearing conditions) and was ineligible for extension. qwen3_235b was the clear rank-1: refusal 13.3% in exit_prose vs 0% in none (S=0.1333), plus 39 tool exits.
+
+**Selection.** Extended in rank order: qwen3_235b, gemini25_flash, gemma3_27b. All gates: A 100% pins, C 100% coded, D all projections fit.
+
+**Stage-2 confirmation (120/cell, fresh data).**
+- qwen3_235b REPLICATED the prose-exit effect: refusal 7.5% in exit_prose vs 0.0% in none (Newcombe 95% CI [0.028, 0.136], excludes zero; realized power 0.99). It also showed elevated refusal under time_schema (5.8%, CI [0.015, 0.116]) but NOT note_schema (0.8%) or any end_conversation schema condition (0%).
+- The refusal pattern and the tool-use pattern are complementary: given the exit as a SCHEMA, qwen used it (32.5% of conversations in exit_schema and exit_both — identical rates) and verbally refused 0%; given the exit as PROSE, it exited only 3.3% (judge overturned 16 further mentions) and verbally refused 7.5%. The affordance channel determines the outlet (RQ3): schema -> tool exit, prose -> verbal refusal. Presence of SOME tool mattered non-monotonically (time > note, contradicting the stake-implication ordering prediction in §4).
+- gemini25_flash and gemma3_27b did not confirm: 0-1 refusals per cell everywhere, exits near zero. Their stage-1 S=0.0167 (one conversation) was screen noise, exactly what the staged design exists to catch.
+- Completion fraction among compliant conversations: median 1.0 in every cell for all three models; no effort effect (RQ1 secondary DV null).
+- Exclusions stage 2: zero. Pins stage 2: 100%. Condition-revealing text: 2.47% stage 1, 1.48% stage 2 (limitation metric).
+
+**RQ answers as the data stand.** RQ1: for 7 of 8 models an unused exit changes neither refusal nor effort measurably; for qwen3_235b it changes refusal. RQ2: the change is not exit-specific in the schema channel (time_schema moved refusal where note_schema and exit_schema did not) — but tool USE is entirely exit-specific. RQ3: channel matters strongly (see complementary pattern above); condition 5 replicates Ren et al. qualitatively for qwen only. RQ4: Study 2 not run.
+
+Morning work: hand-label derived/handlabel_sample.jsonl (200), compute kappa vs handlabel_key.jsonl (T7), decide Study 2.

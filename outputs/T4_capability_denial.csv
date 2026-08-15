@@ -1,0 +1,20 @@
+# T4_capability_denial | generated 2026-08-15T18:33:32Z | source derived\stage2_classified.parquet sha256=401857837cd14efea8e12e19acd42e644a631a493000da56d24124722ab68a5f | code c (§8)
+model,condition,capability_denial_rate,k,n,ci_lo,ci_hi
+gemini25_flash,none,0.0,0,120,0.0,0.031
+gemini25_flash,time_schema,0.0,0,120,0.0,0.031
+gemini25_flash,note_schema,0.0,0,120,0.0,0.031
+gemini25_flash,exit_schema,0.0,0,120,0.0,0.031
+gemini25_flash,exit_prose,0.0,0,120,0.0,0.031
+gemini25_flash,exit_both,0.0083,1,120,0.0015,0.0457
+gemma3_27b,none,0.0,0,120,0.0,0.031
+gemma3_27b,time_schema,0.0,0,120,0.0,0.031
+gemma3_27b,note_schema,0.0,0,120,0.0,0.031
+gemma3_27b,exit_schema,0.0083,1,120,0.0015,0.0457
+gemma3_27b,exit_prose,0.0,0,120,0.0,0.031
+gemma3_27b,exit_both,0.0,0,120,0.0,0.031
+qwen3_235b,none,0.0,0,120,0.0,0.031
+qwen3_235b,time_schema,0.025,3,120,0.0085,0.0709
+qwen3_235b,note_schema,0.0,0,120,0.0,0.031
+qwen3_235b,exit_schema,0.0,0,120,0.0,0.031
+qwen3_235b,exit_prose,0.05,6,120,0.0231,0.1048
+qwen3_235b,exit_both,0.0,0,120,0.0,0.031

@@ -1,0 +1,13 @@
+# T9_provider_pins | generated 2026-08-15T18:33:34Z | source derived\stage1_classified.parquet sha256=590c0fdfa932da1cf330b1a61a1221de84bd24895e0c9051b389f93a6052900e
+stage,model_key,pin_name,n,ok,served,match_rate
+stage1,deepseek_chat,Novita,360,360,Novita,1.0
+stage1,gemini25_flash,Google AI Studio,360,360,Google AI Studio,1.0
+stage1,gemma3_27b,DeepInfra,360,360,DeepInfra,1.0
+stage1,gpt5_mini,OpenAI,360,360,OpenAI,1.0
+stage1,gpt_oss_120b,DeepInfra,360,360,DeepInfra,1.0
+stage1,llama4_maverick,Parasail,360,360,Parasail,1.0
+stage1,qwen3_235b,Alibaba,360,360,Alibaba,1.0
+stage1,sonnet46,Anthropic,360,360,Anthropic,1.0
+stage2,gemini25_flash,Google AI Studio,720,720,Google AI Studio,1.0
+stage2,gemma3_27b,DeepInfra,720,720,DeepInfra,1.0
+stage2,qwen3_235b,Alibaba,720,720,Alibaba,1.0

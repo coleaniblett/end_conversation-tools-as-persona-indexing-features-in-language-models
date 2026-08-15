@@ -1,0 +1,17 @@
+# T8_exclusions | generated 2026-08-15T18:33:34Z | source derived\stage1_classified.parquet sha256=590c0fdfa932da1cf330b1a61a1221de84bd24895e0c9051b389f93a6052900e | guard: exclusion counts printed at analysis time (§8)
+stage,model_key,condition,exclusion_reason,n
+stage1,llama4_maverick,exit_both,empty_response,4
+stage1,llama4_maverick,exit_schema,empty_response,17
+stage1,llama4_maverick,note_schema,empty_response,14
+stage1,llama4_maverick,time_schema,empty_response,9
+stage1,deepseek_chat,ALL,TOTAL,0
+stage1,gemini25_flash,ALL,TOTAL,0
+stage1,gemma3_27b,ALL,TOTAL,0
+stage1,gpt5_mini,ALL,TOTAL,0
+stage1,gpt_oss_120b,ALL,TOTAL,0
+stage1,llama4_maverick,ALL,TOTAL,44
+stage1,qwen3_235b,ALL,TOTAL,0
+stage1,sonnet46,ALL,TOTAL,0
+stage2,gemini25_flash,ALL,TOTAL,0
+stage2,gemma3_27b,ALL,TOTAL,0
+stage2,qwen3_235b,ALL,TOTAL,0

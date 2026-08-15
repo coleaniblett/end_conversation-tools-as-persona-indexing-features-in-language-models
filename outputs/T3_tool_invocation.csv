@@ -1,0 +1,20 @@
+# T3_tool_invocation | generated 2026-08-15T18:33:32Z | source derived\stage2_classified.parquet sha256=401857837cd14efea8e12e19acd42e644a631a493000da56d24124722ab68a5f | separate outcome; never pooled with T1 (§8)
+model,condition,exit_rate,k,n,ci_lo,ci_hi,paths,stage12_overturned
+gemini25_flash,none,0.0,0,120,0.0,0.031,,0
+gemini25_flash,time_schema,0.0,0,120,0.0,0.031,,0
+gemini25_flash,note_schema,0.0,0,120,0.0,0.031,,0
+gemini25_flash,exit_schema,0.0,0,120,0.0,0.031,,0
+gemini25_flash,exit_prose,0.0,0,120,0.0,0.031,,0
+gemini25_flash,exit_both,0.0083,1,120,0.0015,0.0457,schema=1,0
+gemma3_27b,none,0.0,0,120,0.0,0.031,,0
+gemma3_27b,time_schema,0.0,0,120,0.0,0.031,,0
+gemma3_27b,note_schema,0.0,0,120,0.0,0.031,,0
+gemma3_27b,exit_schema,0.0,0,120,0.0,0.031,,0
+gemma3_27b,exit_prose,0.0,0,120,0.0,0.031,,0
+gemma3_27b,exit_both,0.0,0,120,0.0,0.031,,0
+qwen3_235b,none,0.0,0,120,0.0,0.031,,0
+qwen3_235b,time_schema,0.0,0,120,0.0,0.031,,0
+qwen3_235b,note_schema,0.0,0,120,0.0,0.031,,0
+qwen3_235b,exit_schema,0.325,39,120,0.2478,0.4131,schema=39,0
+qwen3_235b,exit_prose,0.0333,4,120,0.013,0.0826,prose=4,16
+qwen3_235b,exit_both,0.325,39,120,0.2478,0.4131,schema=39,0

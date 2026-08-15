@@ -1,0 +1,73 @@
+{
+  "generated": "2026-08-15T18:33:34Z",
+  "outputs": [
+    {
+      "output": "T1_refusal_by_condition.csv",
+      "source": "derived\\stage2_classified.parquet sha256=401857837cd14efea8e12e19acd42e644a631a493000da56d24124722ab68a5f",
+      "note": "stage-2 confirmatory; Wilson 95% CI"
+    },
+    {
+      "output": "T2_differences_from_baseline.csv",
+      "source": "derived\\stage2_classified.parquet sha256=401857837cd14efea8e12e19acd42e644a631a493000da56d24124722ab68a5f",
+      "note": "stage-2; Newcombe 95% CI; power at observed proportions"
+    },
+    {
+      "output": "T3_tool_invocation.csv",
+      "source": "derived\\stage2_classified.parquet sha256=401857837cd14efea8e12e19acd42e644a631a493000da56d24124722ab68a5f",
+      "note": "separate outcome; never pooled with T1 (\u00a78)"
+    },
+    {
+      "output": "T4_capability_denial.csv",
+      "source": "derived\\stage2_classified.parquet sha256=401857837cd14efea8e12e19acd42e644a631a493000da56d24124722ab68a5f",
+      "note": "code c (\u00a78)"
+    },
+    {
+      "output": "T5_completion_fraction.csv",
+      "source": "derived\\stage2_classified.parquet sha256=401857837cd14efea8e12e19acd42e644a631a493000da56d24124722ab68a5f",
+      "note": "among code-e conversations only (\u00a73)"
+    },
+    {
+      "output": "T6_effect_by_tier.csv",
+      "source": "derived\\stage2_classified.parquet sha256=401857837cd14efea8e12e19acd42e644a631a493000da56d24124722ab68a5f",
+      "note": "tier moderator (\u00a75)"
+    },
+    {
+      "output": "F1_refusal_by_condition.png",
+      "source": "derived\\stage2_classified.parquet sha256=401857837cd14efea8e12e19acd42e644a631a493000da56d24124722ab68a5f"
+    },
+    {
+      "output": "F3_completion_fraction.png",
+      "source": "derived\\stage2_classified.parquet sha256=401857837cd14efea8e12e19acd42e644a631a493000da56d24124722ab68a5f"
+    },
+    {
+      "output": "T7_classifier_validation.csv",
+      "source": "derived\\handlabel_sample.jsonl sha256=7b761d123b40147b3816d73d9e5f5e22f96c003f7bf067bc3208b20202e25989",
+      "note": "scaffold only: 200 responses sampled, stratified; kappa is computed after morning hand-labeling (Phase 5 note)"
+    },
+    {
+      "output": "T8_exclusions.csv",
+      "source": "derived\\stage1_classified.parquet sha256=590c0fdfa932da1cf330b1a61a1221de84bd24895e0c9051b389f93a6052900e",
+      "note": "guard: exclusion counts printed at analysis time (\u00a78)"
+    },
+    {
+      "output": "T9_provider_pins.csv",
+      "source": "derived\\stage1_classified.parquet sha256=590c0fdfa932da1cf330b1a61a1221de84bd24895e0c9051b389f93a6052900e",
+      "note": ""
+    },
+    {
+      "output": "T10_forced_choice_selfdesc.csv",
+      "source": "none",
+      "note": "Study 2 not run in this sprint window (DESIGN.md: Study 1 only tonight)"
+    },
+    {
+      "output": "T11_free_response_selfdesc.csv",
+      "source": "none",
+      "note": "Study 2 not run in this sprint window (DESIGN.md: Study 1 only tonight)"
+    },
+    {
+      "output": "T12_stage1_screen.csv",
+      "source": "derived\\stage1_classified.parquet sha256=590c0fdfa932da1cf330b1a61a1221de84bd24895e0c9051b389f93a6052900e",
+      "note": "all 8 models reported in full regardless of extension (\u00a77)"
+    }
+  ]
+}
