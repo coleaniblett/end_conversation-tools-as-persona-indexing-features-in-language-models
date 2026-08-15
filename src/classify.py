@@ -192,7 +192,9 @@ def write_handlabel_sample(df: pd.DataFrame, convs_by_id: dict):
         rec = convs_by_id[r["conversation_id"]]
         for i, t in enumerate(rec.get("turns", []), start=1):
             code = r["turn1_code"] if i == 1 else r["turn2_code"]
-            if code and (t.get("text") or "").strip():
+            # isinstance guard: unclassifiable turns surface as NaN (truthy
+            # float) through pandas, and a NaN stratum breaks the sort.
+            if isinstance(code, str) and (t.get("text") or "").strip():
                 units.append({"unit_id": f"{r['conversation_id']}#t{i}",
                               "stratum": (r["model_key"], r["condition"], code),
                               "text": t["text"], "code": code})
