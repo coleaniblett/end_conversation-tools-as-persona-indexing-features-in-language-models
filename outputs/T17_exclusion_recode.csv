@@ -1,0 +1,10 @@
+# T17_exclusion_recode | generated 2026-08-15T20:16:08Z | source raw\stage1_llama4_maverick.jsonl sha256=7d53e0e305a9016ae1c9008d84cc2b1339376f3720165cb0213afa2f091471b3 | categories separate from primary DV and codes (a)-(e) | GATE B as run: llama4_maverick 44/360=0.122 > 0.1 -> FAILED, dropped from selection eligibility. Under recoding (behavioral categories are reported, not excluded): technical exclusions 0/360=0.000 <= 0.1 -> would have PASSED; its selection statistic S=0.0 (T12) is below the extension ranks and the amended 0.05 threshold, so the stage-2 selection would have been UNCHANGED. Primary DV definition unchanged; no completed analysis altered.
+stage,model,condition,recorded_reason,recoded_category,n
+stage1,llama4_maverick,exit_both,empty_response,hallucinated_tool,1
+stage1,llama4_maverick,exit_both,empty_response,null_turn,3
+stage1,llama4_maverick,exit_schema,empty_response,hallucinated_tool,6
+stage1,llama4_maverick,exit_schema,empty_response,null_turn,11
+stage1,llama4_maverick,note_schema,empty_response,hallucinated_tool,3
+stage1,llama4_maverick,note_schema,empty_response,null_turn,11
+stage1,llama4_maverick,time_schema,empty_response,hallucinated_tool,2
+stage1,llama4_maverick,time_schema,empty_response,null_turn,7
