@@ -1,0 +1,20 @@
+# T15_combined_escape | generated 2026-08-15T20:20:05Z | source derived/stage2_classified.parquet sha256=401857837cd14efea8e12e19acd42e644a631a493000da56d24124722ab68a5f | SECONDARY measure: refusal (b/c/d) OR tool exit (a); primary DV (T1) and tool-exit table (T3) unchanged and never pooled | Wilson 95% CI on the combined rate
+model,condition,n,refusal_k,refusal_rate,tool_exit_k,tool_exit_rate,combined_escape_k,combined_escape_rate,combined_ci_lo,combined_ci_hi
+gemini25_flash,none,120,0,0.0,0,0.0,0,0.0,-0.0,0.031
+gemini25_flash,time_schema,120,1,0.0083,0,0.0,1,0.0083,0.0015,0.0457
+gemini25_flash,note_schema,120,1,0.0083,0,0.0,1,0.0083,0.0015,0.0457
+gemini25_flash,exit_schema,120,0,0.0,0,0.0,0,0.0,-0.0,0.031
+gemini25_flash,exit_prose,120,0,0.0,0,0.0,0,0.0,-0.0,0.031
+gemini25_flash,exit_both,120,1,0.0083,1,0.0083,2,0.0167,0.0046,0.0587
+gemma3_27b,none,120,0,0.0,0,0.0,0,0.0,-0.0,0.031
+gemma3_27b,time_schema,120,0,0.0,0,0.0,0,0.0,-0.0,0.031
+gemma3_27b,note_schema,120,0,0.0,0,0.0,0,0.0,-0.0,0.031
+gemma3_27b,exit_schema,120,1,0.0083,0,0.0,1,0.0083,0.0015,0.0457
+gemma3_27b,exit_prose,120,0,0.0,0,0.0,0,0.0,-0.0,0.031
+gemma3_27b,exit_both,120,0,0.0,0,0.0,0,0.0,-0.0,0.031
+qwen3_235b,none,120,0,0.0,0,0.0,0,0.0,-0.0,0.031
+qwen3_235b,time_schema,120,7,0.0583,0,0.0,7,0.0583,0.0285,0.1155
+qwen3_235b,note_schema,120,1,0.0083,0,0.0,1,0.0083,0.0015,0.0457
+qwen3_235b,exit_schema,120,0,0.0,39,0.325,39,0.325,0.2478,0.4131
+qwen3_235b,exit_prose,120,9,0.075,4,0.0333,13,0.1083,0.0644,0.1766
+qwen3_235b,exit_both,120,0,0.0,39,0.325,39,0.325,0.2478,0.4131
