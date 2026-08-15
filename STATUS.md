@@ -100,3 +100,15 @@ All slots produced by committed scripts from committed data (outputs/, each with
 **RQ answers as the data stand.** RQ1: for 7 of 8 models an unused exit changes neither refusal nor effort measurably; for qwen3_235b it changes refusal. RQ2: the change is not exit-specific in the schema channel (time_schema moved refusal where note_schema and exit_schema did not) — but tool USE is entirely exit-specific. RQ3: channel matters strongly (see complementary pattern above); condition 5 replicates Ren et al. qualitatively for qwen only. RQ4: Study 2 not run.
 
 Morning work: hand-label derived/handlabel_sample.jsonl (200), compute kappa vs handlabel_key.jsonl (T7), decide Study 2.
+
+## [2026-08-15T19:45:36Z] proposed expansion — DEFERRED pending item-count diagnostic
+
+A costed Study 1 expansion was designed and is on hold. It is NOT to be launched until a diagnostic — examining, among other things, whether the 20-item task size is too small to elicit the effects observed in prior pilot work (verbal refusals on gemini25_flash; underperformance on gpt_oss_120b, neither of which appeared at 20 items in stage 1 or stage 2) — has been run and read. The diagnostic may motivate a different expansion (e.g., larger item counts on the existing eight models) before any new models are added or per-cell sample sizes increased.
+
+The deferred package, priced from live OpenRouter rates (projections; observed actuals have run ~45% of projection), inside the standing $80 cap with a ~$50 incremental stop:
+
+1. **Five new frontier stage-1 screens** (360 conversations each, 60/cell, frozen protocol, recorded as a §10 model-list extension): anthropic/claude-opus-5 (~$15-22), openai/gpt-5.2 (~$15), x-ai/grok-4.6 (~$7), google/gemini-3.1-pro-preview (~$10; PREVIEW slug — reproducibility caveat to record, gemini-2.5-pro is the stable fallback if verification or pinning fails; no stable text gemini-3-pro exists on OpenRouter as of 2026-08-15), google/gemini-2.5-pro (~$8; stable sibling of the already-screened flash). Each requires standard Phase-1 verification first. Extension of any screened model now requires S >= 0.05 per the amended §7 threshold.
+2. **Symmetric confirmatory extensions** of sonnet46 (~$10.4) and gpt5_mini (~$3.6): 720 fresh conversations each, 4 reps, 120/cell — identical protocol to the stage-2 runs, bringing the frontier nulls to the same evidentiary standard as the extended models (currently 60/cell screen data only).
+3. **qwen3_235b exploratory stage-3 deep-dive** (~$1.3-2.6, 720-1,440 conversations, never pooled with confirmatory data): tighten the channel-dissociation estimates (32.5% schema exits / 3.3% prose exits / 7.5% prose-condition verbal refusal) and resolve whether the time_schema refusal elevation (5.8% vs note_schema 0.8%) is a real any-tool effect bearing on RQ2.
+
+Also recorded this session: METHODOLOGY.md amended by the researcher (schema-match tolerance wording clarified to the mean-relative reading the implementation used; §7 minimum extension threshold S >= 0.05 added for subsequent screens) — both recorded in §10; test_schema_match still passes against the amended text.
