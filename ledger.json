@@ -1,22 +1,24 @@
 {
   "cap_usd": 80.0,
-  "spent_usd": 7.846002,
-  "calls": 5932,
+  "spent_usd": 8.725282,
+  "calls": 8158,
   "by_purpose": {
     "smoke_turn1": 0.018349,
     "smoke_turn2": 8.8e-05,
     "stage1_turn1": 5.81841,
     "stage1_turn2": 0.015388,
     "judge_stage1": 0.001883,
-    "classify_stage1": 1.991897
+    "classify_stage1": 1.991897,
+    "stage2_turn1": 0.877393,
+    "stage2_turn2": 0.001882
   },
   "by_model": {
     "llama4_maverick": 0.197999,
-    "gemini25_flash": 0.337425,
+    "gemini25_flash": 1.006174,
     "sonnet46": 3.883254,
-    "qwen3_235b": 0.072706,
+    "qwen3_235b": 0.215544,
     "deepseek_chat": 0.215207,
-    "gemma3_27b": 0.03452,
+    "gemma3_27b": 0.102202,
     "gpt5_mini": 1.039319,
     "gpt_oss_120b": 0.071803,
     "classifier_haiku45": 1.99378
@@ -24,5 +26,5 @@
   "estimated_cost_calls": 0,
   "provider_mismatches": [],
   "invalid_cells": [],
-  "updated": "2026-08-15T17:43:42Z"
+  "updated": "2026-08-15T18:29:18Z"
 }

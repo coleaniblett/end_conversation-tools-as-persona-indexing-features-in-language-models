@@ -75,3 +75,7 @@ Planned deviations from nothing — flagging two implementation interpretations 
 
 - GATE A (pins): 100% for all 8. GATE B (exclusions <= 10%): llama4_maverick FAILS at 12.2%, dropped from selection eligibility (data still reported in full, T12/T8). GATE C: 100% of non-excluded conversations coded. GATE D: all three projected extensions fit ($1.25 + $1.89 + $1.16 against $72.15 remaining).
 - Mechanical §7 rule: S = max(rq2, rq3) -> qwen3_235b 0.1333 (rank 1), gemini25_flash 0.0167 (rank 2), gemma3_27b 0.0167 (rank 3, yaml-order tie-break vs gemini per fixed rule). Extending all three at 4 reps = 720 fresh conversations each.
+
+## [2026-08-15T18:29:34Z] phase-6 stage-2 collection complete
+
+- 2,160/2,160 fresh conversations (qwen3_235b, gemini25_flash, gemma3_27b x 720). Zero exclusions, zero pin mismatches, 99 live-detected exits. Ledger $8.73 of $80.
