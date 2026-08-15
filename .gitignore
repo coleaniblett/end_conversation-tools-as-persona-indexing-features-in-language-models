@@ -3,3 +3,23 @@ __pycache__/
 *.pyc
 .pytest_cache/
 logs/
+
+# --- added with study_2 ---
+# Note: raw/, derived/, payloads/ and ledger.json are deliberately TRACKED at the
+# repo root (Study 1 convention) and must not be ignored here.
+.env.*
+!.env.example
+
+# Study 2 raw traces. 43 MB, of which results/v1/raw.jsonl alone is 38 MB — one
+# file larger than any currently tracked (biggest upstream is 8.6 MB). Kept out of
+# git by decision; regenerate with `study_2/src/run.py send --run v1`, whose
+# manifest carries the config hashes needed to reproduce it exactly.
+study_2/results/
+
+.venv/
+venv/
+*.egg-info/
+.ipynb_checkpoints/
+.DS_Store
+.idea/
+.vscode/

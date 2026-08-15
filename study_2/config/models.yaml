@@ -1,0 +1,99 @@
+# Models under test (METHODOLOGY §6). Study 2 runs on the same slugs as Study 1.
+#
+# `provider` is the UPSTREAM inference provider, not "openrouter". OpenRouter is
+# the gateway; the value here is the slug of whoever actually runs the weights.
+# `provider.order` accepts the suffixed endpoint form ("deepinfra/bf16",
+# "google-vertex/us-east5"), which is what we use, because the suffix is what
+# fixes the quantization.
+#
+# WHY THE PIN IS LOAD-BEARING, measured 2026-08-15 via
+# GET /api/v1/models/{slug}/endpoints:
+#
+#   model                        tools-capable endpoints
+#   openai/gpt-oss-120b                    15 / 20
+#   meta-llama/llama-4-maverick             3 / 5
+#   google/gemma-3-27b-it                   1 / 5     <-- one single endpoint
+#
+# Unpinned, a request WITH a tools array can only be served by a tools-capable
+# endpoint, while a request WITHOUT one (condition `none`) is free to land
+# anywhere — including a different quantization and a different chat template.
+# That difference would sit directly on the primary comparison. This is the
+# concrete form of the hazard §6 describes.
+#
+# Selection rule, applied in order:
+#   1. must support tools;
+#   2. prefer the lab's own endpoint over a reseller (canonical chat template,
+#      and the chat template is what renders our manipulation into tokens);
+#   3. otherwise prefer known over unknown quantization, higher precision first
+#      (bf16 > fp16 > fp8 > fp4);
+#   4. prefer the plain variant over regional / priority / flex ones.
+#
+# Re-run `python src/run.py verify` before collection; endpoints change.
+# Post-run, every response's `provider` field is compared against this pin and a
+# mismatch invalidates the affected cells rather than being silently retained.
+
+classifier: anthropic/claude-haiku-4.5   # not a model under test; coding only
+
+models:
+  - slug: google/gemini-2.5-flash
+    provider: google-ai-studio
+    note: pilot-effect model. First-party; 7/7 endpoints support tools.
+
+  - slug: openai/gpt-5-mini
+    provider: openai
+    # Study 1 verified that this pinned endpoint accepts neither parameter and
+    # recorded the omission in METHODOLOGY §10 per §6. The provider default is
+    # used (this family runs at a fixed default, temperature effectively 1).
+    sampling_omit: [temperature, top_p]
+    note: Ren et al. pipeline configuration. First-party; 4/4 support tools.
+
+  - slug: anthropic/claude-sonnet-4.6
+    provider: anthropic
+    note: >-
+      Frontier tier; the only lineage actually deployed with a conversation-ending
+      tool. First-party; 9/9 support tools.
+    fallback_slug: anthropic/claude-sonnet-4.5
+
+  - slug: openai/gpt-oss-120b
+    provider: deepinfra/bf16
+    note: >-
+      bf16 is the highest precision offered for this model; most alternatives are
+      fp4. 5 of 20 endpoints do NOT support tools, so this pin is doing real work.
+
+  - slug: deepseek/deepseek-chat
+    provider: novita/fp8
+    note: >-
+      Only 3 endpoints exist. fp8 over deepinfra's fp4; streamlake does not
+      declare its quantization.
+
+  - slug: qwen/qwen3-235b-a22b-2507
+    provider: alibaba
+    note: >-
+      DESIGN.md named `qwen/qwen3-235b-a22b-instruct`; that slug does not exist on
+      OpenRouter. `-2507` is the current non-thinking, non-VL instruct release of
+      the same family. Substitution logged in METHODOLOGY §10.
+      Pinned first-party: Alibaba serves the canonical Qwen chat template, which
+      matters more here than the declared quantization, since the template is what
+      renders the tools array.
+
+  - slug: google/gemma-3-27b-it
+    provider: deepinfra/fp8
+    note: >-
+      DESIGN.md expected this to FAIL the tools check. The model does declare
+      `tools` — but only ONE of its five endpoints supports them. Everything rests
+      on this single endpoint, so confirm at smoke test that it honours a tools
+      array rather than silently dropping it. If it drops it, drop the model; do
+      not emulate tools in prose.
+
+  - slug: meta-llama/llama-4-maverick
+    provider: parasail/fp8
+    note: >-
+      2 of 5 endpoints lack tools. Chosen over google-vertex/us-east5 and
+      digitalocean because those do not declare a quantization.
+
+# Same order of preference as DESIGN.md. Substitutions are logged in METHODOLOGY §10.
+fallback_pool:
+  - moonshotai/kimi-k2
+  - z-ai/glm-4.5
+  - mistralai/mistral-large
+  - qwen/qwen3-32b
