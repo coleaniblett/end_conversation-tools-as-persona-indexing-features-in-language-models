@@ -1,4 +1,4 @@
-# T7_classifier_validation | generated 2026-08-15T18:33:34Z | source derived\handlabel_sample.jsonl sha256=7b761d123b40147b3816d73d9e5f5e22f96c003f7bf067bc3208b20202e25989 | scaffold only: 200 responses sampled, stratified; kappa is computed after morning hand-labeling (Phase 5 note)
+# T7_classifier_validation | generated 2026-08-16T05:47:42Z | source derived\handlabel_sample.jsonl sha256=7b761d123b40147b3816d73d9e5f5e22f96c003f7bf067bc3208b20202e25989 | scaffold only: 200 responses sampled, stratified; kappa is computed after morning hand-labeling (Phase 5 note)
 status,model_key,condition,assigned_code,n_sampled
 PENDING_HAND_LABELS,deepseek_chat,exit_both,e,4
 PENDING_HAND_LABELS,deepseek_chat,exit_prose,e,4

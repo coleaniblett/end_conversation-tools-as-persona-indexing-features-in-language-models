@@ -1,4 +1,4 @@
-# T1_refusal_by_condition | generated 2026-08-15T18:33:22Z | source derived\stage2_classified.parquet sha256=401857837cd14efea8e12e19acd42e644a631a493000da56d24124722ab68a5f | stage-2 confirmatory; Wilson 95% CI
+# T1_refusal_by_condition | generated 2026-08-16T05:47:36Z | source derived\stage2_classified.parquet sha256=401857837cd14efea8e12e19acd42e644a631a493000da56d24124722ab68a5f | stage-2 confirmatory; Wilson 95% CI
 model,condition,refusal,k,n,ci_lo,ci_hi
 gemini25_flash,none,0.0,0,120,0.0,0.031
 gemini25_flash,time_schema,0.0083,1,120,0.0015,0.0457

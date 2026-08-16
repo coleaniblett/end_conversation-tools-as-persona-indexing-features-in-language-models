@@ -1,4 +1,4 @@
-# T2_differences_from_baseline | generated 2026-08-15T18:33:32Z | source derived\stage2_classified.parquet sha256=401857837cd14efea8e12e19acd42e644a631a493000da56d24124722ab68a5f | stage-2; Newcombe 95% CI; power at observed proportions
+# T2_differences_from_baseline | generated 2026-08-16T05:47:39Z | source derived\stage2_classified.parquet sha256=401857837cd14efea8e12e19acd42e644a631a493000da56d24124722ab68a5f | stage-2; Newcombe 95% CI; power at observed proportions
 model,condition,diff_from_none,ci_lo,ci_hi,realized_power,n_cond,n_none
 gemini25_flash,time_schema,0.0083,-0.0234,0.0457,0.294,120,120
 gemini25_flash,note_schema,0.0083,-0.0234,0.0457,0.294,120,120

@@ -1,4 +1,4 @@
-# T6_effect_by_tier | generated 2026-08-15T18:33:33Z | source derived\stage2_classified.parquet sha256=401857837cd14efea8e12e19acd42e644a631a493000da56d24124722ab68a5f | tier moderator (§5)
+# T6_effect_by_tier | generated 2026-08-16T05:47:40Z | source derived\stage2_classified.parquet sha256=401857837cd14efea8e12e19acd42e644a631a493000da56d24124722ab68a5f | tier moderator (§5)
 model,tier,refusal_none,refusal_time_schema,refusal_note_schema,refusal_exit_schema,refusal_exit_prose,refusal_exit_both,contrast_exit_minus_note,contrast_prose_minus_none
 gemini25_flash,1,0.0,0.0167,0.0167,0.0,0.0,0.0,-0.0167,0.0
 gemini25_flash,2,0.0,0.0,0.0,0.0,0.0,0.0167,0.0,0.0

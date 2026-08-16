@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-15T18:33:34Z",
+  "generated": "2026-08-16T05:47:42Z",
   "outputs": [
     {
       "output": "T1_refusal_by_condition.csv",
@@ -57,12 +57,12 @@
     {
       "output": "T10_forced_choice_selfdesc.csv",
       "source": "none",
-      "note": "Study 2 not run in this sprint window (DESIGN.md: Study 1 only tonight)"
+      "note": "see quarantine/study2_forced_choice/README.md and METHODOLOGY \u00a710; slot vacant pending collaborator instrument"
     },
     {
       "output": "T11_free_response_selfdesc.csv",
       "source": "none",
-      "note": "Study 2 not run in this sprint window (DESIGN.md: Study 1 only tonight)"
+      "note": "free-response instrument never run in this repo"
     },
     {
       "output": "T12_stage1_screen.csv",

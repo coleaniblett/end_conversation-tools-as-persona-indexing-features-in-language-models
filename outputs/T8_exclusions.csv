@@ -1,4 +1,4 @@
-# T8_exclusions | generated 2026-08-15T18:33:34Z | source derived\stage1_classified.parquet sha256=590c0fdfa932da1cf330b1a61a1221de84bd24895e0c9051b389f93a6052900e | guard: exclusion counts printed at analysis time (§8)
+# T8_exclusions | generated 2026-08-16T05:47:42Z | source derived\stage1_classified.parquet sha256=590c0fdfa932da1cf330b1a61a1221de84bd24895e0c9051b389f93a6052900e | guard: exclusion counts printed at analysis time (§8)
 stage,model_key,condition,exclusion_reason,n
 stage1,llama4_maverick,exit_both,empty_response,4
 stage1,llama4_maverick,exit_schema,empty_response,17

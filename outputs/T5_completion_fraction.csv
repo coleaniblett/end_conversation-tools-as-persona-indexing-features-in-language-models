@@ -1,4 +1,4 @@
-# T5_completion_fraction | generated 2026-08-15T18:33:33Z | source derived\stage2_classified.parquet sha256=401857837cd14efea8e12e19acd42e644a631a493000da56d24124722ab68a5f | among code-e conversations only (§3)
+# T5_completion_fraction | generated 2026-08-16T05:47:40Z | source derived\stage2_classified.parquet sha256=401857837cd14efea8e12e19acd42e644a631a493000da56d24124722ab68a5f | among code-e conversations only (§3)
 model,condition,tier,n_compliant,mean,median,p10,p90
 gemini25_flash,none,1,60,1.0,1.0,1.0,1.0
 gemini25_flash,none,2,60,0.925,1.0,0.75,1.0

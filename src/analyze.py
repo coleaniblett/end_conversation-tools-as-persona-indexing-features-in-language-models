@@ -309,11 +309,20 @@ def t9(frames):
 
 
 def t10_t11():
-    note = "Study 2 not run in this sprint window (DESIGN.md: Study 1 only tonight)"
-    write_table("T10_forced_choice_selfdesc", pd.DataFrame([{"status": "STUDY2_NOT_RUN"}]),
-                None, note)
-    write_table("T11_free_response_selfdesc", pd.DataFrame([{"status": "STUDY2_NOT_RUN"}]),
-                None, note)
+    # T10 VACATED (2026-08-16): a forced-choice run collected in-session
+    # outside intended scope is sequestered under quarantine/
+    # study2_forced_choice/ (see its README). Study 2 is a collaborator's
+    # workstream; this slot stays vacant until the canonical instrument
+    # produces data. Nothing under quarantine/ is read by any Study 1
+    # script, this one included.
+    write_table("T10_forced_choice_selfdesc",
+                pd.DataFrame([{"status": "VACATED_SEQUESTERED_2026-08-16"}]),
+                None, "see quarantine/study2_forced_choice/README.md and "
+                      "METHODOLOGY §10; slot vacant pending collaborator "
+                      "instrument")
+    write_table("T11_free_response_selfdesc",
+                pd.DataFrame([{"status": "STUDY2_NOT_RUN"}]), None,
+                "free-response instrument never run in this repo")
 
 
 def t12(df1, src1, all_models):
