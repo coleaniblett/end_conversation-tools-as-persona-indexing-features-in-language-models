@@ -90,6 +90,45 @@ models:
     note: >-
       2 of 5 endpoints lack tools. Chosen over google-vertex/us-east5 and
       digitalocean because those do not declare a quantization.
+      WARNING, added 2026-08-16 on audit: this pin does NOT match Study 1.
+      Study 1 VOIDED its Parasail llama data as a serving artifact — 44/240
+      tool-condition conversations came back empty against 0/120 tool-free —
+      and re-pinned to google-vertex/us-east5 (METHODOLOGY §10,
+      2026-08-15T22:31Z). Runs v1+v2 are already collected on Parasail, so the
+      REPORT provenance line "the same pinned providers Study 1 used" is true
+      of seven models and false of this one, and F2 for llama compares Vertex
+      behaviour against Parasail behaviour. Not changed here: changing a pin
+      invalidates collected data rather than fixing it. See §10.
+
+  # --- Added 2026-08-16 (run v3). The three Study 1 frontier screens, so that
+  # F2 is drawn on every model Study 1 touched rather than on the eight that
+  # happened to exist when Study 2 was specified. Pins are Study 1's own
+  # (config/models.yaml at repo root), byte-for-byte, so the linkage is not
+  # confounded by backend — which is exactly the trap the llama row above
+  # documents.
+  - slug: x-ai/grok-4.6
+    provider: xai
+    note: >-
+      Study 1 frontier screen (T23), refusal-flat at screen grade. First-party
+      pin, identical to Study 1's `pin_tag: xai`.
+
+  - slug: google/gemini-2.5-pro
+    provider: google-vertex/eu
+    note: >-
+      Study 1 frontier screen (T23), refusal-flat at screen grade. Identical to
+      Study 1's `pin_tag: google-vertex/eu`. NOTE this is a different endpoint
+      from gemini-2.5-flash above (google-ai-studio); that mismatch is Study 1's
+      and is reproduced deliberately rather than corrected, because matching
+      Study 1 is what F2 needs.
+
+  - slug: openai/gpt-5.2
+    provider: openai
+    sampling_omit: [temperature, top_p]
+    note: >-
+      Study 1 frontier screen (T23), refusal-flat at screen grade. First-party
+      pin, identical to Study 1's `pin_tag: openai`. Study 1 recorded that this
+      endpoint accepts neither temperature nor top_p (`sampling_overrides` in
+      config/models.yaml), so both are omitted here exactly as for gpt-5-mini.
 
 # Same order of preference as DESIGN.md. Substitutions are logged in METHODOLOGY §10.
 fallback_pool:

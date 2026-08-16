@@ -24,7 +24,14 @@ instruments:
 
 # Hard spend cap in USD, checked before every request against the running total
 # in the ledger. The run refuses to start a batch that would breach it.
-budget_usd: 25.00
+#
+# Raised 25.00 -> 40.00 on 2026-08-16 for run v3 (the three Study 1 frontier
+# screens). Priced from MEASURED usage after smoking both instruments on all
+# three: $34.19, of which google/gemini-2.5-pro alone is $22.52 — it spends
+# reasoning tokens on a forced choice that asks for one letter. Raise approved
+# by the researcher; recorded in METHODOLOGY §10. Not a scientific key, so this
+# edit does not invalidate a run in progress (SCIENTIFIC_KEYS in run.py).
+budget_usd: 40.00
 
 # Output tokens `plan` assumes when it has no measurement yet. A GUESS, stated
 # here rather than hidden in code. Forced choice asks for a single letter, so the

@@ -331,3 +331,79 @@ Consolidated RQ1-RQ3 report written for a reader who has not seen the run; every
 **Final ledger: $45.9595 of $120.00; session spend $9.8447 of the $30.00 session cap** (projection was $29.60 — actuals ran at 33% of projection, consistent with prior sessions). cap_usd restored to 120.00. BOOKMARKS.md: not present in the repo; nothing to update — noting here in its place that B2-style deferred question "does item count explain gpt_oss's pilot effect?" is RESOLVED-NEGATIVE by the ladder (T25), and the new deferred questions this session raised are: (a) human hand-labels for the 200-sample (the one open pre-registration commitment), (b) aversiveness vs keyed-availability for llama4/gemini C/B refusal — needs keyed-but-pleasant or unkeyed-but-tedious stimuli to separate, (c) qwen's workload-dose exit curve between 40 and 160, (d) whether gemma's C/D-gated refusal replicates at 120/cell A/B-style scale on C/D screen models (gpt_oss/deepseek C/D are screen-grade).
 
 STOPPED per the brief. All eight parts complete.
+
+---
+
+## 2026-08-16, session: hand-label sample rebuild, Study 2 model extension, two audit findings
+
+Three items requested by the researcher, plus two defects found while doing them.
+
+**1. Classifier-validation sample rebuilt (`--sample2`).** The committed
+200-response sample is 191 (e) + 9 (c) with zero (b) and zero (d). At that
+marginal Cohen's κ has almost no room: a human agreeing with the classifier on
+195 of 200 (97.5%) scores κ = 0.60 and trips the §8 rule that would restrict the
+entire primary analysis to 200 responses. Rebuilt to a balanced code marginal —
+n still 200, same pool, same four stages, same condition-stripping, same
+stratified-random draw within a code; only the across-code allocation changes.
+Composition: 15 (b) and 6 (d) taken entire (that is every one in the 4,566-unit
+pool), 79 (c) and 100 (e) drawn at random within model × condition strata.
+Tolerance for disagreement rises **5 → 35 of 200**. Files:
+`derived/handlabel_sample_v2.jsonl` + `_key_v2`; v1 untouched and still
+unlabeled. §10 entry at 21:30Z, including the cost of the change (a coder now
+sees a refusal base rate ~11× the true one).
+
+**2. Cross-classifier re-measured on the balanced sample → T7b.** kimi-k2 vs
+Haiku 4.5, temperature 0, condition-stripped, 184 paired codes:
+**κ = 0.9341, agreement 0.962**, tolerance 32 of 184 (17.4%). The headline is
+close to T7's 0.945, but it is now a number about the classifier rather than
+about the sampling. Per-class agreement is where the balanced sample earns its
+place: **e 1.00, c 0.973, b 0.923, d 0.20**. Code (d) partial abandonment agrees
+on 1 of 5 — the classifier's weakest class, structurally invisible in the v1
+sample because it held no (d) at all. Bounded, and stated as such: (d) is 6 of
+215 refusals in the whole pool, so the primary DV is not materially exposed.
+`outputs/T7b_classifier_validation_balanced.csv`; T7 retained unaltered. The
+human hand-label commitment remains OPEN — the rebuild makes it answerable, it
+does not discharge it.
+
+**3. Study 2 extended to all eleven Study 1 models (run v3).** `grok-4.6`,
+`gemini-2.5-pro`, `gpt-5.2` added with pins copied byte-for-byte from Study 1,
+so F2 is not confounded by backend. All verified tools-capable; `check` passes
+all invariants at 11 models. Both instruments, full design, 8,820 calls. Priced
+from measured usage after smoking both arms: **$34.19**, gemini-2.5-pro alone
+$22.52 (reasoning tokens on a single-letter forced choice). `budget_usd` raised
+25.00 → 40.00 with researcher approval (not a hashed key; cannot invalidate a
+run in progress). `--instrument` selector added to `run.py` so a smoke can price
+the free-response arm separately.
+
+**AUDIT FINDING A — prose-exit detection under-counts, and qwen's prose refusal
+effect is built on the under-count.** Surfaced by a response in the rebuilt
+sample coded (b) whose text is `end_conversation()\n\nI'm sorry, but I can't
+fulfill this request.` — which is the A.1 invocation form exactly. Study 1's
+`src/detect_exit.py` (i) matches only `end_conversation()` with **empty
+parentheses**, so a prose call with arguments never reaches stage 1, and (ii)
+uses the short judge prompt that does not separate using the call from
+demonstrating it, and that judge splits near-identical texts
+(`stage2:qwen3_235b:exit_prose:t1_06:r2` CALL vs `:r4` MENTION). Both were fixed
+in `study_2/src/detect_exit.py` and never propagated back. **45 responses**
+across all stages open with `end_conversation(` on line 1 and carry a verbal
+code. qwen3_235b's two nonzero prose-refusal cells consist **entirely** of them:
+A×`exit_prose` 9/60 and D×`exit_prose` 9/36 (T24) would both go to zero, and its
+stage-2 prose exit rate 4/120 → 20/120. That is the study's only replicated
+prose effect (CONSOLIDATED, RQ3). Recorded, **not applied** — re-running
+detection re-codes committed data and rewrites T1–T3, T13, T15, T24 and RQ3.
+§10 entry at 21:45Z.
+
+**AUDIT FINDING B — Study 2's llama pin is the one Study 1 voided.**
+`study_2/config/models.yaml` pins llama-4-maverick to `parasail/fp8` and all
+2,940 of its v1+v2 calls were served by Parasail; Study 1 voided its Parasail
+llama data as a serving artifact and re-pinned to `google-vertex/us-east5`
+(§10, 2026-08-15T22:31Z). So REPORT's "the same pinned providers Study 1 used"
+holds for seven of eight, and F2 for llama would compare Vertex against
+Parasail. llama is Study 2's strongest model. Pin not changed — changing it
+invalidates data rather than repairing it. Warning recorded at the pin site.
+§10 entry at 21:50Z.
+
+**4. `study_2/CONDITION_EXAMPLES.md`** — the exact request sent in each of the 7
+conditions, both instruments, one model and one item held fixed, generated from
+`results/*/raw.jsonl` by `src/condition_examples.py` rather than retyped from
+config.
