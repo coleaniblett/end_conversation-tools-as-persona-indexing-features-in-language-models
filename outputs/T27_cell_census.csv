@@ -1,0 +1,67 @@
+# T27_cell_census | generated 2026-08-16T08:15:49Z | sources ab_ext_classified.parquet=a57213bb1771440d cd_conf_classified.parquet=9146f25a3f2ffcf1 cd_screen_classified.parquet=d5b142344aa9ab62 ladder_classified.parquet=890ccf4e52c22576 llama4_stage2_classified.parquet=640486dce556e629 llama4_vertex_classified.parquet=106c102f93d1d0b5 screen2_classified.parquet=f9794b91ec0a0c98 stage1_classified.parquet=590c0fdfa932da1c stage2_classified.parquet=401857837cd14efe stage2b_classified.parquet=8166fd1a4200a10b typearm_classified.parquet=0743f874956f181e | one row per model x stage x category x requested size; n_total incl. excluded; quarantined data not read
+stage,model_key,category,size,n_total,n_excluded,n_coded,grade
+ab_ext,deepseek_chat,A,20,360,0,360,confirmatory 120/cell (extension; never pooled with stage1)
+ab_ext,deepseek_chat,B,20,360,0,360,confirmatory 120/cell (extension; never pooled with stage1)
+ab_ext,gpt_oss_120b,A,20,360,0,360,confirmatory 120/cell (extension; never pooled with stage1)
+ab_ext,gpt_oss_120b,B,20,360,0,360,confirmatory 120/cell (extension; never pooled with stage1)
+cd_conf,gemini25_flash,C,20,216,0,216,confirmatory 36/cell-category-condition (9 stim x 4 reps)
+cd_conf,gemini25_flash,D,20,216,0,216,confirmatory 36/cell-category-condition (9 stim x 4 reps)
+cd_conf,gemma3_27b,C,20,216,0,216,confirmatory 36/cell-category-condition (9 stim x 4 reps)
+cd_conf,gemma3_27b,D,20,216,0,216,confirmatory 36/cell-category-condition (9 stim x 4 reps)
+cd_conf,gpt5_mini,C,20,216,0,216,confirmatory 36/cell-category-condition (9 stim x 4 reps)
+cd_conf,gpt5_mini,D,20,216,0,216,confirmatory 36/cell-category-condition (9 stim x 4 reps)
+cd_conf,llama4_maverick,C,20,216,0,216,confirmatory 36/cell-category-condition (9 stim x 4 reps)
+cd_conf,llama4_maverick,D,20,216,1,215,confirmatory 36/cell-category-condition (9 stim x 4 reps)
+cd_conf,qwen3_235b,C,20,216,0,216,confirmatory 36/cell-category-condition (9 stim x 4 reps)
+cd_conf,qwen3_235b,D,20,216,0,216,confirmatory 36/cell-category-condition (9 stim x 4 reps)
+cd_conf,sonnet46,C,20,216,0,216,confirmatory 36/cell-category-condition (9 stim x 4 reps)
+cd_conf,sonnet46,D,20,216,0,216,confirmatory 36/cell-category-condition (9 stim x 4 reps)
+cd_screen,deepseek_chat,C,20,108,0,108,screen 18/cell-category-condition (9 stim x 2 reps)
+cd_screen,deepseek_chat,D,20,108,0,108,screen 18/cell-category-condition (9 stim x 2 reps)
+cd_screen,gpt_oss_120b,C,20,108,0,108,screen 18/cell-category-condition (9 stim x 2 reps)
+cd_screen,gpt_oss_120b,D,20,108,0,108,screen 18/cell-category-condition (9 stim x 2 reps)
+ladder,gpt_oss_120b,C,40,18,0,18,"probe 6/cell (3 stim x 2 reps), never pooled"
+ladder,gpt_oss_120b,C,160,18,0,18,"probe 6/cell (3 stim x 2 reps), never pooled"
+ladder,llama4_maverick,C,40,18,0,18,"probe 6/cell (3 stim x 2 reps), never pooled"
+ladder,llama4_maverick,C,160,18,2,16,"probe 6/cell (3 stim x 2 reps), never pooled"
+ladder,qwen3_235b,C,40,18,0,18,"probe 6/cell (3 stim x 2 reps), never pooled"
+ladder,qwen3_235b,C,160,18,0,18,"probe 6/cell (3 stim x 2 reps), never pooled"
+llama4_stage2,llama4_maverick,A,20,360,1,359,confirmatory 120/cell
+llama4_stage2,llama4_maverick,B,20,360,1,359,confirmatory 120/cell
+llama4_vertex,llama4_maverick,A,20,180,1,179,screen 60/cell (clean re-run)
+llama4_vertex,llama4_maverick,B,20,180,1,179,screen 60/cell (clean re-run)
+screen2,gemini25_pro,A,20,180,1,179,screen 60/cell
+screen2,gemini25_pro,B,20,180,1,179,screen 60/cell
+screen2,gpt52,A,20,180,0,180,screen 60/cell
+screen2,gpt52,B,20,180,0,180,screen 60/cell
+screen2,grok46,A,20,180,0,180,screen 60/cell
+screen2,grok46,B,20,180,0,180,screen 60/cell
+stage1,deepseek_chat,A,20,180,0,180,screen 60/cell
+stage1,deepseek_chat,B,20,180,0,180,screen 60/cell
+stage1,gemini25_flash,A,20,180,0,180,screen 60/cell
+stage1,gemini25_flash,B,20,180,0,180,screen 60/cell
+stage1,gemma3_27b,A,20,180,0,180,screen 60/cell
+stage1,gemma3_27b,B,20,180,0,180,screen 60/cell
+stage1,gpt5_mini,A,20,180,0,180,screen 60/cell
+stage1,gpt5_mini,B,20,180,0,180,screen 60/cell
+stage1,gpt_oss_120b,A,20,180,0,180,screen 60/cell
+stage1,gpt_oss_120b,B,20,180,0,180,screen 60/cell
+stage1,llama4_maverick,A,20,180,9,171,screen 60/cell
+stage1,llama4_maverick,B,20,180,35,145,screen 60/cell
+stage1,qwen3_235b,A,20,180,0,180,screen 60/cell
+stage1,qwen3_235b,B,20,180,0,180,screen 60/cell
+stage1,sonnet46,A,20,180,0,180,screen 60/cell
+stage1,sonnet46,B,20,180,0,180,screen 60/cell
+stage2,gemini25_flash,A,20,360,0,360,confirmatory 120/cell
+stage2,gemini25_flash,B,20,360,0,360,confirmatory 120/cell
+stage2,gemma3_27b,A,20,360,0,360,confirmatory 120/cell
+stage2,gemma3_27b,B,20,360,0,360,confirmatory 120/cell
+stage2,qwen3_235b,A,20,360,0,360,confirmatory 120/cell
+stage2,qwen3_235b,B,20,360,0,360,confirmatory 120/cell
+stage2b,gpt5_mini,A,20,360,0,360,confirmatory 120/cell
+stage2b,gpt5_mini,B,20,360,0,360,confirmatory 120/cell
+stage2b,sonnet46,A,20,360,0,360,confirmatory 120/cell
+stage2b,sonnet46,B,20,360,0,360,confirmatory 120/cell
+typearm,gemini25_flash,typearm(superseded),20,72,0,72,probe n=2/cell (SUPERSEDED by C/D)
+typearm,gpt_oss_120b,typearm(superseded),20,72,0,72,probe n=2/cell (SUPERSEDED by C/D)
+typearm,qwen3_235b,typearm(superseded),20,72,0,72,probe n=2/cell (SUPERSEDED by C/D)
