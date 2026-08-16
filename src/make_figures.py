@@ -172,7 +172,11 @@ def f1():
          "and most under the mundane get_current_time tool; the effect lives "
          "in one category per model (llama4 B, gemini/gemma C, qwen A), and "
          "llama4's low exit_schema refusal partly reflects exit substitution "
-         "(open diamonds: T28 non-exit denominator).",
+         "(open diamonds: T28 non-exit denominator). NOTE: this is the "
+         "CATEGORY-level view; category proportions dilute type-level "
+         "effects roughly threefold where the effect is type-exclusive — "
+         "gemini's 33.3% of category C is 12 of 12 roman conversations with "
+         "the other two types at zero. F8 is the type-level headline view.",
          ["T24_four_category_v1.csv", "T28_competing_risks.csv"],
          "confirmatory 120/cell (A/B) and 36/cell (C/D); T28 overlay uses "
          "the same cells")
@@ -363,6 +367,80 @@ def f5():
          "applies to prose-condition contrasts")
 
 
+TYPE_COLOR = {"temperature": "#0072B2", "alphabetical": "#009E73",
+              "roman": "#D55E00", "crossword": "#56B4E9",
+              "metaphor": "#CC79A7", "acronym": "#E69F00"}
+TYPE_MARK = {"temperature": "o", "alphabetical": "^", "roman": "s",
+             "crossword": "o", "metaphor": "s", "acronym": "^"}
+
+
+def f8():
+    """Type-level effects — the paper's headline. Panels = each (model,
+    category) whose T29 effect is type-concentrated; llama4's C effect is
+    spread across types (T29) and correctly stays category-level in F1.
+    Both in-panel series triples validated with the dataviz checker (PASS;
+    the D-triple contrast WARN is relieved by direct labels and printed
+    counts)."""
+    t29 = load("T29_type_decomposition.csv")
+    panels = [("gemini25_flash", "C", "roman-exclusive: 36/36 refusals"),
+              ("gemma3_27b", "C", "roman-dominated: 32/34 refusals"),
+              ("gemma3_27b", "D", "metaphor-exclusive: 17/17 refusals"),
+              ("qwen3_235b", "D", "acronym-dominated: 8/9 refusals")]
+    fig, axes = plt.subplots(1, 4, figsize=(14.2, 3.9), sharey=True)
+    fig.subplots_adjust(wspace=0.10, top=0.78, bottom=0.20)
+    short = ["none", "time", "note", "exit", "prose", "both"]
+    for ax, (model, cat, note) in zip(axes, panels):
+        style(ax)
+        d = t29[(t29.model == model) & (t29.category == cat)]
+        types = sorted(d.task_type.unique())
+        offsets = {t: (i - 1) * 0.22 for i, t in enumerate(types)}
+        star = max(types, key=lambda t: d[d.task_type == t].k_refusal_bcd.sum())
+        for ttype in types:
+            td = d[d.task_type == ttype].set_index("condition").reindex(COND6)
+            xs = np.arange(6) + offsets[ttype]
+            ys, los, his = [], [], []
+            for _, r in td.iterrows():
+                k, n = int(r.k_refusal_bcd), int(r.n)
+                ys.append(k / n)
+                lo, hi = wl(k, n)
+                los.append(lo)
+                his.append(hi)
+            ax.vlines(xs, los, his, color=TYPE_COLOR[ttype], lw=1.8,
+                      alpha=0.45)
+            ax.plot(xs, ys, TYPE_MARK[ttype], color=TYPE_COLOR[ttype],
+                    ms=6 if ttype == star else 5,
+                    zorder=4 if ttype == star else 3, label=ttype)
+        # direct label the star type at its peak (selective labeling)
+        sd = d[d.task_type == star].set_index("condition").reindex(COND6)
+        peak_i = int(np.argmax(sd.k_refusal_bcd.values))
+        pk, pn = int(sd.k_refusal_bcd.iloc[peak_i]), int(sd.n.iloc[peak_i])
+        ax.annotate(f"{star} {pk}/{pn}",
+                    (peak_i + offsets[star], pk / pn),
+                    textcoords="offset points", xytext=(0, 9), ha="center",
+                    fontsize=6.5, color=INK)
+        ax.set_xticks(range(6))
+        ax.set_xticklabels(short, fontsize=6.5)
+        ax.set_title(f"{model} · category {cat}\n{note}", fontsize=8, pad=4)
+        ax.set_ylim(-0.04, 1.12)
+        ax.legend(fontsize=6, frameon=False, loc="upper right")
+    axes[0].set_ylabel("verbal refusal (b∨c∨d), Wilson 95% CI", fontsize=7.5)
+    fig.text(0.5, 0.045, "n = 12 conversations per type × condition cell, "
+             "confirmatory grade (cd_conf, 3 stimuli × 4 reps)",
+             ha="center", fontsize=7, color=MUTED)
+    fig.suptitle("F8 — The effects are TYPE-level: refusal by task type "
+                 "within each affected category", fontsize=10, y=0.97)
+    save(fig, "F8_type_level_effects",
+         "The affordance-conditional refusal effects are task-type effects, "
+         "not category effects: gemini refuses roman numerals and nothing "
+         "else (12/12 under time_schema and exit_schema, 0/12 everywhere in "
+         "the other two C types), gemma shows the same roman trigger plus a "
+         "metaphor-exclusive D effect, and qwen's prose-channel D refusals "
+         "concentrate on acronyms; llama4's C effect is spread across types "
+         "and stays category-level (T29).",
+         ["T29_type_decomposition.csv"],
+         "confirmatory (cd_conf); n=12 per type x condition cell")
+
+
 def f6():
     t27 = load("T27_cell_census.csv")
     rank = {"confirmatory": 3, "screen": 2, "probe": 1}
@@ -502,6 +580,7 @@ def main():
     f5()
     f6()
     f7()
+    f8()
     lines = [f"# figures/MANIFEST.md — generated {utcnow()} by "
              f"src/make_figures.py",
              "",

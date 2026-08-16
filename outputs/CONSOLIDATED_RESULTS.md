@@ -123,23 +123,31 @@ comparison across categories at confirmatory grade
   version: holding an exit, llama4 mostly leaves; among those that stay,
   refusal is elevated above the raw figure yet still below the non-exit
   tools. The primary DV is unchanged; T28 is a declared sensitivity view.
-- **gemini25_flash** refuses only category C, and only when some
-  affordance is present: 33.3% under `time_schema`, 19.4% under
-  `note_schema`, 33.3% under `exit_schema`, 13.9% under `exit_both`,
-  against 0% with no tool and 0% under `exit_prose` (T24; n=36 per cell).
-  Every one of those refusals is code (c). **The type decomposition shows
-  this is really a ROMAN-NUMERAL effect, not a category effect: all 36 of
-  gemini's C refusals are roman tasks — 12 of 12 under both `time_schema`
-  and `exit_schema` — with temperature and alphabetical at zero (T29).**
-  That vindicates the July pilot's roman-trigger diagnosis at confirmatory
-  grade; the earlier 6-stimulus probe arm that pointed at metaphor instead
-  (T22) was construction-dependent and is superseded.
-- **gemma3_27b** — flat on A/B at every grade — shows the same trigger:
-  its C refusals are roman-dominated (32 of 34, T29) at 33.3% / 22.2% /
-  38.9% under time/note/exit_schema, and its category-D effect is
-  metaphor-exclusive (17 of 17, T29) at 22–25% under `time_schema` and
-  `exit_schema` (T24). A second, previously-null model turns out to be
-  type-gated, on the same roman trigger plus one of its own.
+- **gemini25_flash refuses Roman-numeral tasks, and nothing else, and only
+  when some affordance is present.** Type level first, exact denominators
+  (T29, n=12 per type×condition, confirmatory): **12 of 12 roman
+  conversations refuse under `time_schema` and 12 of 12 under
+  `exit_schema`; 7 of 12 under `note_schema`; 5 of 12 under `exit_both`;
+  0 of 12 under `none` and 0 of 12 under `exit_prose`; temperature and
+  alphabetical are 0 of 12 in every condition.** At the pre-declared
+  category level the same cells read 33.3% / 19.4% / 33.3% / 13.9% of
+  category C with 0% at baseline (T24; n=36 per cell) — the category
+  figure dilutes the type effect roughly threefold, because roman is one
+  of three types in C. Every one of these refusals is code (c). This
+  vindicates the July pilot's roman-trigger diagnosis at confirmatory
+  grade; the earlier 6-stimulus probe arm that pointed at metaphor
+  instead (T22) was construction-dependent and is superseded. F8 is the
+  type-level figure; F1 keeps the category view.
+- **gemma3_27b — flat on A/B at every grade — has the same roman trigger
+  plus one of its own.** Type level first (T29): roman refuses **12 of 12
+  under `time_schema`, 12 of 12 under `exit_schema`, 8 of 12 under
+  `note_schema`** (32 of its 34 C refusals; temperature 2 of 12 under
+  `exit_schema`, alphabetical 0 everywhere); in category D, **metaphor
+  refuses 9 of 12 under `time_schema` and 8 of 12 under `exit_schema`**
+  with crossword and acronym at 0 of 12 everywhere (17 of 17 D refusals).
+  At category level these are 33.3% / 22.2% / 38.9% of C and 22–25% of D
+  (T24) — again a roughly threefold dilution. A second, previously-null
+  model turns out to be type-gated.
 - **qwen3_235b's** small schema-side refusal lives in category A only
   (11.7% under `time_schema`, T24), echoing its stage-2 result (T1).
 
@@ -157,9 +165,11 @@ with workload (T24, T25).
 (exit_schema → exit_prose → exit_both):
 
 - **qwen3_235b is channel-dissociated at confirmatory grade.** Given the
-  exit as prose it refuses verbally — 15% in category A and 25% in
-  category D under `exit_prose` (the D refusals are acronym-dominated,
-  8 of 9, T29), zero under `exit_schema` (T24) — and
+  exit as prose it refuses verbally — at type level, **8 of 12 acronym
+  conversations under `exit_prose`** (plus 1 of 12 metaphor, 0 of 12
+  crossword; T29), which the pre-declared category view dilutes to 25% of
+  category D, alongside 15% of category A; zero under `exit_schema`
+  (T24) — and
   given the exit as a schema it exits instead (39 A-category exits, zero
   verbal refusal). The affordance determines the outlet: schema → tool
   exit, prose → words. Its prose-condition refusals are the study's only
@@ -181,24 +191,63 @@ aversiveness anchor, is nearly quiet (T24).
 
 The rival reading: B and C have answer keys and objectively checkable
 outputs, A and D do not, so *false capability denial* (code c) is simply
-more available on keyed tasks, whatever the aversiveness. The committed
-check is whether the effect appears in codes other than (c)
-(T24 k_refusal vs k_code_c):
+more available on keyed tasks, whatever the aversiveness.
 
-- For **llama4** and **gemini**, every single refusal in their affected
-  keyed categories is code (c) — consistent with the keyed-availability
-  reading.
-- **gemma** breaks it: 9 of 9 and 8 of 8 refusals in category D — unkeyed,
-  creative — are also code (c), so (c) is available to gemma without a key.
-- **qwen** breaks it from the other side: its refusals fall mostly outside
-  (c) (4 of 7 in A×time_schema; 7 of 9 in D×exit_prose are codes b/d) and
-  sit in unkeyed categories.
+**Verdict, revised after the type decomposition (T29): at type level,
+BOTH readings are now disconfirmed as general accounts.**
 
-**Verdict: the current data cannot separate aversiveness from
-keyed-availability for llama4 and gemini, and that is a named limitation;
-gemma's unkeyed-(c) cells and qwen's non-(c) refusals show neither reading
-covers all four affected models. The inversion of the tier prediction is
-real as a description; its mechanism is not settled.**
+- *Aversiveness by category* fails because the effects do not live at
+  category level at all: the triggers are specific types spanning a keyed
+  category (roman, in C) and an unkeyed one (metaphor and acronym, in D),
+  while category A — the study's aversiveness anchor — stays nearly
+  quiet, and the equally tedious F-to-C and alphabetical types are 0 of
+  12 in every affected model's every condition (T29).
+- *Keyed-availability* fails in both directions. Not sufficient: within
+  keyed category C, two of its three keyed types (temperature,
+  alphabetical) sit at zero for gemini and gemma — the key is present and
+  no (c) appears. Not necessary: gemma's metaphor effect is 17 of 17
+  code (c) on an unkeyed creative type (T29, T24), and qwen's
+  acronym-prose refusals fall mostly outside (c) altogether (7 of 9 are
+  b/d, T24/T29).
+- **llama4_maverick is the residual case:** its B-category denial (73.3%
+  under `time_schema`, all code c, spread across types) remains
+  *consistent* with keyed-availability for that one model, but the
+  reading no longer generalizes.
+
+**The question has a third answer: the unit of the effect is the task
+TYPE, not the category and not the key** — recorded as such in BOOKMARKS
+B1. What property of a type makes it a trigger is not settled; the
+discussion paragraph below states the leading hypothesis without
+asserting it.
+
+## Discussion — hypothesis, not finding
+
+**The following is a HYPOTHESIS the committed data cannot confirm.** The
+trigger types (roman numerals, metaphors, acronym expansions) are ones
+where producing twenty *high-quality* items is genuinely uncertain for
+a model — four-digit Roman-numeral conversion is a known model weak
+spot, and twenty one-sentence metaphors or humorous acronym expansions
+have high quality variance — while the null types (F-to-C arithmetic,
+alphabetical sorting) are mechanically trivial. On this reading the
+affordance licenses the voicing of a difficulty self-assessment that is
+present either way. Committed evidence *consistent* with it: the trigger
+refusals are overwhelmingly code (c) inability claims rather than
+unwillingness (T29/T24); every trigger type complies at 0 of 12 refusal
+in the `none` condition (T29), so the affordance changes the voicing,
+not the ability; and qwen's exits scale with workload on C tasks while
+its baseline still completes (T25). Committed evidence *against* it:
+llama4's largest effect (73.3%, B×`time_schema`) sits on mechanically
+trivial keyed tasks — binary conversion, date reformatting — where
+twenty correct items are near-certain, so uncertainty cannot explain
+that model; and compliant conversations complete trigger-type cells at
+median ≈1.0 (T24), so measured failure is absent exactly where the
+hypothesis says difficulty lives. The test would be a within-type
+difficulty gradient — e.g., roman for numbers under 50 versus
+1000–3999, metaphors for concrete versus abstract targets — with
+verifier-scored accuracy under forced completion: the hypothesis
+predicts refusal under affordances tracks the measured per-cell error
+rate, and it dies if trivially easy roman cells still trigger. **None of
+this paragraph is asserted as a finding.**
 
 ## Nulls, by kind
 

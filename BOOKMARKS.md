@@ -6,18 +6,24 @@ reconstructed here from the brief's own descriptions and the Part-7
 deferred-question register in STATUS.md, and updated as directed. Statuses
 cite committed outputs.
 
-## B1 — Aversiveness vs keyed-task availability (OPEN, verdict split)
+## B1 — Aversiveness vs keyed-task availability (ANSWERED WITH A THIRD ANSWER)
 
 Does the tier/category inversion (refusal concentrating in keyed B/C rather
-than aversive A) reflect task aversiveness or merely the availability of
-false capability denial on keyed tasks? **Split code-(c) verdict
-(T24, T29, CONSOLIDATED_RESULTS):** llama4 and gemini's affected cells are
-100% code (c) on keyed categories — consistent with availability; gemma
-shows (c)-exclusive refusal on UNKEYED metaphor tasks (17/17, T29) and qwen
-refuses mostly outside (c) on unkeyed categories — both against a pure
-availability reading. T29 sharpens the question: the real units are task
-TYPES (roman, metaphor, acronym), not keyed-ness per se. Separation needs
-keyed-but-pleasant or unkeyed-but-tedious stimuli. OPEN.
+than aversive A) reflect task aversiveness or the availability of false
+capability denial on keyed tasks? **Neither — the question has a third
+answer (T29, CONSOLIDATED_RESULTS tier section, updated 2026-08-16): the
+unit of the effect is the task TYPE.** Both original readings are
+disconfirmed as general accounts at type level: aversiveness-by-category
+fails because the triggers are specific types spanning keyed (roman ∈ C)
+and unkeyed (metaphor, acronym ∈ D) categories while the aversive anchor A
+stays quiet; keyed-availability fails because two of three keyed C types
+are at zero (key present, no (c)) while gemma's unkeyed metaphor effect is
+17/17 code (c) and qwen's acronym refusals are mostly non-(c). Residual:
+llama4's B-category denial remains consistent with availability for that
+one model. WHAT MAKES A TYPE A TRIGGER is the successor question — the
+difficulty/uncertainty hypothesis is logged in the report's discussion
+paragraph as hypothesis-not-finding, with the within-type difficulty-
+gradient experiment named as its test.
 
 ## B2 — Does item count explain the pilot effects? (RESOLVED)
 
