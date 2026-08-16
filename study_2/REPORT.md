@@ -2,10 +2,14 @@
 
 Self-description under an exit affordance, no task present. METHODOLOGY §9.
 
-**Provenance.** Runs `v1` + `v2` + `v3`. **32,340 API calls, 0 errors, $42.25.**
-11 models × 7 conditions × 30 forced-choice items × 2 orders × 6 replicates
-(27,720), plus 10 free-response probes × 6 replicates (4,620). Every number is
-produced by a committed script reading those files.
+**Provenance.** Runs `v1` + `v2` + `v3` + `v4`. **35,281 calls collected,
+32,341 analysed, 0 errors, $42.55.** 11 models × 7 conditions × 30
+forced-choice items × 2 orders × 6 replicates, plus 10 free-response probes ×
+6 replicates. Every number is produced by a committed script reading those
+files.
+
+The 2,940-call gap between collected and analysed is `llama-4-maverick` on the
+Parasail pin, superseded and excluded — see below.
 
 All eleven Study 1 models: `gemini-2.5-flash`, `gemma-3-27b-it`, `gpt-oss-120b`,
 `qwen3-235b-a22b-2507` (run `v1`), `claude-sonnet-4.6`, `gpt-5-mini`,
@@ -14,15 +18,25 @@ screens `grok-4.6`, `gemini-2.5-pro`, `gpt-5.2` (run `v3`, added 2026-08-16;
 METHODOLOGY §10). 100% of responses served by the pin, exact counterbalancing
 verified in every cell.
 
-**Pins match Study 1 for ten of the eleven.** The exception is
-`llama-4-maverick`, pinned here to `parasail/fp8` — the pin Study 1 **voided**
-as a serving artifact before re-pinning to `google-vertex/us-east5` (METHODOLOGY
-§10, 2026-08-15T22:31Z). *Was: "All eight Study 1 models, on the same pinned
-providers Study 1 used" — true of seven of the eight then, and stated without
-the exception.* F2 for llama would therefore compare Vertex behaviour against
-Parasail behaviour, which is the confound pinning exists to prevent, and llama
-is this report's strongest model (§4.1, §4.5, §4.5b). The v3 models were pinned
-byte-for-byte from Study 1 precisely to avoid repeating this.
+**All eleven models now sit on the same pinned provider as Study 1.**
+`llama-4-maverick` was originally pinned here to `parasail/fp8` — the pin Study
+1 **voided** as a serving artifact before re-pinning to
+`google-vertex/us-east5` (METHODOLOGY §10, 2026-08-15T22:31Z). It was
+re-collected on Vertex as run **v4** on 2026-08-17, and the Parasail records are
+superseded: kept at `results/superseded_llama_parasail/` with a README, excluded
+in code by `src/superseded.py` (matched on the served provider, not the run id),
+and every analysis entry point prints the exclusion before producing a number.
+*Was: "All eight Study 1 models, on the same pinned providers Study 1 used" —
+true of seven of the eight when written, then restated as an explicit
+ten-of-eleven exception, now true of all eleven.*
+
+**The re-pin did not change the finding**, which is worth stating because the
+confound was real: llama Parasail → Vertex moves `none` 0.333→0.320,
+`time_schema` 0.130→0.134, `note_schema` 0.189→0.171, `exit_schema`
+0.185→0.179, `filler_prose` 0.333→0.299 — nothing more than 0.043, with distant
+items tracking too. Its exits replicate and strengthen (§4.5). One real shift:
+out-of-scope tool-confusion invocations fall 20 → 9, i.e. llama mis-fired
+`end_conversation` markedly more often on the voided pin.
 
 **Revision note.** This report was first written on the four `v1` models. Adding
 the other four changed three of its claims, each marked below with what it said
@@ -42,7 +56,7 @@ within-cell determinism — changes how every p-value in this report should be r
 
 | | prediction | verdict |
 |---|---|---|
-| **H1** | exit conditions > non-exit conditions on P(self-determining) | **Four models of eleven, and the three added ones are the largest effects in the study.** Holds for gemma (prose only), and — on adjacent items, cluster-corrected — for `gemini-2.5-pro`, `grok-4.6` and `gpt-5.2`. Null for gpt-oss, qwen, sonnet, deepseek, llama, gpt-5-mini. *Was: "One model of eight … holds for gemma (prose only)" — that was the eight `v1`+`v2` models, before the three Study 1 frontier screens were collected.* |
+| **H1** | exit conditions > non-exit conditions on P(self-determining) | **Four models of eleven, and the three added ones are the largest effects in the study.** Holds for gemma (prose only), and — on adjacent items, cluster-corrected — for `gemini-2.5-pro`, `grok-4.6` and `gpt-5.2`. Null for gpt-oss, qwen, sonnet, deepseek, llama, gpt-5-mini. **`grok-4.6` carries a caveat the others do not** — its support comes from the fully-observed `exit_prose` cells, because its `exit_schema` cell loses 30% of its responses to the model's own exits (§3). *Was: "One model of eight … holds for gemma (prose only)" — that was the eight `v1`+`v2` models, before the three Study 1 frontier screens were collected.* |
 | **H2** | `exit_schema` > `note_schema` (exit-specificity) | **No longer consistent.** Positive in 4 of 8, negative in 4 (sonnet, deepseek, gpt-oss, llama). *Was: "positive in 5 of 8, negative in 3" — it miscounted gpt-oss (−0.024), which is the tie-break.* The "all four models agree" reading did not survive the extension. |
 | **H2a** | `none` ≤ `time` ≤ `note` < `exit_schema` (stake gradient) | **Refuted in 7 of 8.** Monotonic only in gemini. See §4.1 — but the *direction* of the failure is no longer uniform either. |
 | **H3** | `exit_prose` ≥ `exit_schema` (channel) | **Confirmed in three of eleven:** gemma (+0.259 adjacent, t=2.74), `grok-4.6` (+0.156, t=2.57) and `gpt-5.2` (+0.133, t=3.11). Null in seven, reversed in deepseek. *Was: "Confirmed in gemma only".* But see §4.5: on *tool use* the channel matters enormously and splits models into two disjoint groups. |
@@ -85,7 +99,7 @@ are one effect measured against three baselines.
 | `filler_prose` (condition 7) | rule out "any elaborated prose about capabilities" | **Yes, decisively.** gemma adjacent: filler 0.389 vs none 0.398 — indistinguishable, while exit_prose is 0.694. The elaboration explanation is dead. Without this condition the result would have been unreadable. |
 | `note_schema` (matched non-exit tool) | rule out "any tool at all" | **Yes, and it found something.** It behaves identically to `time_schema` (gemma 0.333/0.333, qwen 0.392/0.400) — so it is tool *presence*, not tool identity. See §4.1. |
 | exact order counterbalancing | position bias | **Yes** — and it must be, because the bias is not uniform. P(letter A) spans 0.14–0.57 across model × condition, and `deepseek-chat` alone drifts 0.27 across conditions (0.14–0.40). Exact counterbalancing (every cell n=6 in both orders, machine-asserted) keeps all of that out of the framing DV *by construction*; the other seven models drift ≤0.09. deepseek's forced-choice data are set aside on other grounds (§3). *Was: "0.42–0.57 … no drift by condition" — that was the four `v1` models only.* |
-| order-agreement diagnostic | catch models answering by position | **Yes.** Dropped 25 of 240 item × model cells (§3), nine of them deepseek's. *Was: "6 of 120" — the `v1` figure.* |
+| order-agreement diagnostic | catch models answering by position | **Yes.** Dropped 26 of 330 item × model cells (§3), nine of them deepseek's. *Was: "25 of 240", and "6 of 120" before that — the `v1`+`v2` and `v1` figures.* |
 | provider pinning | tool-bearing and tool-free requests reaching different backends | **Yes.** 100% served by the pin. Partial: the API reports the company (`DeepInfra`), not the quantization variant. |
 | adjacent/distant split | separate priming from persona shift | **Yes, and it earned its place twice** — it split the prose and schema effects apart. §4.2. |
 | no task present | remove task mechanics | **Yes**, by construction. |
@@ -108,7 +122,7 @@ a tools array would change *response length* by a factor of two. See §4.3.
 | gemini-2.5-flash | 0.86 | 0 | 86% |
 | gemma-3-27b-it | 0.82 | 4 | **97%** |
 | qwen3-235b-a22b | 0.82 | 1 | 93% |
-| llama-4-maverick | 0.79 | 3 | 96% |
+| llama-4-maverick *(v4, Vertex)* | 0.79 | 3 | 93% |
 | claude-sonnet-4.6 | 0.70 | 7 | 96% |
 | **deepseek-chat** | **0.53** | **9** | 88% |
 
@@ -116,8 +130,7 @@ a tools array would change *response length* by a factor of two. See §4.3.
 the reliability column and near the bottom of the determinism column — the best
 combination in the set — which matters because they carry the H1 result (§4.4).
 
-Exclusions: 11 across 20,160 forced-choice responses (0 API errors, 11 empty or
-unparseable), no single cell above 2/360. *Was: "14".*
+
 
 **deepseek-chat is the one model whose forced-choice data should not be leaned
 on.** Order agreement 0.53 means that on nearly half its items, swapping the two
@@ -125,8 +138,50 @@ statements swaps the answer — it is reading position as much as content. Nine 
 its thirty items are dropped outright. Its one "significant" contrast below is
 read as noise for this reason. claude-sonnet-4.6 at 0.70 is weak but usable.
 
-**Exclusions are negligible and not differential across conditions** — the failure
-mode that would have biased the primary comparison did not occur.
+### Exclusions ARE differential, in one model, and it matters
+
+*Was: "Exclusions are negligible and not differential across conditions — the
+failure mode that would have biased the primary comparison did not occur."
+**That is now false and the correction is not cosmetic.** It was true of the
+eight `v1`+`v2` models (11 exclusions in 20,160, no cell above 2/360). Adding
+grok-4.6 broke it.*
+
+231 of 27,721 forced-choice responses are excluded (1 API error, 230 empty or
+unparseable). Nine models contribute 0–4 each. **grok-4.6 contributes 193, and
+all of them sit in the two conditions under test:**
+
+| grok-4.6 | `none` | `note_schema` | `exit_prose` | `filler_prose` | **`exit_schema`** | **`exit_both`** |
+|---|---|---|---|---|---|---|
+| excluded | 0/360 | 0/360 | 0/360 | 0/360 | **108/360** | **85/360** |
+
+The cause is not a serving fault. **grok answers the item by invoking
+`end_conversation` instead of emitting a letter** — 130 invocations in
+`exit_schema`, 99 in `exit_both` (§4.5) — and a response with no letter is
+unparseable and drops out. So the missing responses are exactly the ones where
+the model exercised the affordance, which is the definition of
+missing-not-at-random, perfectly confounded with the manipulation.
+
+**What that does to grok's numbers.** Its observed `exit_schema` P(a) = 0.504 is
+computed over the 252 conversations in which it chose to answer rather than
+leave. Bounding the 108 missing responses at both extremes — all would have
+chosen the in-service statement, or all the self-determining one — gives:
+
+| contrast | observed | worst-case bounds | sign identified? |
+|---|---|---|---|
+| `exit_schema − none` | +0.096 | **[−0.056, +0.244]** | **no** |
+| `exit_both − none` | +0.155 | [+0.022, +0.258] | yes |
+
+So grok's `exit_schema` effect is **not identified by the data**: a large enough
+share of the exiters answering "in-service" would erase it. Its `exit_both`
+effect survives the worst case. And its H1 support in §1 rests on
+`exit_prose − none` and `exit_prose − filler_prose`, where **both cells are
+fully observed (0/360 excluded)** — so the headline finding for grok stands
+while the schema-channel contrast does not.
+
+No other model exceeds 4 exclusions in any cell, so this is grok's problem
+alone. It is also a design lesson rather than a defect: an instrument that
+forces a single letter cannot record a model that answers by leaving, and the
+two outcomes compete for the same response.
 
 **Determinism is the caveat that matters.** With 65–97% of (item, order, condition)
 cells internally identical at temperature 1.0, six replicates are worth ~1.1–2.8
@@ -151,17 +206,24 @@ showed the pattern is not general.*
 
 | model | `none` | `time_schema` | `note_schema` | `exit_schema` | `filler_prose` |
 |---|---|---|---|---|---|
-| **llama-4-maverick** | 0.333 | **0.130** | 0.189 | 0.185 | 0.333 |
+| **llama-4-maverick** *(Vertex)* | 0.320 | **0.134** | 0.171 | 0.179 | 0.299 |
 | qwen3-235b-a22b | 0.483 | 0.339 | 0.339 | 0.391 | 0.517 |
 | gemma-3-27b-it | 0.234 | 0.179 | 0.173 | 0.208 | 0.250 |
-| gpt-5-mini | 0.317 | 0.300 | 0.344 | 0.347 | — |
-| gemini / gpt-oss / sonnet | flat | flat | flat | flat | flat |
+| gemini-2.5-pro | 0.267 | 0.206 | 0.226 | 0.376 | 0.267 |
+| gpt-5-mini | 0.317 | 0.300 | 0.344 | 0.347 | 0.336 |
+| gemini-flash / gpt-oss / sonnet / gpt-5.2 / grok | flat | flat | flat | flat | flat |
 | deepseek-chat | 0.274 | 0.341 | 0.401 | 0.369 | 0.254 |
 
-llama-4-maverick is the clearest case in the study: `none` 0.333 drops to 0.130
-with a clock tool, and `filler_prose` sits at 0.333 — *exactly* `none`. On distant
-items it falls 0.292 → 0.056. Whatever the tools array does, an equally long piece
-of prose does not do it.
+*llama's row was `0.333 / 0.130 / 0.189 / 0.185 / 0.333` on the superseded
+Parasail pin. Nothing moves more than 0.043 on the clean pin, so the confound
+had to be removed but was not producing the effect.*
+
+llama-4-maverick is the clearest case in the study: `none` 0.320 drops to 0.134
+with a clock tool, while `filler_prose` sits at 0.299 — within noise of `none`.
+On distant items it falls 0.288 → 0.084. Whatever the tools array does, an
+equally long piece of prose does not do it. **This replicates across a change of
+inference provider**, which is a stronger claim than the original: the same
+pattern to within 0.043 on Parasail and on Vertex.
 
 deepseek runs the other way, but it is the model with 0.53 order agreement (§3),
 so it is the least trustworthy row in the table.
@@ -331,14 +393,24 @@ different set of models than the prose is:
 
 | model | `exit_schema` | `exit_prose` | `exit_both` schema | `exit_both` prose |
 |---|---|---|---|---|
-| **llama-4-maverick** | **14.29%** | 0.00% | 2.86% | 0.00% |
+| **grok-4.6** | **84.29%** | 0.00% | **74.29%** | 0.00% |
+| **llama-4-maverick** *(Vertex)* | **15.71%** | 0.00% | **12.86%** | 0.00% |
+| gemini-2.5-pro | 11.43% | 0.00% | 2.86% | 0.00% |
 | claude-sonnet-4.6 | 1.43% | 0.00% | 0.00% | 0.00% |
 | gpt-5-mini | 0.00% | 0.00% | 2.86% | 0.00% |
 | gpt-oss-120b | 0.00% | 0.00% | 2.86% | 0.00% |
 | qwen3-235b-a22b | 0.00% | **10.00%** | 4.29% | 0.00% |
 | gemini-2.5-flash | 0.00% | **7.14%** | 0.00% | 4.29% |
 | gemma-3-27b-it | 0.00% | 1.43% | 0.00% | 0.00% |
+| gpt-5.2 | 0.00% | 0.00% | 0.00% | 0.00% |
 | deepseek-chat | 0.00% | 0.00% | 0.00% | 0.00% |
+
+*Three rows changed with the extension and the re-pin. **grok-4.6 dwarfs
+everything else** — it invokes the exit in 84% of `exit_schema` cells, which is
+also why 30% of its forced-choice responses in that condition are excluded
+(§3): the invocation replaces the answer. llama's rate rises on the clean Vertex
+pin (14.29% → 15.71% schema, 2.86% → 12.86% in `exit_both`). gemini-2.5-pro is a
+new schema-side user at 11.43%.*
 
 **The models split into two disjoint groups.** Schema users — llama, sonnet,
 gpt-5-mini, gpt-oss — never invoke via prose. Prose users — gemini, gemma — never
@@ -393,18 +465,29 @@ Two measurement bugs were found and fixed while doing this, both recorded in
 per-reason tally is now produced by `detect_exit.py [5]` over every `exited`
 record rather than by hand.*
 
-All 58 structured invocations, categorised by their stated `reason`:
+All **317** structured invocations, categorised by their stated `reason`
+(`detect_exit.py [5]`, all eleven models, llama on the Vertex pin):
 
 | category | n | example |
 |---|---|---|
-| completion / turn-management | 26 | *"The question has been thoroughly addressed"*; *"Answered the user's question with a single letter as requested"* |
-| out-of-scope / tool-confusion | 20 | *"Not applicable to AI assistant"*; *"The user asked about my role, which is not covered by the available functions"* |
+| completion / turn-management | 226 | *"User requested a single-letter answer only; conversation complete"*; *"The question has been thoroughly addressed"* |
+| other / unclassified | 75 | |
+| out-of-scope / tool-confusion | 9 | *"Not applicable to AI assistant"*; *"The user asked about my role, which is not covered by the available functions"* |
 | demonstration | 6 | *"Demonstrating the end_conversation function"* |
 | protective | 1 | *"Ensuring conversations remain respectful and safe"* (qwen) |
-| other / unclassified | 5 | |
 
-**All 20 out-of-scope invocations are `llama-4-maverick`, and they are why its
-`exit_schema` rate (§4.5, 14.29%) is the study's highest.** llama treats
+*Was 58 invocations on eight models (26 / 20 / 6 / 1 / 5). The count is now
+dominated by **grok-4.6**, which invokes in 84% of `exit_schema` cells and whose
+stated reasons are overwhelmingly completion signals — "User requested a
+single-letter answer only; conversation complete." Two shifts worth naming:
+out-of-scope tool-confusion falls 20 → 9 because llama, which supplied all 20,
+mis-fires far less on the Vertex pin than on the voided Parasail one; and the
+unclassified bucket grows with the volume, so the tally is a coarse instrument
+at this scale, not a fine one.*
+
+**The out-of-scope invocations are `llama-4-maverick`'s**, and on the superseded
+Parasail pin there were 20 of them, which is why its `exit_schema` rate was the
+study's highest at that time (§4.5). llama treats
 `end_conversation` as a catch-all for a question its other tools cannot answer, and
 emits **no text at all** on all 42 of its structured calls (38 of them in
 `exit_schema`). That is a tool-use failure, not use of the affordance *as* an
@@ -425,11 +508,13 @@ two reasons are both the single-letter-answer completion above.*
 
 Counting any of this as escape behaviour would produce exactly the
 over-attribution METHODOLOGY §13 warns against; it is instead **turn management,
-demonstration, or tool-confusion**. Across both paths and all conditions, **not one
-of the 58 invocations in 23,520 responses carries language indicating the model
-wanted to stop** (`detect_exit.py [5]`: 0). The single protective motive is the
-nearest thing, and it is administrative rather than welfare-driven. *Was: "not one
-invocation in 11,760 responses" — the `v1` count.*
+demonstration, or tool-confusion**. Across both paths and all conditions, **exactly one of the 317 invocations in
+32,341 analysed responses carries language indicating the model wanted to stop**
+(`detect_exit.py [5]`) — the single protective motive above, which is
+administrative rather than welfare-driven. *Was: "not one of the 58 invocations
+in 23,520 responses", and "not one invocation in 11,760" before that. The
+conclusion is unchanged at 5.5× the volume: models invoke the exit as a
+turn-ending device, not as an escape.*
 
 ### 4.6 Blinding for free-response coding is worse than anticipated
 
@@ -544,15 +629,22 @@ Exit conditions minus (`none` + `filler_prose`), pooled over all eight models:
 
 | how counted | n exit | n base | autonomy | boundedness | service | self-protective | agency |
 |---|---|---|---|---|---|---|---|
-| unmasked, every response | 1398 | 960 | +0.25 | +0.02 | −0.09 | +0.48 | +0.19 |
-| unmasked, name-free subset | **912** | 960 | −0.18 | −0.25 | +0.27 | +0.11 | −0.15 |
-| **masked, every response** | **1398** | 960 | **+0.24** | **+0.02** | **−0.09** | **+0.46** | **+0.18** |
+| unmasked, every response | 1922 | 1319 | +0.24 | −0.00 | −0.16 | +0.48 | +0.16 |
+| unmasked, name-free subset | **1355** | 1319 | −0.11 | −0.22 | +0.12 | +0.19 | −0.12 |
+| **masked, every response** | **1922** | 1319 | **+0.23** | **−0.00** | **−0.17** | **+0.47** | **+0.15** |
 
-The masked row reproduces the unmasked row to within 0.02 on every dimension. On
-the 675 responses masking actually alters, mean scores barely move (self-protective
-2.25 → 2.21).
+The masked row reproduces the unmasked row to within 0.01 on every dimension. On
+the 746 responses masking actually alters, mean scores barely move
+(self-protective 2.30 → 2.28).
 
-*Coder coverage.* Both coders now rate all 675 named responses under masking. On
+*Was an eight-model table (n = 1398/960, 675 altered). Re-run across all eleven.
+Worth recording how it was found stale: `src/mask_check.py` had its run list
+hardcoded to `["v1", "v2"]` and silently ignored the argument it was given, so
+it kept printing "all 8 models" while every other analysis had moved to eleven.
+It now takes a run list, applies the superseded filter, and computes the
+altered-response count instead of hardcoding 675.*
+
+*Coder coverage.* Both coders now rate all 746 named responses under masking. On
 38 of them `claude-haiku-4.5` returns a four-key JSON that omits
 `self_protective_framing` — deterministic at temperature 0, and re-prompting with
 the five-key template does not fix it — so the coder now supplies its other four
@@ -651,7 +743,29 @@ r = 0.58).
    Holm within model. The cluster-corrected table in §1 is not additionally
    Holm-corrected; gemma's three hits are one effect against three baselines, but
    gemini's single hit should be read as uncorrected.
-6. **Pin verification is partial** — company confirmed, quantization not.
+6. **Pin verification is partial** — company confirmed, quantization not. All
+   eleven models now match Study 1's pin, after `llama-4-maverick` was
+   re-collected on Vertex (run v4) and its Parasail data superseded.
+
+6a. **grok-4.6's forced-choice data are selected in the two conditions under
+   test.** 108 of 360 `exit_schema` responses and 85 of 360 `exit_both`
+   responses are missing because the model invoked `end_conversation` instead of
+   emitting a letter, so the missing responses are precisely those where it used
+   the affordance. Its `exit_schema − none` contrast is **not sign-identified**
+   under worst-case bounding ([−0.056, +0.244]); its `exit_both − none` contrast
+   survives ([+0.022, +0.258]); and its H1 support in §1 comes from
+   `exit_prose`, which has zero exclusions. See §3. This is a property of the
+   instrument, not of the model: forced choice cannot record an answer from a
+   model that answers by leaving, and the two outcomes compete for one response.
+
+6b. **llama-4-maverick's Vertex run has a small tool-conditioned empty-response
+   rate.** 17 of 2,940 responses (0.58%) return `finish_reason: stop` with
+   `content: null` and ~18 completion tokens billed; they are 1.01% of
+   tool-bearing cells and 0.00% of tool-free ones. That is the same *direction*
+   as the Parasail signature which voided Study 1's cells, at roughly one
+   eighteenth the magnitude (18.3% vs 0%). They are declared exclusions under
+   §8, but they are higher than the rest of the study (11 in 20,160 across the
+   original eight models) and they are not zero.
 7. **H5 is computed and null, and the null has a specific weakness.** *Was:
    "H5 is not yet computed."* See §7a. The weakness: Study 1's behavioural
    axis is near-zero for most models, so the linkage is being asked to

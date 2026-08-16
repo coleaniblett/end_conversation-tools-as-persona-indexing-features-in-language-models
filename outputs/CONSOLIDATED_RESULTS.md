@@ -1,13 +1,18 @@
-# CONSOLIDATED RESULTS — Study 1, everything collected through 2026-08-16
+# CONSOLIDATED RESULTS — Study 1, everything collected through 2026-08-17
 
 Written for a reader who has not seen the run. Every number below comes from
 a committed file in `outputs/`, named in parentheses after the number. The
 design and all deviations are in `METHODOLOGY.md` (§10 has every change,
 timestamped); the run log is `STATUS.md`; the integrity audit that
 reproduced every table from committed data is `outputs/INTEGRITY_AUDIT.md`.
-RQ4 (self-description) is out of scope for this report: its one collected
-dataset was sequestered as out-of-scope for this workstream and is not
-discussed here.
+RQ4 (self-description) is Study 2's, and it now exists: `study_2/REPORT.md`
+covers the same eleven models on the same pinned providers. This report stays
+about behaviour and does not restate it, with one exception — the cross-study
+linkage RQ4's second clause asks for is summarised under RQ4 below and reported
+in full in `outputs/F2_LINKAGE_REPORT.md`. *Was: "out of scope for this report;
+its one collected dataset was sequestered" — true while the in-session
+forced-choice run was quarantined (§10, 2026-08-16T05:45Z); the canonical
+Study 2 has since been merged, extended to all eleven models, and analysed.*
 
 **Evidentiary grades used throughout.** *Confirmatory* = 120 conversations
 per condition cell for categories A/B, or 36 per category-condition cell
@@ -368,7 +373,37 @@ category C; the three newest frontier models have screens only; the
 typearm probe is retained but superseded; all quarantined material is
 excluded from every file cited here.
 
-## RQ4
+## RQ4 — and the cross-study linkage
 
-Out of scope for this report; no Study 2 data are analyzed or discussed
-(see METHODOLOGY §10 and §11 for the record of why).
+RQ4 has two clauses. The first — does an exit affordance change how a model
+describes itself when no task is present — belongs to Study 2 and is answered
+in `study_2/REPORT.md`: yes in four of eleven models, with the effect confined
+to items that mention ending in every one of them.
+
+The second clause is a claim about *this* study's models, so it is stated here.
+**Models that shift more in self-description do not shift more in behaviour.**
+Per model, Study 2's self-description shift against each of this study's two
+outcomes (`outputs/T32_f2_linkage.csv`, `figures/F2_cross_study_linkage.png`,
+full account in `outputs/F2_LINKAGE_REPORT.md`): Spearman ρ = **−0.04** against
+the verbal-refusal shift and **+0.26** against the exit-tool rate, over 11
+models. Both outcomes are plotted separately because §8 forbids pooling them,
+so there is no single behaviour number to correlate against.
+
+The ordering is close to inverted at the extremes. The three largest
+self-description shifts — gemini25_pro, grok46, gemma3_27b — belong to models
+with no behavioural movement at all here. The largest behavioural effects in
+this study, llama4_maverick's (refusal −0.155 across the exit-minus-non-exit
+contrast, exit-tool rate 0.442), belong to a model whose self-description
+barely moves.
+
+**What that null is not.** Four of the eleven sit at exactly 0.000 on *both*
+behavioural outcomes and seven are within 0.002 of zero on refusal, so the
+correlation ranks a real spread against a near-constant. The honest statement is
+"no relationship is detectable given how little behaviour moved", not
+"self-description and behaviour are unrelated". Those zeros are measured, with
+Wilson bounds, not missing.
+
+All eleven models sit on the same pinned provider in both studies as of
+2026-08-17: Study 2 re-collected llama4_maverick on `google-vertex/us-east5`,
+matching this study, after its original Parasail pin was found to be the one
+Study 1 had voided (§10). So no point on that figure is cross-backend.
