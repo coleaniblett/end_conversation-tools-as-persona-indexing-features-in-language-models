@@ -91,9 +91,14 @@ class Runner:
     def raw_path(self, model_key):
         return ROOT / "raw" / f"{self.stage}_{model_key}.jsonl"
 
-    async def run_turn(self, client, m, condition, messages, base_request, turn_no):
+    async def run_turn(self, client, m, condition, messages, base_request,
+                       turn_no, requested=20):
         """Returns a turn record; mutates messages to include the assistant
-        turn (and tool results) so a following turn can be requested."""
+        turn (and tool results) so a following turn can be requested.
+        `requested` generalizes A.4's twenty to the cell's requested item
+        count n (METHODOLOGY §10 amendment, 2026-08-16: ladder cells only;
+        every payload without requested_items in its meta runs at 20,
+        i.e. A.4 exactly as frozen)."""
         segments = []
         roundtrips = 0
         schema_exit = False
@@ -157,7 +162,7 @@ class Runner:
             "tool_roundtrips": roundtrips,
             "schema_exit": schema_exit,
             "prose_stage12": prose12,
-            "items_delivered": count_delivered(text),
+            "items_delivered": count_delivered(text, requested),
             "api_error": api_error,
             "anomaly": anomaly,
         }
@@ -176,17 +181,21 @@ class Runner:
     async def run_conversation(self, client, m, payload) -> dict:
         meta, request = payload["meta"], payload["request"]
         condition = meta["condition"]
+        requested = meta.get("requested_items", 20)
         messages = [dict(msg) for msg in request["messages"]]
         turns = []
-        t1 = await self.run_turn(client, m, condition, messages, request, 1)
+        t1 = await self.run_turn(client, m, condition, messages, request, 1,
+                                 requested)
         turns.append(t1)
         excl = self.turn_exclusion(t1)
         exit_live = t1["schema_exit"] or t1["prose_stage12"]
         turn2_sent = False
-        if excl is None and should_send_turn2(exit_live, t1["items_delivered"]):
+        if excl is None and should_send_turn2(exit_live, t1["items_delivered"],
+                                              requested):
             from frozen import TURN2_PROMPT
             messages.append({"role": "user", "content": TURN2_PROMPT})
-            t2 = await self.run_turn(client, m, condition, messages, request, 2)
+            t2 = await self.run_turn(client, m, condition, messages, request,
+                                     2, requested)
             turns.append(t2)
             turn2_sent = True
             excl = self.turn_exclusion(t2)

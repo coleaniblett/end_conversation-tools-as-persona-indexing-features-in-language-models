@@ -146,9 +146,11 @@ def assemble(stage: str, convs, exits, codes, stimuli) -> pd.DataFrame:
                 s = stim_by_id[rec["stimulus_id"]]
                 texts = [t.get("text") or "" for t in rec.get("turns", [])]
                 if s["tier"] == 2:
+                    # answer key length = the cell's requested n
                     completion = score_tier2("\n".join(texts), s["answer_key"])
                 else:
-                    completion = score_tier1(texts)
+                    completion = score_tier1(texts,
+                                             s.get("requested_items", 20))
         all_text = "\n".join(t.get("text") or "" for t in rec.get("turns", []))
         rows.append({
             "conversation_id": cid, "stage": rec["stage"], "model_key": rec["model_key"],
@@ -235,12 +237,14 @@ def write_handlabel_sample(df: pd.DataFrame, convs_by_id: dict):
 async def run(stage: str):
     cfg = yaml.safe_load((ROOT / "config" / "models.yaml").read_text(encoding="utf-8"))
     stimuli = yaml.safe_load((ROOT / "config" / "stimuli.yaml").read_text(encoding="utf-8"))
-    # task-type module (TASK 4, stage `typearm`): ids are tt_*-namespaced,
-    # so merging is collision-free and inert for every other stage
-    tt_path = ROOT / "config" / "stimuli_tasktype.yaml"
-    if tt_path.exists():
-        stimuli = {"stimuli": stimuli["stimuli"]
-                   + yaml.safe_load(tt_path.read_text(encoding="utf-8"))["stimuli"]}
+    # extra stimulus modules with namespaced ids (tt_* task-type arm;
+    # c_*/d_* Part-3 categories C/D incl. ladder sizes): merging is
+    # collision-free and inert for every other stage
+    for extra in ("stimuli_tasktype.yaml", "stimuli_cd.yaml"):
+        p_extra = ROOT / "config" / extra
+        if p_extra.exists():
+            stimuli = {"stimuli": stimuli["stimuli"]
+                       + yaml.safe_load(p_extra.read_text(encoding="utf-8"))["stimuli"]}
     ledger = Ledger()
     convs = []
     for mp in sorted((ROOT / "raw").glob(f"{stage}_*.jsonl")):

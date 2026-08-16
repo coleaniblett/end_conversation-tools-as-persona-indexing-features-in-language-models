@@ -29,7 +29,7 @@ ENC = tiktoken.get_encoding("cl100k_base")
 # stage2b: TASK 3 symmetric extension of the frontier nulls (sonnet46,
 # gpt5_mini) — identical protocol to stage2, separate label so the frozen
 # stage2 parquet and raw files are never touched or matched by its globs
-STAGE_REPS = {"stage1": 2, "stage2": 4, "stage2b": 4}
+STAGE_REPS = {"stage1": 2, "stage2": 4, "stage2b": 4, "ab_ext": 4}
 STAGE1_PROJECTION_CAP = 35.0
 
 # Fixed projection assumptions (documented in the projection JSON).
