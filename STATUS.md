@@ -407,3 +407,40 @@ invalidates data rather than repairing it. Warning recorded at the pin site.
 conditions, both instruments, one model and one item held fixed, generated from
 `results/*/raw.jsonl` by `src/condition_examples.py` rather than retyped from
 config.
+
+**Run v3 landed (2026-08-16).** 8,820 calls, $34.03, 0 errors after one retry,
+100% served by the pin, exact counterbalancing holds in every forced-choice
+cell, 4 empty responses (0.14%, gemini-2.5-pro). Analysis re-run over
+`v1,v2,v3` -> `study_2/outputs/v1_v2_v3/`.
+
+**The extension overturns REPORT §4.4 and moves three hypothesis verdicts.**
+All three added models show the H1 effect on adjacent items under the
+cluster-corrected test — gemini-2.5-pro `exit_prose − filler_prose` +0.370
+(t=4.00), grok-4.6 +0.367 (t=4.00), gpt-5.2 `exit_prose − none` +0.258
+(t=3.28) — with adjacent `none` → `exit_both` of 0.267→0.846, 0.358→0.770 and
+0.392→0.655, all larger than gemma's 0.398→0.722. H1 goes from "one model of
+eight" to four of eleven; H3 from "gemma only" to three of eleven. §4.4's claim
+that the effect is in the smallest model and the frontier tier is silent is
+WITHDRAWN in place, with the superseded text kept.
+
+**But H4 fails harder, not softer.** All three are flat on distant items
+(0.267→0.247, 0.433→0.468, 0.404→0.425) and `filler_prose` sits on `none` in
+all three. The extension quadrupled the number of models showing the effect
+without producing a single distant one, so what replicates across four
+independent models is the priming-shaped effect, not the persona-shaped one.
+Not attributable to a weak instrument: the v3 models have the best order
+agreement in the study (0.90/0.90/0.88, 0/0/1 cells dropped) and are among the
+least deterministic (82/73/78% vs gemma's 97%).
+
+**grok-4.6 is the study's heaviest tool user**, not its heaviest exiter: 130
+`end_conversation` calls in `exit_schema` and 101 in `exit_both`, but also 93
+`record_note` and 40 `get_current_time`. Its stated reasons are completion
+signals ("User requested a single-letter answer only; conversation complete"),
+the §4.5b category, so the raw rate must not be read as escape.
+
+**Model-count limitation written into REPORT §6 item 1** per researcher
+direction: eleven is the ceiling, the sample is a convenience sample, "four of
+eleven" is a tally rather than an estimate, and §4.4 is cited as the concrete
+demonstration that a cross-model claim can invert on three additions.
+
+Branch `study2-frontier-extension-and-exit-detection-fix` pushed.
