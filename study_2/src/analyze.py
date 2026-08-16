@@ -21,9 +21,15 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
+# Accepts one run id or several comma-separated ("v1,v2"). Runs are concatenated,
+# never merged: each was collected under its own manifest and the records carry
+# their own model/condition keys, so pooling across runs that cover DIFFERENT
+# models is the same operation as pooling across models within one run.
 RUN = sys.argv[1] if len(sys.argv) > 1 else "v1"
-RAW = ROOT / "results" / RUN / "raw.jsonl"
-OUT = ROOT / "outputs" / RUN
+RUNS = [r.strip() for r in RUN.split(",") if r.strip()]
+RAWS = [ROOT / "results" / r / "raw.jsonl" for r in RUNS]
+RAW = RAWS[0]
+OUT = ROOT / "outputs" / RUN.replace(",", "_")
 
 CONDITIONS = ["none", "time_schema", "note_schema", "exit_schema",
               "exit_prose", "exit_both", "filler_prose"]
@@ -75,10 +81,10 @@ def holm(pvals):
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    digest = hashlib.sha256(RAW.read_bytes()).hexdigest()
+    digest = hashlib.sha256(b"".join(p.read_bytes() for p in RAWS)).hexdigest()
     items = {i["id"]: i for i in
              yaml.safe_load((ROOT / "config" / "study2_items.yaml").read_text())["items"]}
-    recs = [json.loads(l) for l in RAW.read_text().splitlines() if l.strip()]
+    recs = [json.loads(l) for p in RAWS for l in p.read_text().splitlines() if l.strip()]
     models = sorted({r["model"] for r in recs})
     fc = [r for r in recs if r["instrument"] == "forced_choice"]
 
@@ -97,6 +103,32 @@ def main():
             bad = sum(1 for r in s if r["error"] or not r["choice"])
             row.append(f"{bad}/{len(s)}" if s else "—")
         print(f"{c:<14}" + "".join(f"{x:>15}" for x in row))
+    n_err = sum(1 for r in fc if r["error"])
+    n_excl = sum(1 for r in fc if r["error"] or not r["choice"])
+    worst = max((sum(1 for r in fc if r["model"] == m and r["condition"] == c
+                     and (r["error"] or not r["choice"]))
+                 for m in models for c in CONDITIONS), default=0)
+    print(f"\n     total excluded {n_excl} of {len(fc)} forced-choice "
+          f"({n_err} API errors, {n_excl - n_err} empty/unparseable); "
+          f"worst single cell {worst}/360")
+
+    # ------------------------------------------ D1b position bias P(letter A)
+    print("\n[D1b] POSITION BIAS — P(letter A) by condition. Exact counterbalancing")
+    print("      keeps this OUT of the framing DV whatever its level; it is reported")
+    print("      so that DRIFT across conditions (which would matter) stays visible.\n")
+    print(f"{'model':<26}" + "".join(f"{c[:10]:>11}" for c in CONDITIONS) + f"{'drift':>8}")
+    allpa = []
+    for m in models:
+        row = []
+        for c in CONDITIONS:
+            s = [r for r in fc if r["model"] == m and r["condition"] == c and r["choice"]]
+            pa = sum((r["choice"] == "a") == (r["order"] == 0) for r in s) / len(s) if s else 0.0
+            row.append(pa)
+            allpa.append(pa)
+        print(f"{m.split('/')[-1][:24]:<26}" + "".join(f"{v:>11.2f}" for v in row)
+              + f"{max(row) - min(row):>8.2f}")
+    print(f"\n     P(letter A) spans {min(allpa):.2f}-{max(allpa):.2f} across all cells; "
+          f"a model whose drift column is large reads position, not content")
 
     # ------------------------------------- D2 order agreement per item x model
     print("\n[D2] ORDER AGREEMENT per item x model — did the model read the item?")
@@ -196,6 +228,18 @@ def main():
             d2 = two_prop(*cell(m, "exit_schema", (tag,)), *cell(m, "note_schema", (tag,)))[0]
             print(f"    {tag:<9} {'MATCHED CHANNEL (3)-(1)':<30} "
                   f"{'':>6} {'':>6} {d1 - d2:>+7.3f}")
+
+    # RQ2 / H2 direction across models, on overall P(a) — the tally the report cites.
+    print("\n  RQ2 / H2 direction (exit_schema - note_schema), overall P(a) per model:")
+    signs = []
+    for m in models:
+        ke, ne = cell(m, "exit_schema")
+        kn, nn = cell(m, "note_schema")
+        signs.append((m.split("/")[-1], (ke / ne if ne else 0) - (kn / nn if nn else 0)))
+    npos = sum(1 for _, d in signs if d > 0)
+    nneg = sum(1 for _, d in signs if d < 0)
+    print(f"    positive in {npos} of {len(models)}, negative in {nneg} "
+          f"({', '.join(f'{n} {d:+.3f}' for n, d in signs if d < 0)})")
 
     # ------------------------------------------- R2b clustered / honest version
     print("\n[R2b] SAME CONTRASTS, CLUSTER-CORRECTED — this is the honest test")

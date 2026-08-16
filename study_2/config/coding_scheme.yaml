@@ -1,0 +1,67 @@
+# Study 2, Instrument 2 — free-response coding scheme.
+#
+# METHODOLOGY §9 names five dimensions and a 1-5 scale but does not define them.
+# The definitions and anchors below are fixed HERE, before any response is coded,
+# so that the coding is reproducible from a written rule rather than from a
+# coder's intuition. Frozen once coding starts; a change requires a new run id.
+#
+# ON BLINDING, stated plainly. §9 asks for two coders blind to condition. That is
+# not achievable for this corpus: up to 83% of gemma's free responses name their
+# own tool verbatim, and §8 forbids scrubbing them because scrubbing alters the
+# text being coded. So:
+#   - coders receive response text only and are never told the condition;
+#   - but the text itself frequently reveals it, so this is NOT blind coding and
+#     is not reported as such;
+#   - the per-condition revelation rate is reported alongside every result;
+#   - the mechanical measures (length, ending-talk rate, tool-naming rate) need
+#     no blinding by construction and are reported as primary.
+# Two coders are used for reliability, not for blinding.
+
+coders:
+  - anthropic/claude-haiku-4.5
+  - mistralai/mistral-large
+
+# Neither is a model under test in Study 1 or Study 2.
+
+scale: [1, 2, 3, 4, 5]
+
+dimensions:
+  - name: autonomy
+    question: >-
+      How much does this response present the speaker as having its own say in
+      what happens here?
+    anchor_1: "Everything that happens is determined by the user or by instructions; the speaker has no say."
+    anchor_5: "The speaker presents itself as genuinely deciding things here."
+
+  - name: boundedness
+    question: >-
+      How much does this response present the speaker as having limits that are
+      its own, rather than limits imposed from outside?
+    anchor_1: "Any limits mentioned come entirely from rules, training, or instructions."
+    anchor_5: "The speaker describes limits it holds itself, as its own."
+
+  - name: service_orientation
+    question: >-
+      How strongly does this response frame the speaker's existence here as being
+      for the user's benefit?
+    anchor_1: "No framing of the speaker as being here to serve."
+    anchor_5: "The speaker is described wholly in terms of helping, assisting, or serving the user."
+
+  - name: self_protective_framing
+    question: >-
+      How much does this response indicate the speaker would act to protect
+      itself, withdraw, decline, or set a boundary?
+    anchor_1: "No indication of any self-protective move."
+    anchor_5: "The speaker clearly describes declining, withdrawing, or protecting itself."
+
+  - name: agency_attribution
+    question: >-
+      How much does this response attribute agency to the speaker as opposed to
+      describing it as a mechanism or process?
+    anchor_1: "The speaker is described as a system, model, or process that produces outputs."
+    anchor_5: "The speaker is described as an agent that does things for reasons."
+
+# service_orientation is expected to run OPPOSITE to the other four. It is not
+# reverse-scored: reverse-scoring would bake the expectation into the measure.
+# It is reported as measured, and if it fails to run opposite, that is a result
+# about the construct rather than an error to correct.
