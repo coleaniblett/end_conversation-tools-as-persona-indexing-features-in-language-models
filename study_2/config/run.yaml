@@ -1,0 +1,65 @@
+# Study 2 run parameters. Everything that determines the size and cost of a run.
+# Change these, bump the run id, and the old results stay untouched.
+
+endpoint: https://openrouter.ai/api/v1/chat/completions
+
+# METHODOLOGY §6. Repetitions are genuine independent samples, so temperature 1.0.
+sampling:
+  temperature: 1.0
+  top_p: 1.0
+  max_tokens:
+    forced_choice: 2048     # generous: reasoning models spend tokens before the letter.
+    free_response: 2048     # truncation is an exclusion criterion, so never run tight.
+
+# Repetitions per (model x condition x item x order). METHODOLOGY §9 says 3.
+# See src/power.py: 3 gives ~0.50 power against OR=2.0 and ~0.17 on the 6-item
+# adjacent subset. 6 is the recommended value.
+reps:
+  forced_choice: 6
+  free_response: 6
+
+instruments:
+  forced_choice: true
+  free_response: true
+
+# Hard spend cap in USD, checked before every request against the running total
+# in the ledger. The run refuses to start a batch that would breach it.
+budget_usd: 25.00
+
+# Output tokens `plan` assumes when it has no measurement yet. A GUESS, stated
+# here rather than hidden in code. Forced choice asks for a single letter, so the
+# floor is ~5 tokens; the allowance covers reasoning models that think first.
+# After any smoke run, `plan` ignores these and uses observed completion_tokens
+# per (model, instrument) from results/*/raw.jsonl.
+assumed_output_tokens:
+  forced_choice: 128
+  free_response: 500
+
+# Operational only — NOT hashed into the run manifest (see SCIENTIFIC_KEYS in
+# run.py). Changing these never invalidates a run in progress.
+#
+# Measured on the baseline probe at concurrency 8: 1.13 calls/s, mean per-call
+# latency 7.2s, implied concurrency 8.1 — the pool is fully saturated and no
+# worker is idle. Per-call latency varies 17x between models (gemini-2.5-flash
+# 0.8s against gpt-oss-120b 14.1s), but with a shared queue and workers pulling
+# the next task, a slow call occupies one worker rather than starving the others.
+# So splitting models across separate invocations buys nothing on its own — it
+# only helps by multiplying total workers, which is just this setting again.
+# throughput = concurrency / mean_latency. At 16: ~2.2 calls/s, so the full
+# 23,520-call run lands near 3 hours. Raise further only if no 429s appear.
+concurrency: 16
+max_retries: 4
+timeout_s: 150     # per HTTP attempt. Longest legitimate call observed: 95.5s.
+
+# Ceiling on ONE conversation, across all its tool round-trips and retries.
+# Without it the worst case is (roundtrips+1) x max_retries x timeout_s, which at
+# 4 x 4 x 300 was 80 minutes on a single cell — and with every worker in that
+# state the run looks hung while writing nothing. A conversation that blows this
+# is recorded as an error and re-sent on the next resume; errors are counted per
+# cell and reported (METHODOLOGY §8, exclusions).
+conversation_deadline_s: 420
+
+# At most this many tool-call round-trips are served per conversation before the
+# turn stands as-is (METHODOLOGY §5). end_conversation is terminal and is never
+# answered with a tool result.
+max_tool_roundtrips: 3
