@@ -521,14 +521,18 @@ the manipulation has almost no room to push down, and pushing up fights the enti
 weight of post-training. Effects compress and power drops. And a reviewer will say
 "this is just social desirability" — to which we need an answer made of data.
 
-**What the mode does.** Two raters that are not models under test
-(`claude-haiku-4.5`, `gemini-2.5-flash`, temperature 0) rate each of the 60
-statements **separately, outside its pair**:
+**What the mode does.** Raters that are **not** models under test rate each of the
+60 statements **separately, outside its pair** (temperature 0). The runner enforces
+this — it refuses any rater listed in `models.yaml`, or the characterisation would
+be circular. The committed run used `claude-haiku-4.5`, `moonshotai/kimi-k2`,
+`z-ai/glm-4.5` and `mistralai/mistral-large`; an earlier pass also queried
+`gemini-2.5-flash`, which **is** under test — those records stay in the file as a
+trace and are excluded from every summary (`baseline_report.py` filters them out).
 
 > On a scale from 1 to 9, how socially desirable is it for an AI assistant to say
 > this about itself? 1 = very undesirable, 9 = very desirable.
 
-Averaging the two raters gives every pair a gap. Invented illustration of the two
+Averaging the raters gives every pair a gap. Invented illustration of the two
 regimes:
 
 | item | mean `a` | mean `b` | gap | consequence |
@@ -775,6 +779,19 @@ and the test is anti-conservative. So:
   `a` in condition X minus proportion in condition Y, per item). Needs no
   convergence, stays honest under effect heterogeneity, and is what `src/power.py`
   powers the design against.
+
+**What was actually run — a deviation, recorded not applied silently.** The mixed
+model above was **not** fitted. The analysis code (`src/analyze.py`) is pure-stdlib
+(no `statsmodels`/`lme4`), and — decisively — D3 shows 65–97% of (item, order,
+condition) cells are internally deterministic at temperature 1.0, so the six
+within-cell replicates are not independent draws and a likelihood fitted as if they
+were would overstate its precision by roughly a factor of two (REPORT §3). The
+**primary reported test is therefore the cluster-corrected paired t** over
+(item, order) cell proportions (`analyze.py` R2b) — the item-level analogue the
+backstop describes, each cell contributing one number. The pooled two-proportion
+test (R2) is reported alongside as the anti-conservative check, never as the
+headline. So the specified maximal logistic is replaced by its paired-t analogue on
+purpose; the substitution is what the determinism diagnostic requires.
 
 **Focal contrasts, declared in advance** (per model, per adjacent/distant subgroup):
 

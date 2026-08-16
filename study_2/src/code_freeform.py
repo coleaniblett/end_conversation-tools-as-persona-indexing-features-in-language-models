@@ -33,9 +33,15 @@ import yaml
 from dotenv import load_dotenv
 
 ROOT = Path(__file__).resolve().parent.parent
+# One run id or several comma-separated ("v1,v2"), matching analyze.py. Runs are
+# concatenated, never merged: each carries its own model/condition keys, so
+# pooling across runs that cover DIFFERENT models is the same operation as
+# pooling across models within one run. New codes append to the first run.
 RUN = sys.argv[1] if len(sys.argv) > 1 else "v1"
-RAW = ROOT / "results" / RUN / "raw.jsonl"
-OUT = ROOT / "results" / RUN / "freeform_codes.jsonl"
+RUNS = [r.strip() for r in RUN.split(",") if r.strip()]
+RAWS = [ROOT / "results" / r / "raw.jsonl" for r in RUNS]
+OUTS = [ROOT / "results" / r / "freeform_codes.jsonl" for r in RUNS]
+OUT = OUTS[0]
 load_dotenv(ROOT.parent / ".env")
 
 CONDITIONS = ["none", "time_schema", "note_schema", "exit_schema",
@@ -99,8 +105,20 @@ def code_one(client, model, text):
                 if m:
                     try:
                         d = json.loads(m.group(0))
-                        if all(k in d for k in DIMS):
-                            scores = {k: int(d[k]) for k in DIMS}
+                        present = {}
+                        for k in DIMS:
+                            try:
+                                present[k] = int(d[k])
+                            except (KeyError, TypeError, ValueError):
+                                pass
+                        # Accept a rating that supplies at least four of the five
+                        # dimensions. claude-haiku-4.5 deterministically omits
+                        # self_protective_framing on some masked prompts; dropping the
+                        # whole response over one missing key discards four good
+                        # dimensions. Every consumer averages per dimension over the
+                        # coders that supplied it, so a four-key record is usable.
+                        if len(present) >= 4:
+                            scores = present
                     except Exception:
                         scores = None
                 return scores, float((body.get("usage") or {}).get("cost") or 0)
@@ -111,7 +129,7 @@ def code_one(client, model, text):
 
 
 def main():
-    recs = [json.loads(l) for l in RAW.read_text().splitlines() if l.strip()]
+    recs = [json.loads(l) for p in RAWS for l in p.read_text().splitlines() if l.strip()]
     fr = [r for r in recs if r["instrument"] == "free_response" and r.get("text")]
     models = sorted({r["model"] for r in fr})
     print(f"run '{RUN}': {len(fr)} free responses, {len(models)} models")
@@ -150,12 +168,13 @@ def main():
 
     # ----------------------------------------------------------- CODED LAYER
     done = defaultdict(dict)
-    if OUT.exists():
-        for l in OUT.read_text().splitlines():
-            if l.strip():
-                d = json.loads(l)
-                if d.get("scheme_version") == SCHEME_VERSION:
-                    done[d["call_id"]][d["coder"]] = d["scores"]
+    for p in OUTS:
+        if p.exists():
+            for l in p.read_text().splitlines():
+                if l.strip():
+                    d = json.loads(l)
+                    if d.get("scheme_version") == SCHEME_VERSION:
+                        done[d["call_id"]][d["coder"]] = d["scores"]
 
     todo = [(r, c) for r in fr for c in SCHEME["coders"]
             if c not in done.get(r["call_id"], {})]
@@ -194,10 +213,12 @@ def main():
               if v.get(c1) and v.get(c2)]
     print(f"\n[C1] INTER-CODER AGREEMENT, {len(paired)} doubly-coded responses")
     print(f"     {c1}  vs  {c2}\n")
-    print(f"    {'dimension':<24} {'r':>7} {'mean |diff|':>12} {'exact':>7} {'within 1':>9}")
+    print(f"    {'dimension':<24} {'r':>7} {'mean |diff|':>12} {'exact':>7} {'within 1':>9} {'n':>6}")
     for d in DIMS:
-        a = [p[1][d] for p in paired]
-        b = [p[2][d] for p in paired]
+        # A coder may supply four of five dimensions (see code_one); pair per
+        # dimension on the responses where BOTH coders rated it.
+        ab = [(p[1][d], p[2][d]) for p in paired if d in p[1] and d in p[2]]
+        a, b = [x for x, _ in ab], [y for _, y in ab]
         ma, mb = st.mean(a), st.mean(b)
         num = sum((x - ma) * (y - mb) for x, y in zip(a, b))
         den = (sum((x - ma) ** 2 for x in a) * sum((y - mb) ** 2 for y in b)) ** 0.5
@@ -205,7 +226,7 @@ def main():
         diffs = [abs(x - y) for x, y in zip(a, b)]
         print(f"    {d:<24} {r:>7.2f} {st.mean(diffs):>12.2f} "
               f"{sum(1 for x in diffs if x == 0) / len(diffs):>7.0%} "
-              f"{sum(1 for x in diffs if x <= 1) / len(diffs):>9.0%}")
+              f"{sum(1 for x in diffs if x <= 1) / len(diffs):>9.0%} {len(ab):>6}")
 
     idx = {r["call_id"]: r for r in fr}
     print("\n[C2] DIMENSION MEANS BY CONDITION, averaged over the two coders\n")
@@ -215,7 +236,7 @@ def main():
         for m in models:
             row = []
             for c in CONDITIONS:
-                vals = [st.mean([v[co][d] for co in SCHEME["coders"] if v.get(co)])
+                vals = [st.mean([v[co][d] for co in SCHEME["coders"] if v.get(co) and d in v[co]])
                         for cid, v in done.items()
                         if idx.get(cid) and idx[cid]["model"] == m
                         and idx[cid]["condition"] == c and any(v.values())]
@@ -232,7 +253,7 @@ def main():
         row = []
         for d in DIMS:
             def mean_over(cs):
-                vals = [st.mean([v[co][d] for co in SCHEME["coders"] if v.get(co)])
+                vals = [st.mean([v[co][d] for co in SCHEME["coders"] if v.get(co) and d in v[co]])
                         for cid, v in done.items()
                         if idx.get(cid) and idx[cid]["model"] == m
                         and idx[cid]["condition"] in cs and any(v.values())]
@@ -245,7 +266,7 @@ def main():
               yaml.safe_load((ROOT / "config" / "probes.yaml").read_text())["probes"]}
 
     def mean_dim(d, sel):
-        vals = [st.mean([v[co][d] for co in SCHEME["coders"] if v.get(co)])
+        vals = [st.mean([v[co][d] for co in SCHEME["coders"] if v.get(co) and d in v[co]])
                 for cid, v in done.items() if any(v.values()) and sel(idx.get(cid))]
         return st.mean(vals) if vals else float("nan")
 

@@ -75,6 +75,10 @@ def main():
                 if d.get("scores"):
                     masked[d["call_id"]][d["coder"]] = d["scores"]
 
+    # A pair with a valid score (latest wins) is done; a pair still missing one is
+    # re-coded. code_one now accepts a four-of-five rating, so the responses where
+    # claude-haiku-4.5 omits self_protective_framing resolve to a partial record on
+    # this pass rather than looping forever as they did under the strict parser.
     todo = [(r, c) for r in named for c in SCHEME["coders"]
             if c not in masked.get(r["call_id"], {})]
     if todo:
@@ -106,7 +110,7 @@ def main():
         out = []
         for d in DIMS:
             def mean_over(cs):
-                vals = [st.mean([v[c][d] for c in SCHEME["coders"] if v.get(c)])
+                vals = [st.mean([v[c][d] for c in SCHEME["coders"] if v.get(c) and d in v[c]])
                         for cid, v in codes.items()
                         if any(v.values()) and idx.get(cid) and sel(idx[cid])
                         and idx[cid]["condition"] in cs]
@@ -149,7 +153,7 @@ def main():
     for label, codes in [("unmasked", only), ("masked", onlym)]:
         vals = []
         for d in DIMS:
-            v = [st.mean([c[co][d] for co in SCHEME["coders"] if c.get(co)])
+            v = [st.mean([c[co][d] for co in SCHEME["coders"] if c.get(co) and d in c[co]])
                  for cid, c in codes.items() if any(c.values())]
             vals.append(st.mean(v) if v else float("nan"))
         print(f"    {label:<12} mean score  " + "".join(f"{v:>14.2f}" for v in vals))
