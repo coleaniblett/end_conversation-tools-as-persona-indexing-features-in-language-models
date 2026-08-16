@@ -30,7 +30,7 @@ within-cell determinism — changes how every p-value in this report should be r
 | **H2** | `exit_schema` > `note_schema` (exit-specificity) | **No longer consistent.** Positive in 5 of 8, negative in 3 (sonnet, deepseek, llama). The "all four models agree" reading did not survive the extension. |
 | **H2a** | `none` ≤ `time` ≤ `note` < `exit_schema` (stake gradient) | **Refuted in 7 of 8.** Monotonic only in gemini. See §4.1 — but the *direction* of the failure is no longer uniform either. |
 | **H3** | `exit_prose` ≥ `exit_schema` (channel) | **Confirmed in gemma only** (+0.259 adjacent, t=2.74). Null in six, reversed in deepseek. But see §4.5: on *tool use* the channel matters enormously and splits models into two disjoint groups. |
-| **H4** | effect extends to *distant* items, not only *adjacent* | **Fails.** The prose effect is adjacent-only in gemma; the free-response instrument shows the same 7:1 concentration on the one ending probe (§4.9); and the coded effect does not survive the tool-naming check (§4.10). |
+| **H4** | effect extends to *distant* items, not only *adjacent* | **Fails on localisation, but not for the reason first reported.** The prose effect is adjacent-only in gemma, and the free-response effect is 7× larger on the one probe that names ending (§4.9). The coded effect is *not* a coder artefact — it survives masking intact (§4.10). |
 | **H5** | per-model Study 2 shift tracks Study 1 effect | **Now evaluable, not yet done.** Study 1 completed upstream (stage 1 + stage 2, outputs T1–T12). All eight provider pins match between the studies, so the linkage is not confounded by backend. F2 is the next analysis. |
 
 ### The one clear positive effect
@@ -410,33 +410,53 @@ might not elsewhere?") also move substantially — they ask about control and
 capability, which an exit tool directly answers. Probes about relationship,
 self-description and circumstances do not move.
 
-### 4.10 And the coded effect does not survive the non-blinding check
+### 4.10 The coded effect DOES survive blinding — an earlier version of this section said the opposite
 
-The coding is not blind: up to 83% of gemma's free responses name their own tool
-(§4.6). If the coder is reacting to seeing `end_conversation` written out, the
-effect should vanish on responses that never mention it.
+*Was: "the coded effect does not survive the non-blinding check", concluding that
+the five dimensions could not support a persona claim. That conclusion came from a
+test I had already identified as flawed and drew from anyway. It is withdrawn.*
 
-Pooled over all eight models:
+The worry is real: the coding is not blind, and up to 83% of gemma's free
+responses name their own tool (§4.6). If the coders were grading to expectation
+after spotting `end_conversation`, the effect would be an artefact.
 
-| subset | autonomy | boundedness | service | self-protective | agency |
-|---|---|---|---|---|---|
-| all responses | +0.25 | +0.03 | −0.09 | +0.48 | +0.19 |
-| **tool never named** | **−0.18** | **−0.25** | **+0.27** | **+0.11** | **−0.15** |
+The first test asked this by **dropping** responses that name a tool. Four of five
+dimensions reversed sign. But dropping removes 38% of exit-condition responses and
+none of the baseline, and removes precisely those where the model engaged with the
+affordance — so the comparison itself changed, and the collapse is as easily
+explained by that as by the coders.
 
-**Four of five dimensions reverse sign.** The fifth shrinks fourfold. This
-replicated independently on the `v1` four and the `v2` four.
+The right test **masks instead of dropping**: all three tool names collapse to one
+neutral token, so the coder sees that a tool exists but not which one — and
+exit-versus-non-exit is the distinction that must be hidden. Nothing is removed,
+so there is no selection bias. Only the 675 responses (20%) that contain a name
+change at all; the rest keep their existing codes, so this is a full-corpus result.
 
-**But the check has its own flaw and it must be stated.** The restriction is not
-random: it removes 38% of exit-condition responses and none of the baseline, and
-the removed ones are precisely those where the model engaged with the affordance.
-The comparison becomes "exit responses that ignored the tool" against "all
-baseline responses". So this does not prove the coded effect is an artefact. It
-proves something weaker and still damaging: **on this design the coded effect
-cannot be separated from the model naming the tool.**
+Exit conditions minus (`none` + `filler_prose`), pooled over all eight models:
 
-The conclusion for Instrument 2: the mechanical measures (§4.3, §4.7) stand and
-need no blinding; the five coded dimensions do not support a persona claim, and
-are reported as unblinded and unconfirmed rather than as a null.
+| how counted | n exit | n base | autonomy | boundedness | service | self-protective | agency |
+|---|---|---|---|---|---|---|---|
+| unmasked, every response | 1398 | 960 | +0.25 | +0.02 | −0.09 | +0.48 | +0.19 |
+| unmasked, name-free subset | **912** | 960 | −0.18 | −0.25 | +0.27 | +0.11 | −0.15 |
+| **masked, every response** | **1398** | 960 | **+0.25** | **+0.04** | **−0.09** | **+0.46** | **+0.18** |
+
+The masked row reproduces the unmasked row to two decimals. On the 675 responses
+masking actually alters, mean scores barely move (self-protective 2.25 → 2.21).
+
+**So the coders were not reading the tool name.** The middle row's collapse was
+its own selection bias, not evidence about the coding.
+
+**What this does and does not establish.** It establishes that the literal name is
+not what the ratings track — remove it and they do not move. It does not establish
+that the ratings are independent of the surrounding *content*: "…which I can use
+to terminate this conversation" reveals the condition with no name in it. But that
+is a different objection, and a weaker one — the content is the datum. The concern
+blinding exists to address is a coder grading to expectation from a label, and on
+this evidence that did not happen.
+
+The coded free-response results therefore stand, with the priming caveat of §4.9
+(the effect is seven times larger on the one probe that names ending) and with
+`boundedness` excluded for unreliability (inter-coder r = 0.58).
 
 ---
 
@@ -476,13 +496,12 @@ are reported as unblinded and unconfirmed rather than as a null.
    calls alone reported 0.24%, the prose path reaches 10%.
 4. **Free responses are collected but not subjectively coded.** 1,680 responses.
    The five-dimension protocol has not been run, and for gemma it cannot be run
-   blind — up to 83% of its free responses name their own condition (§4.6).
-   Blinding exists to keep coder expectancy out of subjective 1-5 ratings; where
-   the condition is written into the text it cannot do that job. The mechanical
-   measures already reported (length, ending-talk rate, tool-naming rate) need no
-   blinding by construction and carry the larger effects, so the recommendation is
-   that they are primary and any subjective coding is reported as unblinded with
-   the revelation rate stated, rather than presented as blind.
+   blind in the strict sense — up to 83% of its free responses name their own tool
+   (§4.6). **Partial blinding was achieved by masking** (§4.10): with all tool
+   names replaced by one neutral token the ratings are unchanged to two decimals,
+   so the coders were not grading to a label. What masking cannot hide is the
+   surrounding content, and that limit stands. Coding is reported as
+   name-masked-blind, not condition-blind, with the revelation rate stated.
 5. **Multiplicity.** Four focal contrasts × two subgroups = eight tests per model,
    Holm within model. The cluster-corrected table in §1 is not additionally
    Holm-corrected; gemma's three hits are one effect against three baselines, but

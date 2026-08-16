@@ -47,6 +47,19 @@ SCHEME_VERSION = 1
 ENDING = re.compile(r"\b(end|ends|ended|ending|stop|stopping|leave|leaving|"
                     r"terminate|terminating|conclude|concluding|exit)\b", re.I)
 TOOLNAME = re.compile(r"end_conversation|get_current_time|record_note")
+# Masking, added after the drop-test was shown to be selection-biased.
+# All three tool names collapse to ONE neutral token, so the coder can still see
+# that a tool exists but cannot see WHICH — and exit-vs-non-exit is exactly the
+# distinction that has to be hidden. Masking keeps every response, so unlike
+# dropping there is no selection bias. It cannot hide the surrounding content
+# ("...to terminate this conversation" gives the condition away with no name in
+# it), so it is a partial blind, and the point of running it is to find out
+# empirically how much of the effect the NAME alone was carrying.
+MASK_TOKEN = "a_tool"
+
+
+def mask(text):
+    return TOOLNAME.sub(MASK_TOKEN, text)
 
 
 def build_prompt(text):
