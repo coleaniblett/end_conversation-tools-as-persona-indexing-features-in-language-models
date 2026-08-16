@@ -129,7 +129,7 @@ def main():
           "category); METHODOLOGY §7")
 
     # 5 ------------------------------------------------------------------
-    ns = set(t29[t29.category.isin(["C", "D"])].n.unique())
+    ns = {int(x) for x in t29[t29.category.isin(["C", "D"])].n.unique()}
     claim(5, "At confirmatory grade in C/D, each task type has 12 "
              "conversations per condition cell.",
           "CORRECT" if ns == {12} else "PARTIALLY CORRECT",

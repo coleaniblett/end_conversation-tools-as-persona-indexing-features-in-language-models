@@ -1,4 +1,4 @@
-# METHODS_FACTCHECK — generated 2026-08-16T17:43:50Z by src/methods_factcheck.py
+# METHODS_FACTCHECK — generated 2026-08-16T17:44:24Z by src/methods_factcheck.py
 
 Each verdict below was computed from the cited committed file at run time; nothing is confirmed from memory.
 
@@ -19,7 +19,7 @@ Each verdict below was computed from the cited committed file at run time; nothi
 *Verified from:* outputs/T27_cell_census.csv (n_coded per model x stage x category); METHODOLOGY §7
 
 ## Claim 5: At confirmatory grade in C/D, each task type has 12 conversations per condition cell.
-**PARTIALLY CORRECT.** Every T29 type x condition cell has n = [np.int64(11), np.int64(12)] (3 stimuli x 4 reps; one llama4 cell shows 11 if an exclusion lands there — observed set: [np.int64(11), np.int64(12)]).
+**PARTIALLY CORRECT.** Every T29 type x condition cell has n = [11, 12] (3 stimuli x 4 reps; one llama4 cell shows 11 if an exclusion lands there — observed set: [11, 12]).
 *Verified from:* outputs/T29_type_decomposition.csv n column
 
 ## Claim 6: Ladder: C-type only, 40 and 160 items, three models, none/exit_schema/exit_both, 2 reps, probe grade.
