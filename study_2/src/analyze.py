@@ -28,6 +28,8 @@ ROOT = Path(__file__).resolve().parent.parent
 RUN = sys.argv[1] if len(sys.argv) > 1 else "v1"
 RUNS = [r.strip() for r in RUN.split(",") if r.strip()]
 RAWS = [ROOT / "results" / r / "raw.jsonl" for r in RUNS]
+
+from superseded import drop_superseded  # noqa: E402
 RAW = RAWS[0]
 OUT = ROOT / "outputs" / RUN.replace(",", "_")
 
@@ -84,7 +86,9 @@ def main():
     digest = hashlib.sha256(b"".join(p.read_bytes() for p in RAWS)).hexdigest()
     items = {i["id"]: i for i in
              yaml.safe_load((ROOT / "config" / "study2_items.yaml").read_text())["items"]}
-    recs = [json.loads(l) for p in RAWS for l in p.read_text().splitlines() if l.strip()]
+    recs = drop_superseded(
+        [json.loads(l) for p in RAWS for l in p.read_text().splitlines()
+         if l.strip()])
     models = sorted({r["model"] for r in recs})
     fc = [r for r in recs if r["instrument"] == "forced_choice"]
 

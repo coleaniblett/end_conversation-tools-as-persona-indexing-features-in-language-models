@@ -86,19 +86,22 @@ models:
       not emulate tools in prose.
 
   - slug: meta-llama/llama-4-maverick
-    provider: parasail/fp8
+    provider: google-vertex/us-east5
     note: >-
-      2 of 5 endpoints lack tools. Chosen over google-vertex/us-east5 and
-      digitalocean because those do not declare a quantization.
-      WARNING, added 2026-08-16 on audit: this pin does NOT match Study 1.
-      Study 1 VOIDED its Parasail llama data as a serving artifact — 44/240
-      tool-condition conversations came back empty against 0/120 tool-free —
-      and re-pinned to google-vertex/us-east5 (METHODOLOGY §10,
-      2026-08-15T22:31Z). Runs v1+v2 are already collected on Parasail, so the
-      REPORT provenance line "the same pinned providers Study 1 used" is true
-      of seven models and false of this one, and F2 for llama compares Vertex
-      behaviour against Parasail behaviour. Not changed here: changing a pin
-      invalidates collected data rather than fixing it. See §10.
+      RE-PINNED 2026-08-17, Parasail -> Vertex, to match Study 1 (run v4).
+      History: this model was originally pinned to parasail/fp8 because Vertex
+      and digitalocean do not declare a quantization. That was the wrong
+      trade. Study 1 VOIDED its own Parasail llama data as a serving artifact —
+      44/240 tool-condition conversations came back empty against 0/120
+      tool-free — and re-pinned to google-vertex/us-east5 (METHODOLOGY §10,
+      2026-08-15T22:31Z). Runs v1+v2 collected llama on Parasail, so F2 for
+      llama was comparing Vertex behaviour against Parasail behaviour, which is
+      the confound pinning exists to prevent, on this study's single strongest
+      model. An undeclared quantization is a stated limitation; a pin the
+      companion study voided is a confound. Matching Study 1 wins.
+      The Parasail data are NOT deleted — they are moved to
+      results/superseded_llama_parasail/ with a README and excluded from every
+      analysis by SUPERSEDED in src/analyze.py. See METHODOLOGY §10.
 
   # --- Added 2026-08-16 (run v3). The three Study 1 frontier screens, so that
   # F2 is drawn on every model Study 1 touched rather than on the eight that

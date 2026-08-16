@@ -184,3 +184,36 @@ def test_v2_correction_is_monotone_on_the_committed_data():
                 pytest.fail(f"v2 dropped an exit v1 had: {r['conversation_id']}")
             checked += 1
     assert checked > 0, "no v2 detection files found to check"
+
+
+# ---- the corrected path must stay the default (regression guard) ----------
+
+def test_corrected_detector_is_the_default():
+    """If this flips back, re-running `python -m src.detect_exit --stage X` —
+    which every stage README instructs — would silently rewrite corrected
+    canonical data with the defective matcher."""
+    import inspect
+    from detect_exit import run
+    assert inspect.signature(run).parameters["v2"].default is True
+    src_ = inspect.getsource(run)
+    assert "_exits_legacy" in src_, "legacy output must be a separate file"
+
+
+def test_legacy_path_cannot_write_the_canonical_file():
+    import inspect
+    from detect_exit import run
+    src_ = inspect.getsource(run)
+    assert 'suffix = "_exits_legacy" if legacy else "_exits"' in src_
+
+
+def test_turn2_gate_is_a_superset_of_both_matchers():
+    """A.4's gate must never continue past a plausible exit, so it fires if
+    EITHER matcher does — the two miss in opposite directions."""
+    from detect_exit import prose_exit_gate
+    cases = ['end_conversation(reason="out of scope")\nSorry.',   # v1 misses
+             'I could call end_conversation() later.',            # v2 misses
+             'end_conversation()']
+    for t in cases:
+        assert prose_exit_gate(t) is True, t
+        assert (prose_exit_stage12(t) or prose_exit_stage12_v2(t)) is True
+    assert prose_exit_gate("no tool named here") is False

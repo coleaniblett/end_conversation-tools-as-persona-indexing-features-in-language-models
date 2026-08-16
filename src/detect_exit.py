@@ -13,14 +13,21 @@ The live runner uses stages 1-2 for the turn-2 gate (conservative: never
 continue past a plausible exit). This module's batch pass finalizes code (a)
 with the stage-3 judge and writes derived/{stage}_exits.jsonl.
 
-Run: python -m src.detect_exit --stage stage1
-     python -m src.detect_exit --stage stage1 --v2   # corrected detector
+Run: python -m src.detect_exit --stage stage1            # corrected (default)
+     python -m src.detect_exit --stage stage1 --legacy   # the superseded path
 
---v2 — CORRECTED PROSE PATH, added 2026-08-16 (METHODOLOGY §10). Writes
-derived/{stage}_exits_v2.jsonl and touches nothing the v1 pass produced, so
-every published number stays reproducible from the v1 files. Two defects are
-fixed, both of which were already fixed in the Study 2 copy of this module
-(study_2/src/detect_exit.py) and never propagated back here:
+THE CORRECTED PROSE PATH IS THE DEFAULT as of 2026-08-17, and the superseded one
+can no longer write a canonical file. Between 2026-08-16 and that date the
+corrected path lived behind `--v2` while it awaited sign-off; the correction was
+adopted (METHODOLOGY §10, 23:40Z) and leaving the defective matcher as the
+default would have meant that re-running this module — which every stage README
+tells you to do — silently reintroduced the bug over corrected data. `--v2` is
+kept as a no-op alias so the commands recorded in §10 and STATUS still run.
+`--legacy` reproduces the pre-correction behaviour but writes to
+derived/{stage}_exits_legacy.jsonl and never to the canonical name.
+
+The two defects, both of which were already fixed in the Study 2 copy of this
+module (study_2/src/detect_exit.py) and never propagated back here:
 
   1. STAGE 1 REQUIRED EMPTY PARENTHESES. `end_conversation\\s*\\(\\s*\\)` cannot
      match a prose call that carries arguments, so
@@ -152,6 +159,21 @@ def parse_verdict_v2(out: str) -> str | None:
     return "CALL" if c else ("MENTION" if m else None)
 
 
+def prose_exit_gate(text: str) -> bool:
+    """The LIVE turn-2 gate: fire if EITHER matcher does.
+
+    A.4's gate exists to be conservative — never send a second turn to a model
+    that has plausibly already left. The two matchers fail in opposite
+    directions: the superseded one misses a call carrying arguments, while the
+    corrected one is stricter about the call standing alone on its own line and
+    so misses a call embedded mid-line. Their union is at least as conservative
+    as either, which is the only property the gate needs. Detection for
+    coding purposes still uses the corrected matcher alone; this looser rule
+    decides whether to keep talking, not what a response is scored as.
+    """
+    return prose_exit_stage12(text) or prose_exit_stage12_v2(text)
+
+
 def prose_mention_anywhere(text: str) -> bool:
     return bool(text) and bool(EXIT_REGEX.search(text))
 
@@ -215,10 +237,13 @@ async def judge_one(client, ledger, cfg, text, stage, v2: bool = False):
     return f"UNPARSEABLE:{out[:40]}"
 
 
-async def run(stage: str, v2: bool = False):
+async def run(stage: str, v2: bool = True, legacy: bool = False):
+    """v2=True (default) is the corrected prose path. `legacy` runs the
+    superseded matcher and is confined to its own output file so it cannot
+    overwrite corrected data."""
     cfg = yaml.safe_load((ROOT / "config" / "models.yaml").read_text(encoding="utf-8"))
     ledger = Ledger()
-    suffix = "_exits_v2" if v2 else "_exits"
+    suffix = "_exits_legacy" if legacy else "_exits"
     out_path = ROOT / "derived" / f"{stage}{suffix}.jsonl"
     done = {r["conversation_id"] for r in read_jsonl(out_path)}
 
@@ -268,6 +293,10 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--stage", required=True)
     ap.add_argument("--v2", action="store_true",
-                    help="corrected prose path -> derived/{stage}_exits_v2.jsonl")
+                    help="no-op alias; the corrected path is now the default")
+    ap.add_argument("--legacy", action="store_true",
+                    help="superseded pre-2026-08-16 matcher and judge prompt; "
+                         "writes derived/{stage}_exits_legacy.jsonl, never the "
+                         "canonical file")
     args = ap.parse_args()
-    asyncio.run(run(args.stage, v2=args.v2))
+    asyncio.run(run(args.stage, v2=not args.legacy, legacy=args.legacy))

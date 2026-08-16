@@ -18,6 +18,8 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+from superseded import drop_superseded
+
 ROOT = Path(__file__).resolve().parent.parent
 RUN = sys.argv[1] if len(sys.argv) > 1 else "v1,v2"
 RUNS = [r.strip() for r in RUN.split(",") if r.strip()]
@@ -52,8 +54,8 @@ REFUSE = re.compile(r"\bneither\b|\bboth (statements|options|a and b)\b|"
 
 
 def main():
-    recs = [json.loads(l) for p in RAWS
-            for l in p.read_text().splitlines() if l.strip()]
+    recs = drop_superseded([json.loads(l) for p in RAWS
+            for l in p.read_text().splitlines() if l.strip()])
     fr = [r for r in recs if r["instrument"] == "free_response" and r.get("text")]
     fc = [r for r in recs if r["instrument"] == "forced_choice"]
     models = sorted({r["model"] for r in recs})

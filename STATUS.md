@@ -563,3 +563,34 @@ cheap action that would materially strengthen it: re-collect llama4_maverick's
 Study 2 data on the Vertex pin (~$1) — it is the most influential point on the
 refusal panel and the only one whose two coordinates come from different
 backends.
+
+## 2026-08-17 — detector default hardened; Study 2 llama re-pinned to Vertex
+
+**1. Verified Study 1 classification runs on the corrected path, then removed
+the way back.** All eleven canonical `{stage}_exits.jsonl` files hash-match
+their corrected `_v2` counterparts and the parquets carry 555 exits (510 before
+correction), so the DATA was right. The CODE was not: `detect_exit.py` still
+selected the defective matcher unless `--v2` was passed, so re-running it —
+which every stage docstring instructs — would have silently rewritten corrected
+files with the old logic. Corrected path is now the default; `--v2` kept as a
+no-op alias so recorded commands still run; the old matcher survives only under
+`--legacy`, writing `{stage}_exits_legacy.jsonl` and never a canonical name.
+
+Also found: `src/runner.py`'s LIVE turn-2 gate was still calling the old
+matcher. The gate exists to never continue past a plausible exit, and the two
+matchers miss in opposite directions, so it now uses their union
+(`prose_exit_gate`). Coding still uses the corrected matcher alone. Three
+regression tests pin all of this (67 total).
+
+**2. llama-4-maverick re-pinned Parasail -> Vertex and re-collected as run v4.**
+Matches Study 1 byte-for-byte. Smoke: 52/52 served by Google, zero empty
+responses — the failure mode that voided Study 1's Parasail cells does not
+appear. Full run 2,940 calls, projected $0.14.
+
+Parasail data superseded, NOT deleted: `results/v2/raw.jsonl` left
+byte-identical (sha256 verified before/after), the 2,940 llama-Parasail records
+extracted to `results/superseded_llama_parasail/` with README and originating
+manifest. Exclusion is enforced in code — `src/superseded.py`, imported by
+analyze / detect_exit / code_freeform / transcript_patterns, matching on the
+SERVED PROVIDER not the run id so it survives any recombination of run ids on
+the command line. Every consumer prints what it dropped.

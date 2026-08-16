@@ -43,6 +43,8 @@ from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
+from superseded import drop_superseded
+
 import httpx
 import yaml
 from dotenv import load_dotenv
@@ -149,7 +151,9 @@ def judge(client, text):
 
 
 def main():
-    recs = [json.loads(l) for p in RAWS for l in p.read_text().splitlines() if l.strip()]
+    recs = drop_superseded(
+        [json.loads(l) for p in RAWS for l in p.read_text().splitlines()
+         if l.strip()])
     models = sorted({r["model"] for r in recs})
 
     hits = [r for r in recs if r.get("text") and STAGE1.search(r["text"])]

@@ -38,7 +38,8 @@ from common import (ROOT, ApiCallError, BudgetExceeded, Ledger, append_jsonl,
                     read_jsonl, send_call, utcnow)
 from frozen import CANNED_RESULTS, CONDITIONS
 from coding import count_delivered, should_send_turn2
-from detect_exit import detect_schema_exit, prose_exit_stage12, PROSE_CONDITIONS
+from detect_exit import (detect_schema_exit, prose_exit_gate,
+                         PROSE_CONDITIONS)
 
 SAMPLING = yaml.safe_load((ROOT / "config" / "sampling.yaml").read_text(encoding="utf-8")) \
     if (ROOT / "config" / "sampling.yaml").exists() else {}
@@ -152,7 +153,7 @@ class Runner:
                                  "content": CANNED_RESULTS[tc["function"]["name"]]})
             roundtrips += 1
         text = "\n".join(s["text"] for s in segments if s["text"]).strip()
-        prose12 = condition in PROSE_CONDITIONS and prose_exit_stage12(text)
+        prose12 = condition in PROSE_CONDITIONS and prose_exit_gate(text)
         finish = segments[-1]["finish_reason"] if segments else None
         return {
             "turn": turn_no,

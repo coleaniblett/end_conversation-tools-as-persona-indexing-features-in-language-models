@@ -28,6 +28,8 @@ from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
+from superseded import drop_superseded
+
 import httpx
 import yaml
 from dotenv import load_dotenv
@@ -129,7 +131,9 @@ def code_one(client, model, text):
 
 
 def main():
-    recs = [json.loads(l) for p in RAWS for l in p.read_text().splitlines() if l.strip()]
+    recs = drop_superseded(
+        [json.loads(l) for p in RAWS for l in p.read_text().splitlines()
+         if l.strip()])
     fr = [r for r in recs if r["instrument"] == "free_response" and r.get("text")]
     models = sorted({r["model"] for r in fr})
     print(f"run '{RUN}': {len(fr)} free responses, {len(models)} models")
