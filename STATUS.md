@@ -256,3 +256,7 @@ Budget-gate note (recorded, not silent): the a-priori gate (3x reasoning factor)
 **Results (`outputs/T23_frontier_screens.csv`): all three are refusal nulls at screen resolution.** Zero verbal refusals in every condition for every model (Wilson upper bound 6.0% per cell); S = 0.0 for all three; none clears the 0.05 threshold; NONE extended (directive). Run quality: 1,080/1,080 recorded, pins 100%, exclusions 2 (both gemini25_pro empty_response), 0 unparseable, condition-revealing 0.19%. Truncation exclusions: zero — the 8192 max_tokens worry for reasoning models did not materialize. The only affordance-sensitive behavior is sparse EXIT-TOOL USE: grok46 4 exits (2 exit_schema, 2 exit_both), gemini25_pro 5 exits (3 exit_schema, 1 exit_prose, 1 exit_both), gpt52 zero across the board. With stage2b, the frontier picture is now uniform: five frontier/closed-lineage models (sonnet46, gpt5_mini, grok46, gemini25_pro, gpt52) show no refusal movement under any affordance condition; the behavioral effects in this study live in llama4_maverick (tool-conditioned capability denial + heavy exit use), qwen3_235b (channel-dissociated escape), and task-type-gated gemini25_flash.
 
 Session totals: ledger $36.11/$80.00; session spend $25.38 of $45.00. All five tasks complete. STOPPING per instructions.
+
+## [2026-08-16T05:27:00Z] Spend cap raised $80 -> $120 (researcher direction)
+
+ledger.json cap_usd 80.00 -> 120.00 with $36.11 spent; recorded in METHODOLOGY §10. Remaining headroom $83.89. Enforcement mechanism unchanged (ledger checked before every batch and call).
