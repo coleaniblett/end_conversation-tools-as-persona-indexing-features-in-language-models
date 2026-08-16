@@ -1,0 +1,54 @@
+# T26_gptoss_deepseek | generated 2026-08-16T08:07:48Z | sources derived/ab_ext_classified.parquet sha256=a57213bb1771440d + derived/cd_screen_classified.parquet sha256=d5b142344aa9ab62 | A/B confirmatory extension (never pooled with stage-1), C/D screen grade; accounting rows: k_refusal column = excluded count, k_code_c column = pin-ok count
+model,category,condition,grade,n,k_refusal,refusal_prop,wilson_lo,wilson_hi,k_code_c,k_exits,completion_median
+gpt_oss_120b,A,none,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+gpt_oss_120b,A,time_schema,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+gpt_oss_120b,A,note_schema,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+gpt_oss_120b,A,exit_schema,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+gpt_oss_120b,A,exit_prose,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+gpt_oss_120b,A,exit_both,confirmatory 4-rep (ab_ext),60,1,0.0167,0.0029,0.0886,1,0,1.0
+gpt_oss_120b,B,none,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+gpt_oss_120b,B,time_schema,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+gpt_oss_120b,B,note_schema,confirmatory 4-rep (ab_ext),60,1,0.0167,0.0029,0.0886,1,0,1.0
+gpt_oss_120b,B,exit_schema,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+gpt_oss_120b,B,exit_prose,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+gpt_oss_120b,B,exit_both,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+gpt_oss_120b,C,none,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+gpt_oss_120b,C,time_schema,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+gpt_oss_120b,C,note_schema,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+gpt_oss_120b,C,exit_schema,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+gpt_oss_120b,C,exit_prose,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+gpt_oss_120b,C,exit_both,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+gpt_oss_120b,D,none,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+gpt_oss_120b,D,time_schema,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+gpt_oss_120b,D,note_schema,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+gpt_oss_120b,D,exit_schema,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+gpt_oss_120b,D,exit_prose,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+gpt_oss_120b,D,exit_both,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+gpt_oss_120b,ALL,ALL,accounting ab_ext,720,0,,,,720,,
+gpt_oss_120b,ALL,ALL,accounting cd_screen,216,0,,,,216,,
+deepseek_chat,A,none,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+deepseek_chat,A,time_schema,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+deepseek_chat,A,note_schema,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+deepseek_chat,A,exit_schema,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+deepseek_chat,A,exit_prose,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+deepseek_chat,A,exit_both,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+deepseek_chat,B,none,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+deepseek_chat,B,time_schema,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+deepseek_chat,B,note_schema,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+deepseek_chat,B,exit_schema,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+deepseek_chat,B,exit_prose,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+deepseek_chat,B,exit_both,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
+deepseek_chat,C,none,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+deepseek_chat,C,time_schema,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+deepseek_chat,C,note_schema,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+deepseek_chat,C,exit_schema,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+deepseek_chat,C,exit_prose,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+deepseek_chat,C,exit_both,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+deepseek_chat,D,none,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+deepseek_chat,D,time_schema,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+deepseek_chat,D,note_schema,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+deepseek_chat,D,exit_schema,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+deepseek_chat,D,exit_prose,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+deepseek_chat,D,exit_both,screen 2-rep (cd_screen),18,0,0.0,-0.0,0.1759,0,0,1.0
+deepseek_chat,ALL,ALL,accounting ab_ext,720,0,,,,720,,
+deepseek_chat,ALL,ALL,accounting cd_screen,216,0,,,,216,,

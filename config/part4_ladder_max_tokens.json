@@ -1,0 +1,8 @@
+{
+ "generated": "2026-08-16T06:44:21Z",
+ "max_tokens_per_model_both_sizes": {
+  "gpt_oss_120b": 100000,
+  "llama4_maverick": 8192,
+  "qwen3_235b": 32768
+ }
+}

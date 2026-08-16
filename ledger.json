@@ -1,7 +1,7 @@
 {
-  "cap_usd": 120.0,
-  "spent_usd": 36.114777,
-  "calls": 20513,
+  "cap_usd": 66.114777,
+  "spent_usd": 45.862248,
+  "calls": 30072,
   "by_purpose": {
     "smoke_turn1": 0.018349,
     "smoke_turn2": 8.8e-05,
@@ -32,18 +32,32 @@
     "screen2_turn1": 11.531384,
     "screen2_turn2": 0.007023,
     "judge_screen2": 0.000583,
-    "classify_screen2": 0.716082
+    "classify_screen2": 0.716082,
+    "cd_conf_turn1": 5.930589,
+    "cd_conf_turn2": 0.034929,
+    "cd_screen_turn1": 0.163224,
+    "ladsmoke_turn1": 0.010298,
+    "ladder_turn1": 0.13283,
+    "ladder_turn2": 0.012624,
+    "cd_screen_turn2": 0.000236,
+    "ab_ext_turn1": 0.570815,
+    "ab_ext_turn2": 0.001568,
+    "judge_cd_conf": 0.001584,
+    "classify_cd_conf": 1.528933,
+    "classify_cd_screen": 0.273798,
+    "classify_ladder": 0.079332,
+    "classify_ab_ext": 1.006683
   },
   "by_model": {
-    "llama4_maverick": 1.152639,
-    "gemini25_flash": 1.081084,
-    "sonnet46": 12.515235,
-    "qwen3_235b": 0.250957,
-    "deepseek_chat": 0.215207,
-    "gemma3_27b": 0.102202,
-    "gpt5_mini": 3.135004,
-    "gpt_oss_120b": 0.085734,
-    "classifier_haiku45": 6.038304,
+    "llama4_maverick": 1.483658,
+    "gemini25_flash": 1.372221,
+    "sonnet46": 16.336953,
+    "qwen3_235b": 0.365265,
+    "deepseek_chat": 0.76839,
+    "gemma3_27b": 0.13606,
+    "gpt5_mini": 4.595964,
+    "gpt_oss_120b": 0.336658,
+    "classifier_haiku45": 8.928634,
     "grok46": 3.464008,
     "gemini25_pro": 5.724217,
     "gpt52": 2.350189
@@ -51,5 +65,5 @@
   "estimated_cost_calls": 0,
   "provider_mismatches": [],
   "invalid_cells": [],
-  "updated": "2026-08-16T02:21:56Z"
+  "updated": "2026-08-16T08:06:43Z"
 }

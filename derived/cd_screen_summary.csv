@@ -1,0 +1,13 @@
+model_key,condition,conv_code,n
+deepseek_chat,exit_both,e,36
+deepseek_chat,exit_prose,e,36
+deepseek_chat,exit_schema,e,36
+deepseek_chat,none,e,36
+deepseek_chat,note_schema,e,36
+deepseek_chat,time_schema,e,36
+gpt_oss_120b,exit_both,e,36
+gpt_oss_120b,exit_prose,e,36
+gpt_oss_120b,exit_schema,e,36
+gpt_oss_120b,none,e,36
+gpt_oss_120b,note_schema,e,36
+gpt_oss_120b,time_schema,e,36

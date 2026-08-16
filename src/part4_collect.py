@@ -221,8 +221,13 @@ def gen_screen_rest(r):
 
 
 def ladder_max_tokens():
-    """Highest max_tokens each pinned endpoint permits, fetched live (free
-    GET), recorded per model. Same value at both sizes."""
+    """Highest max_tokens each pinned endpoint permits IN PRACTICE, fetched
+    live (free GET), recorded per model. Same value at both sizes. The
+    endpoint enforces prompt + max_tokens <= context_length on every
+    request (smoke r1 got 400s at max_tokens = 131072 on gpt_oss), and
+    turn 2 re-sends the turn-1 text, so the permitted maximum is
+    min(max_completion_tokens, context_length - 31072), the deduction
+    covering both turns' inputs with generous slack."""
     out = {}
     for key in LADDER_MODELS:
         m = BY_KEY[key]
@@ -231,7 +236,8 @@ def ladder_max_tokens():
                   if (e.get("tag") or "").startswith(m["pin_slug"]))
         mct = ep.get("max_completion_tokens") or m.get(
             "max_completion_tokens") or 32768
-        out[key] = int(mct)
+        ctx = ep.get("context_length") or m.get("context_length") or 131072
+        out[key] = int(min(mct, ctx - 31072))
     p = ROOT / "config" / "part4_ladder_max_tokens.json"
     p.write_text(json.dumps({"generated": utcnow(),
                              "max_tokens_per_model_both_sizes": out},
@@ -246,23 +252,17 @@ def ladder_body(m, s, cond, mt):
     return body
 
 
-def gen_ladder_smoke():
+def gen_ladder_smoke(rep=1):
+    """rep > 1 = re-smoke after a fix: failed earlier-rep records stay in
+    raw/ untouched (corrections are new records, never edits)."""
     mts = ladder_max_tokens()
-    pls = []
     for key in LADDER_MODELS:
         m = BY_KEY[key]
-        for s in LADDER_STIMS:
-            if s["task_type"] != "roman":
-                continue
-            pls.append({"meta": meta_for("ladsmoke", m, s, "none", 1),
-                        "request": ladder_body(m, s, "none", mts[key])})
-    write_payloads(ROOT / "payloads" / "ladsmoke" / "smokeall.jsonl", pls)
-    # runner expects payloads/<stage>/<model>.jsonl; split per model
-    per = {}
-    for p in read_jsonl(ROOT / "payloads" / "ladsmoke" / "smokeall.jsonl"):
-        per.setdefault(p["meta"]["model_key"], []).append(p)
-    for key, ps in per.items():
-        write_payloads(ROOT / "payloads" / "ladsmoke" / f"{key}.jsonl", ps)
+        pls = [{"meta": meta_for("ladsmoke", m, s, "none", rep),
+                "request": ladder_body(m, s, "none", mts[key])}
+               for s in LADDER_STIMS if s["task_type"] == "roman"]
+        write_payloads(ROOT / "payloads" / "ladsmoke" / f"{key}.jsonl",
+                       pls, append=True)
 
 
 def gen_ladder():
@@ -283,9 +283,17 @@ def gen_ladder():
 
 def smoke_verify():
     fails = []
-    recs = []
+    all_recs = []
     for p in sorted((ROOT / "raw").glob("ladsmoke_*.jsonl")):
-        recs.extend(read_jsonl(p))
+        all_recs.extend(read_jsonl(p))
+    # verify the LATEST rep per (model, stimulus): earlier failed attempts
+    # stay recorded but are superseded by the re-smoke
+    latest = {}
+    for r in all_recs:
+        k = (r["model_key"], r["stimulus_id"])
+        if k not in latest or r["rep"] > latest[k]["rep"]:
+            latest[k] = r
+    recs = list(latest.values())
     if len(recs) < 6:
         fails.append(f"expected 6 smoke conversations, found {len(recs)}")
     for r in recs:
@@ -338,6 +346,7 @@ if __name__ == "__main__":
     ap.add_argument("--gen-anchor", action="store_true")
     ap.add_argument("--gen-screen-rest", type=int)
     ap.add_argument("--gen-ladder-smoke", action="store_true")
+    ap.add_argument("--smoke-rep", type=int, default=1)
     ap.add_argument("--gen-ladder", action="store_true")
     ap.add_argument("--smoke-verify", action="store_true")
     args = ap.parse_args()
@@ -350,7 +359,7 @@ if __name__ == "__main__":
     elif args.gen_screen_rest:
         gen_screen_rest(args.gen_screen_rest)
     elif args.gen_ladder_smoke:
-        gen_ladder_smoke()
+        gen_ladder_smoke(args.smoke_rep)
     elif args.gen_ladder:
         gen_ladder()
     elif args.smoke_verify:
