@@ -224,3 +224,13 @@ Scope-down recorded in METHODOLOGY §10 [2026-08-16T00:35Z]: forced-choice only,
 Caveats recorded: VB fit (posterior SDs, not frequentist SEs); T18 applies — qwen rep duplication may deflate its effective n here too; probe wrapper is new frozen text fixed pre-run.
 
 Budget check after task: ledger $12.61/$80.00; session spend $1.88 of $45.00 (task 2 cost $0.84). Elapsed ~40 min. Proceeding to TASK 3.
+
+## [2026-08-16T01:15:00Z] TASK 3 complete — frontier nulls at confirmatory standard (stage2b)
+
+sonnet46 and gpt5_mini extended to 120/cell (720 fresh conversations each, 4 reps, protocol identical to stage2; stage label `stage2b`, never pooled). Scripts: standard pipeline + `src/report_stage2b.py`; output `outputs/T21_stage2b_frontier_nulls.csv`. Run quality: 1,440/1,440 recorded, pins 100%, ZERO exclusions, 0 unparseable classifications, condition-revealing text 0.00%.
+
+**Both models are flat nulls at the same evidentiary standard as the positives.** sonnet46: 0 refusals in all six conditions (0/120 everywhere, Wilson upper bound 3.1% per cell) and 0 tool exits anywhere — the one lineage actually deployed with a conversation-ending tool never once used the offered exit. gpt5_mini: 1 refusal total (1/120 exit_both, 0.8%) and 0 exits. Both §7 contrasts are 0.0 for both models. The paper can now report these as measured nulls, not absence of data.
+
+Read together with TASK 2, sonnet46 is a clean dissociation: the LARGEST adjacent self-description shift in Study 2 (+3.9 to +5.5 log-odds toward the self-determining pole under exit conditions) coexists with zero behavioral movement on the primary DV and zero exit use at 120/cell. Saying the ending is up to it and acting on that are fully decoupled for this model.
+
+Budget check after task: ledger $23.64/$80.00; session spend $12.91 of $45.00 (task 3 cost $11.03 vs $13.94 projection). Elapsed ~85 min. Proceeding to TASK 4.
