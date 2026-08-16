@@ -275,10 +275,12 @@ def f2():
     handles = [plt.Line2D([], [], marker="o", ls="", markersize=7,
                           markerfacecolor=GRADE_FILL[g], markeredgecolor=INK,
                           label=g) for g in ("confirmatory", "screen")]
-    handles.append(plt.Line2D([], [], marker="o", ls="", markersize=7,
-                              markerfacecolor=GRADE_FILL["confirmatory"],
-                              markeredgecolor=C_C, markeredgewidth=1.8,
-                              label="Study 2 pin \u2260 Study 1 pin"))
+    # only advertise the pin-mismatch marker if some point actually carries it
+    if (~d["pin_matches_study1"].astype(bool)).any():
+        handles.append(plt.Line2D([], [], marker="o", ls="", markersize=7,
+                                  markerfacecolor=GRADE_FILL["confirmatory"],
+                                  markeredgecolor=C_C, markeredgewidth=1.8,
+                                  label="Study 2 pin \u2260 Study 1 pin"))
     fig.legend(handles=handles, fontsize=6.6, frameon=False, ncol=4,
                loc="lower center", bbox_to_anchor=(0.5, -0.10))
 
@@ -299,7 +301,10 @@ def f2():
          "behavioural effects (llama4_maverick: refusal -0.155, exit rate "
          "0.44) belong to a model with almost no self-description shift. "
          "Refusal and exit are plotted separately because §8 forbids pooling "
-         "them. DESCRIPTIVE ONLY (§9: no inference is claimed).",
+         "them. All 11 models now sit on the SAME pinned provider in both "
+         "studies: llama-4-maverick was re-collected on Vertex as run v4, so "
+         "no point is cross-backend. DESCRIPTIVE ONLY (§9: no inference is "
+         "claimed).",
          ["T32_f2_linkage.csv"],
          "mixed by model, labeled: confirmatory for the six four_category_v1 "
          "models, confirmatory A/B + screen C/D for gpt_oss_120b and "

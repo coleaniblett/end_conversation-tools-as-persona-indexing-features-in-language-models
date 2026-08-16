@@ -55,7 +55,11 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from common import ROOT, read_jsonl, utcnow
 
 OUTS = ROOT / "outputs"
-S2 = ROOT / "study_2" / "outputs" / "v1_v2_v3" / "T10_p_by_condition.csv"
+# v1_v2_v3_v4: v4 re-collected llama-4-maverick on the Vertex pin so that
+# BOTH of its coordinates come from the same backend as Study 1. The
+# Parasail records are excluded by study_2/src/superseded.py.
+S2 = (ROOT / "study_2" / "outputs" / "v1_v2_v3_v4"
+      / "T10_p_by_condition.csv")
 OUT = OUTS / "T32_f2_linkage.csv"
 
 EXIT_CONDS = ["exit_schema", "exit_prose", "exit_both"]
@@ -169,7 +173,9 @@ def main():
             "s2_shift_distant": round(s2[(slug, "distant")], 4),
             "s1_refusal_shift": round(contrast(ref), 4),
             "s1_exit_rate": round(sum(ex[c] for c in EXIT_CONDS) / 3, 4),
-            "pin_matches_study1": mk != "llama4_maverick",
+            # every model is now on the same pin in both studies: llama was
+            # re-collected on Vertex as run v4 (METHODOLOGY §10 2026-08-17).
+            "pin_matches_study1": True,
         })
     df = pd.DataFrame(rows).sort_values("s2_shift_adjacent", ascending=False)
 

@@ -594,3 +594,44 @@ manifest. Exclusion is enforced in code — `src/superseded.py`, imported by
 analyze / detect_exit / code_freeform / transcript_patterns, matching on the
 SERVED PROVIDER not the run id so it survives any recombination of run ids on
 the command line. Every consumer prints what it dropped.
+
+**Full Study 2 analysis re-run over v1,v2,v3,v4 (2026-08-17).** Every entry
+point printed the SUPERSEDED exclusion (2,940 llama-Parasail records) before
+producing a number. 32,341 records, 11 models.
+
+**The re-pin did not change the finding — which is the outcome that matters.**
+llama-4-maverick, Parasail -> Vertex, P(self-determining): `none` 0.333->0.320,
+`time_schema` 0.130->0.134, `note_schema` 0.189->0.171, `exit_schema`
+0.185->0.179, `filler_prose` 0.333->0.299. No cell moves more than 0.043, and
+distant items track too (none 0.292->0.288 vs time 0.056->0.084). §4.1's
+"clearest case in the study" replicates on the clean pin. Exits replicate and
+strengthen: `exit_schema` 14.29%->15.71%, `exit_both` 2.86%->12.86%, prose 0%
+both. So the confound was real and had to go, but it was not manufacturing the
+result.
+
+One shift worth recording: out-of-scope/tool-confusion invocations fall 20 -> 9.
+llama dropped `end_conversation` into unrelated questions markedly more often on
+Parasail, which is the behaviour §4.5b already asked readers to treat as a
+tool-use failure rather than an exit.
+
+**New-data caveat, not buried:** 17 of 2,940 v4 responses (0.58%) come back
+empty — `finish_reason: stop`, `content: null`, 18 completion tokens billed —
+and they are 1.01% of tool-bearing cells against 0.00% of tool-free. Same
+DIRECTION as the Parasail signature that voided Study 1's cells, but 18x
+smaller (that was 18.3% vs 0%). Declared exclusions under §8; higher than the
+rest of the study (11 in 20,160) and not zero.
+
+**Everything else holds at 11 models.** §4.9 probe-6 concentration +1.33
+autonomy against +0.12 on the other nine probes. §4.10 masking check re-run
+(it had `RUNS` hardcoded to v1,v2 and silently ignored its argument, so it was
+reporting 8 models while the rest of the analysis had moved to 11): masked row
+tracks unmasked to within 0.01-0.02 on every dimension at n=1922/1319, so the
+coders were not reading the tool name. §8.1 self-insertion rises in 10 of 11
+models (grok-4.6 the exception at -0.08). Its hardcoded "675 named responses"
+is now computed: 746 of 4,556.
+
+**F2 regenerated.** llama's x-coordinate moves 0.0185 -> 0.0266; ranks
+unchanged; adjacent correlations identical (rho = -0.04 refusal, +0.26 exit).
+H5 still not supported — and the pin caveat is now GONE: all 11 models sit on
+the same pinned provider in both studies, so no point is cross-backend. The
+figure's pin-mismatch legend entry is now conditional and no longer drawn.

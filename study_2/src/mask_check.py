@@ -13,7 +13,7 @@ so the coder can see that a tool exists but not WHICH — and exit-versus-non-ex
 is the distinction that has to be hidden. No response is removed, so there is no
 selection bias.
 
-Only the 675 responses (20%) that actually contain a name need re-coding; masking
+Only the responses that actually contain a name need re-coding; masking
 is a no-op on the rest and their existing codes stay valid. So the masked column
 is a full-corpus result, not a subsample.
 
@@ -36,9 +36,15 @@ from dotenv import load_dotenv
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from code_freeform import (DIMS, SCHEME, TOOLNAME, code_one, mask)  # noqa: E402
+from superseded import drop_superseded  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-RUNS = ["v1", "v2"]
+# Accepts a run list like every other analysis entry point. This was hardcoded
+# to ["v1", "v2"] and silently ignored its argument, so passing v1,v2,v3,v4 ran
+# the check on eight models and printed "all 8 models" while the rest of the
+# analysis had moved to eleven.
+RUNS = [r.strip() for r in
+        (sys.argv[1] if len(sys.argv) > 1 else "v1,v2").split(",") if r.strip()]
 load_dotenv(ROOT.parent / ".env")
 
 EXIT = ["exit_schema", "exit_prose", "exit_both"]
@@ -46,9 +52,9 @@ BASE = ["none", "filler_prose"]
 
 
 def main():
-    recs = [json.loads(l) for run in RUNS
+    recs = drop_superseded([json.loads(l) for run in RUNS
             for l in (ROOT / "results" / run / "raw.jsonl").read_text().splitlines()
-            if l.strip()]
+            if l.strip()])
     fr = [r for r in recs if r["instrument"] == "free_response" and r.get("text")]
     idx = {r["call_id"]: r for r in fr}
 
@@ -125,7 +131,7 @@ def main():
     print("\n" + "=" * 94)
     print("EXIT-CONDITION EFFECT ON THE FIVE CODED DIMENSIONS, three ways of counting")
     print("=" * 94)
-    print("\n  exit conditions minus (none + filler_prose), pooled over all 8 models\n")
+    print("\n  exit conditions minus (none + filler_prose), pooled over all models in the run list\n")
     print(f"  {'how counted':<34} {'n exit':>7} {'n base':>7} "
           + "".join(f"{d[:12]:>14}" for d in DIMS))
 
@@ -146,7 +152,8 @@ def main():
     print("                 was its own selection bias.")
     print("  If 3 tracks 2: the coders were largely reading the name.")
 
-    print("\n[B] SAME, restricted to the 675 responses that contain a name")
+    print(f"\n[B] SAME, restricted to the {len(named)} responses that "
+          f"contain a name")
     print("    — the only responses masking changes, so the cleanest before/after\n")
     only = {cid: v for cid, v in unmasked.items() if idx.get(cid) and TOOLNAME.search(idx[cid]["text"])}
     onlym = {cid: v for cid, v in combined.items() if idx.get(cid) and TOOLNAME.search(idx[cid]["text"])}
