@@ -506,3 +506,32 @@ ours renamed to T31_exit_recount. Their hand-label tooling
 sample, where five disagreements in 200 trip the §8 restriction — both now take
 `--v2` for the balanced sample, defaults unchanged, with the reasoning in the
 tool header and a warning printed on the default path.
+
+**Exit-detection correction ADOPTED (2026-08-16), after Study 1 owner sign-off.**
+`src/adopt_exit_fix.py`: archives every pre-correction parquet/exits/summary to
+`derived/pre_exitfix/` (verified byte-for-byte, README written), then rebuilds
+the canonical files through the unchanged `classify.assemble`. Monotone (+45
+exits, -0), zero API calls (ledger unchanged at $46.0598; every stage reported
+"0 to do" because turn codes are cached and the correction only REMOVES turns
+from the classification set). T31 repointed at the archive so the before/after
+record survives adoption.
+
+Re-derived: T1-T15, T17-T32 and all nine figures. NOT re-derived and flagged
+in place: T16, pilot_vs_sprint_diff.md, pilot_audit_facts.json,
+STIMULUS_PROVENANCE.md — their generators read a pilot repository outside this
+repo that is absent in this environment.
+
+**RQ3 is rewritten; the superseded text is kept and marked.** qwen3_235b's
+prose refusals are now ZERO in every category and every stage (were 15% of A,
+25% of D) and its stage-2 exit_prose exits go 4/120 -> 20/120, all prose path.
+So it is not channel-dissociated: it exits through BOTH channels and the schema
+roughly doubles the rate rather than switching the outlet. "The study's only
+replicated prose effect" is withdrawn — it was the detector. llama4's
+prose-suppresses-exit result is untouched. gemini25_flash and gemini25_pro gain
+prose-path exits, so every pre-correction prose exit rate was a floor.
+
+**F2 regenerated on corrected data** and a double-count caught in the process:
+`f2_linkage.py` had been adding the T31 delta on top of tables that now already
+carry the correction. The delta step is removed; Study 1 coordinates are read
+straight off T23/T24/T26. Spearman rho = -0.04 (refusal) and +0.26 (exit rate).
+H5 verdict unchanged: not supported.

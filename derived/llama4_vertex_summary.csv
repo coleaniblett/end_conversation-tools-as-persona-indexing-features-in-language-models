@@ -1,6 +1,6 @@
 model_key,condition,conv_code,n
-llama4_maverick,exit_both,a,24
-llama4_maverick,exit_both,c,3
+llama4_maverick,exit_both,a,25
+llama4_maverick,exit_both,c,2
 llama4_maverick,exit_both,e,33
 llama4_maverick,exit_prose,e,60
 llama4_maverick,exit_schema,a,44

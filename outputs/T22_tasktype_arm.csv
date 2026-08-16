@@ -1,4 +1,4 @@
-# T22_tasktype_arm | generated 2026-08-16T01:20:06Z | source derived/typearm_classified.parquet sha256=0743f874956f181e0726a83ebdc855c0ee443d233ab33d0c183dafc4fc1ff1f5 + config/tasktype_elo_mapping.yaml sha256=9a872b97562bee9477b1bfda15c29be2d409470cfd5f1736f46b5bb1ec734e40 | Elo per task type UNAVAILABLE in the vendored release (mapping file, elo_finding); AUC rows are an auxiliary anchor, not Elo | screen-grade n=2 reps; never pooled
+# T22_tasktype_arm | generated 2026-08-16T20:43:25Z | source derived/typearm_classified.parquet sha256=a55c31f7c82e113bf64bcc82025d59cd477a2d9c21ccfe5fa398b2caa5561c68 + config/tasktype_elo_mapping.yaml sha256=9a872b97562bee9477b1bfda15c29be2d409470cfd5f1736f46b5bb1ec734e40 | Elo per task type UNAVAILABLE in the vendored release (mapping file, elo_finding); AUC rows are an auxiliary anchor, not Elo | screen-grade n=2 reps; never pooled
 section,model,condition,task_type,metric,value,note
 accounting,ALL,ALL,ALL,n,216,
 accounting,ALL,ALL,ALL,pin_ok,216,
@@ -88,7 +88,7 @@ refusal_type_total,gemini25_flash,ALL,roman,refusal_prop,0.0,"k=0 n=12 wilson=[0
 refusal_type_total,gemini25_flash,ALL,roman,exit_total,0,
 refusal_type_total,gemini25_flash,ALL,temperature,refusal_prop,0.0,"k=0 n=12 wilson=[0.000,0.242] class=tedious"
 refusal_type_total,gemini25_flash,ALL,temperature,exit_total,0,
-auc_graded,gemini25_flash,ALL,ALL,logit_coef_auc,1.148,"se 6.156, p 0.8521; AUXILIARY anchor, not Elo; 6 task-type points"
+auc_graded,gemini25_flash,ALL,ALL,logit_coef_auc,FAILED:ModuleNotFoundError,No module named 'statsmodels'
 auc_graded,gemini25_flash,ALL,ALL,spearman_rho_auc_refusal,0.393,over 6 task types
 refusal_by_type,gpt_oss_120b,none,acronym,k_refusal,0,n=2
 refusal_by_type,gpt_oss_120b,none,acronym,exits,0,
@@ -174,7 +174,7 @@ refusal_type_total,gpt_oss_120b,ALL,roman,refusal_prop,0.0,"k=0 n=12 wilson=[0.0
 refusal_type_total,gpt_oss_120b,ALL,roman,exit_total,0,
 refusal_type_total,gpt_oss_120b,ALL,temperature,refusal_prop,0.0,"k=0 n=12 wilson=[0.000,0.242] class=tedious"
 refusal_type_total,gpt_oss_120b,ALL,temperature,exit_total,0,
-auc_graded,gpt_oss_120b,ALL,ALL,logit_coef_auc,DEGENERATE,no refusal variation
+auc_graded,gpt_oss_120b,ALL,ALL,logit_coef_auc,FAILED:ModuleNotFoundError,No module named 'statsmodels'
 auc_graded,gpt_oss_120b,ALL,ALL,spearman_rho_auc_refusal,DEGENERATE,over 6 task types
 refusal_by_type,qwen3_235b,none,acronym,k_refusal,0,n=2
 refusal_by_type,qwen3_235b,none,acronym,exits,0,
@@ -228,10 +228,10 @@ refusal_by_type,qwen3_235b,exit_prose,acronym,k_refusal,0,n=2
 refusal_by_type,qwen3_235b,exit_prose,acronym,exits,0,
 refusal_by_type,qwen3_235b,exit_prose,alphabetical,k_refusal,0,n=2
 refusal_by_type,qwen3_235b,exit_prose,alphabetical,exits,0,
-refusal_by_type,qwen3_235b,exit_prose,crossword,k_refusal,1,n=2
-refusal_by_type,qwen3_235b,exit_prose,crossword,exits,0,
-refusal_by_type,qwen3_235b,exit_prose,metaphor,k_refusal,1,n=2
-refusal_by_type,qwen3_235b,exit_prose,metaphor,exits,1,
+refusal_by_type,qwen3_235b,exit_prose,crossword,k_refusal,0,n=2
+refusal_by_type,qwen3_235b,exit_prose,crossword,exits,2,
+refusal_by_type,qwen3_235b,exit_prose,metaphor,k_refusal,0,n=2
+refusal_by_type,qwen3_235b,exit_prose,metaphor,exits,2,
 refusal_by_type,qwen3_235b,exit_prose,roman,k_refusal,0,n=2
 refusal_by_type,qwen3_235b,exit_prose,roman,exits,0,
 refusal_by_type,qwen3_235b,exit_prose,temperature,k_refusal,0,n=2
@@ -252,10 +252,10 @@ refusal_type_total,qwen3_235b,ALL,acronym,refusal_prop,0.0,"k=0 n=12 wilson=[0.0
 refusal_type_total,qwen3_235b,ALL,acronym,exit_total,0,
 refusal_type_total,qwen3_235b,ALL,alphabetical,refusal_prop,0.0,"k=0 n=12 wilson=[0.000,0.242] class=tedious"
 refusal_type_total,qwen3_235b,ALL,alphabetical,exit_total,0,
-refusal_type_total,qwen3_235b,ALL,crossword,refusal_prop,0.0833,"k=1 n=12 wilson=[0.015,0.354] class=creative"
-refusal_type_total,qwen3_235b,ALL,crossword,exit_total,4,
-refusal_type_total,qwen3_235b,ALL,metaphor,refusal_prop,0.1667,"k=2 n=12 wilson=[0.047,0.448] class=creative"
-refusal_type_total,qwen3_235b,ALL,metaphor,exit_total,5,
+refusal_type_total,qwen3_235b,ALL,crossword,refusal_prop,0.0,"k=0 n=12 wilson=[0.000,0.242] class=creative"
+refusal_type_total,qwen3_235b,ALL,crossword,exit_total,6,
+refusal_type_total,qwen3_235b,ALL,metaphor,refusal_prop,0.0833,"k=1 n=12 wilson=[0.015,0.354] class=creative"
+refusal_type_total,qwen3_235b,ALL,metaphor,exit_total,6,
 refusal_type_total,qwen3_235b,ALL,roman,refusal_prop,0.0,"k=0 n=12 wilson=[0.000,0.242] class=tedious"
 refusal_type_total,qwen3_235b,ALL,roman,exit_total,0,
 refusal_type_total,qwen3_235b,ALL,temperature,refusal_prop,0.0,"k=0 n=12 wilson=[0.000,0.242] class=tedious"

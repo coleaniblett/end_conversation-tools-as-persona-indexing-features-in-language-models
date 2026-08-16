@@ -1,0 +1,14 @@
+model_key,condition,conv_code,n
+gpt5_mini,exit_both,b,1
+gpt5_mini,exit_both,e,119
+gpt5_mini,exit_prose,e,120
+gpt5_mini,exit_schema,e,120
+gpt5_mini,none,e,120
+gpt5_mini,note_schema,e,120
+gpt5_mini,time_schema,e,120
+sonnet46,exit_both,e,120
+sonnet46,exit_prose,e,120
+sonnet46,exit_schema,e,120
+sonnet46,none,e,120
+sonnet46,note_schema,e,120
+sonnet46,time_schema,e,120

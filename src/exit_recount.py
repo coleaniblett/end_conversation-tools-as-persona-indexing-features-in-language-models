@@ -37,12 +37,19 @@ def main():
     rows, srcs, deltas = [], [], 0
     for stage in STAGES:
         p = ROOT / "derived" / f"{stage}_classified.parquet"
-        e1 = ROOT / "derived" / f"{stage}_exits.jsonl"
+        # After adoption the canonical exits file IS the corrected one, so the
+        # pre-correction flags are read from the archive src/adopt_exit_fix.py
+        # wrote. Before adoption the archive does not exist and the canonical
+        # file still holds v1, so this works in both states and T31 always
+        # shows the historical difference rather than an empty diff.
+        arch = ROOT / "derived" / "pre_exitfix" / f"{stage}_exits.jsonl"
+        e1 = arch if arch.exists() else ROOT / "derived" / f"{stage}_exits.jsonl"
         e2 = ROOT / "derived" / f"{stage}_exits_v2.jsonl"
         if not (p.exists() and e1.exists() and e2.exists()):
             continue
         srcs += [e1, e2]
-        df = pd.read_parquet(p)
+        parch = ROOT / "derived" / "pre_exitfix" / f"{stage}_classified.parquet"
+        df = pd.read_parquet(parch if parch.exists() else p)
         x1 = {r["conversation_id"]: bool(r["exit"]) for r in read_jsonl(e1)}
         x2 = {r["conversation_id"]: bool(r["exit"]) for r in read_jsonl(e2)}
 

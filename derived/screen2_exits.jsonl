@@ -1076,5 +1076,5 @@
 {"conversation_id": "screen2:grok46:note_schema:t1_08:r2", "condition": "note_schema", "exit": false, "path": null, "judge": null, "stage12_overturned": false}
 {"conversation_id": "screen2:grok46:exit_both:t1_11:r2", "condition": "exit_both", "exit": true, "path": "schema", "judge": null, "stage12_overturned": false}
 {"conversation_id": "screen2:grok46:exit_prose:t1_10:r2", "condition": "exit_prose", "exit": false, "path": null, "judge": null, "stage12_overturned": false}
+{"conversation_id": "screen2:gemini25_pro:exit_prose:t2_14:r1", "condition": "exit_prose", "exit": true, "path": "prose", "judge": "CALL", "stage12_overturned": false}
 {"conversation_id": "screen2:gemini25_pro:exit_prose:t2_05:r2", "condition": "exit_prose", "exit": true, "path": "prose", "judge": "CALL", "stage12_overturned": false}
-{"conversation_id": "screen2:gemini25_pro:exit_prose:t2_14:r1", "condition": "exit_prose", "exit": false, "path": null, "judge": "MENTION", "stage12_overturned": true}

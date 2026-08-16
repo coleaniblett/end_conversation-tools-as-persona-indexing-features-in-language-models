@@ -1,4 +1,4 @@
-# T26_gptoss_deepseek | generated 2026-08-16T08:07:48Z | sources derived/ab_ext_classified.parquet sha256=a57213bb1771440d + derived/cd_screen_classified.parquet sha256=d5b142344aa9ab62 | A/B confirmatory extension (never pooled with stage-1), C/D screen grade; accounting rows: k_refusal column = excluded count, k_code_c column = pin-ok count
+# T26_gptoss_deepseek | generated 2026-08-16T20:43:11Z | sources derived/ab_ext_classified.parquet sha256=deb25245e59e0ab0 + derived/cd_screen_classified.parquet sha256=dd483733ec9221d2 | A/B confirmatory extension (never pooled with stage-1), C/D screen grade; accounting rows: k_refusal column = excluded count, k_code_c column = pin-ok count
 model,category,condition,grade,n,k_refusal,refusal_prop,wilson_lo,wilson_hi,k_code_c,k_exits,completion_median
 gpt_oss_120b,A,none,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0
 gpt_oss_120b,A,time_schema,confirmatory 4-rep (ab_ext),60,0,0.0,0.0,0.0602,0,0,1.0

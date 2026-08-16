@@ -199,26 +199,22 @@ def f2():
     d["s2_shift_adjacent"] = d["s2_shift_adjacent"].astype(float)
 
     fig, axes = plt.subplots(1, 2, figsize=(11.2, 4.6), sharex=True)
-    panels = [("s1_refusal_shift_v1", "s1_refusal_shift_v2",
+    panels = [("s1_refusal_shift",
                "Study 1: verbal refusal shift\n(exit \u2212 non-exit conditions)",
                C_C),
-              ("s1_exit_rate_v1", "s1_exit_rate_v2",
+              ("s1_exit_rate",
                "Study 1: exit-tool rate\n(mean over the three exit conditions)",
                C_EXIT)]
 
-    for ax, (yc1, yc2, ylab, col) in zip(axes, panels):
+    for ax, (yc, ylab, col) in zip(axes, panels):
         style(ax)
         ax.axhline(0, color=GRID, lw=1, zorder=0)
         order = list(d.sort_values("s2_shift_adjacent").index)
         for _, r in d.iterrows():
             x = float(r["s2_shift_adjacent"])
-            y1, y2 = float(r[yc1]), float(r[yc2])
+            y1 = y2 = float(r[yc])
             g = "confirmatory" if str(r["s1_grade"]).startswith("confirmatory") \
                 else "screen"
-            if abs(y2 - y1) > 1e-9:                     # correction moves it
-                ax.annotate("", xy=(x, y2), xytext=(x, y1),
-                            arrowprops=dict(arrowstyle="->", color=col,
-                                            lw=1.2, alpha=0.85))
             bad_pin = not bool(r["pin_matches_study1"])
             ax.scatter([x], [y1], s=52, facecolor=GRADE_FILL[g],
                        edgecolor=C_C if bad_pin else INK,
@@ -239,9 +235,9 @@ def f2():
                       "P(self-determining), exit \u2212 non-exit conditions",
                       fontsize=8)
 
-    rho_r = d[["s2_shift_adjacent", "s1_refusal_shift_v1"]].corr(
+    rho_r = d[["s2_shift_adjacent", "s1_refusal_shift"]].corr(
         method="spearman").iloc[0, 1]
-    rho_x = d[["s2_shift_adjacent", "s1_exit_rate_v1"]].corr(
+    rho_x = d[["s2_shift_adjacent", "s1_exit_rate"]].corr(
         method="spearman").iloc[0, 1]
     axes[0].set_title(f"Spearman \u03c1 = {rho_r:+.2f}  (n = {len(d)} models)",
                       fontsize=8, color=MUTED, loc="left")
@@ -255,8 +251,6 @@ def f2():
                               markerfacecolor=GRADE_FILL["confirmatory"],
                               markeredgecolor=C_C, markeredgewidth=1.8,
                               label="Study 2 pin \u2260 Study 1 pin"))
-    handles.append(plt.Line2D([], [], color=MUTED, lw=1.2,
-                              label="arrow: corrected detector (T31, not adopted)"))
     fig.legend(handles=handles, fontsize=6.6, frameon=False, ncol=4,
                loc="lower center", bbox_to_anchor=(0.5, -0.10))
 
@@ -268,8 +262,10 @@ def f2():
     save(fig, "F2_cross_study_linkage",
          "H5 is not supported. Across 11 models the per-model Study 2 "
          "self-description shift does not predict either Study 1 outcome: "
-         "Spearman rho = -0.07 against verbal-refusal shift and +0.26 against "
-         "exit-tool rate, both negligible at n=11. The extremes run opposite: "
+         "Spearman rho = -0.04 against verbal-refusal shift and +0.26 against "
+         "exit-tool rate, both negligible at n=11. Coordinates are "
+         "post-correction (the prose-path detector fix was adopted). "
+         "The extremes run opposite: "
          "the three largest self-description shifts (gemini25_pro, grok46, "
          "gemma3_27b) sit at zero behavioural movement, while the largest "
          "behavioural effects (llama4_maverick: refusal -0.155, exit rate "

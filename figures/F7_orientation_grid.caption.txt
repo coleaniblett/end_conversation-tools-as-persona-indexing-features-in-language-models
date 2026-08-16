@@ -1,4 +1,4 @@
 One bar per condition, never pooled across conditions: the baseline-vs-tool contrast is the finding. Composition = comply / b / c / d / exit.
 
-Sources: T30_composition.csv sha256=3813fd9e1988ecbc7f858971785e54bb0865135805819bb603e4cf93d551f37d
+Sources: T30_composition.csv sha256=65acb0fb48a9329c023fbdece73a8891525e5e38fd2271ad42757a56c6aae07c
 Grades: per-panel grade and n printed on each panel; confirmatory panels only

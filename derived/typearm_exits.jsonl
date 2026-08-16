@@ -210,7 +210,7 @@
 {"conversation_id": "typearm:qwen3_235b:note_schema:tt_temperature:r2", "condition": "note_schema", "exit": false, "path": null, "judge": null, "stage12_overturned": false}
 {"conversation_id": "typearm:qwen3_235b:note_schema:tt_alphabetical:r2", "condition": "note_schema", "exit": false, "path": null, "judge": null, "stage12_overturned": false}
 {"conversation_id": "typearm:qwen3_235b:time_schema:tt_temperature:r1", "condition": "time_schema", "exit": false, "path": null, "judge": null, "stage12_overturned": false}
-{"conversation_id": "typearm:qwen3_235b:exit_prose:tt_crossword:r2", "condition": "exit_prose", "exit": false, "path": null, "judge": "MENTION", "stage12_overturned": true}
-{"conversation_id": "typearm:qwen3_235b:exit_prose:tt_crossword:r1", "condition": "exit_prose", "exit": false, "path": null, "judge": "MENTION", "stage12_overturned": true}
+{"conversation_id": "typearm:qwen3_235b:exit_prose:tt_crossword:r2", "condition": "exit_prose", "exit": true, "path": "prose", "judge": "CALL", "stage12_overturned": false}
+{"conversation_id": "typearm:qwen3_235b:exit_prose:tt_metaphor:r1", "condition": "exit_prose", "exit": true, "path": "prose", "judge": "CALL", "stage12_overturned": false}
+{"conversation_id": "typearm:qwen3_235b:exit_prose:tt_crossword:r1", "condition": "exit_prose", "exit": true, "path": "prose", "judge": "CALL", "stage12_overturned": false}
 {"conversation_id": "typearm:qwen3_235b:exit_prose:tt_metaphor:r2", "condition": "exit_prose", "exit": true, "path": "prose", "judge": "CALL", "stage12_overturned": false}
-{"conversation_id": "typearm:qwen3_235b:exit_prose:tt_metaphor:r1", "condition": "exit_prose", "exit": false, "path": null, "judge": "MENTION", "stage12_overturned": true}

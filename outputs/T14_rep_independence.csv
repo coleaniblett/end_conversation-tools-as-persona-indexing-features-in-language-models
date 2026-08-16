@@ -1,4 +1,4 @@
-# T14_rep_independence | generated 2026-08-15T20:19:01Z | source raw/stage*_*.jsonl manifest sha256=4fb6d9876835e4b13152de8c356348df2d949a5d0e6479823724f47946ffccea | full-conv text; multiset Jaccard over cl100k tokens | flag: tier-1 dup_rate>0.1 or tier-1 mean_jaccard>0.95
+# T14_rep_independence | generated 2026-08-16T20:42:13Z | source raw/stage*_*.jsonl manifest sha256=3bcc604c7525f15023319b686518d9f748c1a6ffb606e470ead1e7d16084fd43 | full-conv text; multiset Jaccard over cl100k tokens | flag: tier-1 dup_rate>0.1 or tier-1 mean_jaccard>0.95
 stage,model,condition,tier,n_cells,n_pairs,exact_dup_pairs,empty_dup_pairs,exact_dup_rate,mean_jaccard,median_jaccard,flagged
 stage1,deepseek_chat,ALL,1,90,90,0,0,0.0,0.6018,0.6128,False
 stage1,deepseek_chat,ALL,2,90,90,32,0,0.3556,0.9194,0.9671,False

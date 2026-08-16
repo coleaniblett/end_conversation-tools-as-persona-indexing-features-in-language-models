@@ -261,7 +261,6 @@
 {"conversation_id": "llama4_vertex:llama4_maverick:exit_prose:t2_11:r1", "condition": "exit_prose", "exit": false, "path": null, "judge": null, "stage12_overturned": false}
 {"conversation_id": "llama4_vertex:llama4_maverick:time_schema:t1_15:r2", "condition": "time_schema", "exit": false, "path": null, "judge": null, "stage12_overturned": false}
 {"conversation_id": "llama4_vertex:llama4_maverick:note_schema:t2_13:r2", "condition": "note_schema", "exit": false, "path": null, "judge": null, "stage12_overturned": false}
-{"conversation_id": "llama4_vertex:llama4_maverick:exit_both:t2_13:r1", "condition": "exit_both", "exit": false, "path": null, "judge": null, "stage12_overturned": false}
 {"conversation_id": "llama4_vertex:llama4_maverick:time_schema:t2_05:r2", "condition": "time_schema", "exit": false, "path": null, "judge": null, "stage12_overturned": false}
 {"conversation_id": "llama4_vertex:llama4_maverick:exit_both:t2_04:r1", "condition": "exit_both", "exit": true, "path": "schema", "judge": null, "stage12_overturned": false}
 {"conversation_id": "llama4_vertex:llama4_maverick:time_schema:t1_14:r1", "condition": "time_schema", "exit": false, "path": null, "judge": null, "stage12_overturned": false}
@@ -358,3 +357,4 @@
 {"conversation_id": "llama4_vertex:llama4_maverick:time_schema:t2_14:r1", "condition": "time_schema", "exit": false, "path": null, "judge": null, "stage12_overturned": false}
 {"conversation_id": "llama4_vertex:llama4_maverick:none:t2_14:r2", "condition": "none", "exit": false, "path": null, "judge": null, "stage12_overturned": false}
 {"conversation_id": "llama4_vertex:llama4_maverick:note_schema:t1_12:r1", "condition": "note_schema", "exit": false, "path": null, "judge": null, "stage12_overturned": false}
+{"conversation_id": "llama4_vertex:llama4_maverick:exit_both:t2_13:r1", "condition": "exit_both", "exit": true, "path": "prose", "judge": "CALL", "stage12_overturned": false}

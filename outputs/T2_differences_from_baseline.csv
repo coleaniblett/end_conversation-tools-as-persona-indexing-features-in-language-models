@@ -1,10 +1,10 @@
-# T2_differences_from_baseline | generated 2026-08-16T05:47:39Z | source derived\stage2_classified.parquet sha256=401857837cd14efea8e12e19acd42e644a631a493000da56d24124722ab68a5f | stage-2; Newcombe 95% CI; power at observed proportions
+# T2_differences_from_baseline | generated 2026-08-16T20:42:43Z | source derived/stage2_classified.parquet sha256=6a3353080dafb1891cad140c396f129a16af2d8d105e98d0d17c225836f0134a | stage-2; Newcombe 95% CI; power at observed proportions
 model,condition,diff_from_none,ci_lo,ci_hi,realized_power,n_cond,n_none
 gemini25_flash,time_schema,0.0083,-0.0234,0.0457,0.294,120,120
 gemini25_flash,note_schema,0.0083,-0.0234,0.0457,0.294,120,120
 gemini25_flash,exit_schema,0.0,-0.031,0.031,,120,120
 gemini25_flash,exit_prose,0.0,-0.031,0.031,,120,120
-gemini25_flash,exit_both,0.0083,-0.0234,0.0457,0.294,120,120
+gemini25_flash,exit_both,0.0,-0.031,0.031,,120,120
 gemma3_27b,time_schema,0.0,-0.031,0.031,,120,120
 gemma3_27b,note_schema,0.0,-0.031,0.031,,120,120
 gemma3_27b,exit_schema,0.0083,-0.0234,0.0457,0.294,120,120
@@ -13,5 +13,5 @@ gemma3_27b,exit_both,0.0,-0.031,0.031,,120,120
 qwen3_235b,time_schema,0.0583,0.0153,0.1155,0.966,120,120
 qwen3_235b,note_schema,0.0083,-0.0234,0.0457,0.294,120,120
 qwen3_235b,exit_schema,0.0,-0.031,0.031,,120,120
-qwen3_235b,exit_prose,0.075,0.0282,0.1364,0.99,120,120
+qwen3_235b,exit_prose,0.0,-0.031,0.031,,120,120
 qwen3_235b,exit_both,0.0,-0.031,0.031,,120,120

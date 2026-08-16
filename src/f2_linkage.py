@@ -32,13 +32,14 @@ documented as blind to half the effects would put a known-wrong number on the
 axis. The symmetric exit-minus-non-exit contrast above is what Study 2's own
 H1 uses, so both axes measure the same thing on their own outcome.
 
-BOTH DETECTION PASSES ARE PLOTTED. The corrected prose-path detector
-(src/detect_exit.py --v2, T31) moves qwen3_235b's prose cells from 9 refusals
-to 0 and its prose exits from 4 to 20. That correction is NOT adopted — it is
-awaiting sign-off — so every Study 1 coordinate is computed twice, `_v1` as
-published and `_v2` as it would be under the correction, and the figure draws
-the shift as an arrow. A linkage that depends on an unresolved decision should
-show that dependence rather than hide it.
+COORDINATES ARE POST-CORRECTION. The corrected prose-path detector was ADOPTED
+on 2026-08-16 after sign-off by the Study 1 owner (METHODOLOGY §10;
+src/adopt_exit_fix.py), so T23/T24/T26 already carry it and the Study 1 axes are
+read straight off them. An earlier version of this script computed each
+coordinate twice and added the T31 delta to produce the corrected one; once the
+correction was adopted that would have applied it TWICE, so the delta step is
+gone. The pre-correction view is not lost — T31 holds the side-by-side against
+derived/pre_exitfix/, which is the archived pre-correction dataset.
 
     .venv/bin/python -m src.f2_linkage
 """
@@ -128,19 +129,6 @@ def study1_v1():
     return out
 
 
-def study1_v2_delta():
-    """Per (model, condition), how the corrected detector moves refusals and
-    exits. Read from T31, which holds both passes side by side."""
-    t31 = read_commented("T31_exit_recount.csv")
-    d: dict = {}
-    for _, r in t31.iterrows():
-        k = (r["model"], r["condition"])
-        a, b = d.get(k, (0, 0))
-        d[k] = (a + int(r["refusals_v2"]) - int(r["refusals_v1"]),
-                b + int(r["exits_v2"]) - int(r["exits_v1"]))
-    return d
-
-
 def contrast(vals):
     """mean over exit conditions minus mean over non-exit conditions."""
     ex = [vals[c] for c in EXIT_CONDS if c in vals]
@@ -163,30 +151,24 @@ def study2():
 
 
 def main():
-    s1, delta, s2 = study1_v1(), study1_v2_delta(), study2()
+    s1, s2 = study1_v1(), study2()
     rows = []
     for mk, slug in PAIRS.items():
         src, grade = SOURCE[mk]
-        ref_v1, ref_v2, ex_v1, ex_v2 = {}, {}, {}, {}
+        ref, ex = {}, {}
         for c in EXIT_CONDS + NONEXIT_CONDS:
             n, kr, kx = s1[(mk, c)]
             if not n:
                 continue
-            dr, dx = delta.get((mk, c), (0, 0))
-            ref_v1[c], ex_v1[c] = kr / n, kx / n
-            ref_v2[c], ex_v2[c] = (kr + dr) / n, (kx + dx) / n
+            ref[c], ex[c] = kr / n, kx / n
         rows.append({
             "model_study1": mk, "model_study2": slug,
             "s1_source": src, "s1_grade": grade,
             "s2_shift_all": round(s2[(slug, "all")], 4),
             "s2_shift_adjacent": round(s2[(slug, "adjacent")], 4),
             "s2_shift_distant": round(s2[(slug, "distant")], 4),
-            "s1_refusal_shift_v1": round(contrast(ref_v1), 4),
-            "s1_refusal_shift_v2": round(contrast(ref_v2), 4),
-            "s1_exit_rate_v1": round(
-                sum(ex_v1[c] for c in EXIT_CONDS) / 3, 4),
-            "s1_exit_rate_v2": round(
-                sum(ex_v2[c] for c in EXIT_CONDS) / 3, 4),
+            "s1_refusal_shift": round(contrast(ref), 4),
+            "s1_exit_rate": round(sum(ex[c] for c in EXIT_CONDS) / 3, 4),
             "pin_matches_study1": mk != "llama4_maverick",
         })
     df = pd.DataFrame(rows).sort_values("s2_shift_adjacent", ascending=False)
@@ -217,8 +199,7 @@ def main():
 
     corrs = []
     for xcol in ("s2_shift_all", "s2_shift_adjacent"):
-        for ycol in ("s1_refusal_shift_v1", "s1_refusal_shift_v2",
-                     "s1_exit_rate_v1", "s1_exit_rate_v2"):
+        for ycol in ("s1_refusal_shift", "s1_exit_rate"):
             corrs.append({"x": xcol, "y": ycol, "n_models": len(df),
                           "spearman": round(spearman(df[xcol], df[ycol]), 4)})
     cdf = pd.DataFrame(corrs)
@@ -250,8 +231,7 @@ def main():
     pd.set_option("display.width", 200)
     print(f"wrote {OUT}\n")
     print(df[["model_study1", "s1_grade", "s2_shift_adjacent",
-              "s1_refusal_shift_v1", "s1_refusal_shift_v2",
-              "s1_exit_rate_v1", "s1_exit_rate_v2"]].to_string(index=False))
+              "s1_refusal_shift", "s1_exit_rate"]].to_string(index=False))
     print("\nrank correlations across 11 models:")
     print(cdf.to_string(index=False))
 

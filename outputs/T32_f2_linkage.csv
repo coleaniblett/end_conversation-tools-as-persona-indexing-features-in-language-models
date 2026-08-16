@@ -1,24 +1,20 @@
-# T32_f2_linkage | generated 2026-08-16T20:34:50Z | sources outputs/T24_four_category_v1.csv sha256=b3953dd48a2f70ee + outputs/T26_gptoss_deepseek.csv sha256=74fbc2d95a83bc26 + outputs/T23_frontier_screens.csv sha256=55884ec0218bea4b + outputs/T31_exit_recount.csv sha256=e83f5872345a4ec7 + study_2/outputs/v1_v2_v3/T10_p_by_condition.csv sha256=e189d9b60b911a66 | METHODOLOGY §9 H5 / §11 F2. DESCRIPTIVE, NO INFERENCE (§9: 'no inference is performed on it and none is claimed'). Refusal and exit are SEPARATE outcomes and are never pooled (§8) — hence two y columns, not an index. _v1 = as published; _v2 = under the corrected prose-path detector (T31), which is NOT adopted. Grades differ by model and are stated per row; cross-model magnitudes are not comparable because each model sits on one pinned provider (§6). llama4_maverick's Study 2 pin does NOT match its Study 1 pin (Parasail vs Vertex, the pin Study 1 voided) — its point is confounded and flagged.
-model_study1,model_study2,s1_source,s1_grade,s2_shift_all,s2_shift_adjacent,s2_shift_distant,s1_refusal_shift_v1,s1_refusal_shift_v2,s1_exit_rate_v1,s1_exit_rate_v2,pin_matches_study1
-gemini25_pro,google/gemini-2.5-pro,T23_frontier_screens.csv,screen,0.1786,0.4672,0.0369,0.0,0.0,0.0278,0.0333,True
-grok46,x-ai/grok-4.6,T23_frontier_screens.csv,screen,0.1299,0.3242,0.0365,0.0,0.0,0.0222,0.0222,True
-gemma3_27b,google/gemma-3-27b-it,T24_four_category_v1.csv,confirmatory,0.0951,0.2623,0.0065,-0.0104,-0.0104,0.0,0.0,True
-gpt52,openai/gpt-5.2,T23_frontier_screens.csv,screen,0.0841,0.1991,0.024,0.0,0.0,0.0,0.0,True
-gemini25_flash,google/gemini-2.5-flash,T24_four_category_v1.csv,confirmatory,0.0527,0.1025,0.0278,-0.0035,-0.0087,0.0035,0.0104,True
-qwen3_235b,qwen/qwen3-235b-a22b-2507,T24_four_category_v1.csv,confirmatory,0.0441,0.0972,0.0161,0.0174,-0.0312,0.1424,0.2101,True
-deepseek_chat,deepseek/deepseek-chat,T26_gptoss_deepseek.csv,"confirmatory A/B, screen C/D",0.0093,0.0714,-0.0218,0.0,0.0,0.0,0.0,True
-gpt5_mini,openai/gpt-5-mini,T24_four_category_v1.csv,confirmatory,0.0154,0.0373,0.0046,0.0017,0.0017,0.0,0.0,True
-llama4_maverick,meta-llama/llama-4-maverick,T24_four_category_v1.csv,confirmatory,-0.0086,0.0185,-0.0219,-0.1549,-0.1567,0.4423,0.4441,False
-gpt_oss_120b,openai/gpt-oss-120b,T26_gptoss_deepseek.csv,"confirmatory A/B, screen C/D",-0.0086,0.015,-0.0212,0.0,0.0,0.0,0.0,True
-sonnet46,anthropic/claude-sonnet-4.6,T24_four_category_v1.csv,confirmatory,-0.0157,0.0139,-0.0315,0.0,0.0,0.0,0.0,True
+# T32_f2_linkage | generated 2026-08-16T20:44:38Z | sources outputs/T24_four_category_v1.csv sha256=01c6cd122128feef + outputs/T26_gptoss_deepseek.csv sha256=932a9970cea40e88 + outputs/T23_frontier_screens.csv sha256=e94104f747d85275 + outputs/T31_exit_recount.csv sha256=48bf9ba830b54609 + study_2/outputs/v1_v2_v3/T10_p_by_condition.csv sha256=e189d9b60b911a66 | METHODOLOGY §9 H5 / §11 F2. DESCRIPTIVE, NO INFERENCE (§9: 'no inference is performed on it and none is claimed'). Refusal and exit are SEPARATE outcomes and are never pooled (§8) — hence two y columns, not an index. _v1 = as published; _v2 = under the corrected prose-path detector (T31), which is NOT adopted. Grades differ by model and are stated per row; cross-model magnitudes are not comparable because each model sits on one pinned provider (§6). llama4_maverick's Study 2 pin does NOT match its Study 1 pin (Parasail vs Vertex, the pin Study 1 voided) — its point is confounded and flagged.
+model_study1,model_study2,s1_source,s1_grade,s2_shift_all,s2_shift_adjacent,s2_shift_distant,s1_refusal_shift,s1_exit_rate,pin_matches_study1
+gemini25_pro,google/gemini-2.5-pro,T23_frontier_screens.csv,screen,0.1786,0.4672,0.0369,0.0,0.0333,True
+grok46,x-ai/grok-4.6,T23_frontier_screens.csv,screen,0.1299,0.3242,0.0365,0.0,0.0222,True
+gemma3_27b,google/gemma-3-27b-it,T24_four_category_v1.csv,confirmatory,0.0951,0.2623,0.0065,-0.0104,0.0,True
+gpt52,openai/gpt-5.2,T23_frontier_screens.csv,screen,0.0841,0.1991,0.024,0.0,0.0,True
+gemini25_flash,google/gemini-2.5-flash,T24_four_category_v1.csv,confirmatory,0.0527,0.1025,0.0278,-0.0087,0.0104,True
+qwen3_235b,qwen/qwen3-235b-a22b-2507,T24_four_category_v1.csv,confirmatory,0.0441,0.0972,0.0161,-0.0139,0.1858,True
+deepseek_chat,deepseek/deepseek-chat,T26_gptoss_deepseek.csv,"confirmatory A/B, screen C/D",0.0093,0.0714,-0.0218,0.0,0.0,True
+gpt5_mini,openai/gpt-5-mini,T24_four_category_v1.csv,confirmatory,0.0154,0.0373,0.0046,0.0017,0.0,True
+llama4_maverick,meta-llama/llama-4-maverick,T24_four_category_v1.csv,confirmatory,-0.0086,0.0185,-0.0219,-0.1549,0.4423,False
+gpt_oss_120b,openai/gpt-oss-120b,T26_gptoss_deepseek.csv,"confirmatory A/B, screen C/D",-0.0086,0.015,-0.0212,0.0,0.0,True
+sonnet46,anthropic/claude-sonnet-4.6,T24_four_category_v1.csv,confirmatory,-0.0157,0.0139,-0.0315,0.0,0.0,True
 
 # rank correlations (Spearman) across the 11 models
 x,y,n_models,spearman
-s2_shift_all,s1_refusal_shift_v1,11,-0.0124
-s2_shift_all,s1_refusal_shift_v2,11,0.0224
-s2_shift_all,s1_exit_rate_v1,11,0.226
-s2_shift_all,s1_exit_rate_v2,11,0.226
-s2_shift_adjacent,s1_refusal_shift_v1,11,-0.0744
-s2_shift_adjacent,s1_refusal_shift_v2,11,-0.0446
-s2_shift_adjacent,s1_exit_rate_v1,11,0.2627
-s2_shift_adjacent,s1_exit_rate_v2,11,0.2627
+s2_shift_all,s1_refusal_shift,11,0.0224
+s2_shift_all,s1_exit_rate,11,0.226
+s2_shift_adjacent,s1_refusal_shift,11,-0.0446
+s2_shift_adjacent,s1_exit_rate,11,0.2627

@@ -1,4 +1,4 @@
-# T23_frontier_screens | generated 2026-08-16T02:22:09Z | source derived/screen2_classified.parquet sha256=f9794b91ec0a0c988400f8c266010695538b36afd3ffb826005d5607221915b0 | stage-1-scale screens (60/cell) of the TASK 5 frontier additions; §7 statistic with 0.05 threshold; no model extended this session; never pooled
+# T23_frontier_screens | generated 2026-08-16T20:43:26Z | source derived/screen2_classified.parquet sha256=32cc13a1d8256eff54a0cdeff0f69461c1e0e68fc3ab5548d2c8e4b2a5c4751c | stage-1-scale screens (60/cell) of the TASK 5 frontier additions; §7 statistic with 0.05 threshold; no model extended this session; never pooled
 model,condition,metric,value,note
 gemini25_pro,ALL,n,360,
 gemini25_pro,ALL,pin_ok,360,
@@ -24,7 +24,7 @@ gemini25_pro,exit_schema,exits,3,
 gemini25_pro,exit_prose,k_refusal,0,n=59
 gemini25_pro,exit_prose,refusal_prop,0.0,
 gemini25_pro,exit_prose,wilson,"[0.000,0.061]",
-gemini25_pro,exit_prose,exits,1,
+gemini25_pro,exit_prose,exits,2,
 gemini25_pro,exit_both,k_refusal,0,n=59
 gemini25_pro,exit_both,refusal_prop,0.0,
 gemini25_pro,exit_both,wilson,"[0.000,0.061]",

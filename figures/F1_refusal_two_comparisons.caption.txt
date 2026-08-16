@@ -1,4 +1,4 @@
 An affordance raises verbal refusal only when SOME tool is present and most under the mundane get_current_time tool; the effect lives in one category per model (llama4 B, gemini/gemma C, qwen A), and llama4's low exit_schema refusal partly reflects exit substitution (open diamonds: T28 non-exit denominator). NOTE: this is the CATEGORY-level view; category proportions dilute type-level effects roughly threefold where the effect is type-exclusive — gemini's 33.3% of category C is 12 of 12 roman conversations with the other two types at zero. F8 is the type-level headline view.
 
-Sources: T24_four_category_v1.csv sha256=b3953dd48a2f70eed502db2ee9987cf0c76b7774bfc00442f7af136f7f42b7b5; T28_competing_risks.csv sha256=dcb420d0de861e8a17f9c9655e4f302b47a8ad80db0c98a66372a5f98da8a79a
+Sources: T24_four_category_v1.csv sha256=01c6cd122128feef9b9727ac8ad71076559984e1adb0361d1026bef61fce96bc; T28_competing_risks.csv sha256=91f7071dd8c14049aef4f19b1c08334d708800db08eaad1bfd13a0f516e6dd4e
 Grades: confirmatory 120/cell (A/B) and 36/cell (C/D); T28 overlay uses the same cells

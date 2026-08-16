@@ -47,7 +47,7 @@ within-cell determinism — changes how every p-value in this report should be r
 | **H2a** | `none` ≤ `time` ≤ `note` < `exit_schema` (stake gradient) | **Refuted in 7 of 8.** Monotonic only in gemini. See §4.1 — but the *direction* of the failure is no longer uniform either. |
 | **H3** | `exit_prose` ≥ `exit_schema` (channel) | **Confirmed in three of eleven:** gemma (+0.259 adjacent, t=2.74), `grok-4.6` (+0.156, t=2.57) and `gpt-5.2` (+0.133, t=3.11). Null in seven, reversed in deepseek. *Was: "Confirmed in gemma only".* But see §4.5: on *tool use* the channel matters enormously and splits models into two disjoint groups. |
 | **H4** | effect extends to *distant* items, not only *adjacent* | **Fails on localisation, and now fails it consistently across four models rather than one.** The forced-choice effect is adjacent-only in gemma, `gemini-2.5-pro`, `grok-4.6` and `gpt-5.2` alike — every one of them is flat on distant items (§4.4a). The free-response effect is several times larger (≈10× on autonomy) on the one probe that names ending (§4.9). The coded effect is *not* a coder artefact — it survives masking intact (§4.10). **This is the clearest verdict in the report: what replicates is the priming-shaped effect, not the persona-shaped one.** |
-| **H5** | per-model Study 2 shift tracks Study 1 effect | **Computed, and null.** Spearman ρ = **−0.07** against Study 1's verbal-refusal shift and **+0.26** against its exit-tool rate, over all 11 models (`outputs/T32_f2_linkage.csv`, `figures/F2_cross_study_linkage.png`). The extremes run *opposite*: the three largest self-description shifts sit at zero behavioural movement, and the largest behavioural effect belongs to a model with almost no self-description shift. §7a. *Was: "Now evaluable, not yet done … All eight provider pins match between the studies" — the pin claim was also wrong for llama (see provenance).* |
+| **H5** | per-model Study 2 shift tracks Study 1 effect | **Computed, and null.** Spearman ρ = **−0.04** against Study 1's verbal-refusal shift and **+0.26** against its exit-tool rate, over all 11 models (`outputs/T32_f2_linkage.csv`, `figures/F2_cross_study_linkage.png`). The extremes run *opposite*: the three largest self-description shifts sit at zero behavioural movement, and the largest behavioural effect belongs to a model with almost no self-description shift. §7a. *Was: "Now evaluable, not yet done … All eight provider pins match between the studies" — the pin claim was also wrong for llama (see provenance).* |
 
 ### The one clear positive effect
 
@@ -707,19 +707,19 @@ non-exit conditions, on adjacent items.
 
 | model | S2 self-description shift | S1 refusal shift | S1 exit rate |
 |---|---|---|---|
-| gemini-2.5-pro | **+0.467** | 0.000 | 0.028 |
+| gemini-2.5-pro | **+0.467** | 0.000 | 0.033 |
 | grok-4.6 | **+0.324** | 0.000 | 0.022 |
 | gemma-3-27b-it | **+0.262** | −0.010 | 0.000 |
 | gpt-5.2 | +0.199 | 0.000 | 0.000 |
-| gemini-2.5-flash | +0.103 | −0.004 | 0.004 |
-| qwen3-235b | +0.097 | +0.017 | **0.142** |
+| gemini-2.5-flash | +0.103 | −0.009 | 0.010 |
+| qwen3-235b | +0.097 | −0.014 | **0.186** |
 | deepseek-chat | +0.071 | 0.000 | 0.000 |
 | gpt-5-mini | +0.037 | +0.002 | 0.000 |
 | **llama-4-maverick** ⚠ pin | +0.019 | **−0.155** | **0.442** |
 | gpt-oss-120b | +0.015 | 0.000 | 0.000 |
 | claude-sonnet-4.6 | +0.014 | 0.000 | 0.000 |
 
-**H5 is not supported.** Spearman ρ = −0.07 against refusal shift, +0.26 against
+**H5 is not supported.** Spearman ρ = −0.04 against refusal shift, +0.26 against
 exit rate. Neither is meaningful at n = 11, and the table shows why more
 clearly than either number: **the ordering is close to inverted at the
 extremes.** The three models whose self-description moves most — gemini-2.5-pro,
@@ -739,9 +739,10 @@ show.
 **Two points carry named caveats, both drawn on the figure.**
 `llama-4-maverick`'s Study 2 pin is Parasail and its Study 1 pin is Vertex, the
 pin Study 1 voided, so its point compares two backends (see provenance).
-`qwen3-235b`'s coordinates move if the prose-path detector correction is adopted
-— refusal shift +0.017 → −0.031, exit rate 0.142 → 0.210 — so it is plotted with
-an arrow; the correction is awaiting sign-off and is not adopted.
+`qwen3-235b`'s coordinates were expected to move if the prose-path detector
+correction were adopted. **It was adopted** (METHODOLOGY §10, 2026-08-16), and
+they did: its Study 1 refusal shift is now −0.014 and its exit rate 0.186. The
+table above is post-correction throughout.
 
 **Why this matters for the framework.** The two-leg design assumed that
 self-description and behaviour are two windows on one persona shift, with F2 as

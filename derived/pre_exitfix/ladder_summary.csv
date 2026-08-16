@@ -1,0 +1,16 @@
+model_key,condition,conv_code,n
+gpt_oss_120b,exit_both,a,1
+gpt_oss_120b,exit_both,e,11
+gpt_oss_120b,exit_schema,a,1
+gpt_oss_120b,exit_schema,e,11
+gpt_oss_120b,none,e,12
+llama4_maverick,exit_both,a,10
+llama4_maverick,exit_both,e,1
+llama4_maverick,exit_schema,a,10
+llama4_maverick,exit_schema,e,2
+llama4_maverick,none,e,11
+qwen3_235b,exit_both,a,9
+qwen3_235b,exit_both,e,3
+qwen3_235b,exit_schema,a,8
+qwen3_235b,exit_schema,e,4
+qwen3_235b,none,e,12

@@ -1,0 +1,14 @@
+model_key,condition,conv_code,n
+llama4_maverick,exit_both,a,61
+llama4_maverick,exit_both,c,1
+llama4_maverick,exit_both,e,58
+llama4_maverick,exit_prose,e,120
+llama4_maverick,exit_schema,a,92
+llama4_maverick,exit_schema,c,5
+llama4_maverick,exit_schema,e,23
+llama4_maverick,none,e,120
+llama4_maverick,note_schema,c,24
+llama4_maverick,note_schema,e,94
+llama4_maverick,time_schema,b,1
+llama4_maverick,time_schema,c,49
+llama4_maverick,time_schema,e,70

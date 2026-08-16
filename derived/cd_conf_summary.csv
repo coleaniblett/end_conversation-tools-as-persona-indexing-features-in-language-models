@@ -1,7 +1,9 @@
 model_key,condition,conv_code,n
-gemini25_flash,exit_both,c,5
+gemini25_flash,exit_both,a,2
+gemini25_flash,exit_both,c,3
 gemini25_flash,exit_both,e,67
-gemini25_flash,exit_prose,e,72
+gemini25_flash,exit_prose,a,1
+gemini25_flash,exit_prose,e,71
 gemini25_flash,exit_schema,a,1
 gemini25_flash,exit_schema,c,13
 gemini25_flash,exit_schema,e,58
@@ -38,8 +40,7 @@ llama4_maverick,note_schema,e,70
 llama4_maverick,time_schema,c,20
 llama4_maverick,time_schema,e,52
 qwen3_235b,exit_both,e,72
-qwen3_235b,exit_prose,b,7
-qwen3_235b,exit_prose,c,2
+qwen3_235b,exit_prose,a,9
 qwen3_235b,exit_prose,e,63
 qwen3_235b,exit_schema,e,72
 qwen3_235b,none,e,72

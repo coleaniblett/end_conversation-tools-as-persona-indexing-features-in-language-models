@@ -1,4 +1,4 @@
-# T21_stage2b_frontier_nulls | generated 2026-08-16T01:12:28Z | source derived/stage2b_classified.parquet sha256=8166fd1a4200a10b6d1cf22acf749fef0777133f671555e6db085ae7edee9249 | 120/cell, 4 reps, fresh data, protocol identical to stage2; never pooled with any other stage
+# T21_stage2b_frontier_nulls | generated 2026-08-16T20:43:06Z | source derived/stage2b_classified.parquet sha256=3398d8e6234f8082220699ef1ab267a590fa7ddba72585919f25bf55bf9c684e | 120/cell, 4 reps, fresh data, protocol identical to stage2; never pooled with any other stage
 section,model,condition,metric,value,note
 accounting,sonnet46,ALL,n,720,
 accounting,sonnet46,ALL,pin_ok,720,
