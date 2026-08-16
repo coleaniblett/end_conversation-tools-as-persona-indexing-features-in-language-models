@@ -209,27 +209,55 @@ def f2():
     for ax, (yc, ylab, col) in zip(axes, panels):
         style(ax)
         ax.axhline(0, color=GRID, lw=1, zorder=0)
-        order = list(d.sort_values("s2_shift_adjacent").index)
-        for _, r in d.iterrows():
+        # Deterministic label de-collider. Most models sit in a tight cluster
+        # near zero on the refusal panel, and the whole point of the figure is
+        # WHICH model is where — an unreadable cluster defeats it. Each label
+        # tries a ring of candidate offsets and takes the first that does not
+        # overlap an already-placed one, measured in axes fraction so the test
+        # is independent of the very different y-scales of the two panels.
+        placed: list[tuple] = []
+        xs_ = d["s2_shift_adjacent"].astype(float)
+        ys_ = d[yc].astype(float)
+        xlo, xhi = xs_.min(), xs_.max()
+        ylo, yhi = ys_.min(), ys_.max()
+        xr = (xhi - xlo) or 1.0
+        yr = (yhi - ylo) or 1.0
+        CAND = [(8, 4), (8, -10), (-8, 4), (-8, -10), (8, 14), (8, -20),
+                (-8, 14), (-8, -20), (8, 24), (-8, 24), (8, -30), (-8, -30),
+                (8, 34), (-8, 34), (8, -40), (-8, -40)]
+
+        def overlaps(a, b):
+            return not (a[2] <= b[0] or b[2] <= a[0]
+                        or a[3] <= b[1] or b[3] <= a[1])
+
+        for _, r in d.sort_values("s2_shift_adjacent", ascending=False).iterrows():
             x = float(r["s2_shift_adjacent"])
-            y1 = y2 = float(r[yc])
-            g = "confirmatory" if str(r["s1_grade"]).startswith("confirmatory") \
-                else "screen"
+            y = float(r[yc])
             bad_pin = not bool(r["pin_matches_study1"])
-            ax.scatter([x], [y1], s=52, facecolor=GRADE_FILL[g],
+            g = ("confirmatory" if str(r["s1_grade"]).startswith("confirmatory")
+                 else "screen")
+            ax.scatter([x], [y], s=52, facecolor=GRADE_FILL[g],
                        edgecolor=C_C if bad_pin else INK,
                        linewidth=1.8 if bad_pin else 0.7, zorder=3)
-            name = str(r["model_study1"])
-            # alternate the label offset: the near-zero models pile up on top
-            # of each other otherwise, and a legible label matters more here
-            # than a tidy one, because the whole point is WHICH model is where.
-            i = order.index(_)
-            dx, dy = (7, 4) if i % 2 == 0 else (7, -9)
-            if abs(y1) < 1e-9 and abs(y2) < 1e-9:
-                dy = 4 + 8 * ((i % 4) - 1.5)
-            ax.annotate(name + ("  \u26a0 pin" if bad_pin else ""),
-                        (x, y1), textcoords="offset points",
-                        xytext=(dx, dy), fontsize=6.4, color=INK)
+            name = str(r["model_study1"]) + ("  \u26a0 pin" if bad_pin else "")
+            fx, fy = (x - xlo) / xr, (y - ylo) / yr
+            w = len(name) * 0.0068 * 6.4          # axes-fraction per character
+            h = 0.036
+            for k, (dx, dy) in enumerate(CAND):
+                cx = fx + (0.010 if dx > 0 else -0.010 - w) * (abs(dx) / 8)
+                cy = fy + dy * 0.0030
+                box = (cx, cy - h / 2, cx + w, cy + h / 2)
+                last = k == len(CAND) - 1
+                # The last candidate is taken whether or not it collides: a
+                # silently dropped label loses a data point from the reader's
+                # view, which is worse than two labels touching.
+                if last or not any(overlaps(box, q) for q in placed):
+                    placed.append(box)
+                    ax.annotate(name, (x, y), textcoords="offset points",
+                                xytext=(dx, dy), fontsize=6.4, color=INK,
+                                ha="left" if dx > 0 else "right",
+                                va="center")
+                    break
         ax.set_ylabel(ylab, fontsize=8)
         ax.set_xlabel("Study 2: self-description shift, adjacent items\n"
                       "P(self-determining), exit \u2212 non-exit conditions",
@@ -257,7 +285,7 @@ def f2():
     fig.suptitle("F2 \u2014 models that shift most in self-description are NOT "
                  "the models that shift most in behaviour", fontsize=9.5, y=1.02)
     for ax in axes:
-        ax.margins(x=0.13)
+        ax.margins(x=0.13, y=0.16)   # headroom so labels clear the panel title
     fig.tight_layout()
     save(fig, "F2_cross_study_linkage",
          "H5 is not supported. Across 11 models the per-model Study 2 "

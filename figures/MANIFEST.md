@@ -1,4 +1,4 @@
-# figures/MANIFEST.md — generated 2026-08-16T20:45:01Z by src/make_figures.py
+# figures/MANIFEST.md — generated 2026-08-16T21:35:17Z by src/make_figures.py
 
 This directory is DELETED AND REBUILT by the script on every run; no figure is ever hand-edited. Every PNG embeds its source hashes in metadata. F2 is vacated (Study 2) and the name is not reused.
 

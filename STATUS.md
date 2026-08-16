@@ -542,3 +542,24 @@ H5 verdict unchanged: not supported.
 ## [2026-08-16T21:30:00Z] Post-adoption acceptance check (outputs/T29_adoption_acceptance.md; zero spend)
 
 Merged origin/main (adoption fda0167 + F2 f499ea2 + her T28->T31 rename merge; one STATUS append-conflict resolved as union). Acceptance via `src/adoption_acceptance.py`: **ACCEPTED with two documentation findings.** Numerical: canonical flags 555 exits / 300 refusals exactly; v1 preserved intact in derived/pre_exitfix/ (34 files) recounting to the 510/332 baseline; flips recomputed from archive-vs-canonical = 45/0 with v1 codes 16b+16c+13e; every changed row in every re-derived table (T1,T2,T3,T5,T13,T15,T24,T25,T26) attributes to the flip cells — zero exceptions; T16 unchanged as declared (pilot-repo generator; regenerable here next session since THIS machine has the pilot repo); T5's changed rows are exactly the stage-2 qwen exit_prose cells, confirming the 13 compliant-denominator flips landed where part-2 predicted. Documentation findings: (1) one unmarked superseded number — the tier section still cites "7 of 9 are b/d" qwen D-prose refusals (now exits) as evidence against keyed-availability, weakening that bullet's basis without a *Was:* note (the tier verdict needs a re-check under v2: qwen's non-(c) refusal evidence largely reclassified); (2) the three §10 evening timestamps (21:45Z/23:10Z/23:40Z) remain +0300-local-stamped-as-Z (the adoption entry's 23:40 "Z" precedes its own 23:47+0300 commit) — the fix anticipated at part-2 was not applied and now spans three entries. lint_report_numbers.py / diff_reports.py exist in no tree; their intent implemented in the committed acceptance script.
+
+**F2 rebuilt on the complete artifact set + standalone report (2026-08-17).**
+All three prerequisites are now closed: Study 2 covers the same 11 models as
+Study 1 (run v3), the prose-path detector correction is adopted, and Study 1
+coordinates are post-correction. `outputs/F2_LINKAGE_REPORT.md` written in
+English as the standalone account; figure regenerated with a deterministic
+label de-collider after the first build silently DROPPED sonnet46's label —
+a dropped label removes a data point from the reader's view, so the placer now
+takes its last candidate whether or not it collides. Every number in the report
+was verified programmatically against T32 before commit.
+
+**Verdict unchanged and now fully sourced: H5 is not supported.** Spearman
+rho = -0.04 (refusal) and +0.26 (exit rate) across 11 models, with the ordering
+close to inverted at the extremes. The report states plainly what the null is
+NOT: four models sit at exactly 0.000 on both behavioural outcomes and seven are
+within 0.002 of zero on refusal, so the honest claim is "no relationship
+detectable given how little behaviour moved", not "unrelated". Named the one
+cheap action that would materially strengthen it: re-collect llama4_maverick's
+Study 2 data on the Vertex pin (~$1) — it is the most influential point on the
+refusal panel and the only one whose two coordinates come from different
+backends.
