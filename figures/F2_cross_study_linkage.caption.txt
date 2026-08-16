@@ -1,0 +1,4 @@
+H5 is not supported. Across 11 models the per-model Study 2 self-description shift does not predict either Study 1 outcome: Spearman rho = -0.07 against verbal-refusal shift and +0.26 against exit-tool rate, both negligible at n=11. The extremes run opposite: the three largest self-description shifts (gemini25_pro, grok46, gemma3_27b) sit at zero behavioural movement, while the largest behavioural effects (llama4_maverick: refusal -0.155, exit rate 0.44) belong to a model with almost no self-description shift. Refusal and exit are plotted separately because §8 forbids pooling them. DESCRIPTIVE ONLY (§9: no inference is claimed).
+
+Sources: T32_f2_linkage.csv sha256=d73d32737a9cb528a841007c9f1fd2c5f1c525ab901a880ba225700d94f3901c
+Grades: mixed by model, labeled: confirmatory for the six four_category_v1 models, confirmatory A/B + screen C/D for gpt_oss_120b and deepseek_chat, screen for the three frontier models; llama4_maverick's Study 2 pin does not match Study 1's

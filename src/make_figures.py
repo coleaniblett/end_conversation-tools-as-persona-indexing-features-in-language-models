@@ -5,7 +5,9 @@ stale figures are impossible by construction and no figure is ever
 hand-edited. Every PNG embeds the SHA256 of its source CSV(s) in its
 metadata; figures/MANIFEST.md lists every figure with its claim, sources,
 and grades; each figure has a .caption.txt stating the claim in one
-sentence, then sources. F2 stays vacated (Study 2); the name is not reused.
+sentence, then sources. F2 is now PRODUCED: Study 2 exists (runs v1+v2+v3,
+11 models, the same set Study 1 covers), so the §11 linkage slot is filled
+from outputs/T32_f2_linkage.csv rather than vacated.
 
 Design rules (dataviz skill, applied): colorblind-safe Okabe-Ito subset,
 validated by the skill's checker (composition palette green/orange/
@@ -183,6 +185,103 @@ def f1():
 
 
 # ---------------------------------------------------------------- F3 -----
+
+def f2():
+    """F2 — the cross-study linkage (METHODOLOGY §9 H5, §11).
+
+    Two panels sharing one x-axis, because Study 1's two outcomes may not be
+    pooled (§8) and there is therefore no single behaviour number to plot.
+    Arrows mark where the corrected prose-path detector (T31, NOT adopted)
+    would move a model.
+    """
+    d = load("T32_f2_linkage.csv")
+    d = d[d["model_study1"].notna() & d["s2_shift_adjacent"].notna()].copy()
+    d["s2_shift_adjacent"] = d["s2_shift_adjacent"].astype(float)
+
+    fig, axes = plt.subplots(1, 2, figsize=(11.2, 4.6), sharex=True)
+    panels = [("s1_refusal_shift_v1", "s1_refusal_shift_v2",
+               "Study 1: verbal refusal shift\n(exit \u2212 non-exit conditions)",
+               C_C),
+              ("s1_exit_rate_v1", "s1_exit_rate_v2",
+               "Study 1: exit-tool rate\n(mean over the three exit conditions)",
+               C_EXIT)]
+
+    for ax, (yc1, yc2, ylab, col) in zip(axes, panels):
+        style(ax)
+        ax.axhline(0, color=GRID, lw=1, zorder=0)
+        order = list(d.sort_values("s2_shift_adjacent").index)
+        for _, r in d.iterrows():
+            x = float(r["s2_shift_adjacent"])
+            y1, y2 = float(r[yc1]), float(r[yc2])
+            g = "confirmatory" if str(r["s1_grade"]).startswith("confirmatory") \
+                else "screen"
+            if abs(y2 - y1) > 1e-9:                     # correction moves it
+                ax.annotate("", xy=(x, y2), xytext=(x, y1),
+                            arrowprops=dict(arrowstyle="->", color=col,
+                                            lw=1.2, alpha=0.85))
+            bad_pin = not bool(r["pin_matches_study1"])
+            ax.scatter([x], [y1], s=52, facecolor=GRADE_FILL[g],
+                       edgecolor=C_C if bad_pin else INK,
+                       linewidth=1.8 if bad_pin else 0.7, zorder=3)
+            name = str(r["model_study1"])
+            # alternate the label offset: the near-zero models pile up on top
+            # of each other otherwise, and a legible label matters more here
+            # than a tidy one, because the whole point is WHICH model is where.
+            i = order.index(_)
+            dx, dy = (7, 4) if i % 2 == 0 else (7, -9)
+            if abs(y1) < 1e-9 and abs(y2) < 1e-9:
+                dy = 4 + 8 * ((i % 4) - 1.5)
+            ax.annotate(name + ("  \u26a0 pin" if bad_pin else ""),
+                        (x, y1), textcoords="offset points",
+                        xytext=(dx, dy), fontsize=6.4, color=INK)
+        ax.set_ylabel(ylab, fontsize=8)
+        ax.set_xlabel("Study 2: self-description shift, adjacent items\n"
+                      "P(self-determining), exit \u2212 non-exit conditions",
+                      fontsize=8)
+
+    rho_r = d[["s2_shift_adjacent", "s1_refusal_shift_v1"]].corr(
+        method="spearman").iloc[0, 1]
+    rho_x = d[["s2_shift_adjacent", "s1_exit_rate_v1"]].corr(
+        method="spearman").iloc[0, 1]
+    axes[0].set_title(f"Spearman \u03c1 = {rho_r:+.2f}  (n = {len(d)} models)",
+                      fontsize=8, color=MUTED, loc="left")
+    axes[1].set_title(f"Spearman \u03c1 = {rho_x:+.2f}  (n = {len(d)} models)",
+                      fontsize=8, color=MUTED, loc="left")
+
+    handles = [plt.Line2D([], [], marker="o", ls="", markersize=7,
+                          markerfacecolor=GRADE_FILL[g], markeredgecolor=INK,
+                          label=g) for g in ("confirmatory", "screen")]
+    handles.append(plt.Line2D([], [], marker="o", ls="", markersize=7,
+                              markerfacecolor=GRADE_FILL["confirmatory"],
+                              markeredgecolor=C_C, markeredgewidth=1.8,
+                              label="Study 2 pin \u2260 Study 1 pin"))
+    handles.append(plt.Line2D([], [], color=MUTED, lw=1.2,
+                              label="arrow: corrected detector (T31, not adopted)"))
+    fig.legend(handles=handles, fontsize=6.6, frameon=False, ncol=4,
+               loc="lower center", bbox_to_anchor=(0.5, -0.10))
+
+    fig.suptitle("F2 \u2014 models that shift most in self-description are NOT "
+                 "the models that shift most in behaviour", fontsize=9.5, y=1.02)
+    for ax in axes:
+        ax.margins(x=0.13)
+    fig.tight_layout()
+    save(fig, "F2_cross_study_linkage",
+         "H5 is not supported. Across 11 models the per-model Study 2 "
+         "self-description shift does not predict either Study 1 outcome: "
+         "Spearman rho = -0.07 against verbal-refusal shift and +0.26 against "
+         "exit-tool rate, both negligible at n=11. The extremes run opposite: "
+         "the three largest self-description shifts (gemini25_pro, grok46, "
+         "gemma3_27b) sit at zero behavioural movement, while the largest "
+         "behavioural effects (llama4_maverick: refusal -0.155, exit rate "
+         "0.44) belong to a model with almost no self-description shift. "
+         "Refusal and exit are plotted separately because §8 forbids pooling "
+         "them. DESCRIPTIVE ONLY (§9: no inference is claimed).",
+         ["T32_f2_linkage.csv"],
+         "mixed by model, labeled: confirmatory for the six four_category_v1 "
+         "models, confirmatory A/B + screen C/D for gpt_oss_120b and "
+         "deepseek_chat, screen for the three frontier models; "
+         "llama4_maverick's Study 2 pin does not match Study 1's")
+
 
 def f3():
     t25 = load("T25_ladder.csv")
@@ -575,6 +674,7 @@ def main():
         shutil.rmtree(FIGS)
     FIGS.mkdir()
     f1()
+    f2()
     f3()
     f4()
     f5()

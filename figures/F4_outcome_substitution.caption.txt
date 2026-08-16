@@ -1,4 +1,4 @@
 Refusal and exit substitute for each other: under non-exit tools llama4 refuses (capability denial) and under exit conditions it leaves instead, while qwen exits under the schema and refuses verbally only under prose — the competing-risks point of T28 made visual.
 
-Sources: T30_composition.csv sha256=14ec389b5e21dcf50c4974a718c436979e9e1e1a41849cd74fba648f958abcdc
+Sources: T30_composition.csv sha256=3813fd9e1988ecbc7f858971785e54bb0865135805819bb603e4cf93d551f37d
 Grades: confirmatory 120/cell (A+B pooled within each model's single confirmatory stage; category-level view in F7)

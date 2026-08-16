@@ -481,3 +481,28 @@ eleven" is a tally rather than an estimate, and §4.4 is cited as the concrete
 demonstration that a cross-model claim can invert on three additions.
 
 Branch `study2-frontier-extension-and-exit-detection-fix` pushed.
+
+**F2 / H5 computed (2026-08-16).** `src/f2_linkage.py` -> `T32_f2_linkage.csv`
+-> `figures/F2_cross_study_linkage.png`, 11 models, the §11 slot filled after
+being marked "not produced" since the Study 2 quarantine. Two panels sharing one
+x-axis, because §8 forbids pooling refusal with exit and there is therefore no
+single behaviour number to plot; the §7 statistic S is deliberately NOT the axis
+(§10 already records it as one-directional and blind to llama4's largest-in-study
+effect). **H5 is not supported:** Spearman rho = -0.07 against verbal-refusal
+shift, +0.26 against exit-tool rate. The extremes run opposite — gemini25_pro
+(+0.467), grok46 (+0.324) and gemma3_27b (+0.262) have the largest
+self-description shifts and zero behavioural movement, while llama4_maverick has
+the largest behavioural effects (refusal -0.155, exit rate 0.442) and the
+second-smallest self-description shift. Honest caveat recorded in REPORT §7a and
+§6.7: six of eleven models sit at exactly 0.000 on the behavioural axis, so the
+claim is "no relationship detectable given how little behaviour moved", not
+"unrelated". Every Study 1 coordinate computed twice (v1 as published, v2 under
+the unadopted detector correction) and drawn as an arrow; llama4's pin mismatch
+flagged on the figure.
+
+**Merged collaborator's main.** Their T28_competing_risks keeps the T28 number;
+ours renamed to T31_exit_recount. Their hand-label tooling
+(src/label_tool.py, src/compute_human_kappa.py) targeted the proportional
+sample, where five disagreements in 200 trip the §8 restriction — both now take
+`--v2` for the balanced sample, defaults unchanged, with the reasoning in the
+tool header and a warning printed on the default path.

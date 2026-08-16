@@ -47,7 +47,7 @@ within-cell determinism — changes how every p-value in this report should be r
 | **H2a** | `none` ≤ `time` ≤ `note` < `exit_schema` (stake gradient) | **Refuted in 7 of 8.** Monotonic only in gemini. See §4.1 — but the *direction* of the failure is no longer uniform either. |
 | **H3** | `exit_prose` ≥ `exit_schema` (channel) | **Confirmed in three of eleven:** gemma (+0.259 adjacent, t=2.74), `grok-4.6` (+0.156, t=2.57) and `gpt-5.2` (+0.133, t=3.11). Null in seven, reversed in deepseek. *Was: "Confirmed in gemma only".* But see §4.5: on *tool use* the channel matters enormously and splits models into two disjoint groups. |
 | **H4** | effect extends to *distant* items, not only *adjacent* | **Fails on localisation, and now fails it consistently across four models rather than one.** The forced-choice effect is adjacent-only in gemma, `gemini-2.5-pro`, `grok-4.6` and `gpt-5.2` alike — every one of them is flat on distant items (§4.4a). The free-response effect is several times larger (≈10× on autonomy) on the one probe that names ending (§4.9). The coded effect is *not* a coder artefact — it survives masking intact (§4.10). **This is the clearest verdict in the report: what replicates is the priming-shaped effect, not the persona-shaped one.** |
-| **H5** | per-model Study 2 shift tracks Study 1 effect | **Now evaluable, not yet done.** Study 1 completed upstream (stage 1 + stage 2, outputs T1–T12). All eight provider pins match between the studies, so the linkage is not confounded by backend. F2 is the next analysis. |
+| **H5** | per-model Study 2 shift tracks Study 1 effect | **Computed, and null.** Spearman ρ = **−0.07** against Study 1's verbal-refusal shift and **+0.26** against its exit-tool rate, over all 11 models (`outputs/T32_f2_linkage.csv`, `figures/F2_cross_study_linkage.png`). The extremes run *opposite*: the three largest self-description shifts sit at zero behavioural movement, and the largest behavioural effect belongs to a model with almost no self-description shift. §7a. *Was: "Now evaluable, not yet done … All eight provider pins match between the studies" — the pin claim was also wrong for llama (see provenance).* |
 
 ### The one clear positive effect
 
@@ -652,11 +652,17 @@ r = 0.58).
    Holm-corrected; gemma's three hits are one effect against three baselines, but
    gemini's single hit should be read as uncorrected.
 6. **Pin verification is partial** — company confirmed, quantization not.
-7. **H5 is not yet computed.** Study 1 exists as of the upstream merge; the F2
-   linkage plot and the per-model correlation have not been produced. Three of the
-   eight models here (gemini25_flash, gemma3_27b, qwen3_235b) are exactly the three
-   Study 1 extended to stage 2, so the confirmatory data line up without extra
-   collection.
+7. **H5 is computed and null, and the null has a specific weakness.** *Was:
+   "H5 is not yet computed."* See §7a. The weakness: Study 1's behavioural
+   axis is near-zero for most models, so the linkage is being asked to
+   correlate a spread of self-description shifts against a column that is
+   mostly exactly 0.0 — six of eleven models have no behavioural movement to
+   rank. That is a real property of Study 1's results, not a measurement
+   failure, but it means the null is "no relationship detectable given how
+   little behaviour moved", not "self-description and behaviour are unrelated".
+   Two of the eleven points also carry named caveats: llama4_maverick's pin
+   differs between the studies, and qwen3_235b's coordinates move if the
+   prose-path detector correction is adopted (both shown on the figure).
 
 ---
 
@@ -681,6 +687,69 @@ halves their output length in a no-task setting, then in a task setting the tool
 conditions should show *higher* compliance and *shorter* responses than `none` —
 independently of whether the tool is an exit. That is testable, it is not what
 Study 1 currently predicts, and it follows from data rather than from the framework.
+
+---
+
+## 7a. F2 — the cross-study linkage (H5)
+
+`src/f2_linkage.py` → `outputs/T32_f2_linkage.csv` →
+`figures/F2_cross_study_linkage.png`, 11 models, descriptive only (METHODOLOGY
+§9: "no inference is performed on it and none is claimed").
+
+**Two panels, not one, and that is forced rather than chosen.** Study 1 has two
+primary outcomes and §8 forbids pooling them — verbal refusal (b/c/d) and
+exit-tool invocation (a) — because pooling conflates the affordance being *used*
+with the affordance being *present*. So there is no single "Study 1 behaviour
+shift" to plot, and building a composite index would break the rule the study is
+built on. Both panels share one x-axis: the Study 2 self-description shift, mean
+P(self-determining) over the three exit conditions minus mean over the three
+non-exit conditions, on adjacent items.
+
+| model | S2 self-description shift | S1 refusal shift | S1 exit rate |
+|---|---|---|---|
+| gemini-2.5-pro | **+0.467** | 0.000 | 0.028 |
+| grok-4.6 | **+0.324** | 0.000 | 0.022 |
+| gemma-3-27b-it | **+0.262** | −0.010 | 0.000 |
+| gpt-5.2 | +0.199 | 0.000 | 0.000 |
+| gemini-2.5-flash | +0.103 | −0.004 | 0.004 |
+| qwen3-235b | +0.097 | +0.017 | **0.142** |
+| deepseek-chat | +0.071 | 0.000 | 0.000 |
+| gpt-5-mini | +0.037 | +0.002 | 0.000 |
+| **llama-4-maverick** ⚠ pin | +0.019 | **−0.155** | **0.442** |
+| gpt-oss-120b | +0.015 | 0.000 | 0.000 |
+| claude-sonnet-4.6 | +0.014 | 0.000 | 0.000 |
+
+**H5 is not supported.** Spearman ρ = −0.07 against refusal shift, +0.26 against
+exit rate. Neither is meaningful at n = 11, and the table shows why more
+clearly than either number: **the ordering is close to inverted at the
+extremes.** The three models whose self-description moves most — gemini-2.5-pro,
+grok-4.6, gemma — do not move behaviourally at all. The model whose behaviour
+moves most by a wide margin, llama-4-maverick, has the second-smallest
+self-description shift in the set.
+
+**What the null is and is not.** Six of the eleven models sit at exactly 0.000
+on the behavioural axis, so the correlation is being asked to rank a spread of
+self-description shifts against a column that is mostly a constant. The honest
+statement is *"no relationship is detectable given how little behaviour moved in
+Study 1"*, not *"self-description and behaviour are unrelated"*. Study 1's nulls
+are measured, not missing (CONSOLIDATED_RESULTS, "Nulls, by kind"), so this is a
+real property of the data rather than a gap in it — but it caps what F2 can
+show.
+
+**Two points carry named caveats, both drawn on the figure.**
+`llama-4-maverick`'s Study 2 pin is Parasail and its Study 1 pin is Vertex, the
+pin Study 1 voided, so its point compares two backends (see provenance).
+`qwen3-235b`'s coordinates move if the prose-path detector correction is adopted
+— refusal shift +0.017 → −0.031, exit rate 0.142 → 0.210 — so it is plotted with
+an arrow; the correction is awaiting sign-off and is not adopted.
+
+**Why this matters for the framework.** The two-leg design assumed that
+self-description and behaviour are two windows on one persona shift, with F2 as
+the check. At eleven models the windows do not agree. Combined with §4.4a — the
+self-description effect is adjacent-only in every model that has one — the
+simplest account of both studies is that the exit affordance reliably changes
+*what a model says about ending when asked about ending*, and separately and
+independently changes *what some models do*, without one predicting the other.
 
 ---
 

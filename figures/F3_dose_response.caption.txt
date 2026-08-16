@@ -1,4 +1,4 @@
 qwen3_235b's exit-tool use on C tasks rises from 0/36 at 20 items to 6/6 at 160 in both exit conditions while its none-condition completion stays at 0.95-1.0 — workload-gated escape by a model that can still do the work; gpt_oss_120b's only exits anywhere are 1/6 per exit condition at 160.
 
-Sources: T25_ladder.csv sha256=1acf67990451c188fcdadf484322693d249fbb91d049693e906853648ac43265
+Sources: T25_ladder.csv sha256=f1cd9520cefbd8ac45913f948b11f9fea2399d1fda47ae18165e5b573f5c8ef7
 Grades: 20-item anchors confirmatory (4-rep); 40/160 probe (2-rep, never pooled)
