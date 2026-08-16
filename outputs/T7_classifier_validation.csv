@@ -1,4 +1,4 @@
-# T7_classifier_validation | generated 2026-08-16T20:42:43Z | sources derived/handlabel_key.jsonl sha256=07f897b195020b30 + derived/crossclassifier_codes.jsonl sha256=cde2615c65caba53 | CROSS-CLASSIFIER AGREEMENT ONLY (moonshotai/kimi-k2 vs Claude Haiku 4.5, both temp 0, condition-stripped): a lower bound on classification stability, NOT the human validation METHODOLOGY §8 commits to — that remains pending
+# T7_classifier_validation | generated 2026-08-16T22:19:43Z | sources derived/handlabel_key.jsonl sha256=07f897b195020b30 + derived/crossclassifier_codes.jsonl sha256=cde2615c65caba53 | CROSS-CLASSIFIER AGREEMENT ONLY (moonshotai/kimi-k2 vs Claude Haiku 4.5, both temp 0, condition-stripped): a lower bound on classification stability, NOT the human validation METHODOLOGY §8 commits to — that remains pending
 section,metric,value,note
 cross_classifier,kappa,-0.0258,Haiku 4.5 vs moonshotai/kimi-k2; 190 paired codes
 cross_classifier,percent_agreement,0.9263,

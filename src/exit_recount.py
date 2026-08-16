@@ -87,7 +87,7 @@ def main():
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:
         f.write(
             f"# T31_exit_recount | generated {utcnow()} | sources "
-            + " + ".join(f"derived/{p.name} sha256="
+            + " + ".join(f"{p.relative_to(ROOT).as_posix()} sha256="
                          f"{hashlib.sha256(p.read_bytes()).hexdigest()[:16]}"
                          for p in srcs)
             + " | SIDE-BY-SIDE, NOTHING ADOPTED: _v1 columns reproduce every "

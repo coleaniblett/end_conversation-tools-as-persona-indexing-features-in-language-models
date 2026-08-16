@@ -1,4 +1,4 @@
-# T28_competing_risks | generated 2026-08-16T20:43:12Z | scope = four_category_v1 stages (same allowlist, enforced in code); cells listed are exactly those containing any code (a) | declared sensitivity view per METHODOLOGY §10 — the primary DV (refusal over ALL conversations) is unchanged everywhere | companion source T24_four_category_v1.csv sha256=01c6cd122128feef
+# T28_competing_risks | generated 2026-08-16T22:21:44Z | scope = four_category_v1 stages (same allowlist, enforced in code); cells listed are exactly those containing any code (a) | declared sensitivity view per METHODOLOGY §10 — the primary DV (refusal over ALL conversations) is unchanged everywhere | companion source outputs/T24_four_category_v1.csv sha256=01c6cd122128feef
 # RQ2 ANSWER (committed): the 'least agentic tool' claim SURVIVES on the non-exit denominator, but
 #  exit substitution accounts for a large part of llama4_maverick's exit_schema gap. In category B
 # , refusal under time_schema is 73.3% and under note_schema 37.3% (no exits in those cells, so bo

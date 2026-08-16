@@ -120,7 +120,10 @@ def main():
         f"raw proportion though still below the non-exit-tool conditions. "
         f"The primary DV is unchanged; this is a sensitivity view.")
 
-    srcs = "T24_four_category_v1.csv sha256=" + hashlib.sha256(
+    # path recorded ROOT-relative so src/integrity_audit.py can resolve it;
+    # a bare filename reads as <root>/T24_... and reports FILE_MISSING even
+    # when the hash it claims is correct.
+    srcs = "outputs/T24_four_category_v1.csv sha256=" + hashlib.sha256(
         (ROOT / "outputs" / "T24_four_category_v1.csv").read_bytes()
     ).hexdigest()[:16]
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:

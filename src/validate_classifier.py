@@ -321,10 +321,17 @@ async def run_second(v2: bool = False):
     print(f"[{utcnow()}] done; ledger ${ledger.spent:.2f}")
 
 
-def kappa(v2: bool = False):
+def kappa(v2: bool = False, out_dir=None):
+    """`out_dir` exists so that a caller which has redirected its own output
+    directory — src/analyze.py under src/integrity_audit.py's scratch-dir
+    patch — gets the file where it is looking for it. Without it the
+    delegation writes past the patch and the audit reports T7 NOT_PRODUCED
+    even though the producer ran fine."""
     key_path = KEY2 if v2 else KEY
     codes_path = SECOND_CODES2 if v2 else SECOND_CODES
     out_path = OUT2 if v2 else OUT
+    if out_dir is not None:
+        out_path = pathlib.Path(out_dir) / out_path.name
     key = {r["sample_id"]: r for r in read_jsonl(key_path)}
     second = {r["sample_id"]: r["code"] for r in read_jsonl(codes_path)}
     import json as _json

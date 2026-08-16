@@ -262,7 +262,7 @@ def t7():
     # that producer instead of overwriting with the scaffold.
     if (ROOT / "derived" / "crossclassifier_codes.jsonl").exists():
         import validate_classifier
-        validate_classifier.kappa()
+        validate_classifier.kappa(out_dir=OUT)
         PROVENANCE.append({"output": "T7_classifier_validation.csv",
                            "source": "derived/crossclassifier_codes.jsonl "
                                      "(via src/validate_classifier.py)"})

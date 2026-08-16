@@ -218,7 +218,7 @@ def main():
             + " + ".join(f"outputs/{s} sha256="
                          f"{hashlib.sha256((OUTS / s).read_bytes()).hexdigest()[:16]}"
                          for s in srcs)
-            + f" + study_2/outputs/v1_v2_v3/T10_p_by_condition.csv sha256="
+            + f" + {S2.relative_to(ROOT).as_posix()} sha256="
               f"{hashlib.sha256(S2.read_bytes()).hexdigest()[:16]}"
             + " | METHODOLOGY §9 H5 / §11 F2. DESCRIPTIVE, NO INFERENCE (§9: "
               "'no inference is performed on it and none is claimed'). Refusal "
