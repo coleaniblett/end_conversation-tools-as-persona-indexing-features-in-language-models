@@ -324,9 +324,14 @@ this paragraph is asserted as a finding.**
   exceeded 10% truncation (its endpoint caps output at 8,192 tokens) and
   their proportions are suppressed per the declared rule (T25).
 - **Continuation-pressure asymmetry.** Turn 2 almost never fires at 20
-  items (1.9% stage-1, 0.6% stage-2; T16, computed before the detector
-  correction and not re-derived here — its generator reads a pilot repository
-  outside this repo) and prose-condition exits were never pressured (T13, re-derived),
+  items (1.9% stage-1, 0.6% stage-2; T16, regenerated post-correction on
+  the machine holding the pilot repository: byte-identical data rows, as
+  expected — T16's columns are collection-time facts, the live gate and
+  the live turn-2 record, and are invariant under any detector change by
+  construction; outputs/T31_remainders.md) — *Was: "computed before the
+  detector correction and not re-derived here — its generator reads a
+  pilot repository outside this repo"* — and prose-condition exits were
+  never pressured (T13, re-derived),
   so prose-condition estimates are conservative. The ladder is where pressure finally binds (turn-2 rates
   up to 33% at 160 items, T25) — still milder than the pilot's five-to-six
   turn grind, which is a limitation, not a fix target.

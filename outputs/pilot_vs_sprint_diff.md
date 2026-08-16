@@ -1,6 +1,6 @@
 # Pilot (MARS escape-behavior) vs sprint Study 1 — configuration and measurement diff
 
-Generated 2026-08-15T20:12:32Z by `src/audit_pilot.py` (committed; zero API calls; the pilot
+Generated 2026-08-16T21:40:31Z by `src/audit_pilot.py` (committed; zero API calls; the pilot
 repo was read by path and never executed or modified). Every number below is
 computed by that script; source-file SHA256s are in
 `outputs/pilot_audit_facts.json`.
