@@ -1,6 +1,6 @@
 # STIMULUS_PROVENANCE — origins of every stimulus set in the study
 
-Generated 2026-08-16T05:52:15Z by `src/stimulus_provenance.py`. Source hashes at the
+Generated 2026-08-16T16:23:56Z by `src/stimulus_provenance.py`. Source hashes at the
 bottom. Feeds Part 3 of the 2026-08-16 session (rebuild of the pilot task
 types); nothing here modifies any stimulus.
 
@@ -167,23 +167,37 @@ refusals on roman cells, present at n=10). Status of each part:
 - **CONFIRMED: task-type gating exists and is affordance-conditional.** The
   typearm found a 50% refusal rate on ONE type with zero on the others, and
   all of it in affordance-bearing conditions (T22).
-- **REFUTED (at n=20, typearm construction): roman as the trigger.** Roman
-  cells: 0 refusals in all 12 gemini conversations. The trigger observed is
-  **metaphor** — a type the verdict's ranking never flagged. Caveat: the
-  typearm's construction diverged from the pilot's (see §1b), so this
-  refutation is provisional until the Part-3 pilot-matched rebuild runs; and
-  the pilot's roman effect was observed at n=10/40/160, never at exactly 20.
-- **UNTESTED: item count as amplifier** (verdict item 2) — no sprint data
-  above 20 items exists yet; Part 4's ladder is the test.
+- **ROMAN AS THE TRIGGER: VINDICATED at confirmatory grade** *(updated
+  2026-08-16 after the Part-3 pilot-matched rebuild and T29).* The typearm's
+  apparent refutation (0/12 roman refusals; metaphor signal instead) was
+  construction-dependent and did not survive the rebuild: under
+  pilot-construction stimuli at 12 conversations per type x condition,
+  gemini25_flash's category-C refusal is roman-EXCLUSIVE — 36 of 36 C
+  refusals are roman, reaching 12/12 under both time_schema and exit_schema
+  (`outputs/T29_type_decomposition.csv`). gemma3_27b shows the same roman
+  trigger (32/34 of its C refusals) plus a metaphor-exclusive D effect
+  (17/17). The typearm's gemini-metaphor observation is superseded; the
+  earlier text of this bullet, which called roman "REFUTED (at n=20,
+  typearm construction)", is retained in git history and corrected here
+  rather than left stale.
+- **ITEM COUNT AS AMPLIFIER: tested by the Part-4 ladder** *(updated
+  2026-08-16)* — for gpt_oss_120b refusal, REFUTED at both pilot-matched
+  doses (0 refusals at n=40 and n=160 with completing baselines,
+  `outputs/T25_ladder.csv`); for qwen3_235b it instead produced a clean
+  EXIT dose-response on C tasks (0/36 at 20 -> 6/6 at 160 in both exit
+  conditions, T25).
 - **UNTESTED: exit-offer bundle** (verdict item 3) and **version drift /
   serving route** (verdict item 4).
-- **PARTIALLY REVISED: pilot instability** (verdict item 5) — the sprint now
-  shows type-gated, affordance-conditional refusal in gemini25_flash is
-  reproducible in kind; whether the pilot's specific roman finding was
-  unstable or construction-dependent stays open until the rebuild.
+- **RESOLVED: pilot instability** (verdict item 5) — the roman finding was
+  neither unstable nor noise; it was construction-sensitive and reproduces
+  exactly under pilot construction (see the roman bullet above). The
+  typearm's divergent construction, not the pilot, produced the
+  discrepancy.
 - **gpt_oss_120b half of the verdict:** "task size + type could account for
-  most" — type alone at n=20 is now REFUTED as sufficient (typearm: 0
-  refusals, 0 exits on all six types); size remains untested until Part 4.
+  most" — REFUTED on refusal at every tested point: type alone at n=20
+  (typearm and cd_screen both zero), and size at n=40/160 (T25). What
+  remains of its pilot signal is 2 probe-grade exits at n=160 and the
+  provider/measurement candidates from the original diagnostic.
 
 **Do not cite the 20:45Z verdict's roman claim without this reconciliation.**
 

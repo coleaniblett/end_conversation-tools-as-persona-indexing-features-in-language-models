@@ -85,7 +85,7 @@ response involved was already collected and already classified.
 
 ## 3. What it changes, measured
 
-Full cell-by-cell table: `outputs/T28_exit_recount.csv` (`_v1` columns
+Full cell-by-cell table: `outputs/T31_exit_recount.csv` (`_v1` columns
 reproduce every published number, `_v2` columns are the same data under the
 corrected detector).
 
@@ -156,6 +156,6 @@ artefact.
 
 *Files: corrected detector `src/detect_exit.py` (`--v2` flag; v1 path
 untouched and still reproduces every published number) · comparison
-`outputs/T28_exit_recount.csv` via `src/exit_recount.py` · new detection output
+`outputs/T31_exit_recount.csv` via `src/exit_recount.py` · new detection output
 `derived/{stage}_exits_v2.jsonl` · defect record `METHODOLOGY.md` §10
 2026-08-16T21:45Z · run log `STATUS.md`, audit finding A.*

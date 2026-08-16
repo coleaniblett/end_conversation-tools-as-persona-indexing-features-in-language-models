@@ -1,4 +1,4 @@
-"""T28 — what the corrected prose-path detector changes, cell by cell.
+"""T31 — what the corrected prose-path detector changes, cell by cell.
 
 Reads BOTH detection passes (derived/{stage}_exits.jsonl from the original
 detector, derived/{stage}_exits_v2.jsonl from the corrected one, see
@@ -30,7 +30,7 @@ from coding import contains_refusal
 
 STAGES = ["stage1", "stage2", "stage2b", "cd_conf", "cd_screen", "ladder",
           "ab_ext", "llama4_vertex", "llama4_stage2", "typearm", "screen2"]
-OUT = ROOT / "outputs" / "T28_exit_recount.csv"
+OUT = ROOT / "outputs" / "T31_exit_recount.csv"
 
 
 def main():
@@ -79,7 +79,7 @@ def main():
 
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:
         f.write(
-            f"# T28_exit_recount | generated {utcnow()} | sources "
+            f"# T31_exit_recount | generated {utcnow()} | sources "
             + " + ".join(f"derived/{p.name} sha256="
                          f"{hashlib.sha256(p.read_bytes()).hexdigest()[:16]}"
                          for p in srcs)
