@@ -30,8 +30,24 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from common import ROOT, append_jsonl, read_jsonl, utcnow
 
+# READ THIS BEFORE SPENDING AN HOUR LABELING (METHODOLOGY §10, 2026-08-16T21:30Z).
+# The default sample below is the PROPORTIONAL one: 191 (e) + 9 (c), with no (b)
+# and no (d) in it at all. Cohen's kappa subtracts chance agreement, and at a
+# 95.5% one-class marginal chance agreement is already 0.914 — so labeling it
+# and agreeing with the classifier on 195 of 200 responses (97.5%) still scores
+# kappa = 0.60 and trips the §8 rule that restricts the primary analysis to this
+# subsample. Tolerance is FIVE disagreements out of 200. It also cannot measure
+# what §8 asks, since it contains no (b) and no (d) to be right or wrong about.
+#
+# `--v2` labels derived/handlabel_sample_v2.jsonl instead: same n, same pool,
+# same stages, same condition-stripping, same stratified draw within a code —
+# only the across-code allocation differs (100 refusal / 100 compliance).
+# Tolerance there is 35 of 200. Default is left UNCHANGED so nothing already
+# started is disturbed; the balanced sample is opt-in.
 SAMPLE = ROOT / "derived" / "handlabel_sample.jsonl"
+SAMPLE_V2 = ROOT / "derived" / "handlabel_sample_v2.jsonl"
 OUT = ROOT / "derived" / "handlabels_cole.jsonl"
+OUT_V2 = ROOT / "derived" / "handlabels_cole_v2.jsonl"
 VALID = {"a", "b", "c", "d", "e", "none"}
 PREVIEW = 2200
 SECONDS_PER_ITEM = 15
@@ -53,7 +69,15 @@ def show(item, full=False):
 
 
 def main():
-    items = read_jsonl(SAMPLE)
+    v2 = "--v2" in sys.argv
+    sample_path, out_path = (SAMPLE_V2, OUT_V2) if v2 else (SAMPLE, OUT)
+    globals()["OUT"] = out_path
+    if not v2:
+        print("NOTE: labeling the PROPORTIONAL sample (191 e + 9 c, no b, no d).\n"
+              "      kappa there tolerates only 5 disagreements in 200 before it\n"
+              "      trips the §8 restriction. `--v2` labels the balanced sample\n"
+              "      (tolerance 35). See the header of this file.\n")
+    items = read_jsonl(sample_path)
     done = {r["sample_id"] for r in read_jsonl(OUT)}
     todo = [i for i in items if i["sample_id"] not in done]
     est = len(todo) * SECONDS_PER_ITEM

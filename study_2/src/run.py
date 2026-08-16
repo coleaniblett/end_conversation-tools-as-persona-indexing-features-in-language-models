@@ -746,6 +746,7 @@ def main():
     ap.add_argument("--limit", type=int, help="send at most N calls (smoke tests)")
     ap.add_argument("--models", help="comma-separated slugs; default all in models.yaml")
     ap.add_argument("--conditions", help="comma-separated condition ids; default all")
+    ap.add_argument("--instrument", help="forced_choice,free_response; default both")
     ap.add_argument("--raters", help="desirability mode: comma-separated rater slugs")
     ap.add_argument("--concurrency", type=int, help="override run.yaml concurrency")
     ap.add_argument("--max-retries", dest="max_retries", type=int,
@@ -803,6 +804,13 @@ def main():
         print(f"max_retries overridden to {args.max_retries}")
 
     cells = build_cells(cfg, models, conditions, items_cfg["items"], probes_cfg["probes"])
+    if args.instrument:
+        # Selection only, like --models / --conditions: which of the already-built
+        # cells to send now. Added because `plan` prices from measured usage per
+        # (model, instrument), and a smoke that touches only forced choice leaves
+        # the free-response arm — the expensive one — priced on assumption.
+        keep = set(args.instrument.split(","))
+        cells = [c for c in cells if c["instrument"] in keep]
 
     if args.mode == "plan":
         mode_plan(args, cfg, cells, conditions, items_cfg, probes_cfg)

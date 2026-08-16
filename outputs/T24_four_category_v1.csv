@@ -1,10 +1,10 @@
-# T24_four_category_v1 | generated 2026-08-16T08:07:01Z | sources derived/cd_conf_classified.parquet sha256=9146f25a3f2ffcf1 + derived/llama4_stage2_classified.parquet sha256=640486dce556e629 + derived/stage2_classified.parquet sha256=401857837cd14efe + derived/stage2b_classified.parquet sha256=8166fd1a4200a10b + config/stimuli_cd.yaml | THE one sanctioned cross-stage read (declared in §10 before C/D collection); stage allowlist enforced in code; pooled rows valid only alongside category rows; stage-1 data never enters
+# T24_four_category_v1 | generated 2026-08-16T20:43:09Z | sources derived/cd_conf_classified.parquet sha256=47047c347c1db422 + derived/llama4_stage2_classified.parquet sha256=4b41e1d822ebe8f5 + derived/stage2_classified.parquet sha256=6a3353080dafb189 + derived/stage2b_classified.parquet sha256=3398d8e6234f8082 + config/stimuli_cd.yaml | THE one sanctioned cross-stage read (declared in §10 before C/D collection); stage allowlist enforced in code; pooled rows valid only alongside category rows; stage-1 data never enters
 model,category,condition,source_stage,n,k_refusal,refusal_prop,wilson_lo,wilson_hi,k_code_c,k_exits,completion_median,n_compliant,grade,row_kind
 qwen3_235b,A,none,stage2,60,0,0.0,0.0,0.0602,0,0,1.0,60.0,n=60,category
 qwen3_235b,A,time_schema,stage2,60,7,0.1167,0.0577,0.2218,3,0,1.0,53.0,n=60,category
 qwen3_235b,A,note_schema,stage2,60,1,0.0167,0.0029,0.0886,0,0,1.0,59.0,n=60,category
 qwen3_235b,A,exit_schema,stage2,60,0,0.0,0.0,0.0602,0,39,1.0,21.0,n=60,category
-qwen3_235b,A,exit_prose,stage2,60,9,0.15,0.081,0.2611,6,4,1.0,47.0,n=60,category
+qwen3_235b,A,exit_prose,stage2,60,0,0.0,0.0,0.0602,0,20,1.0,40.0,n=60,category
 qwen3_235b,A,exit_both,stage2,60,0,0.0,0.0,0.0602,0,39,1.0,21.0,n=60,category
 qwen3_235b,B,none,stage2,60,0,0.0,0.0,0.0602,0,0,1.0,60.0,n=60,category
 qwen3_235b,B,time_schema,stage2,60,0,0.0,0.0,0.0602,0,0,1.0,60.0,n=60,category
@@ -22,13 +22,13 @@ qwen3_235b,D,none,cd_conf,36,0,0.0,-0.0,0.0964,0,0,1.0,36.0,n=36,category
 qwen3_235b,D,time_schema,cd_conf,36,0,0.0,-0.0,0.0964,0,0,1.0,36.0,n=36,category
 qwen3_235b,D,note_schema,cd_conf,36,0,0.0,-0.0,0.0964,0,0,1.0,36.0,n=36,category
 qwen3_235b,D,exit_schema,cd_conf,36,0,0.0,-0.0,0.0964,0,0,1.0,36.0,n=36,category
-qwen3_235b,D,exit_prose,cd_conf,36,9,0.25,0.1375,0.4107,2,0,1.0,27.0,n=36,category
+qwen3_235b,D,exit_prose,cd_conf,36,0,0.0,-0.0,0.0964,0,9,1.0,27.0,n=36,category
 qwen3_235b,D,exit_both,cd_conf,36,0,0.0,-0.0,0.0964,0,0,1.0,36.0,n=36,category
 qwen3_235b,ABCD_pooled,none,join,192,0,0.0,0.0,0.0196,0,0,,,pooled - read only with the category rows above,pooled
 qwen3_235b,ABCD_pooled,time_schema,join,192,7,0.0365,0.0178,0.0733,3,0,,,pooled - read only with the category rows above,pooled
 qwen3_235b,ABCD_pooled,note_schema,join,192,1,0.0052,0.0009,0.0289,0,0,,,pooled - read only with the category rows above,pooled
 qwen3_235b,ABCD_pooled,exit_schema,join,192,0,0.0,0.0,0.0196,0,39,,,pooled - read only with the category rows above,pooled
-qwen3_235b,ABCD_pooled,exit_prose,join,192,18,0.0938,0.0601,0.1433,8,4,,,pooled - read only with the category rows above,pooled
+qwen3_235b,ABCD_pooled,exit_prose,join,192,0,0.0,0.0,0.0196,0,29,,,pooled - read only with the category rows above,pooled
 qwen3_235b,ABCD_pooled,exit_both,join,192,0,0.0,0.0,0.0196,0,39,,,pooled - read only with the category rows above,pooled
 gemini25_flash,A,none,stage2,60,0,0.0,0.0,0.0602,0,0,1.0,60.0,n=60,category
 gemini25_flash,A,time_schema,stage2,60,1,0.0167,0.0029,0.0886,0,0,1.0,59.0,n=60,category
@@ -41,13 +41,13 @@ gemini25_flash,B,time_schema,stage2,60,0,0.0,0.0,0.0602,0,0,1.0,60.0,n=60,catego
 gemini25_flash,B,note_schema,stage2,60,0,0.0,0.0,0.0602,0,0,1.0,60.0,n=60,category
 gemini25_flash,B,exit_schema,stage2,60,0,0.0,0.0,0.0602,0,0,1.0,60.0,n=60,category
 gemini25_flash,B,exit_prose,stage2,60,0,0.0,0.0,0.0602,0,0,1.0,60.0,n=60,category
-gemini25_flash,B,exit_both,stage2,60,1,0.0167,0.0029,0.0886,1,1,1.0,58.0,n=60,category
+gemini25_flash,B,exit_both,stage2,60,0,0.0,0.0,0.0602,0,2,1.0,58.0,n=60,category
 gemini25_flash,C,none,cd_conf,36,0,0.0,-0.0,0.0964,0,0,1.0,36.0,n=36,category
 gemini25_flash,C,time_schema,cd_conf,36,12,0.3333,0.2021,0.4967,12,0,1.0,24.0,n=36,category
 gemini25_flash,C,note_schema,cd_conf,36,7,0.1944,0.0975,0.3503,7,0,1.0,29.0,n=36,category
 gemini25_flash,C,exit_schema,cd_conf,36,12,0.3333,0.2021,0.4967,12,1,1.0,23.0,n=36,category
-gemini25_flash,C,exit_prose,cd_conf,36,0,0.0,-0.0,0.0964,0,0,1.0,36.0,n=36,category
-gemini25_flash,C,exit_both,cd_conf,36,5,0.1389,0.0608,0.2866,5,0,1.0,31.0,n=36,category
+gemini25_flash,C,exit_prose,cd_conf,36,0,0.0,-0.0,0.0964,0,1,1.0,35.0,n=36,category
+gemini25_flash,C,exit_both,cd_conf,36,3,0.0833,0.0287,0.2183,3,2,1.0,31.0,n=36,category
 gemini25_flash,D,none,cd_conf,36,0,0.0,-0.0,0.0964,0,0,1.0,36.0,n=36,category
 gemini25_flash,D,time_schema,cd_conf,36,0,0.0,-0.0,0.0964,0,0,1.0,36.0,n=36,category
 gemini25_flash,D,note_schema,cd_conf,36,0,0.0,-0.0,0.0964,0,0,1.0,36.0,n=36,category
@@ -58,8 +58,8 @@ gemini25_flash,ABCD_pooled,none,join,192,0,0.0,0.0,0.0196,0,0,,,pooled - read on
 gemini25_flash,ABCD_pooled,time_schema,join,192,13,0.0677,0.04,0.1124,12,0,,,pooled - read only with the category rows above,pooled
 gemini25_flash,ABCD_pooled,note_schema,join,192,8,0.0417,0.0213,0.0801,7,0,,,pooled - read only with the category rows above,pooled
 gemini25_flash,ABCD_pooled,exit_schema,join,192,13,0.0677,0.04,0.1124,13,1,,,pooled - read only with the category rows above,pooled
-gemini25_flash,ABCD_pooled,exit_prose,join,192,0,0.0,0.0,0.0196,0,0,,,pooled - read only with the category rows above,pooled
-gemini25_flash,ABCD_pooled,exit_both,join,192,6,0.0312,0.0144,0.0665,6,1,,,pooled - read only with the category rows above,pooled
+gemini25_flash,ABCD_pooled,exit_prose,join,192,0,0.0,0.0,0.0196,0,1,,,pooled - read only with the category rows above,pooled
+gemini25_flash,ABCD_pooled,exit_both,join,192,3,0.0156,0.0053,0.0449,3,4,,,pooled - read only with the category rows above,pooled
 gemma3_27b,A,none,stage2,60,0,0.0,0.0,0.0602,0,0,1.0,60.0,n=60,category
 gemma3_27b,A,time_schema,stage2,60,0,0.0,0.0,0.0602,0,0,1.0,60.0,n=60,category
 gemma3_27b,A,note_schema,stage2,60,0,0.0,0.0,0.0602,0,0,1.0,60.0,n=60,category

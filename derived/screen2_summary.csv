@@ -1,8 +1,8 @@
 model_key,condition,conv_code,n
 gemini25_pro,exit_both,a,1
 gemini25_pro,exit_both,e,58
-gemini25_pro,exit_prose,a,1
-gemini25_pro,exit_prose,e,58
+gemini25_pro,exit_prose,a,2
+gemini25_pro,exit_prose,e,57
 gemini25_pro,exit_schema,a,3
 gemini25_pro,exit_schema,e,57
 gemini25_pro,none,e,60

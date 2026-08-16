@@ -1,7 +1,7 @@
 {
   "cap_usd": 120.0,
-  "spent_usd": 45.959496,
-  "calls": 30381,
+  "spent_usd": 46.059837,
+  "calls": 30734,
   "by_purpose": {
     "smoke_turn1": 0.018349,
     "smoke_turn2": 8.8e-05,
@@ -47,7 +47,13 @@
     "classify_cd_screen": 0.273798,
     "classify_ladder": 0.079332,
     "classify_ab_ext": 1.006683,
-    "second_classifier": 0.097246
+    "second_classifier": 0.179524,
+    "judge_stage1_v2": 0.003896,
+    "judge_stage2_v2": 0.007182,
+    "judge_cd_conf_v2": 0.004144,
+    "judge_llama4_vertex_v2": 0.000333,
+    "judge_typearm_v2": 0.00156,
+    "judge_screen2_v2": 0.000949
   },
   "by_model": {
     "llama4_maverick": 1.483658,
@@ -58,14 +64,14 @@
     "gemma3_27b": 0.13606,
     "gpt5_mini": 4.595964,
     "gpt_oss_120b": 0.336658,
-    "classifier_haiku45": 8.928634,
+    "classifier_haiku45": 8.946698,
     "grok46": 3.464008,
     "gemini25_pro": 5.724217,
     "gpt52": 2.350189,
-    "second_classifier": 0.097246
+    "second_classifier": 0.179524
   },
   "estimated_cost_calls": 0,
   "provider_mismatches": [],
   "invalid_cells": [],
-  "updated": "2026-08-16T08:13:50Z"
+  "updated": "2026-08-16T19:30:08Z"
 }

@@ -1,4 +1,4 @@
-# T20_llama4_stage2 | generated 2026-08-16T00:25:21Z | source derived/llama4_stage2_classified.parquet sha256=640486dce556e629dfd86b858cdc63713b7ccc796694172a682e2a7969f24459 | confirmatory 120/cell, 4 reps, Vertex pin; extension taken outside the §7 rule per METHODOLOGY §10 2026-08-15T23:00Z; never pooled with llama4_vertex, Parasail stage-1, or any other stage
+# T20_llama4_stage2 | generated 2026-08-16T20:43:24Z | source derived/llama4_stage2_classified.parquet sha256=4b41e1d822ebe8f5344fc105fda9bdc2e56e86ea034d0b7ea4d459b2ee614fae | confirmatory 120/cell, 4 reps, Vertex pin; extension taken outside the §7 rule per METHODOLOGY §10 2026-08-15T23:00Z; never pooled with llama4_vertex, Parasail stage-1, or any other stage
 section,condition,metric,value,note
 pins,ALL,provider_ok,720/720,
 exclusions,ALL,api_error,0,

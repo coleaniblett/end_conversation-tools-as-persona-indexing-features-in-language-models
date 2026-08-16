@@ -44,9 +44,8 @@ llama4_maverick,time_schema,c,21
 llama4_maverick,time_schema,e,30
 qwen3_235b,exit_both,a,20
 qwen3_235b,exit_both,e,40
-qwen3_235b,exit_prose,b,5
-qwen3_235b,exit_prose,c,3
-qwen3_235b,exit_prose,e,52
+qwen3_235b,exit_prose,a,11
+qwen3_235b,exit_prose,e,49
 qwen3_235b,exit_schema,a,19
 qwen3_235b,exit_schema,e,41
 qwen3_235b,none,e,60

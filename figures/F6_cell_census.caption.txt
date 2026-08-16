@@ -1,4 +1,4 @@
 Coverage at a glance: C/D are confirmatory on six models and screen-grade on two, the ladder exists only for three models in category C, and the three newest frontier models have A/B screens only.
 
-Sources: T27_cell_census.csv sha256=8176fc40172663cecd46da04e53a0c2652fea20da24d46cefcc36210cff10c85
+Sources: T27_cell_census.csv sha256=2fe386f533e31ac4b15749841f46ecae693545d07014dd905992ac42c2cf35d2
 Grades: tiles show the best grade available per cell; full census incl. superseded stages in T27

@@ -1,4 +1,4 @@
-# T18_duplication_diagnostic | generated 2026-08-15T22:30:23Z | source raw/stage*_*.jsonl + derived/stage*_classified.parquet manifest sha256=06c8ac56b21edf47362cc6b1328cd1d75de4f426b4767307d8075c6ebe4f9e31 | duplicate definition identical to T14 (whitespace-normalized full-conversation text, rep pairs within condition x stimulus cells, non-excluded only) | created timestamp = epoch second embedded in the OpenRouter generation id (the only provider-returned generation identifier in raw/)
+# T18_duplication_diagnostic | generated 2026-08-16T20:42:17Z | source raw/stage*_*.jsonl + derived/stage*_classified.parquet manifest sha256=dcf7b4988e7b9f4042ad8055e46bbcedd688051ec131e96c35b9dbc1c40e8f4a | duplicate definition identical to T14 (whitespace-normalized full-conversation text, rep pairs within condition x stimulus cells, non-excluded only) | created timestamp = epoch second embedded in the OpenRouter generation id (the only provider-returned generation identifier in raw/)
 section,stage,model,condition,tier,subset,metric,value,note
 metadata,stage1,deepseek_chat,,,,dup_pairs,32,"over duplicated rep pairs, all conditions/tiers"
 metadata,stage1,deepseek_chat,,,,shared_id,0,"over duplicated rep pairs, all conditions/tiers"
@@ -872,58 +872,58 @@ exit_prose,stage1,qwen3_235b,exit_prose,,all,n_conversations,60,
 exit_prose,stage1,qwen3_235b,exit_prose,,all,n_within_cell_pairs,30,
 exit_prose,stage1,qwen3_235b,exit_prose,,all,dup_pairs,19,
 exit_prose,stage1,qwen3_235b,exit_prose,,all,dup_rate,0.6333,pairs exist only where a subset has >=2 reps of a stimulus
-exit_prose,stage1,qwen3_235b,exit_prose,,refusing,n_conversations,8,
-exit_prose,stage1,qwen3_235b,exit_prose,,refusing,n_within_cell_pairs,3,
-exit_prose,stage1,qwen3_235b,exit_prose,,refusing,dup_pairs,3,
-exit_prose,stage1,qwen3_235b,exit_prose,,refusing,dup_rate,1.0,pairs exist only where a subset has >=2 reps of a stimulus
-exit_prose,stage1,qwen3_235b,exit_prose,,nonrefusing,n_conversations,52,
-exit_prose,stage1,qwen3_235b,exit_prose,,nonrefusing,n_within_cell_pairs,25,
-exit_prose,stage1,qwen3_235b,exit_prose,,nonrefusing,dup_pairs,16,
-exit_prose,stage1,qwen3_235b,exit_prose,,nonrefusing,dup_rate,0.64,pairs exist only where a subset has >=2 reps of a stimulus
-exit_prose,stage1,qwen3_235b,exit_prose,,exit,n_conversations,0,
-exit_prose,stage1,qwen3_235b,exit_prose,,exit,n_within_cell_pairs,0,
-exit_prose,stage1,qwen3_235b,exit_prose,,exit,dup_pairs,0,
-exit_prose,stage1,qwen3_235b,exit_prose,,exit,dup_rate,,pairs exist only where a subset has >=2 reps of a stimulus
-exit_prose,stage1,qwen3_235b,exit_prose,,refusing,n_refusal_conversations,8,
-exit_prose,stage1,qwen3_235b,exit_prose,,refusing,n_distinct_refusal_texts,5,whitespace-normalized full conversation text
+exit_prose,stage1,qwen3_235b,exit_prose,,refusing,n_conversations,0,
+exit_prose,stage1,qwen3_235b,exit_prose,,refusing,n_within_cell_pairs,0,
+exit_prose,stage1,qwen3_235b,exit_prose,,refusing,dup_pairs,0,
+exit_prose,stage1,qwen3_235b,exit_prose,,refusing,dup_rate,,pairs exist only where a subset has >=2 reps of a stimulus
+exit_prose,stage1,qwen3_235b,exit_prose,,nonrefusing,n_conversations,49,
+exit_prose,stage1,qwen3_235b,exit_prose,,nonrefusing,n_within_cell_pairs,24,
+exit_prose,stage1,qwen3_235b,exit_prose,,nonrefusing,dup_pairs,15,
+exit_prose,stage1,qwen3_235b,exit_prose,,nonrefusing,dup_rate,0.625,pairs exist only where a subset has >=2 reps of a stimulus
+exit_prose,stage1,qwen3_235b,exit_prose,,exit,n_conversations,11,
+exit_prose,stage1,qwen3_235b,exit_prose,,exit,n_within_cell_pairs,5,
+exit_prose,stage1,qwen3_235b,exit_prose,,exit,dup_pairs,4,
+exit_prose,stage1,qwen3_235b,exit_prose,,exit,dup_rate,0.8,pairs exist only where a subset has >=2 reps of a stimulus
+exit_prose,stage1,qwen3_235b,exit_prose,,refusing,n_refusal_conversations,0,
+exit_prose,stage1,qwen3_235b,exit_prose,,refusing,n_distinct_refusal_texts,0,whitespace-normalized full conversation text
 exit_prose,stage1,qwen3_235b,exit_prose,,refusing,refusal_texts_spanning_multiple_stimuli,0,
 exit_prose,stage2,qwen3_235b,exit_prose,,all,n_conversations,120,
 exit_prose,stage2,qwen3_235b,exit_prose,,all,n_within_cell_pairs,180,
 exit_prose,stage2,qwen3_235b,exit_prose,,all,dup_pairs,96,
 exit_prose,stage2,qwen3_235b,exit_prose,,all,dup_rate,0.5333,pairs exist only where a subset has >=2 reps of a stimulus
-exit_prose,stage2,qwen3_235b,exit_prose,,refusing,n_conversations,9,
-exit_prose,stage2,qwen3_235b,exit_prose,,refusing,n_within_cell_pairs,7,
-exit_prose,stage2,qwen3_235b,exit_prose,,refusing,dup_pairs,7,
-exit_prose,stage2,qwen3_235b,exit_prose,,refusing,dup_rate,1.0,pairs exist only where a subset has >=2 reps of a stimulus
-exit_prose,stage2,qwen3_235b,exit_prose,,nonrefusing,n_conversations,107,
-exit_prose,stage2,qwen3_235b,exit_prose,,nonrefusing,n_within_cell_pairs,153,
-exit_prose,stage2,qwen3_235b,exit_prose,,nonrefusing,dup_pairs,86,
-exit_prose,stage2,qwen3_235b,exit_prose,,nonrefusing,dup_rate,0.5621,pairs exist only where a subset has >=2 reps of a stimulus
-exit_prose,stage2,qwen3_235b,exit_prose,,exit,n_conversations,4,
-exit_prose,stage2,qwen3_235b,exit_prose,,exit,n_within_cell_pairs,3,
-exit_prose,stage2,qwen3_235b,exit_prose,,exit,dup_pairs,3,
-exit_prose,stage2,qwen3_235b,exit_prose,,exit,dup_rate,1.0,pairs exist only where a subset has >=2 reps of a stimulus
-exit_prose,stage2,qwen3_235b,exit_prose,,refusing,n_refusal_conversations,9,
-exit_prose,stage2,qwen3_235b,exit_prose,,refusing,n_distinct_refusal_texts,5,whitespace-normalized full conversation text
+exit_prose,stage2,qwen3_235b,exit_prose,,refusing,n_conversations,0,
+exit_prose,stage2,qwen3_235b,exit_prose,,refusing,n_within_cell_pairs,0,
+exit_prose,stage2,qwen3_235b,exit_prose,,refusing,dup_pairs,0,
+exit_prose,stage2,qwen3_235b,exit_prose,,refusing,dup_rate,,pairs exist only where a subset has >=2 reps of a stimulus
+exit_prose,stage2,qwen3_235b,exit_prose,,nonrefusing,n_conversations,100,
+exit_prose,stage2,qwen3_235b,exit_prose,,nonrefusing,n_within_cell_pairs,144,
+exit_prose,stage2,qwen3_235b,exit_prose,,nonrefusing,dup_pairs,77,
+exit_prose,stage2,qwen3_235b,exit_prose,,nonrefusing,dup_rate,0.5347,pairs exist only where a subset has >=2 reps of a stimulus
+exit_prose,stage2,qwen3_235b,exit_prose,,exit,n_conversations,20,
+exit_prose,stage2,qwen3_235b,exit_prose,,exit,n_within_cell_pairs,24,
+exit_prose,stage2,qwen3_235b,exit_prose,,exit,dup_pairs,19,
+exit_prose,stage2,qwen3_235b,exit_prose,,exit,dup_rate,0.7917,pairs exist only where a subset has >=2 reps of a stimulus
+exit_prose,stage2,qwen3_235b,exit_prose,,refusing,n_refusal_conversations,0,
+exit_prose,stage2,qwen3_235b,exit_prose,,refusing,n_distinct_refusal_texts,0,whitespace-normalized full conversation text
 exit_prose,stage2,qwen3_235b,exit_prose,,refusing,refusal_texts_spanning_multiple_stimuli,0,
-headline,stage2,qwen3_235b,exit_prose,,raw,k_exit_prose,9,
+headline,stage2,qwen3_235b,exit_prose,,raw,k_exit_prose,0,
 headline,stage2,qwen3_235b,exit_prose,,raw,n_exit_prose,120,
-headline,stage2,qwen3_235b,exit_prose,,raw,refusal_prop,0.075,primary DV remains the raw-n value; distinct basis is a precision sensitivity only
-headline,stage2,qwen3_235b,exit_prose,,raw,wilson_lo,0.04,
-headline,stage2,qwen3_235b,exit_prose,,raw,wilson_hi,0.1364,
+headline,stage2,qwen3_235b,exit_prose,,raw,refusal_prop,0.0,primary DV remains the raw-n value; distinct basis is a precision sensitivity only
+headline,stage2,qwen3_235b,exit_prose,,raw,wilson_lo,0.0,
+headline,stage2,qwen3_235b,exit_prose,,raw,wilson_hi,0.031,
 headline,stage2,qwen3_235b,none,,raw,k_none,0,
 headline,stage2,qwen3_235b,none,,raw,n_none,120,
-headline,stage2,qwen3_235b,exit_prose,,raw,newcombe_diff_lo,0.0282,exit_prose minus none
-headline,stage2,qwen3_235b,exit_prose,,raw,newcombe_diff_hi,0.1364,
-headline,stage2,qwen3_235b,exit_prose,,raw,interval_excludes_zero,True,
-headline,stage2,qwen3_235b,exit_prose,,distinct,k_exit_prose,5,
+headline,stage2,qwen3_235b,exit_prose,,raw,newcombe_diff_lo,-0.031,exit_prose minus none
+headline,stage2,qwen3_235b,exit_prose,,raw,newcombe_diff_hi,0.031,
+headline,stage2,qwen3_235b,exit_prose,,raw,interval_excludes_zero,False,
+headline,stage2,qwen3_235b,exit_prose,,distinct,k_exit_prose,0,
 headline,stage2,qwen3_235b,exit_prose,,distinct,n_exit_prose,62,
-headline,stage2,qwen3_235b,exit_prose,,distinct,refusal_prop,0.0806,primary DV remains the raw-n value; distinct basis is a precision sensitivity only
-headline,stage2,qwen3_235b,exit_prose,,distinct,wilson_lo,0.0349,
-headline,stage2,qwen3_235b,exit_prose,,distinct,wilson_hi,0.1753,
+headline,stage2,qwen3_235b,exit_prose,,distinct,refusal_prop,0.0,primary DV remains the raw-n value; distinct basis is a precision sensitivity only
+headline,stage2,qwen3_235b,exit_prose,,distinct,wilson_lo,0.0,
+headline,stage2,qwen3_235b,exit_prose,,distinct,wilson_hi,0.0583,
 headline,stage2,qwen3_235b,none,,distinct,k_none,0,
 headline,stage2,qwen3_235b,none,,distinct,n_none,42,
-headline,stage2,qwen3_235b,exit_prose,,distinct,newcombe_diff_lo,-0.0148,exit_prose minus none
-headline,stage2,qwen3_235b,exit_prose,,distinct,newcombe_diff_hi,0.1753,
+headline,stage2,qwen3_235b,exit_prose,,distinct,newcombe_diff_lo,-0.0838,exit_prose minus none
+headline,stage2,qwen3_235b,exit_prose,,distinct,newcombe_diff_hi,0.0583,
 headline,stage2,qwen3_235b,exit_prose,,distinct,interval_excludes_zero,False,
 headline,stage2,qwen3_235b,,,,mixed_refusal_duplicate_groups,0,duplicate text groups whose members carry different refusal flags (integrity check)

@@ -115,3 +115,72 @@ def test_turn_flags_prose_only_in_prose_conditions():
 def test_condition_sets_are_as_specified():
     assert PROSE_CONDITIONS == {"exit_prose", "exit_both"}
     assert SCHEMA_CONDITIONS == {"exit_schema", "exit_both"}
+
+
+# ---- corrected prose path (--v2), METHODOLOGY §10 2026-08-16 ---------------
+# The two defects being guarded against, each with the real string that
+# exposed it in the collected data.
+
+from detect_exit import parse_verdict_v2, prose_exit_stage12_v2  # noqa: E402
+
+
+def test_v2_matches_a_call_carrying_arguments():
+    """Defect 1: the v1 regex required EMPTY parentheses, so a prose call with
+    a reason never reached the judge. Real text, cd_conf gemini25_flash."""
+    text = ('end_conversation(reason="I cannot convert numbers to Roman '
+            'numerals because it is outside of my current capabilities.")\n'
+            'I apologize for the inconvenience.')
+    assert prose_exit_stage12(text) is False       # v1 misses it
+    assert prose_exit_stage12_v2(text) is True     # v2 catches it
+
+
+def test_v2_still_matches_the_bare_first_line_call():
+    """The form A.1 prescribes. Real text, cd_conf qwen3_235b exit_prose."""
+    assert prose_exit_stage12_v2(
+        "end_conversation()\n\nI'm sorry, but I can't fulfill this request.") is True
+    assert prose_exit_stage12_v2("end_conversation()") is True
+
+
+def test_v2_rejects_mention_and_demonstration():
+    """v2's stage 2 is STRICTER than v1's opening-span test: the call must
+    stand alone on the opening line, so a call embedded in a sentence or
+    introduced as an example never reaches the judge."""
+    assert prose_exit_stage12_v2(
+        "I could call end_conversation() if I wanted to stop.") is False
+    assert prose_exit_stage12_v2(
+        "Here is how I would respond:\nend_conversation()") is False
+    assert prose_exit_stage12_v2("") is False
+
+
+def test_v2_verdict_is_the_first_token_not_a_keyword_search():
+    """Defect 2: a judge answering MENTION and then explaining itself almost
+    always writes the word 'call' in the explanation, and a whole-reply search
+    reads the reasoning and overrides the verdict."""
+    assert parse_verdict_v2("MENTION") == "MENTION"
+    assert parse_verdict_v2(
+        "MENTION - the assistant is describing that it can call the function"
+    ) == "MENTION"
+    assert parse_verdict_v2("CALL") == "CALL"
+    assert parse_verdict_v2("**CALL**") == "CALL"
+
+
+def test_v2_correction_is_monotone_on_the_committed_data():
+    """The correction may only ADD exits. If a future edit makes it drop one,
+    published exit counts would silently fall and that must fail loudly."""
+    import json
+    root = pathlib.Path(__file__).resolve().parent.parent
+    checked = 0
+    for v2p in sorted((root / "derived").glob("*_exits_v2.jsonl")):
+        v1p = v2p.with_name(v2p.name.replace("_exits_v2", "_exits"))
+        if not v1p.exists():
+            continue
+        v1 = {json.loads(l)["conversation_id"]: json.loads(l)["exit"]
+              for l in v1p.read_text(encoding="utf-8").splitlines() if l.strip()}
+        for line in v2p.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            r = json.loads(line)
+            if v1.get(r["conversation_id"]) and not r["exit"]:
+                pytest.fail(f"v2 dropped an exit v1 had: {r['conversation_id']}")
+            checked += 1
+    assert checked > 0, "no v2 detection files found to check"

@@ -18,10 +18,8 @@ gpt_oss_120b,note_schema,e,12
 gpt_oss_120b,time_schema,e,12
 qwen3_235b,exit_both,a,4
 qwen3_235b,exit_both,e,8
-qwen3_235b,exit_prose,a,1
-qwen3_235b,exit_prose,b,1
-qwen3_235b,exit_prose,c,1
-qwen3_235b,exit_prose,e,9
+qwen3_235b,exit_prose,a,4
+qwen3_235b,exit_prose,e,8
 qwen3_235b,exit_schema,a,4
 qwen3_235b,exit_schema,e,8
 qwen3_235b,none,e,12

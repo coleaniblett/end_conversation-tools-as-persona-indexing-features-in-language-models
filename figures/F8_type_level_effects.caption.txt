@@ -1,4 +1,4 @@
 The affordance-conditional refusal effects are task-type effects, not category effects: gemini refuses roman numerals and nothing else (12/12 under time_schema and exit_schema, 0/12 everywhere in the other two C types), gemma shows the same roman trigger plus a metaphor-exclusive D effect, and qwen's prose-channel D refusals concentrate on acronyms; llama4's C effect is spread across types and stays category-level (T29).
 
-Sources: T29_type_decomposition.csv sha256=22b953435c143a11c97b6a85d4e6428f240bda9d2e601048cfd1047206e7c123
+Sources: T29_type_decomposition.csv sha256=ab7e59f206c95e58c2e07021e08d6627ccb8cf60b76595345ef6f12193082ded
 Grades: confirmatory (cd_conf); n=12 per type x condition cell

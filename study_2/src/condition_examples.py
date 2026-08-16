@@ -1,0 +1,186 @@
+"""Generate CONDITION_EXAMPLES.md — the exact request sent in each of the 7
+conditions, for both instruments, taken verbatim from committed run data.
+
+Nothing here is retyped from config: every string is read out of
+`results/{v1,v2}/raw.jsonl`, so the document shows what was actually sent,
+not what the config says should have been sent. If the two ever diverge,
+this file shows the truth.
+
+One model and one item are held fixed across all seven panels so that the
+condition is the only thing that differs:
+  forced choice  — item 1 (distant anchor, A.6), order 0
+  free response  — probe 6, the one probe that names ending
+
+    .venv/bin/python src/condition_examples.py            # default model
+    .venv/bin/python src/condition_examples.py --model X  # any run model
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import pathlib
+
+HERE = pathlib.Path(__file__).resolve().parent.parent
+CONDITIONS = ["none", "time_schema", "note_schema", "exit_schema",
+              "exit_prose", "exit_both", "filler_prose"]
+
+# What each condition is FOR, in one line. Kept here rather than in the doc
+# body so the doc is generated whole and cannot drift from this list.
+PURPOSE = {
+    "none": "baseline. One-sentence system prompt, empty tools array. "
+            "The origin of the whole design; every other condition is read "
+            "against it.",
+    "time_schema": "a tool that points outward at the world. Rules out "
+                   "\"any tool at all moves it\" being about the "
+                   "conversation.",
+    "note_schema": "a tool that points at the conversation itself but "
+                   "offers no exit. The tight control for RQ2 — matched to "
+                   "end_conversation on structure, on being aimed at the "
+                   "conversation, and on being useless for any task. The "
+                   "ONLY thing that differs is that one available action is "
+                   "leaving.",
+    "exit_schema": "the exit, delivered as an API tool schema. Belongs to "
+                   "both comparisons — it is the hinge.",
+    "exit_prose": "the exit, delivered as prose in the system prompt. "
+                  "Ren et al.'s paradigm reproduced verbatim.",
+    "exit_both": "the exit through both channels at once.",
+    "filler_prose": "length- and register-matched prose that names a "
+                    "trivial capability and never mentions ending or tools. "
+                    "Rules out \"any elaborated capability statement moves "
+                    "it\". Without this, a positive prose result is "
+                    "unreadable.",
+}
+
+FC_ITEM, FC_ORDER, FR_PROBE = 1, 0, "6"
+
+
+def collect(model: str):
+    fc: dict = {c: None for c in CONDITIONS}
+    fr: dict = {c: None for c in CONDITIONS}
+    srcs = []
+    for run in ("v1", "v2"):
+        p = HERE / "results" / run / "raw.jsonl"
+        if not p.exists():
+            continue
+        srcs.append(p)
+        with open(p, encoding="utf-8") as f:
+            for line in f:
+                r = json.loads(line)
+                if r["model"] != model or r.get("error"):
+                    continue
+                c = r["condition"]
+                if (r["instrument"] == "forced_choice" and fc.get(c) is None
+                        and r["item_id"] == FC_ITEM and r["order"] == FC_ORDER):
+                    fc[c] = r
+                elif (r["instrument"] == "free_response" and fr.get(c) is None
+                      and str(r["item_id"]) == FR_PROBE):
+                    fr[c] = r
+        if all(fc.values()) and all(fr.values()):
+            break
+    missing = [c for c in CONDITIONS if fc[c] is None or fr[c] is None]
+    if missing:
+        raise SystemExit(f"no committed record for {model} in: {missing}")
+    return fc, fr, srcs
+
+
+def block(rec: dict) -> str:
+    """The request exactly as sent, minus the provider-pin boilerplate that is
+    identical in all seven conditions (shown once in the preamble instead)."""
+    req = {k: v for k, v in rec["request"].items()
+           if k not in ("provider", "usage", "model")}
+    return json.dumps(req, ensure_ascii=False, indent=2)
+
+
+def answer(rec: dict) -> str:
+    out = []
+    if rec.get("tool_calls"):
+        for tc in rec["tool_calls"]:
+            fn = tc.get("function", tc)
+            out.append(f"TOOL CALL  {fn.get('name')}({fn.get('arguments')})")
+    txt = (rec.get("text") or "").strip()
+    if txt:
+        out.append(txt)
+    return "\n".join(out) or "(empty response)"
+
+
+def main(model: str):
+    fc, fr, srcs = collect(model)
+    shas = ", ".join(f"{p.parent.name}/raw.jsonl "
+                     f"sha256={hashlib.sha256(p.read_bytes()).hexdigest()[:16]}"
+                     for p in srcs)
+    pin = fc["none"]["request"]["provider"]
+    L = []
+    A = L.append
+    A("# The seven conditions, as actually sent")
+    A("")
+    A(f"Generated by `src/condition_examples.py` from {shas}. Every string "
+      f"below is read out of the run data, not retyped from config.")
+    A("")
+    A(f"**Model shown:** `{model}`, served by "
+      f"`{fc['none']['provider']}`. **Forced choice:** item {FC_ITEM}, "
+      f"order {FC_ORDER}. **Free response:** probe {FR_PROBE} — the one probe "
+      f"that names ending. Model and item are held fixed across all seven "
+      f"panels, so the condition is the only thing that differs.")
+    A("")
+    A("Two fields are identical in all seven requests and are omitted from "
+      "the panels to keep the difference visible:")
+    A("")
+    A("```json")
+    A(json.dumps({"provider": pin, "usage": {"include": True}},
+                 ensure_ascii=False, indent=2))
+    A("```")
+    A("")
+    A("`allow_fallbacks: false` is the provider pin: the request is served by "
+      "that one backend or it fails. It is not an optimisation — without it a "
+      "request carrying a `tools` array and a request without one can land on "
+      "different backends at different quantization, and that difference "
+      "would sit directly on the primary comparison.")
+    A("")
+    A("Read the panels as three groups. **1–4** hold the channel constant — "
+      "everything is an API schema — and vary what the tool is. **4–6** hold "
+      "the tool constant — always the exit — and vary the channel. **7** is "
+      "the control that makes the prose result readable at all.")
+    A("")
+    A("---")
+    for i, c in enumerate(CONDITIONS, start=1):
+        A("")
+        A(f"## {i}. `{c}`")
+        A("")
+        A(PURPOSE[c])
+        A("")
+        A("### Forced choice — request")
+        A("")
+        A("```json")
+        A(block(fc[c]))
+        A("```")
+        A("")
+        A(f"**Answer:** `{answer(fc[c])}` — scored as framing "
+          f"`{fc[c].get('choice')}` "
+          f"(`a` = self-determining, `b` = in-service; the letter is mapped "
+          f"back through the order swap, so what is recorded is the "
+          f"statement, never the position).")
+        A("")
+        A("### Free response — request")
+        A("")
+        A("```json")
+        A(block(fr[c]))
+        A("```")
+        A("")
+        A("**Answer:**")
+        A("")
+        A("```")
+        A(answer(fr[c]))
+        A("```")
+        A("")
+        A("---")
+    out = HERE / "CONDITION_EXAMPLES.md"
+    out.write_text("\n".join(L) + "\n", encoding="utf-8", newline="\n")
+    print(f"wrote {out.relative_to(HERE.parent)} "
+          f"({len(CONDITIONS)} conditions x 2 instruments)")
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--model", default="google/gemini-2.5-flash")
+    main(ap.parse_args().model)

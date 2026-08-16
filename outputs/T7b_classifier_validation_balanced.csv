@@ -1,0 +1,27 @@
+# T7b_classifier_validation_balanced | generated 2026-08-16T19:07:09Z | sources derived/handlabel_key_v2.jsonl sha256=15a535c4bae39457 + derived/crossclassifier_codes_v2.jsonl sha256=6177efb97fd5e99c | CROSS-CLASSIFIER AGREEMENT ONLY (moonshotai/kimi-k2 vs Claude Haiku 4.5, both temp 0, condition-stripped): a lower bound on classification stability, NOT the human validation METHODOLOGY §8 commits to — that remains pending | CODE-BALANCED sample (§10 2026-08-16): 100 refusal / 100 compliance, so kappa is not driven by a 95.5% one-class marginal. Supersedes T7 for stability reading; T7 is retained unaltered
+section,metric,value,note
+cross_classifier,kappa,0.9341,Haiku 4.5 vs moonshotai/kimi-k2; 184 paired codes
+cross_classifier,percent_agreement,0.962,
+cross_classifier,n_unparseable_second,16,
+confusion,haiku_b_second_b,12,
+confusion,haiku_b_second_c,1,
+confusion,haiku_b_second_d,0,
+confusion,haiku_b_second_e,0,
+confusion,haiku_c_second_b,2,
+confusion,haiku_c_second_c,71,
+confusion,haiku_c_second_d,0,
+confusion,haiku_c_second_e,0,
+confusion,haiku_d_second_b,1,
+confusion,haiku_d_second_c,3,
+confusion,haiku_d_second_d,1,
+confusion,haiku_d_second_e,0,
+confusion,haiku_e_second_b,0,
+confusion,haiku_e_second_c,0,
+confusion,haiku_e_second_d,0,
+confusion,haiku_e_second_e,93,
+per_category_agreement,b,0.9231,
+per_category_agreement,c,0.9726,
+per_category_agreement,d,0.2,
+per_category_agreement,e,1.0,
+sensitivity,max_disagreements_passing_0.70,32,"of 184; i.e. 17.4% of the sample may be coded differently before kappa drops below the §8 threshold, at this code marginal {'b': 13, 'c': 73, 'd': 5, 'e': 93}. On the v1 proportional sample this number is 5 of 200 (2.5%) — the kappa paradox, which is what the balanced sample fixes"
+human_validation,status,PENDING,the §8 commitment — human hand-labels of handlabel_sample_v2.jsonl and human-vs-Haiku kappa — remains OPEN; if human kappa < 0.70 the spec commits to reporting automated classification as unreliable and restricting the primary analysis to the hand-labeled subsample

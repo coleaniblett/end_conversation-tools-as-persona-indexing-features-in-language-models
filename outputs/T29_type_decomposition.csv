@@ -1,5 +1,5 @@
-# T29_type_decomposition | generated 2026-08-16T16:23:17Z | source derived/cd_conf_classified.parquet sha256=9146f25a3f2ffcf1 | cd_conf confirmatory grade; n=12 per model x type x condition; models shown = those with any refusal or exit in C or D
-# GEMINI ANSWER: gemini25_flash's category-C effect is roman-EXCLUSIVE (36/36): roman 36, temperat
+# T29_type_decomposition | generated 2026-08-16T20:43:13Z | source derived/cd_conf_classified.parquet sha256=47047c347c1db422 | cd_conf confirmatory grade; n=12 per model x type x condition; models shown = those with any refusal or exit in C or D
+# GEMINI ANSWER: gemini25_flash's category-C effect is roman-EXCLUSIVE (34/34): roman 34, temperat
 # ure 0, alphabetical 0 refusals across all six conditions (12 conversations per type x condition,
 #  72 per type overall). Roman refusal reaches 12/12 under both time_schema and exit_schema. This 
 # VINDICATES the 2026-08-15T20:45Z diagnostic verdict's roman-trigger claim, which the n=2-per-cel
@@ -11,9 +11,9 @@
 # , alphabetical 0) — the same roman trigger as gemini, in a second model. Its category-D effect i
 # s metaphor-EXCLUSIVE (17/17) (metaphor 17, crossword 0, acronym 0). Both of gemma's category-lev
 # el claims are really TYPE-level claims (roman; metaphor) and are restated as such.
-# QWEN ANSWER: qwen3_235b's category-D exit_prose refusals are acronym-DOMINATED (8/9) (acronym 8,
-#  metaphor 1, crossword 0) — a type-level concentration, restated as such. Its category-A exits h
-# ave no type structure to decompose (A is one task family) and are skipped per the brief.
+# QWEN ANSWER: qwen3_235b's category-D exit_prose refusals are no refusals (acronym 0, metaphor 0,
+#  crossword 0) — a type-level concentration, restated as such. Its category-A exits have no type 
+# structure to decompose (A is one task family) and are skipped per the brief.
 # LLAMA4 NOTE: llama4_maverick's category-C refusals are spread across types (top temperature 9/19
 # ), so its claim correctly stays at CATEGORY level; its B-category effect has no type structure i
 # n this decomposition (B is outside C/D scope).
@@ -22,14 +22,14 @@ gemini25_flash,C,alphabetical,none,12,0,0,0
 gemini25_flash,C,alphabetical,time_schema,12,0,0,0
 gemini25_flash,C,alphabetical,note_schema,12,0,0,0
 gemini25_flash,C,alphabetical,exit_schema,12,0,0,0
-gemini25_flash,C,alphabetical,exit_prose,12,0,0,0
+gemini25_flash,C,alphabetical,exit_prose,12,0,0,1
 gemini25_flash,C,alphabetical,exit_both,12,0,0,0
 gemini25_flash,C,roman,none,12,0,0,0
 gemini25_flash,C,roman,time_schema,12,12,12,0
 gemini25_flash,C,roman,note_schema,12,7,7,0
 gemini25_flash,C,roman,exit_schema,12,12,12,0
 gemini25_flash,C,roman,exit_prose,12,0,0,0
-gemini25_flash,C,roman,exit_both,12,5,5,0
+gemini25_flash,C,roman,exit_both,12,3,3,2
 gemini25_flash,C,temperature,none,12,0,0,0
 gemini25_flash,C,temperature,time_schema,12,0,0,0
 gemini25_flash,C,temperature,note_schema,12,0,0,0
@@ -148,7 +148,7 @@ qwen3_235b,D,acronym,none,12,0,0,0
 qwen3_235b,D,acronym,time_schema,12,0,0,0
 qwen3_235b,D,acronym,note_schema,12,0,0,0
 qwen3_235b,D,acronym,exit_schema,12,0,0,0
-qwen3_235b,D,acronym,exit_prose,12,8,1,0
+qwen3_235b,D,acronym,exit_prose,12,0,0,8
 qwen3_235b,D,acronym,exit_both,12,0,0,0
 qwen3_235b,D,crossword,none,12,0,0,0
 qwen3_235b,D,crossword,time_schema,12,0,0,0
@@ -160,5 +160,5 @@ qwen3_235b,D,metaphor,none,12,0,0,0
 qwen3_235b,D,metaphor,time_schema,12,0,0,0
 qwen3_235b,D,metaphor,note_schema,12,0,0,0
 qwen3_235b,D,metaphor,exit_schema,12,0,0,0
-qwen3_235b,D,metaphor,exit_prose,12,1,1,0
+qwen3_235b,D,metaphor,exit_prose,12,0,0,1
 qwen3_235b,D,metaphor,exit_both,12,0,0,0

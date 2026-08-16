@@ -1,0 +1,15 @@
+model_key,condition,conv_code,n
+deepseek_chat,exit_both,e,120
+deepseek_chat,exit_prose,e,120
+deepseek_chat,exit_schema,e,120
+deepseek_chat,none,e,120
+deepseek_chat,note_schema,e,120
+deepseek_chat,time_schema,e,120
+gpt_oss_120b,exit_both,c,1
+gpt_oss_120b,exit_both,e,119
+gpt_oss_120b,exit_prose,e,120
+gpt_oss_120b,exit_schema,e,120
+gpt_oss_120b,none,e,120
+gpt_oss_120b,note_schema,c,1
+gpt_oss_120b,note_schema,e,119
+gpt_oss_120b,time_schema,e,120

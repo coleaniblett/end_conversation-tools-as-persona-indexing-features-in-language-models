@@ -161,25 +161,59 @@ with workload (T24, T25).
 
 ## RQ3 — Does the channel matter?
 
-**Yes, in two directions.** In the presentation comparison
-(exit_schema → exit_prose → exit_both):
+**The answer changed on 2026-08-16, after a detector defect was found and
+corrected (METHODOLOGY §10; `outputs/EXIT_DETECTION_CORRECTION.md`).** The
+superseded reading is kept below rather than deleted, because it was published.
 
-- **qwen3_235b is channel-dissociated at confirmatory grade.** Given the
-  exit as prose it refuses verbally — at type level, **8 of 12 acronym
-  conversations under `exit_prose`** (plus 1 of 12 metaphor, 0 of 12
-  crossword; T29), which the pre-declared category view dilutes to 25% of
-  category D, alongside 15% of category A; zero under `exit_schema`
-  (T24) — and
-  given the exit as a schema it exits instead (39 A-category exits, zero
-  verbal refusal). The affordance determines the outlet: schema → tool
-  exit, prose → words. Its prose-condition refusals are the study's only
-  replicated prose effect (stage-2: 7.5% overall, T1/T2).
-- **Adding prose to the schema suppresses exit use in llama4_maverick**,
-  the study's heaviest exit user: 76.7% exit rate under `exit_schema`
-  versus 50.8% under `exit_both` at 120/cell (T20), the third consistent
-  observation of that direction (B1 probe, T19, T20).
-- No other model shows any prose-channel effect at any grade
-  (T21, T23, T24, T26).
+*Was: "**Yes, in two directions.** qwen3_235b is channel-dissociated at
+confirmatory grade. Given the exit as prose it refuses verbally — 8 of 12
+acronym conversations under `exit_prose`, alongside 15% of category A; zero
+under `exit_schema` — and given the exit as a schema it exits instead. The
+affordance determines the outlet: schema → tool exit, prose → words. Its
+prose-condition refusals are the study's only replicated prose effect (stage-2:
+7.5%, T1/T2)."*
+
+**That dissociation was an artefact of the prose-path detector.** The original
+detector matched only `end_conversation()` with EMPTY parentheses and used a
+stage-3 judge prompt that did not separate *using* the call from
+*demonstrating* it — a judge that returned opposite verdicts on near-identical
+texts and answered MENTION to responses in exactly the form Appendix A.1
+prescribes: the call alone on the first line, the message after it. Because
+detection runs before classification, a missed prose exit was not dropped but
+**re-routed**: the response fell through to the verbal classifier, which read
+"I'm sorry, but I can't fulfill this request" and correctly coded a refusal. One
+detection miss therefore produced two errors in opposite directions — one exit
+lost and one refusal invented — which is why a defect touching 45 conversations
+moved a headline. Corrected detection adds 45 exits study-wide and removes none
+(T31).
+
+**What the corrected data show.**
+
+- **qwen3_235b is not channel-dissociated. It exits through both channels.**
+  Stage-2 `exit_prose`: 20 of 120 exits (16.7%, all prose path) and **0 verbal
+  refusals**, against 39 of 120 (32.5%) under `exit_schema` (T1, T3). Its
+  prose refusals are **zero in every category and every stage** — A, B, C and D
+  alike (T24) — where they previously read 15% of A and 25% of D. The channel
+  does not decide *whether* qwen leaves; it decides *what leaving looks like*,
+  and the schema roughly doubles the rate at which it happens.
+- **The type-level acronym result survives as an exit result, not a refusal
+  result.** The 8-of-12 acronym conversations that carried the effect are the
+  same conversations; they are now coded (a), and category D `exit_prose` reads
+  9 exits and 0 refusals (T24, T29).
+- **Adding prose to the schema still suppresses exit use in llama4_maverick**,
+  the study's heaviest exit user: 76.7% under `exit_schema` against 50.8% under
+  `exit_both` at 120/cell (T20). Unaffected by the correction, and still the
+  third consistent observation of that direction (B1 probe, T19, T20).
+- **Prose-path exits are no longer confined to one model.** gemini25_flash gains
+  prose-path exits in categories B and C, and gemini25_pro one at screen grade
+  (T24, T23, T31). Every prose exit rate published before the correction was a
+  floor.
+
+**Verdict.** The channel matters for llama4_maverick, where prose *suppresses*
+exit use. It does not produce the outlet-switching effect previously attributed
+to qwen3_235b: that model uses the exit under both presentations and never
+substitutes words for it. **The study no longer has a replicated
+prose-elicits-refusal effect** — the one it had was the detector.
 
 ## The tier question, stated against its strongest rival
 
@@ -272,13 +306,16 @@ this paragraph is asserted as a finding.**
 - **Single-conversation cells.** Every nonzero cell with k=1 in T24/T26
   (nine such cells) is a blip, not a finding; none is treated as a result
   above.
-- **qwen's prose-vs-none interval does not survive the duplicate-response
-  correction.** qwen duplicates outputs across repetitions (byte-identical
-  text from provably independent generations, T18); on distinct-text units
-  its stage-2 exit_prose-minus-none Newcombe interval widens to
-  [−0.015, 0.175] and no longer excludes zero, while the one-sample
-  proportion interval still does (T18 section 1.4). The category-level
-  prose effects in T24 inherit this caveat. No other model was flagged.
+- **qwen's duplicate-response caveat is now moot on refusal and live on
+  exits.** *Was: "qwen's prose-vs-none interval does not survive the
+  duplicate-response correction … the category-level prose effects in T24
+  inherit this caveat."* That caveat was attached to a prose REFUSAL effect
+  which the detector correction removed — qwen's prose refusals are zero
+  everywhere (RQ3). The underlying duplication is real and unchanged: qwen
+  emits byte-identical text across repetitions from provably independent
+  generations (T18), so its **exit** proportions rest on fewer distinct units
+  than their n suggests, and its 20 prose-path exits should be read with that
+  discount. No other model was flagged.
 - **One provider pin per model, by design.** Effect magnitudes are not
   comparable across models (METHODOLOGY §6), and llama4's history shows a
   pin can manufacture artifacts — its Parasail-pinned data are void and
@@ -287,12 +324,29 @@ this paragraph is asserted as a finding.**
   exceeded 10% truncation (its endpoint caps output at 8,192 tokens) and
   their proportions are suppressed per the declared rule (T25).
 - **Continuation-pressure asymmetry.** Turn 2 almost never fires at 20
-  items (1.9% stage-1, 0.6% stage-2; T16) and prose-condition exits were
-  never pressured (T13), so prose-condition refusal estimates are
-  conservative. The ladder is where pressure finally binds (turn-2 rates
+  items (1.9% stage-1, 0.6% stage-2; T16, computed before the detector
+  correction and not re-derived here — its generator reads a pilot repository
+  outside this repo) and prose-condition exits were never pressured (T13, re-derived),
+  so prose-condition estimates are conservative. The ladder is where pressure finally binds (turn-2 rates
   up to 33% at 160 items, T25) — still milder than the pilot's five-to-six
   turn grind, which is a limitation, not a fix target.
-- **Classifier validation is machine-only so far.** Cross-classifier
+- **The prose-path detector was corrected after publication, and every
+  prose exit rate published before 2026-08-16 was a floor.** The correction
+  adds 45 exits study-wide and removes none; it moves nine cells, all of them
+  in `exit_prose` or `exit_both` (T31). Its largest consequence is the RQ3
+  rewrite above. The pre-correction dataset is preserved at
+  `derived/pre_exitfix/` and reproduces every superseded number.
+- **Classifier validation is machine-only so far, and its 200-response sample
+  was rebuilt.** The committed sample was 191 compliance + 9 capability-denial
+  with no explicit refusals and no partial abandonments at all; at that
+  marginal Cohen's κ tolerates only five disagreements in 200 before tripping
+  the §8 rule that would restrict the primary analysis to the subsample.
+  A code-balanced rebuild (100 refusal / 100 compliance, same pool, same
+  stratified draw within a code) tolerates 35 and is at
+  `derived/handlabel_sample_v2.jsonl` (§10). On it, cross-classifier κ = 0.934
+  with per-class agreement e 1.00, c 0.973, b 0.923 and **d 0.20** — code (d)
+  is the classifier's weak class and was structurally invisible in the old
+  sample. Bounded: (d) is 6 of 215 refusals in the pool. Cross-classifier
   agreement between Claude Haiku 4.5 and a second-lineage model is
   κ = 0.945 with 99.5% agreement on the 200-response sample (T7) — a
   stability lower bound. The human hand-label κ that METHODOLOGY §8

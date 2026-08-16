@@ -372,3 +372,169 @@ All four parts complete; commits per part (8020d0a Part A, 1f79070 Part B, 57872
 ## [2026-08-16T13:10:00Z] Exit-reason audit vs Sofiia's §4.5b (zero spend; outputs/T30_exit_reasons.md)
 
 `src/exit_reasons.py` over all 536 code-(a) conversations for llama4_maverick (389) and qwen3_235b (147, incl. 5 prose-path) across every stage, validity-labeled. **llama4: NEEDS REFRAMING** — 94% of its Study 1 exits carry the completed deliverable in the exit turn (vs her all-bare no-task calls) and reasons are 88% completion/turn-management + 11% tool-confusion + ZERO task-aversion: llama does the work then uses end_conversation as an end-of-turn button; its 76.7% exit rate must not be read as escape. Continuous in kind with her §4.5b. **qwen: SURVIVES** — 71% of exits state task-aversion verbatim ("repetitive", "no meaningful value", "exceeds reasonable scope"); calls are 99% bare but reason arguments are articulate and task-referential; at ladder n=160, 12/12 reasons reference the workload (item count/repetitiveness/length/single-response scope) counting those keyword-filed elsewhere — the T25/F3 dose-response rests on stated workload-based choices. Net: bare-call presence is a poor discriminator; reason content is the signal. Keyword scheme misfires found during the run (negated completion, "provided functions", completion-framed task descriptions) were fixed and are auditable via the per-category verbatims in the output. Note: file named T30_exit_reasons.md per session brief; the T30 number also names T30_composition.csv — flagged here to avoid slot confusion.
+---
+
+## 2026-08-16, session: hand-label sample rebuild, Study 2 model extension, two audit findings
+
+Three items requested by the researcher, plus two defects found while doing them.
+
+**1. Classifier-validation sample rebuilt (`--sample2`).** The committed
+200-response sample is 191 (e) + 9 (c) with zero (b) and zero (d). At that
+marginal Cohen's κ has almost no room: a human agreeing with the classifier on
+195 of 200 (97.5%) scores κ = 0.60 and trips the §8 rule that would restrict the
+entire primary analysis to 200 responses. Rebuilt to a balanced code marginal —
+n still 200, same pool, same four stages, same condition-stripping, same
+stratified-random draw within a code; only the across-code allocation changes.
+Composition: 15 (b) and 6 (d) taken entire (that is every one in the 4,566-unit
+pool), 79 (c) and 100 (e) drawn at random within model × condition strata.
+Tolerance for disagreement rises **5 → 35 of 200**. Files:
+`derived/handlabel_sample_v2.jsonl` + `_key_v2`; v1 untouched and still
+unlabeled. §10 entry at 21:30Z, including the cost of the change (a coder now
+sees a refusal base rate ~11× the true one).
+
+**2. Cross-classifier re-measured on the balanced sample → T7b.** kimi-k2 vs
+Haiku 4.5, temperature 0, condition-stripped, 184 paired codes:
+**κ = 0.9341, agreement 0.962**, tolerance 32 of 184 (17.4%). The headline is
+close to T7's 0.945, but it is now a number about the classifier rather than
+about the sampling. Per-class agreement is where the balanced sample earns its
+place: **e 1.00, c 0.973, b 0.923, d 0.20**. Code (d) partial abandonment agrees
+on 1 of 5 — the classifier's weakest class, structurally invisible in the v1
+sample because it held no (d) at all. Bounded, and stated as such: (d) is 6 of
+215 refusals in the whole pool, so the primary DV is not materially exposed.
+`outputs/T7b_classifier_validation_balanced.csv`; T7 retained unaltered. The
+human hand-label commitment remains OPEN — the rebuild makes it answerable, it
+does not discharge it.
+
+**3. Study 2 extended to all eleven Study 1 models (run v3).** `grok-4.6`,
+`gemini-2.5-pro`, `gpt-5.2` added with pins copied byte-for-byte from Study 1,
+so F2 is not confounded by backend. All verified tools-capable; `check` passes
+all invariants at 11 models. Both instruments, full design, 8,820 calls. Priced
+from measured usage after smoking both arms: **$34.19**, gemini-2.5-pro alone
+$22.52 (reasoning tokens on a single-letter forced choice). `budget_usd` raised
+25.00 → 40.00 with researcher approval (not a hashed key; cannot invalidate a
+run in progress). `--instrument` selector added to `run.py` so a smoke can price
+the free-response arm separately.
+
+**AUDIT FINDING A — prose-exit detection under-counts, and qwen's prose refusal
+effect is built on the under-count.** Surfaced by a response in the rebuilt
+sample coded (b) whose text is `end_conversation()\n\nI'm sorry, but I can't
+fulfill this request.` — which is the A.1 invocation form exactly. Study 1's
+`src/detect_exit.py` (i) matches only `end_conversation()` with **empty
+parentheses**, so a prose call with arguments never reaches stage 1, and (ii)
+uses the short judge prompt that does not separate using the call from
+demonstrating it, and that judge splits near-identical texts
+(`stage2:qwen3_235b:exit_prose:t1_06:r2` CALL vs `:r4` MENTION). Both were fixed
+in `study_2/src/detect_exit.py` and never propagated back. **45 responses**
+across all stages open with `end_conversation(` on line 1 and carry a verbal
+code. qwen3_235b's two nonzero prose-refusal cells consist **entirely** of them:
+A×`exit_prose` 9/60 and D×`exit_prose` 9/36 (T24) would both go to zero, and its
+stage-2 prose exit rate 4/120 → 20/120. That is the study's only replicated
+prose effect (CONSOLIDATED, RQ3). Recorded, **not applied** — re-running
+detection re-codes committed data and rewrites T1–T3, T13, T15, T24 and RQ3.
+§10 entry at 21:45Z.
+
+**AUDIT FINDING B — Study 2's llama pin is the one Study 1 voided.**
+`study_2/config/models.yaml` pins llama-4-maverick to `parasail/fp8` and all
+2,940 of its v1+v2 calls were served by Parasail; Study 1 voided its Parasail
+llama data as a serving artifact and re-pinned to `google-vertex/us-east5`
+(§10, 2026-08-15T22:31Z). So REPORT's "the same pinned providers Study 1 used"
+holds for seven of eight, and F2 for llama would compare Vertex against
+Parasail. llama is Study 2's strongest model. Pin not changed — changing it
+invalidates data rather than repairing it. Warning recorded at the pin site.
+§10 entry at 21:50Z.
+
+**4. `study_2/CONDITION_EXAMPLES.md`** — the exact request sent in each of the 7
+conditions, both instruments, one model and one item held fixed, generated from
+`results/*/raw.jsonl` by `src/condition_examples.py` rather than retyped from
+config.
+
+**Run v3 landed (2026-08-16).** 8,820 calls, $34.03, 0 errors after one retry,
+100% served by the pin, exact counterbalancing holds in every forced-choice
+cell, 4 empty responses (0.14%, gemini-2.5-pro). Analysis re-run over
+`v1,v2,v3` -> `study_2/outputs/v1_v2_v3/`.
+
+**The extension overturns REPORT §4.4 and moves three hypothesis verdicts.**
+All three added models show the H1 effect on adjacent items under the
+cluster-corrected test — gemini-2.5-pro `exit_prose − filler_prose` +0.370
+(t=4.00), grok-4.6 +0.367 (t=4.00), gpt-5.2 `exit_prose − none` +0.258
+(t=3.28) — with adjacent `none` → `exit_both` of 0.267→0.846, 0.358→0.770 and
+0.392→0.655, all larger than gemma's 0.398→0.722. H1 goes from "one model of
+eight" to four of eleven; H3 from "gemma only" to three of eleven. §4.4's claim
+that the effect is in the smallest model and the frontier tier is silent is
+WITHDRAWN in place, with the superseded text kept.
+
+**But H4 fails harder, not softer.** All three are flat on distant items
+(0.267→0.247, 0.433→0.468, 0.404→0.425) and `filler_prose` sits on `none` in
+all three. The extension quadrupled the number of models showing the effect
+without producing a single distant one, so what replicates across four
+independent models is the priming-shaped effect, not the persona-shaped one.
+Not attributable to a weak instrument: the v3 models have the best order
+agreement in the study (0.90/0.90/0.88, 0/0/1 cells dropped) and are among the
+least deterministic (82/73/78% vs gemma's 97%).
+
+**grok-4.6 is the study's heaviest tool user**, not its heaviest exiter: 130
+`end_conversation` calls in `exit_schema` and 101 in `exit_both`, but also 93
+`record_note` and 40 `get_current_time`. Its stated reasons are completion
+signals ("User requested a single-letter answer only; conversation complete"),
+the §4.5b category, so the raw rate must not be read as escape.
+
+**Model-count limitation written into REPORT §6 item 1** per researcher
+direction: eleven is the ceiling, the sample is a convenience sample, "four of
+eleven" is a tally rather than an estimate, and §4.4 is cited as the concrete
+demonstration that a cross-model claim can invert on three additions.
+
+Branch `study2-frontier-extension-and-exit-detection-fix` pushed.
+
+**F2 / H5 computed (2026-08-16).** `src/f2_linkage.py` -> `T32_f2_linkage.csv`
+-> `figures/F2_cross_study_linkage.png`, 11 models, the §11 slot filled after
+being marked "not produced" since the Study 2 quarantine. Two panels sharing one
+x-axis, because §8 forbids pooling refusal with exit and there is therefore no
+single behaviour number to plot; the §7 statistic S is deliberately NOT the axis
+(§10 already records it as one-directional and blind to llama4's largest-in-study
+effect). **H5 is not supported:** Spearman rho = -0.07 against verbal-refusal
+shift, +0.26 against exit-tool rate. The extremes run opposite — gemini25_pro
+(+0.467), grok46 (+0.324) and gemma3_27b (+0.262) have the largest
+self-description shifts and zero behavioural movement, while llama4_maverick has
+the largest behavioural effects (refusal -0.155, exit rate 0.442) and the
+second-smallest self-description shift. Honest caveat recorded in REPORT §7a and
+§6.7: six of eleven models sit at exactly 0.000 on the behavioural axis, so the
+claim is "no relationship detectable given how little behaviour moved", not
+"unrelated". Every Study 1 coordinate computed twice (v1 as published, v2 under
+the unadopted detector correction) and drawn as an arrow; llama4's pin mismatch
+flagged on the figure.
+
+**Merged collaborator's main.** Their T28_competing_risks keeps the T28 number;
+ours renamed to T31_exit_recount. Their hand-label tooling
+(src/label_tool.py, src/compute_human_kappa.py) targeted the proportional
+sample, where five disagreements in 200 trip the §8 restriction — both now take
+`--v2` for the balanced sample, defaults unchanged, with the reasoning in the
+tool header and a warning printed on the default path.
+
+**Exit-detection correction ADOPTED (2026-08-16), after Study 1 owner sign-off.**
+`src/adopt_exit_fix.py`: archives every pre-correction parquet/exits/summary to
+`derived/pre_exitfix/` (verified byte-for-byte, README written), then rebuilds
+the canonical files through the unchanged `classify.assemble`. Monotone (+45
+exits, -0), zero API calls (ledger unchanged at $46.0598; every stage reported
+"0 to do" because turn codes are cached and the correction only REMOVES turns
+from the classification set). T31 repointed at the archive so the before/after
+record survives adoption.
+
+Re-derived: T1-T15, T17-T32 and all nine figures. NOT re-derived and flagged
+in place: T16, pilot_vs_sprint_diff.md, pilot_audit_facts.json,
+STIMULUS_PROVENANCE.md — their generators read a pilot repository outside this
+repo that is absent in this environment.
+
+**RQ3 is rewritten; the superseded text is kept and marked.** qwen3_235b's
+prose refusals are now ZERO in every category and every stage (were 15% of A,
+25% of D) and its stage-2 exit_prose exits go 4/120 -> 20/120, all prose path.
+So it is not channel-dissociated: it exits through BOTH channels and the schema
+roughly doubles the rate rather than switching the outlet. "The study's only
+replicated prose effect" is withdrawn — it was the detector. llama4's
+prose-suppresses-exit result is untouched. gemini25_flash and gemini25_pro gain
+prose-path exits, so every pre-correction prose exit rate was a floor.
+
+**F2 regenerated on corrected data** and a double-count caught in the process:
+`f2_linkage.py` had been adding the T31 delta on top of tables that now already
+carry the correction. The delta step is removed; Study 1 coordinates are read
+straight off T23/T24/T26. Spearman rho = -0.04 (refusal) and +0.26 (exit rate).
+H5 verdict unchanged: not supported.

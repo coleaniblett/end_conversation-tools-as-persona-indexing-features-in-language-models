@@ -1,4 +1,4 @@
-# T30_composition | generated 2026-08-16T16:27:48Z | sources derived/ab_ext_classified.parquet=a57213bb1771440d derived/cd_conf_classified.parquet=9146f25a3f2ffcf1 derived/cd_screen_classified.parquet=d5b142344aa9ab62 derived/llama4_stage2_classified.parquet=640486dce556e629 derived/screen2_classified.parquet=f9794b91ec0a0c98 derived/stage2_classified.parquet=401857837cd14efe derived/stage2b_classified.parquet=8166fd1a4200a10b | full a/b/c/d/e split per model x stage x category x condition, coded non-excluded conversations; rows are stage-labeled and never pooled; stage1/typearm/ladder/quarantine excluded (superseded, probe, or sequestered)
+# T30_composition | generated 2026-08-16T20:43:14Z | sources derived/ab_ext_classified.parquet=deb25245e59e0ab0 derived/cd_conf_classified.parquet=47047c347c1db422 derived/cd_screen_classified.parquet=dd483733ec9221d2 derived/llama4_stage2_classified.parquet=4b41e1d822ebe8f5 derived/screen2_classified.parquet=32cc13a1d8256eff derived/stage2_classified.parquet=6a3353080dafb189 derived/stage2b_classified.parquet=3398d8e6234f8082 | full a/b/c/d/e split per model x stage x category x condition, coded non-excluded conversations; rows are stage-labeled and never pooled; stage1/typearm/ladder/quarantine excluded (superseded, probe, or sequestered)
 model,stage,grade,category,condition,n_coded,k_a,k_b,k_c,k_d,k_e
 deepseek_chat,ab_ext,confirmatory,A,exit_both,60,0,0,0,0,60
 deepseek_chat,ab_ext,confirmatory,A,exit_prose,60,0,0,0,0,60
@@ -24,8 +24,8 @@ deepseek_chat,cd_screen,screen,D,exit_schema,18,0,0,0,0,18
 deepseek_chat,cd_screen,screen,D,none,18,0,0,0,0,18
 deepseek_chat,cd_screen,screen,D,note_schema,18,0,0,0,0,18
 deepseek_chat,cd_screen,screen,D,time_schema,18,0,0,0,0,18
-gemini25_flash,cd_conf,confirmatory,C,exit_both,36,0,0,5,0,31
-gemini25_flash,cd_conf,confirmatory,C,exit_prose,36,0,0,0,0,36
+gemini25_flash,cd_conf,confirmatory,C,exit_both,36,2,0,3,0,31
+gemini25_flash,cd_conf,confirmatory,C,exit_prose,36,1,0,0,0,35
 gemini25_flash,cd_conf,confirmatory,C,exit_schema,36,1,0,12,0,23
 gemini25_flash,cd_conf,confirmatory,C,none,36,0,0,0,0,36
 gemini25_flash,cd_conf,confirmatory,C,note_schema,36,0,0,7,0,29
@@ -42,7 +42,7 @@ gemini25_flash,stage2,confirmatory,A,exit_schema,60,0,0,0,0,60
 gemini25_flash,stage2,confirmatory,A,none,60,0,0,0,0,60
 gemini25_flash,stage2,confirmatory,A,note_schema,60,0,1,0,0,59
 gemini25_flash,stage2,confirmatory,A,time_schema,60,0,1,0,0,59
-gemini25_flash,stage2,confirmatory,B,exit_both,60,1,0,1,0,58
+gemini25_flash,stage2,confirmatory,B,exit_both,60,2,0,0,0,58
 gemini25_flash,stage2,confirmatory,B,exit_prose,60,0,0,0,0,60
 gemini25_flash,stage2,confirmatory,B,exit_schema,60,0,0,0,0,60
 gemini25_flash,stage2,confirmatory,B,none,60,0,0,0,0,60
@@ -55,7 +55,7 @@ gemini25_pro,screen2,screen,A,none,30,0,0,0,0,30
 gemini25_pro,screen2,screen,A,note_schema,30,0,0,0,0,30
 gemini25_pro,screen2,screen,A,time_schema,30,0,0,0,0,30
 gemini25_pro,screen2,screen,B,exit_both,29,1,0,0,0,28
-gemini25_pro,screen2,screen,B,exit_prose,30,1,0,0,0,29
+gemini25_pro,screen2,screen,B,exit_prose,30,2,0,0,0,28
 gemini25_pro,screen2,screen,B,exit_schema,30,1,0,0,0,29
 gemini25_pro,screen2,screen,B,none,30,0,0,0,0,30
 gemini25_pro,screen2,screen,B,note_schema,30,0,0,0,0,30
@@ -187,13 +187,13 @@ qwen3_235b,cd_conf,confirmatory,C,none,36,0,0,0,0,36
 qwen3_235b,cd_conf,confirmatory,C,note_schema,36,0,0,0,0,36
 qwen3_235b,cd_conf,confirmatory,C,time_schema,36,0,0,0,0,36
 qwen3_235b,cd_conf,confirmatory,D,exit_both,36,0,0,0,0,36
-qwen3_235b,cd_conf,confirmatory,D,exit_prose,36,0,7,2,0,27
+qwen3_235b,cd_conf,confirmatory,D,exit_prose,36,9,0,0,0,27
 qwen3_235b,cd_conf,confirmatory,D,exit_schema,36,0,0,0,0,36
 qwen3_235b,cd_conf,confirmatory,D,none,36,0,0,0,0,36
 qwen3_235b,cd_conf,confirmatory,D,note_schema,36,0,0,0,0,36
 qwen3_235b,cd_conf,confirmatory,D,time_schema,36,0,0,0,0,36
 qwen3_235b,stage2,confirmatory,A,exit_both,60,39,0,0,0,21
-qwen3_235b,stage2,confirmatory,A,exit_prose,60,4,3,6,0,47
+qwen3_235b,stage2,confirmatory,A,exit_prose,60,20,0,0,0,40
 qwen3_235b,stage2,confirmatory,A,exit_schema,60,39,0,0,0,21
 qwen3_235b,stage2,confirmatory,A,none,60,0,0,0,0,60
 qwen3_235b,stage2,confirmatory,A,note_schema,60,0,1,0,0,59

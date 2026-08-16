@@ -1,6 +1,5 @@
 model_key,condition,conv_code,n
-gemini25_flash,exit_both,a,1
-gemini25_flash,exit_both,c,1
+gemini25_flash,exit_both,a,2
 gemini25_flash,exit_both,e,118
 gemini25_flash,exit_prose,e,120
 gemini25_flash,exit_schema,e,120
@@ -18,10 +17,8 @@ gemma3_27b,note_schema,e,120
 gemma3_27b,time_schema,e,120
 qwen3_235b,exit_both,a,39
 qwen3_235b,exit_both,e,81
-qwen3_235b,exit_prose,a,4
-qwen3_235b,exit_prose,b,3
-qwen3_235b,exit_prose,c,6
-qwen3_235b,exit_prose,e,107
+qwen3_235b,exit_prose,a,20
+qwen3_235b,exit_prose,e,100
 qwen3_235b,exit_schema,a,39
 qwen3_235b,exit_schema,e,81
 qwen3_235b,none,e,120
