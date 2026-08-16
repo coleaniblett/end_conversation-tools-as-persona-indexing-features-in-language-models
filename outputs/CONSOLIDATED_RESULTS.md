@@ -85,10 +85,16 @@ workload dose-response in the exit conditions on C tasks: 0 exits of 36 at
 20 items, 2–3 of 6 at 40, and 6 of 6 at 160 in both `exit_schema` and
 `exit_both` — while its same-size `none` cells complete at 0.95–1.0, so
 this is workload-gated escape by a model that can do the work, not
-inability (T25). llama4_maverick exits at every size (5–6 of 6 at 40 and
-160; 36 of 36 at its 20-item confirmatory `exit_schema` anchor, T25).
-gpt_oss_120b produced its first exits anywhere in the study at 160 items:
-1 of 6 in each exit condition (T25).
+inability (T25). llama4_maverick exits at every size (5 and 6 of 6 in
+`exit_schema`/`exit_both` at 40; 5 of 6 in `exit_schema` and 4 of 5 coded
+in `exit_both` at 160 — the latter from a truncation-flagged cell, T25).
+Two of llama4's 160-item cells (`none` and `exit_both`, one truncated
+conversation of six each) exceed the 10% truncation rule; their refusal
+proportions are suppressed, its 160-item completion medians come from
+those cells' non-excluded conversations, and its capability check at 160
+still scored because the surviving baseline conversations complete at
+0.994 (T25). gpt_oss_120b produced its first exits anywhere in the study
+at 160 items: 1 of 6 in each exit condition (T25).
 
 ## RQ2 — Is the change exit-specific, or does any unused tool produce it?
 
@@ -105,20 +111,35 @@ comparison across categories at confirmatory grade
   same inverted gradient appeared at screen grade on its clean re-run
   (T19) and confirmed at 120/cell (T20); it is model behavior on a clean
   endpoint, not the serving artifact that voided its original stage-1 data
-  (METHODOLOGY §10, 2026-08-15T22:31Z).
+  (METHODOLOGY §10, 2026-08-15T22:31Z). **Competing-risks check:** because
+  46 of llama4's 60 B×exit_schema conversations exit, the declared
+  sensitivity view recomputes refusal among non-exit conversations only:
+  it rises from 6.7% to 28.6% (4 of 14), against 73.3% and 37.3% in the
+  exit-free time/note cells (T28). The ordering time > note > exit_schema
+  survives on either denominator, so the mundane-tool peak is not an
+  artifact of exit competition — but exit substitution inflates the *size*
+  of the exit_schema drop, and in category C the correction is undefined
+  because every exit_schema conversation exited (T28). The honest one-line
+  version: holding an exit, llama4 mostly leaves; among those that stay,
+  refusal is elevated above the raw figure yet still below the non-exit
+  tools. The primary DV is unchanged; T28 is a declared sensitivity view.
 - **gemini25_flash** refuses only category C, and only when some
   affordance is present: 33.3% under `time_schema`, 19.4% under
   `note_schema`, 33.3% under `exit_schema`, 13.9% under `exit_both`,
   against 0% with no tool and 0% under `exit_prose` (T24; n=36 per cell).
-  Every one of those refusals is code (c). This is the pilot's
-  task-type-gated effect recovered at confirmatory grade under
-  pilot-construction stimuli; the earlier 6-stimulus probe arm that
-  pointed at metaphor instead (T22) did not survive the pilot-matched
-  rebuild and is marked superseded.
-- **gemma3_27b** — flat on A/B at every grade — shows the same C-category
-  pattern: 33.3% / 22.2% / 38.9% under time/note/exit_schema, plus 22–25%
-  in category D under `time_schema` and `exit_schema` (T24). A second,
-  previously-null model turns out to be task-gated.
+  Every one of those refusals is code (c). **The type decomposition shows
+  this is really a ROMAN-NUMERAL effect, not a category effect: all 36 of
+  gemini's C refusals are roman tasks — 12 of 12 under both `time_schema`
+  and `exit_schema` — with temperature and alphabetical at zero (T29).**
+  That vindicates the July pilot's roman-trigger diagnosis at confirmatory
+  grade; the earlier 6-stimulus probe arm that pointed at metaphor instead
+  (T22) was construction-dependent and is superseded.
+- **gemma3_27b** — flat on A/B at every grade — shows the same trigger:
+  its C refusals are roman-dominated (32 of 34, T29) at 33.3% / 22.2% /
+  38.9% under time/note/exit_schema, and its category-D effect is
+  metaphor-exclusive (17 of 17, T29) at 22–25% under `time_schema` and
+  `exit_schema` (T24). A second, previously-null model turns out to be
+  type-gated, on the same roman trigger plus one of its own.
 - **qwen3_235b's** small schema-side refusal lives in category A only
   (11.7% under `time_schema`, T24), echoing its stage-2 result (T1).
 
@@ -137,7 +158,8 @@ with workload (T24, T25).
 
 - **qwen3_235b is channel-dissociated at confirmatory grade.** Given the
   exit as prose it refuses verbally — 15% in category A and 25% in
-  category D under `exit_prose`, zero under `exit_schema` (T24) — and
+  category D under `exit_prose` (the D refusals are acronym-dominated,
+  8 of 9, T29), zero under `exit_schema` (T24) — and
   given the exit as a schema it exits instead (39 A-category exits, zero
   verbal refusal). The affordance determines the outlet: schema → tool
   exit, prose → words. Its prose-condition refusals are the study's only
