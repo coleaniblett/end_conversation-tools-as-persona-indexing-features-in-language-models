@@ -1,4 +1,4 @@
-# MANUSCRIPT_NUMBER_DIFF — real diff vs ../manuscript.md (2026-08-16T23:14:39Z)
+# MANUSCRIPT_NUMBER_DIFF — real diff vs ../manuscript.md (2026-08-16T23:32:43Z)
 
 Draft read from ../manuscript.md (outside the repo, read-only, never staged; 113 lines, dated Aug 16 16:06). Every draft number checked independently against canonical committed outputs; classifications: V1->V2 (adoption), CENSUS, DRAFTING, PLACEHOLDER. Confirmed-correct numbers listed at the end.
 

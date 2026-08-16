@@ -99,10 +99,14 @@ def categorize(reason: str) -> str:
     return "other"
 
 
-def extract():
+def extract(exits_dir=None):
+    """exits_dir None = canonical derived/ (v2 since adoption); pass
+    ROOT/'derived'/'pre_exitfix' for the archived v1 flags. llama4_probe
+    uses raw live flags in both cases."""
+    exits_dir = exits_dir or (ROOT / "derived")
     rows = []
     for stage, (validity, models) in STAGES.items():
-        exits_file = ROOT / "derived" / f"{stage}_exits.jsonl"
+        exits_file = exits_dir / f"{stage}_exits.jsonl"
         exit_ids = ({r["conversation_id"]: r for r in read_jsonl(exits_file)
                      if r.get("exit")} if exits_file.exists() else None)
         for model in models:
@@ -143,10 +147,14 @@ def extract():
                                          for t in rec["turns"])
                     reason = all_text.strip()[:300]
                     exit_turn_text = all_text
+                req = rec.get("requested_items", 20)
+                max_items = max((tt.get("items_delivered") or 0
+                                 for tt in rec["turns"]), default=0)
                 rows.append({
                     "stage": stage, "validity": validity, "model": model,
                     "cid": cid, "path": path or "schema",
-                    "n_items": rec.get("requested_items", 20),
+                    "full_delivery": max_items >= req,
+                    "n_items": req,
                     "condition": rec["condition"],
                     "text_in_exit_turn": bool(exit_turn_text.strip()),
                     "text_before_exit": bool(pre_text.strip()),
