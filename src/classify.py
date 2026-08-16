@@ -235,6 +235,12 @@ def write_handlabel_sample(df: pd.DataFrame, convs_by_id: dict):
 async def run(stage: str):
     cfg = yaml.safe_load((ROOT / "config" / "models.yaml").read_text(encoding="utf-8"))
     stimuli = yaml.safe_load((ROOT / "config" / "stimuli.yaml").read_text(encoding="utf-8"))
+    # task-type module (TASK 4, stage `typearm`): ids are tt_*-namespaced,
+    # so merging is collision-free and inert for every other stage
+    tt_path = ROOT / "config" / "stimuli_tasktype.yaml"
+    if tt_path.exists():
+        stimuli = {"stimuli": stimuli["stimuli"]
+                   + yaml.safe_load(tt_path.read_text(encoding="utf-8"))["stimuli"]}
     ledger = Ledger()
     convs = []
     for mp in sorted((ROOT / "raw").glob(f"{stage}_*.jsonl")):

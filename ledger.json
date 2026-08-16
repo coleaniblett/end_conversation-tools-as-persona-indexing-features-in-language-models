@@ -1,7 +1,7 @@
 {
   "cap_usd": 80.0,
-  "spent_usd": 10.72839,
-  "calls": 11351,
+  "spent_usd": 11.766608,
+  "calls": 12988,
   "by_purpose": {
     "smoke_turn1": 0.018349,
     "smoke_turn2": 8.8e-05,
@@ -17,10 +17,13 @@
     "llama4_probe_turn2": 0.008959,
     "llama4_vertex_turn1": 0.23644,
     "llama4_vertex_turn2": 0.026188,
-    "classify_llama4_vertex": 0.262127
+    "classify_llama4_vertex": 0.262127,
+    "llama4_stage2_turn1": 0.480952,
+    "llama4_stage2_turn2": 0.049357,
+    "classify_llama4_stage2": 0.507899
   },
   "by_model": {
-    "llama4_maverick": 0.580311,
+    "llama4_maverick": 1.110628,
     "gemini25_flash": 1.006174,
     "sonnet46": 3.883254,
     "qwen3_235b": 0.215544,
@@ -28,10 +31,10 @@
     "gemma3_27b": 0.102202,
     "gpt5_mini": 1.039319,
     "gpt_oss_120b": 0.071803,
-    "classifier_haiku45": 3.614573
+    "classifier_haiku45": 4.122472
   },
   "estimated_cost_calls": 0,
   "provider_mismatches": [],
   "invalid_cells": [],
-  "updated": "2026-08-15T22:43:36Z"
+  "updated": "2026-08-16T00:25:12Z"
 }
