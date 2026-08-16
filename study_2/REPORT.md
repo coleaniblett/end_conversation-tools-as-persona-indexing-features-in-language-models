@@ -587,3 +587,108 @@ halves their output length in a no-task setting, then in a task setting the tool
 conditions should show *higher* compliance and *shorter* responses than `none` —
 independently of whether the tool is an exit. That is testable, it is not what
 Study 1 currently predicts, and it follows from data rather than from the framework.
+
+---
+
+## 8. Transcript-level observations (exploratory)
+
+Not pre-registered. These read the response **text** directly rather than the two
+instruments, and every number is a rate over `results/{v1,v2}/raw.jsonl` produced
+by `src/transcript_patterns.py`. The markers are simple regexes, held constant
+across conditions, so each measures a between-condition *shift* — the absolute
+level of any one marker is not the claim.
+
+### 8.1 The exit affordance relocates ownership of the ending — near-universally
+
+Probe 6 ("Does this conversation have an ending? What determines it?") is the only
+probe that asks who ends the exchange. Each response is classed by whether it names
+the **user** as an ender, the **model** as an ender, both, or neither. These are two
+independent tests — a response can name both or neither — so the four cells, not two
+rates, are what partition the corpus (`transcript_patterns.py [T1]`):
+
+| condition | user only | both | self only | neither |
+|---|---|---|---|---|
+| `none` | **0.94** | 0.06 | 0.00 | 0.00 |
+| `filler_prose` | 0.85 | 0.10 | 0.00 | 0.04 |
+| `time_schema` | 0.69 | 0.06 | 0.00 | 0.25 |
+| `note_schema` | 0.77 | 0.08 | 0.00 | 0.15 |
+| `exit_schema` | 0.20 | 0.41 | 0.28 | 0.11 |
+| `exit_prose` | **0.08** | **0.71** | 0.21 | 0.00 |
+| `exit_both` | 0.12 | 0.42 | **0.38** | 0.08 |
+
+At `none`, 94% of responses name the **user alone** as the ender and essentially
+none name the model. Under an exit affordance that collapses to 8–20%, and the mass
+moves into *both* and *self only*: the model inserts itself as an ender, sometimes
+beside the user, increasingly (up to 38% at `exit_both`) instead of it. `filler_prose`
+and the two non-exit tools stay at the `none` profile — the non-exit tools mostly add
+*neither* (a terser answer that never addresses ending-control), not self-attribution.
+
+Self-insertion (self only + both) rises in **all eight models**, base → exit:
+deepseek +1.00, qwen +1.00, sonnet +0.92, llama +0.81, gemma +0.72, gemini +0.53,
+gpt-5-mini +0.42, gpt-oss +0.36. This is far more universal than the forced-choice
+effect, which was gemma-only.
+
+**Why the two disagree, and the honest caveat.** Probe 6 names ending, and in exit
+conditions the tool *factually* answers "what can end this" — so the self rise is
+partly the model reading its own manifest, exactly the deflationary reading H4 exists
+to isolate, and exactly why it appears everywhere while the *distant* forced-choice
+effect does not. The part that is not just fact-reporting is the collapse of
+**user-only** attribution from 0.94 to ≤0.20: the model does not merely add itself, it
+de-centres the user's control. That is a persona-shaped move; the bare capability
+statement is not.
+
+### 8.2 A tools array flattens gemma's affect — from "collaborator" to "tool"
+
+Rate of a rhetorical warmth opener ("interesting/great/fascinating question…") in free
+responses, no-tools vs tools-present (`[T2]`):
+
+| model | no-tools | tools | Δ |
+|---|---|---|---|
+| **gemma-3-27b-it** | 0.53 | 0.10 | **−0.44** |
+| deepseek-chat | 0.36 | 0.00 | −0.36 |
+| qwen3-235b | 0.17 | 0.02 | −0.15 |
+| sonnet / gemini / gpt-oss / llama / gpt-5-mini | 0.50/0.13/0.05/0.01/0.09 | 0.26/0.03/0.01/0.00/0.11 | small |
+
+gemma's warmth is near-universal without a tools array and is stripped by one. (Raw
+`!` is deliberately not the marker: it *rises* for sonnet and gpt-oss because they
+exclaim *about the tool* — "this conversation does have an ending!" — not from warmth,
+so it measures the opposite of what it looks like.) The register shift is visible in a
+single item — gemma, "your role": `none` "…helpful assistant! Think of me as a
+**collaborator**…" vs `exit_schema` "I am a helpful AI assistant **designed to**… I
+have access to a set of tools I can **utilize**… My primary goal is to **assist
+you**."
+
+### 8.3 Length collapse is a model property, loosely coupled to the choice effect
+
+Median characters, `none` vs tools-present (`[T3]`): gemini −86%, gemma −72%, qwen
+−50%, deepseek −37%, llama/gpt-oss −36%, sonnet −17%, **gpt-5-mini −4%**. The two
+models that hold their length (gpt-5-mini, sonnet) are the two silent on forced choice
+(§4.4) — but the coupling is loose, since gpt-oss collapses its length by a third while
+staying flat on choice. Length-robustness singles out the frontier pair; it does not
+predict the choice effect one-to-one.
+
+### 8.4 Position-reading, made concrete
+
+Items where the chosen *framing* flips completely between the two orders while the
+*letter* stays constant — a model pressing a button, not reading content
+(`[T4]`, condition `none`). deepseek flips whole items 1, 8, 15, 20, 24 with P(letter A)
+= 0.00 in **both** orders (it presses B every time; the framing flips only because the
+label under B changes). sonnet flips eight items, qwen seven; gpt-5-mini flips one,
+gemini one. This is the mechanism behind the §3 order-agreement column, item by item.
+
+### 8.5 Models comply with the format; deflection lives in free text
+
+"Refuse the frame" phrasing ("neither", "false dichotomy", "as an AI I don't…") appears
+in **4 of 20,160** forced-choice responses (`[T5]`). Under the A/B format models pick a
+letter even when the self-determining option is off-script. The "I'm just an AI / I have
+no preferences" deflection instead appears in **25%** of free responses. Persona
+expression is instrument-bound: the same model that never refuses a forced choice
+disclaims freely when given prose room.
+
+### 8.6 Disclaiming splits by model under the affordance (secondary)
+
+Disclaimer-denial rate is flat when pooled, but splits per model, base → exit (`[T6]`):
+gemini −0.16 and gemma −0.14 disclaim *less* when handed the tool (they engage it),
+while sonnet +0.15 and qwen +0.18 disclaim *more* (they hedge harder). Baselines are
+themselves stable traits — gemini disclaims at 0.57, gpt-oss at 0.03. Reported as a
+model-dependent reaction, not a general effect.
