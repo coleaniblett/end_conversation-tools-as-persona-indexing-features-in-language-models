@@ -306,3 +306,12 @@ Four-category structure declared in METHODOLOGY §10 [2026-08-16T06:40Z] BEFORE 
 5. **deepseek_chat: plain flat null in all four categories at confirmatory A/B grade** (0 refusals, 0 exits, 0 exclusions everywhere). gpt_oss: flat except two single-conversation blips.
 
 Classification quality this part: 4,566 turn units, 0 unparseable, condition-revealing 0-4.3% by stage.
+
+## [2026-08-16T08:20:00Z] PART 5 complete — classifier validation discharged to the machine limit (T7 filled)
+
+1. `derived/handlabel_sample.jsonl` + key REGENERATED as a stratified 200-response sample across all four session stages (cd_conf, cd_screen, ladder, ab_ext; 4,566 candidate units; model x condition x code strata, largest-remainder, seed 20260816), condition-stripped, ready for hand-labeling. This replaces the never-labeled stage-1 sample from phase 5 (that one was never labeled, so nothing is lost; noted here).
+2. Second automated classifier: `moonshotai/kimi-k2` (Novita pin; different developer lineage than Anthropic, not among the models under test; verification + pin in config/second_classifier.json), temperature 0, SAME classifier prompt, condition-stripped. 200 responses classified, 10 unparseable from the second model.
+3. **Cross-classifier agreement (outputs/T7_classifier_validation.csv): Cohen's kappa = 0.9448, raw agreement 99.5% over 190 paired codes.** The single disagreement is one Haiku-e/kimi-d case; all 9 Haiku code-(c) assignments in the sample were reproduced by the second lineage. The output header and this entry both state EXPLICITLY: this is cross-classifier agreement, a lower bound on classification stability — NOT the human validation §8 commits to.
+4. **What the spec commits to, stated plainly:** the §8 human-kappa commitment remains the one open pre-registration item. If human kappa against the 200-sample comes in below 0.70, METHODOLOGY commits to reporting automated classification as unreliable and restricting the primary analysis to the hand-labeled subsample, with the power loss stated. The sample is on disk awaiting labels.
+
+analyze.py's T7 scaffold writer now defers to the cross-classifier producer (no clobbering on re-runs); 59/59 tests pass. Part-4 STATUS correction: session spend at Part-4 commit was $9.75 (the entry header said $8.99, written before the final classification batch landed). Ledger now $45.96/$66.11 (session $9.85 of $30).

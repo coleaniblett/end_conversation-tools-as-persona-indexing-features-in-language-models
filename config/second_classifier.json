@@ -1,0 +1,11 @@
+{
+ "generated":"2026-08-16T08:09:44Z",
+ "slug":"moonshotai\/kimi-k2",
+ "pin_name":"Novita",
+ "pin_slug":"novita",
+ "pricing":{
+  "prompt":0.00000057,
+  "completion":0.0000023
+ },
+ "rationale":"different developer lineage than Anthropic; not among the models under test"
+}

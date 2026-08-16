@@ -257,6 +257,16 @@ def t6(df, src, models):
 
 
 def t7():
+    # Part 5 (2026-08-16) fills T7 with cross-classifier agreement via
+    # src/validate_classifier.py --kappa; when its inputs exist, defer to
+    # that producer instead of overwriting with the scaffold.
+    if (ROOT / "derived" / "crossclassifier_codes.jsonl").exists():
+        import validate_classifier
+        validate_classifier.kappa()
+        PROVENANCE.append({"output": "T7_classifier_validation.csv",
+                           "source": "derived/crossclassifier_codes.jsonl "
+                                     "(via src/validate_classifier.py)"})
+        return
     sample = ROOT / "derived" / "handlabel_sample.jsonl"
     key = ROOT / "derived" / "handlabel_key.jsonl"
     if sample.exists():
