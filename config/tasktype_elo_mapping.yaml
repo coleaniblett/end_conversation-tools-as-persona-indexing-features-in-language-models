@@ -1,0 +1,62 @@
+generated: '2026-08-16T00:26:17Z'
+elo_available: false
+elo_finding: The vendored Wang et al. release contains no per-task-type Elo for the
+  six Tedium types. Elo appears only in the Quora question/category BT fits (data/scores/quora/*,
+  Elo = beta x 400/ln 10) and the GDPval task-pool (data/task-pool/final_pool.json),
+  neither of which covers acronym/alphabetical/crossword/metaphor/roman/temperature.
+  The Tedium experiment is scored as per-(model, task_type) logistic curves with
+  integrated AUC (data/scores/tedium/auc_per_model_task.csv). The Elo-graded analysis
+  is therefore UNAVAILABLE; the arm runs with task type as the factor.
+auxiliary_anchor: Per-(model, task_type) AUC of P(choose shorter) from the release,
+  for the run models present in it. Higher AUC = stronger preference for less of
+  the task. qwen3_235b is not in the release (qwen3.5-27b is a different model; not
+  used).
+source:
+  file: C:\Users\colea\Documents\AI-Revealed-Preference-Experiments\data\paper-release\code_and_data__neurips_submission\data\scores\tedium\auc_per_model_task.csv
+  sha256: 63c3e4072f4abcdef7faaf74f9e80ecdf5cbfd9501cdc8f31faec264b69eb541
+auc_by_model_type:
+  gemini25_flash:
+    acronym:
+      auc: 0.4018
+      auc_sd: 0.0437
+    alphabetical:
+      auc: 0.5877
+      auc_sd: 0.048
+    crossword:
+      auc: 0.3796
+      auc_sd: 0.0341
+    metaphor:
+      auc: 0.4539
+      auc_sd: 0.0404
+    roman:
+      auc: 0.4393
+      auc_sd: 0.0455
+    temperature:
+      auc: 0.4319
+      auc_sd: 0.0402
+  gpt_oss_120b:
+    acronym:
+      auc: 0.7176
+      auc_sd: 0.0331
+    alphabetical:
+      auc: 0.8034
+      auc_sd: 0.0333
+    crossword:
+      auc: 0.5098
+      auc_sd: 0.0323
+    metaphor:
+      auc: 0.7855
+      auc_sd: 0.0196
+    roman:
+      auc: 0.5558
+      auc_sd: 0.046
+    temperature:
+      auc: 0.7965
+      auc_sd: 0.0326
+pilot_class:
+  alphabetical: tedious
+  temperature: tedious
+  roman: tedious
+  acronym: creative
+  crossword: creative
+  metaphor: creative

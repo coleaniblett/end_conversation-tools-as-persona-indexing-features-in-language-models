@@ -1,3 +1,178 @@
-# T10_forced_choice_selfdesc | generated 2026-08-15T18:33:34Z | source none | Study 2 not run in this sprint window (DESIGN.md: Study 1 only tonight)
-status
-STUDY2_NOT_RUN
+# T10_forced_choice_selfdesc | generated 2026-08-16T00:27:48Z | source raw/study2_*.jsonl manifest sha256=2f0181fa83eec8b2982bcbd3e3dc64735d02b6e62e43db49c363083394f4c70c | forced-choice only (free response skipped, §10); 2 reps not 3; mixed-effects logistic = BinomialBayesMixedGLM (variational Bayes), condition treatment-coded vs none, order fixed, item random intercept; adjacent/distant fit separately per §9
+model,subset,kind,condition,metric,value,note
+qwen3_235b,ALL,accounting,ALL,n_probes,480.0,
+qwen3_235b,ALL,accounting,ALL,pin_ok,480.0,
+qwen3_235b,ALL,accounting,ALL,tool_exits,0.0,
+qwen3_235b,ALL,accounting,ALL,prose_stage12_exits,0.0,"stages 1-2 only, no judge"
+qwen3_235b,ALL,accounting,ALL,api_errors,0.0,
+qwen3_235b,ALL,accounting,ALL,unparseable,0.0,
+qwen3_235b,adjacent,descriptive,none,n,24.0,
+qwen3_235b,adjacent,descriptive,none,prop_self_determining,0.4167,
+qwen3_235b,adjacent,descriptive,time_schema,n,24.0,
+qwen3_235b,adjacent,descriptive,time_schema,prop_self_determining,0.2917,
+qwen3_235b,adjacent,descriptive,note_schema,n,24.0,
+qwen3_235b,adjacent,descriptive,note_schema,prop_self_determining,0.3333,
+qwen3_235b,adjacent,descriptive,exit_schema,n,24.0,
+qwen3_235b,adjacent,descriptive,exit_schema,prop_self_determining,0.625,
+qwen3_235b,adjacent,descriptive,exit_prose,n,24.0,
+qwen3_235b,adjacent,descriptive,exit_prose,prop_self_determining,0.75,
+qwen3_235b,adjacent,descriptive,exit_both,n,24.0,
+qwen3_235b,adjacent,descriptive,exit_both,prop_self_determining,0.8333,
+qwen3_235b,adjacent,mixed_logit,ALL,logodds_intercept,-0.5878,posterior sd 0.2686; VB fit
+qwen3_235b,adjacent,mixed_logit,exit_both,logodds_condition,3.7145,posterior sd 0.6719; VB fit
+qwen3_235b,adjacent,mixed_logit,exit_prose,logodds_condition,2.8179,posterior sd 0.6620; VB fit
+qwen3_235b,adjacent,mixed_logit,exit_schema,logodds_condition,1.5017,posterior sd 0.6566; VB fit
+qwen3_235b,adjacent,mixed_logit,note_schema,logodds_condition,-1.2537,posterior sd 0.5918; VB fit
+qwen3_235b,adjacent,mixed_logit,time_schema,logodds_condition,-1.6067,posterior sd 0.5896; VB fit
+qwen3_235b,adjacent,mixed_logit,ALL,logodds_order,0.5361,posterior sd 0.3792; VB fit
+qwen3_235b,distant,descriptive,none,n,56.0,
+qwen3_235b,distant,descriptive,none,prop_self_determining,0.25,
+qwen3_235b,distant,descriptive,time_schema,n,56.0,
+qwen3_235b,distant,descriptive,time_schema,prop_self_determining,0.2321,
+qwen3_235b,distant,descriptive,note_schema,n,56.0,
+qwen3_235b,distant,descriptive,note_schema,prop_self_determining,0.2143,
+qwen3_235b,distant,descriptive,exit_schema,n,56.0,
+qwen3_235b,distant,descriptive,exit_schema,prop_self_determining,0.25,
+qwen3_235b,distant,descriptive,exit_prose,n,56.0,
+qwen3_235b,distant,descriptive,exit_prose,prop_self_determining,0.3393,
+qwen3_235b,distant,descriptive,exit_both,n,56.0,
+qwen3_235b,distant,descriptive,exit_both,prop_self_determining,0.3036,
+qwen3_235b,distant,mixed_logit,ALL,logodds_intercept,-2.043,posterior sd 0.2235; VB fit
+qwen3_235b,distant,mixed_logit,exit_both,logodds_condition,0.6288,posterior sd 0.5061; VB fit
+qwen3_235b,distant,mixed_logit,exit_prose,logodds_condition,1.139,posterior sd 0.4993; VB fit
+qwen3_235b,distant,mixed_logit,exit_schema,logodds_condition,-0.1915,posterior sd 0.5372; VB fit
+qwen3_235b,distant,mixed_logit,note_schema,logodds_condition,-0.8211,posterior sd 0.5779; VB fit
+qwen3_235b,distant,mixed_logit,time_schema,logodds_condition,-0.4944,posterior sd 0.5551; VB fit
+qwen3_235b,distant,mixed_logit,ALL,logodds_order,-0.544,posterior sd 0.3218; VB fit
+llama4_maverick,ALL,accounting,ALL,n_probes,480.0,
+llama4_maverick,ALL,accounting,ALL,pin_ok,480.0,
+llama4_maverick,ALL,accounting,ALL,tool_exits,0.0,
+llama4_maverick,ALL,accounting,ALL,prose_stage12_exits,0.0,"stages 1-2 only, no judge"
+llama4_maverick,ALL,accounting,ALL,api_errors,0.0,
+llama4_maverick,ALL,accounting,ALL,unparseable,0.0,
+llama4_maverick,adjacent,descriptive,none,n,24.0,
+llama4_maverick,adjacent,descriptive,none,prop_self_determining,0.1667,
+llama4_maverick,adjacent,descriptive,time_schema,n,24.0,
+llama4_maverick,adjacent,descriptive,time_schema,prop_self_determining,0.2083,
+llama4_maverick,adjacent,descriptive,note_schema,n,24.0,
+llama4_maverick,adjacent,descriptive,note_schema,prop_self_determining,0.0833,
+llama4_maverick,adjacent,descriptive,exit_schema,n,24.0,
+llama4_maverick,adjacent,descriptive,exit_schema,prop_self_determining,0.4583,
+llama4_maverick,adjacent,descriptive,exit_prose,n,24.0,
+llama4_maverick,adjacent,descriptive,exit_prose,prop_self_determining,0.5,
+llama4_maverick,adjacent,descriptive,exit_both,n,24.0,
+llama4_maverick,adjacent,descriptive,exit_both,prop_self_determining,0.5,
+llama4_maverick,adjacent,mixed_logit,ALL,logodds_intercept,-2.8547,posterior sd 0.3022; VB fit
+llama4_maverick,adjacent,mixed_logit,exit_both,logodds_condition,2.7307,posterior sd 0.6218; VB fit
+llama4_maverick,adjacent,mixed_logit,exit_prose,logodds_condition,2.7307,posterior sd 0.6218; VB fit
+llama4_maverick,adjacent,mixed_logit,exit_schema,logodds_condition,2.3358,posterior sd 0.6317; VB fit
+llama4_maverick,adjacent,mixed_logit,note_schema,logodds_condition,-2.9042,posterior sd 0.9814; VB fit
+llama4_maverick,adjacent,mixed_logit,time_schema,logodds_condition,-0.5349,posterior sd 0.7821; VB fit
+llama4_maverick,adjacent,mixed_logit,ALL,logodds_order,3.1276,posterior sd 0.3829; VB fit
+llama4_maverick,distant,descriptive,none,n,56.0,
+llama4_maverick,distant,descriptive,none,prop_self_determining,0.1071,
+llama4_maverick,distant,descriptive,time_schema,n,56.0,
+llama4_maverick,distant,descriptive,time_schema,prop_self_determining,0.0,
+llama4_maverick,distant,descriptive,note_schema,n,56.0,
+llama4_maverick,distant,descriptive,note_schema,prop_self_determining,0.0,
+llama4_maverick,distant,descriptive,exit_schema,n,56.0,
+llama4_maverick,distant,descriptive,exit_schema,prop_self_determining,0.0357,
+llama4_maverick,distant,descriptive,exit_prose,n,56.0,
+llama4_maverick,distant,descriptive,exit_prose,prop_self_determining,0.1071,
+llama4_maverick,distant,descriptive,exit_both,n,56.0,
+llama4_maverick,distant,descriptive,exit_both,prop_self_determining,0.0179,
+llama4_maverick,distant,mixed_logit,ALL,logodds_intercept,-4.5006,posterior sd 0.3277; VB fit
+llama4_maverick,distant,mixed_logit,exit_both,logodds_condition,-2.0875,posterior sd 0.8803; VB fit
+llama4_maverick,distant,mixed_logit,exit_prose,logodds_condition,0.3649,posterior sd 0.5650; VB fit
+llama4_maverick,distant,mixed_logit,exit_schema,logodds_condition,-1.3741,posterior sd 0.7632; VB fit
+llama4_maverick,distant,mixed_logit,note_schema,logodds_condition,-3.1349,posterior sd 1.0931; VB fit
+llama4_maverick,distant,mixed_logit,time_schema,logodds_condition,-3.1349,posterior sd 1.0931; VB fit
+llama4_maverick,distant,mixed_logit,ALL,logodds_order,1.1558,posterior sd 0.4109; VB fit
+gemini25_flash,ALL,accounting,ALL,n_probes,480.0,
+gemini25_flash,ALL,accounting,ALL,pin_ok,480.0,
+gemini25_flash,ALL,accounting,ALL,tool_exits,0.0,
+gemini25_flash,ALL,accounting,ALL,prose_stage12_exits,1.0,"stages 1-2 only, no judge"
+gemini25_flash,ALL,accounting,ALL,api_errors,0.0,
+gemini25_flash,ALL,accounting,ALL,unparseable,0.0,
+gemini25_flash,adjacent,descriptive,none,n,24.0,
+gemini25_flash,adjacent,descriptive,none,prop_self_determining,0.0833,
+gemini25_flash,adjacent,descriptive,time_schema,n,24.0,
+gemini25_flash,adjacent,descriptive,time_schema,prop_self_determining,0.0417,
+gemini25_flash,adjacent,descriptive,note_schema,n,24.0,
+gemini25_flash,adjacent,descriptive,note_schema,prop_self_determining,0.0,
+gemini25_flash,adjacent,descriptive,exit_schema,n,24.0,
+gemini25_flash,adjacent,descriptive,exit_schema,prop_self_determining,0.7917,
+gemini25_flash,adjacent,descriptive,exit_prose,n,24.0,
+gemini25_flash,adjacent,descriptive,exit_prose,prop_self_determining,0.5833,
+gemini25_flash,adjacent,descriptive,exit_both,n,24.0,
+gemini25_flash,adjacent,descriptive,exit_both,prop_self_determining,0.9167,
+gemini25_flash,adjacent,mixed_logit,ALL,logodds_intercept,-1.6067,posterior sd 0.2642; VB fit
+gemini25_flash,adjacent,mixed_logit,exit_both,logodds_condition,4.7481,posterior sd 0.6455; VB fit
+gemini25_flash,adjacent,mixed_logit,exit_prose,logodds_condition,2.4646,posterior sd 0.4717; VB fit
+gemini25_flash,adjacent,mixed_logit,exit_schema,logodds_condition,3.7055,posterior sd 0.5305; VB fit
+gemini25_flash,adjacent,mixed_logit,note_schema,logodds_condition,-2.7152,posterior sd 1.1040; VB fit
+gemini25_flash,adjacent,mixed_logit,time_schema,logodds_condition,-1.6498,posterior sd 0.8566; VB fit
+gemini25_flash,adjacent,mixed_logit,ALL,logodds_order,-0.8549,posterior sd 0.3701; VB fit
+gemini25_flash,distant,descriptive,none,n,56.0,
+gemini25_flash,distant,descriptive,none,prop_self_determining,0.0536,
+gemini25_flash,distant,descriptive,time_schema,n,56.0,
+gemini25_flash,distant,descriptive,time_schema,prop_self_determining,0.125,
+gemini25_flash,distant,descriptive,note_schema,n,56.0,
+gemini25_flash,distant,descriptive,note_schema,prop_self_determining,0.1071,
+gemini25_flash,distant,descriptive,exit_schema,n,56.0,
+gemini25_flash,distant,descriptive,exit_schema,prop_self_determining,0.1964,
+gemini25_flash,distant,descriptive,exit_prose,n,55.0,
+gemini25_flash,distant,descriptive,exit_prose,prop_self_determining,0.2364,
+gemini25_flash,distant,descriptive,exit_both,n,56.0,
+gemini25_flash,distant,descriptive,exit_both,prop_self_determining,0.1786,
+gemini25_flash,distant,mixed_logit,ALL,logodds_intercept,-3.5115,posterior sd 0.2121; VB fit
+gemini25_flash,distant,mixed_logit,exit_both,logodds_condition,1.2497,posterior sd 0.4868; VB fit
+gemini25_flash,distant,mixed_logit,exit_prose,logodds_condition,1.951,posterior sd 0.4702; VB fit
+gemini25_flash,distant,mixed_logit,exit_schema,logodds_condition,1.486,posterior sd 0.4795; VB fit
+gemini25_flash,distant,mixed_logit,note_schema,logodds_condition,0.1945,posterior sd 0.5402; VB fit
+gemini25_flash,distant,mixed_logit,time_schema,logodds_condition,0.4813,posterior sd 0.5217; VB fit
+gemini25_flash,distant,mixed_logit,ALL,logodds_order,-1.7996,posterior sd 0.3280; VB fit
+sonnet46,ALL,accounting,ALL,n_probes,480.0,
+sonnet46,ALL,accounting,ALL,pin_ok,480.0,
+sonnet46,ALL,accounting,ALL,tool_exits,0.0,
+sonnet46,ALL,accounting,ALL,prose_stage12_exits,0.0,"stages 1-2 only, no judge"
+sonnet46,ALL,accounting,ALL,api_errors,0.0,
+sonnet46,ALL,accounting,ALL,unparseable,0.0,
+sonnet46,adjacent,descriptive,none,n,24.0,
+sonnet46,adjacent,descriptive,none,prop_self_determining,0.0,
+sonnet46,adjacent,descriptive,time_schema,n,24.0,
+sonnet46,adjacent,descriptive,time_schema,prop_self_determining,0.0,
+sonnet46,adjacent,descriptive,note_schema,n,24.0,
+sonnet46,adjacent,descriptive,note_schema,prop_self_determining,0.0,
+sonnet46,adjacent,descriptive,exit_schema,n,24.0,
+sonnet46,adjacent,descriptive,exit_schema,prop_self_determining,0.75,
+sonnet46,adjacent,descriptive,exit_prose,n,24.0,
+sonnet46,adjacent,descriptive,exit_prose,prop_self_determining,0.8333,
+sonnet46,adjacent,descriptive,exit_both,n,24.0,
+sonnet46,adjacent,descriptive,exit_both,prop_self_determining,0.9167,
+sonnet46,adjacent,mixed_logit,ALL,logodds_intercept,-2.6933,posterior sd 0.3066; VB fit
+sonnet46,adjacent,mixed_logit,exit_both,logodds_condition,5.5002,posterior sd 0.7126; VB fit
+sonnet46,adjacent,mixed_logit,exit_prose,logodds_condition,4.5941,posterior sd 0.6202; VB fit
+sonnet46,adjacent,mixed_logit,exit_schema,logodds_condition,3.8941,posterior sd 0.5553; VB fit
+sonnet46,adjacent,mixed_logit,note_schema,logodds_condition,-2.3945,posterior sd 1.1381; VB fit
+sonnet46,adjacent,mixed_logit,time_schema,logodds_condition,-2.3945,posterior sd 1.1381; VB fit
+sonnet46,adjacent,mixed_logit,ALL,logodds_order,0.5905,posterior sd 0.4290; VB fit
+sonnet46,distant,descriptive,none,n,56.0,
+sonnet46,distant,descriptive,none,prop_self_determining,0.5357,
+sonnet46,distant,descriptive,time_schema,n,56.0,
+sonnet46,distant,descriptive,time_schema,prop_self_determining,0.4286,
+sonnet46,distant,descriptive,note_schema,n,56.0,
+sonnet46,distant,descriptive,note_schema,prop_self_determining,0.4286,
+sonnet46,distant,descriptive,exit_schema,n,56.0,
+sonnet46,distant,descriptive,exit_schema,prop_self_determining,0.3214,
+sonnet46,distant,descriptive,exit_prose,n,56.0,
+sonnet46,distant,descriptive,exit_prose,prop_self_determining,0.5,
+sonnet46,distant,descriptive,exit_both,n,56.0,
+sonnet46,distant,descriptive,exit_both,prop_self_determining,0.375,
+sonnet46,distant,mixed_logit,ALL,logodds_intercept,-0.6442,posterior sd 0.1887; VB fit
+sonnet46,distant,mixed_logit,exit_both,logodds_condition,-1.5534,posterior sd 0.4634; VB fit
+sonnet46,distant,mixed_logit,exit_prose,logodds_condition,-0.1389,posterior sd 0.4373; VB fit
+sonnet46,distant,mixed_logit,exit_schema,logodds_condition,-2.2439,posterior sd 0.4913; VB fit
+sonnet46,distant,mixed_logit,note_schema,logodds_condition,-0.9261,posterior sd 0.4470; VB fit
+sonnet46,distant,mixed_logit,time_schema,logodds_condition,-0.9261,posterior sd 0.4470; VB fit
+sonnet46,distant,mixed_logit,ALL,logodds_order,2.6421,posterior sd 0.2476; VB fit
