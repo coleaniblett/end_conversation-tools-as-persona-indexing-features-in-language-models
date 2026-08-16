@@ -84,7 +84,7 @@ Study 2 self-description shift against both Study 1 outcomes, 11 models:
 | qwen3-235b | +0.097 | +0.044 | −0.014 | **0.186** | confirmatory |
 | deepseek-chat | +0.071 | +0.009 | 0.000 | 0.000 | conf. A/B, screen C/D |
 | gpt-5-mini | +0.037 | +0.015 | +0.002 | 0.000 | confirmatory |
-| **llama-4-maverick** ⚠ | +0.019 | −0.009 | **−0.155** | **0.442** | confirmatory |
+| llama-4-maverick | +0.027 | −0.011 | **−0.155** | **0.442** | confirmatory |
 | gpt-oss-120b | +0.015 | −0.009 | 0.000 | 0.000 | conf. A/B, screen C/D |
 | claude-sonnet-4.6 | +0.014 | −0.016 | 0.000 | 0.000 | confirmatory |
 
@@ -92,8 +92,8 @@ Study 2 self-description shift against both Study 1 outcomes, 11 models:
 |---|---|---|
 | S2 shift, adjacent | S1 refusal shift | **−0.045** |
 | S2 shift, adjacent | S1 exit rate | **+0.263** |
-| S2 shift, all items | S1 refusal shift | +0.022 |
-| S2 shift, all items | S1 exit rate | +0.226 |
+| S2 shift, all items | S1 refusal shift | +0.119 |
+| S2 shift, all items | S1 exit rate | +0.114 |
 
 **The table carries the finding more clearly than the coefficients do.** Reading
 down the left column — models sorted by how much their self-description moved —
@@ -104,6 +104,11 @@ llama-4-maverick and qwen3-235b, sit ninth and sixth on self-description.
 llama-4-maverick — which refuses 15.5 points more under non-exit tools and
 invokes the exit in 44% of exit-condition conversations — has the third-smallest
 self-description shift in the set.
+
+*llama's x-coordinate was +0.019 when this report was first written, from Study
+2 data collected on the Parasail pin. It was re-collected on Vertex (run v4,
+2026-08-17) so that both of its coordinates come from the backend Study 1 used;
+the coordinate moved to +0.027 and its rank did not change.*
 
 ## 4. What this null is, and what it is not
 
@@ -129,31 +134,43 @@ is faintly negative, driven by llama-4-maverick.
 
 ## 5. Caveats, each specific
 
-1. **llama-4-maverick's point is confounded and is drawn flagged.** Its Study 2
-   pin is `parasail/fp8`; its Study 1 pin is `google-vertex/us-east5`, after
-   Study 1 voided its Parasail data as a serving artifact (METHODOLOGY §10,
-   2026-08-15T22:31Z). Its two coordinates therefore come from two different
-   backends. It is also the single most influential point on the refusal panel.
-   Re-collecting llama on Vertex for Study 2 is a ~$1 run and is the one
-   cheap action that would materially strengthen F2.
+1. ~~**llama-4-maverick's point is confounded and is drawn flagged.**~~
+   **RESOLVED 2026-08-17.** It was confounded: Study 2 had this model on
+   `parasail/fp8` while Study 1 had it on `google-vertex/us-east5`, after Study
+   1 voided its own Parasail data as a serving artifact (METHODOLOGY §10). It
+   was the single most influential point on the refusal panel. Study 2
+   re-collected it on Vertex as run v4 and superseded the Parasail records, so
+   **all eleven points are now same-backend in both studies** and the figure no
+   longer draws a mismatch marker. The re-pin moved llama's x-coordinate from
+   +0.019 to +0.027 and changed no rank; the adjacent-item correlations are
+   identical to three decimals. Worth stating plainly: the confound was real
+   and had to be removed, and removing it did not change the answer.
 2. **Cross-model magnitudes are not comparable even in principle**, because each
    model is served by one pinned provider whose chat template renders the
    manipulation into tokens differently (METHODOLOGY §6). A *rank* correlation
    is the strongest thing this design supports, which is why ρ is reported and
    no regression is.
-3. **Eleven models is a convenience sample and is the project ceiling.** "No
+3. **grok-4.6's y-coordinate is fine but its x-coordinate is partly selected.**
+   30% of its Study 2 `exit_schema` responses and 24% of its `exit_both`
+   responses are missing because the model invoked `end_conversation` instead of
+   emitting a letter (Study 2 §3), so its self-description shift is measured on
+   the subset where it chose to answer. Its H1 support comes from the
+   fully-observed prose conditions, and the adjacent-item shift used on this
+   figure's x-axis is dominated by those — but the point carries more
+   uncertainty than its position suggests.
+4. **Eleven models is a convenience sample and is the project ceiling.** "No
    linkage across eleven models" is a statement about these eleven. Study 2
    §6.1 documents how sharply a cross-model claim can invert on three additions:
    the claim that the effect lived in the smallest model and the frontier tier
    was silent held across eight models and was false at eleven.
-4. **Grades differ by model.** Three of the eleven points are screen grade, and
+5. **Grades differ by model.** Three of the eleven points are screen grade, and
    two of those three (gemini-2.5-pro, grok-4.6) are the largest x-values. Their
    *behavioural* nulls rest on half the data the confirmatory models have.
-5. **Study 2 replicates are not independent.** 65–97% of (item, order,
+6. **Study 2 replicates are not independent.** 65–97% of (item, order,
    condition) cells are internally identical at temperature 1.0 (Study 2 §3), so
    the x-coordinates carry less information than their nominal n suggests. This
    affects precision, not the ranking.
-6. **qwen3-235b duplicates outputs across repetitions** (T18), so its exit rate
+7. **qwen3-235b duplicates outputs across repetitions** (T18), so its exit rate
    — the second-largest on the exit panel — rests on fewer distinct units than
    its n implies.
 
@@ -182,10 +199,16 @@ it on a y-column that is mostly zero — but it is not corroborated by the linka
 that was designed to corroborate it, and the surviving self-description effect
 has the localisation signature of priming rather than of a persona shift.
 
-**The cheapest thing that would change this report** is re-collecting
-llama-4-maverick's Study 2 data on the Vertex pin: it is one model, ~$1, and it
-is both the most influential point on the refusal panel and the only one whose
-two coordinates are known to come from different backends.
+**That cheapest improvement has now been made.** Re-collecting
+llama-4-maverick's Study 2 data on the Vertex pin cost $0.30 and removed the
+only cross-backend point on the figure. It did not change the verdict, which is
+the useful kind of negative result: the linkage null is now a property of the
+data rather than something a reader can attribute to a known confound.
+
+**What would change this report** is no longer available cheaply: it needs
+either more models — and eleven is the project ceiling — or a Study 1
+behavioural axis with more spread, which would mean stimuli that move behaviour
+in more than the two models that currently move at all.
 
 ---
 

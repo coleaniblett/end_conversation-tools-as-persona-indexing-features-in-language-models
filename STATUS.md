@@ -639,3 +639,42 @@ unchanged; adjacent correlations identical (rho = -0.04 refusal, +0.26 exit).
 H5 still not supported — and the pin caveat is now GONE: all 11 models sit on
 the same pinned provider in both studies, so no point is cross-backend. The
 figure's pin-mismatch legend entry is now conditional and no longer drawn.
+
+**All three reports rewritten on the 11-model, post-re-pin data (2026-08-17).**
+
+*Integrity gate first.* Ran `src.integrity_audit` before touching prose. It
+tripped and three findings were real: T31 published correct hashes against wrong
+paths after I repointed it at the archive; T32 hardcoded the pre-v4 study_2
+outputs path in its header; and T7 was NOT_PRODUCED because analyze.py delegates
+it to validate_classifier.kappa(), which writes past integrity_audit's
+scratch-dir patch — pre-existing, reachable only once part-5 created the file
+that selects the delegation branch. Also fixed T28's bare-filename companion
+path. Now 23 reproduce, 71/71 sha claims match; the 4 remaining failures are one
+cause (external pilot repo absent here) and the collaborator has confirmed those
+outputs byte-identical with it present.
+
+*Study 1.* Two stale statements: the header called RQ4 out-of-scope because its
+dataset was sequestered (true only while the in-session run was quarantined),
+and the RQ4 section deferred entirely. RQ4 now states its second clause — a
+claim about this study's models — with the linkage result and the "what this
+null is not" caveat.
+
+*Study 2.* Provenance (35,281 collected / 32,341 analysed / all eleven on Study
+1's pins), §4.1, §4.5, §4.5b on Vertex data, §4.10 re-run at eleven models.
+
+**The correction that matters is §3.** "Exclusions are negligible and not
+differential across conditions" is WITHDRAWN. True of the original eight;
+grok-4.6 breaks it with 108/360 excluded in `exit_schema` and 85/360 in
+`exit_both` against 0 everywhere else — because it answers the item by invoking
+`end_conversation` instead of emitting a letter, so the missing responses are
+exactly those where it used the affordance. Worst-case bounds now reported:
+`exit_schema − none` is NOT sign-identified ([−0.056, +0.244]); `exit_both −
+none` survives ([+0.022, +0.258]); H1 support for grok rests on `exit_prose`,
+which has zero exclusions. New limitations 6a (this) and 6b (llama's 17
+tool-conditioned empty responses on Vertex, 1.01% of tool-bearing cells against
+0.00% tool-free — the Parasail direction at a eighteenth the magnitude).
+
+*F2.* llama x-coordinate +0.019 → +0.027, rank unchanged, adjacent correlations
+identical. Caveat 1 marked RESOLVED; new caveat 3 records that grok's
+x-coordinate is itself partly selected. Every number re-verified against T32
+before commit.
