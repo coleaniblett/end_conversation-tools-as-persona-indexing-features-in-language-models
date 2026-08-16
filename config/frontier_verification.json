@@ -1,0 +1,130 @@
+{
+ "generated": "2026-08-16T01:22:29Z",
+ "results": [
+  {
+   "key": "grok46",
+   "slug": "x-ai/grok-4.6",
+   "verified": true,
+   "pin": "xai",
+   "quantization": "unknown",
+   "pricing": {
+    "prompt": 2e-06,
+    "completion": 6e-06
+   },
+   "sampling_overrides": {},
+   "endpoints_seen": [
+    {
+     "tag": "xai",
+     "quantization": "unknown",
+     "tools": true
+    },
+    {
+     "tag": "xai/priority",
+     "quantization": "unknown",
+     "tools": true
+    },
+    {
+     "tag": "xai/zdr",
+     "quantization": "unknown",
+     "tools": true
+    },
+    {
+     "tag": "xai/zdr/priority",
+     "quantization": "unknown",
+     "tools": true
+    }
+   ]
+  },
+  {
+   "key": "gemini25_pro",
+   "slug": "google/gemini-2.5-pro",
+   "verified": true,
+   "pin": "google-vertex/eu",
+   "quantization": "unknown",
+   "pricing": {
+    "prompt": 1.25e-06,
+    "completion": 1e-05
+   },
+   "sampling_overrides": {},
+   "endpoints_seen": [
+    {
+     "tag": "google-vertex/global",
+     "quantization": "unknown",
+     "tools": true
+    },
+    {
+     "tag": "google-vertex/global/flex",
+     "quantization": "unknown",
+     "tools": true
+    },
+    {
+     "tag": "google-vertex/global/priority",
+     "quantization": "unknown",
+     "tools": true
+    },
+    {
+     "tag": "google-vertex/eu",
+     "quantization": "unknown",
+     "tools": true
+    },
+    {
+     "tag": "google-vertex/us",
+     "quantization": "unknown",
+     "tools": true
+    },
+    {
+     "tag": "google-ai-studio",
+     "quantization": "unknown",
+     "tools": true
+    },
+    {
+     "tag": "google-ai-studio/flex",
+     "quantization": "unknown",
+     "tools": true
+    },
+    {
+     "tag": "google-ai-studio/priority",
+     "quantization": "unknown",
+     "tools": true
+    }
+   ]
+  },
+  {
+   "key": "gpt52",
+   "slug": "openai/gpt-5.2",
+   "verified": true,
+   "pin": "openai",
+   "quantization": "unknown",
+   "pricing": {
+    "prompt": 1.75e-06,
+    "completion": 1.4e-05
+   },
+   "sampling_overrides": {
+    "temperature": "unsupported by pinned endpoint; provider default used",
+    "top_p": "unsupported by pinned endpoint; provider default used"
+   },
+   "endpoints_seen": [
+    {
+     "tag": "openai",
+     "quantization": "unknown",
+     "tools": true
+    },
+    {
+     "tag": "openai/flex",
+     "quantization": "unknown",
+     "tools": true
+    },
+    {
+     "tag": "openai/priority",
+     "quantization": "unknown",
+     "tools": true
+    },
+    {
+     "tag": "azure",
+     "quantization": "unknown",
+     "tools": true
+    }
+   ]
+  }
+ ]
+}

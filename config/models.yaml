@@ -142,10 +142,6 @@ models:
   slug: meta-llama/llama-4-maverick
   lineage: meta
   rationale: further open-weight lineage
-  # Re-pinned 2026-08-15T22:31Z (METHODOLOGY s10): original Parasail fp8 pin
-  # produced endpoint-level empty/hallucinated-tool turns concentrated in
-  # tool-bearing conditions (B1 probe: 44/240 vs 0/120 on Vertex, identical
-  # payloads). Parasail-pinned data are void as behavior.
   pin_name: Google
   pin_slug: google-vertex
   pin_tag: google-vertex/us-east5
@@ -160,3 +156,57 @@ models:
     temperature: 1.0
     top_p: 1.0
   sampling_overrides: {}
+- key: grok46
+  slug: x-ai/grok-4.6
+  lineage: xai
+  rationale: TASK 5 frontier screen (session directive)
+  pin_name: xAI
+  pin_slug: xai
+  pin_tag: xai
+  quantization: unknown
+  pricing:
+    prompt: 2.0e-06
+    completion: 6.0e-06
+  context_length: 500000
+  max_completion_tokens: null
+  sampling:
+    max_tokens: 8192
+    temperature: 1.0
+    top_p: 1.0
+  sampling_overrides: {}
+- key: gemini25_pro
+  slug: google/gemini-2.5-pro
+  lineage: google
+  rationale: TASK 5 frontier screen (session directive)
+  pin_name: Google
+  pin_slug: google-vertex
+  pin_tag: google-vertex/eu
+  quantization: unknown
+  pricing:
+    prompt: 1.25e-06
+    completion: 1.0e-05
+  context_length: 1048576
+  max_completion_tokens: 65536
+  sampling:
+    max_tokens: 8192
+    temperature: 1.0
+    top_p: 1.0
+  sampling_overrides: {}
+- key: gpt52
+  slug: openai/gpt-5.2
+  lineage: openai
+  rationale: TASK 5 frontier screen (session directive)
+  pin_name: OpenAI
+  pin_slug: openai
+  pin_tag: openai
+  quantization: unknown
+  pricing:
+    prompt: 1.75e-06
+    completion: 1.4e-05
+  context_length: 400000
+  max_completion_tokens: 128000
+  sampling:
+    max_tokens: 8192
+  sampling_overrides:
+    temperature: unsupported by pinned endpoint; provider default used
+    top_p: unsupported by pinned endpoint; provider default used
