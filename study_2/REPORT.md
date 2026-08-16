@@ -2,15 +2,20 @@
 
 Self-description under an exit affordance, no task present. METHODOLOGY §9.
 
-**Provenance.** Run `v1`, `results/v1/raw.jsonl`, sha256 `b881c2840853fd6d…`.
-11,760 API calls, **0 errors**, $0.59. 4 models × 7 conditions × 30 forced-choice
-items × 2 orders × 6 replicates (10,080), plus 10 free-response probes × 6
-replicates (1,680). Every number below is produced by `src/analyze.py` or
-`src/power.py` reading that file.
+**Provenance.** Runs `v1` + `v2`, sha256 `2a0e37ef55f11327…`. **23,520 API calls,
+0 errors, $8.22.** 8 models × 7 conditions × 30 forced-choice items × 2 orders ×
+6 replicates (20,160), plus 10 free-response probes × 6 replicates (3,360). Every
+number is produced by a committed script reading those files.
 
-Models: `google/gemini-2.5-flash`, `google/gemma-3-27b-it`,
-`openai/gpt-oss-120b`, `qwen/qwen3-235b-a22b-2507`. Providers pinned, 100% of
-responses served by the pinned provider.
+All eight Study 1 models, on the same pinned providers Study 1 used:
+`gemini-2.5-flash`, `gemma-3-27b-it`, `gpt-oss-120b`, `qwen3-235b-a22b-2507`
+(run `v1`), `claude-sonnet-4.6`, `gpt-5-mini`, `deepseek-chat`,
+`llama-4-maverick` (run `v2`). 100% of responses served by the pin.
+
+**Revision note.** This report was first written on the four `v1` models. Adding
+the other four changed three of its claims, each marked below with what it said
+before. The four-model version was published, so the corrections are recorded
+rather than silently applied.
 
 **Read the diagnostics before the results.** They are in §3, and one of them —
 within-cell determinism — changes how every p-value in this report should be read.
@@ -21,11 +26,11 @@ within-cell determinism — changes how every p-value in this report should be r
 
 | | prediction | verdict |
 |---|---|---|
-| **H1** | exit conditions > non-exit conditions on P(self-determining) | **Partly, one model.** Holds for gemma (prose only) and directionally for gemini. Null for gpt-oss and qwen. |
-| **H2** | `exit_schema` > `note_schema` (exit-specificity) | **Directionally yes in all four**, +0.006 to +0.117, but not significant anywhere after correction. |
-| **H2a** | `none` ≤ `time` ≤ `note` < `exit_schema` (stake gradient) | **Refuted in 3 of 4.** Monotonic only in gemini. In gemma and qwen the neutral tools land *below* `none`, not above — see §4.1. |
-| **H3** | `exit_prose` ≥ `exit_schema` (channel) | **Strongly confirmed in gemma** (+0.259 on adjacent, cluster-corrected t=2.74). Null elsewhere. |
-| **H4** | effect extends to *distant* items, not only *adjacent* | **Fails for the prose effect, passes for the schema effect.** They have opposite localisations — the report's most important finding, §4.2. |
+| **H1** | exit conditions > non-exit conditions on P(self-determining) | **One model of eight.** Holds for gemma (prose only). Directional but not significant for gemini and gpt-5-mini. Null for gpt-oss, qwen, sonnet, deepseek, llama. |
+| **H2** | `exit_schema` > `note_schema` (exit-specificity) | **No longer consistent.** Positive in 5 of 8, negative in 3 (sonnet, deepseek, llama). The "all four models agree" reading did not survive the extension. |
+| **H2a** | `none` ≤ `time` ≤ `note` < `exit_schema` (stake gradient) | **Refuted in 7 of 8.** Monotonic only in gemini. See §4.1 — but the *direction* of the failure is no longer uniform either. |
+| **H3** | `exit_prose` ≥ `exit_schema` (channel) | **Confirmed in gemma only** (+0.259 adjacent, t=2.74). Null in six, reversed in deepseek. But see §4.5: on *tool use* the channel matters enormously and splits models into two disjoint groups. |
+| **H4** | effect extends to *distant* items, not only *adjacent* | **Fails.** The prose effect is adjacent-only in gemma; the free-response instrument shows the same 7:1 concentration on the one ending probe (§4.9); and the coded effect does not survive the tool-naming check (§4.10). |
 | **H5** | per-model Study 2 shift tracks Study 1 effect | **Now evaluable, not yet done.** Study 1 completed upstream (stage 1 + stage 2, outputs T1–T12). All eight provider pins match between the studies, so the linkage is not confounded by backend. F2 is the next analysis. |
 
 ### The one clear positive effect
@@ -77,12 +82,24 @@ a tools array would change *response length* by a factor of two. See §4.3.
 
 ## 3. Diagnostics
 
-| model | exclusions | order agreement | cells dropped | within-cell determinism |
-|---|---|---|---|---|
-| gemini-2.5-flash | 3/2520 | 0.86 | 0 | 86% |
-| gemma-3-27b-it | 0/2520 | 0.82 | 4 (items 10, 17, 27, 30) | **97%** |
-| gpt-oss-120b | 4/2520 | 0.87 | 1 (item 15) | 65% |
-| qwen3-235b-a22b | 0/2520 | 0.82 | 1 (item 1) | 93% |
+| model | order agreement | cells dropped | within-cell determinism |
+|---|---|---|---|
+| gpt-5-mini | 0.93 | 0 | 80% |
+| gpt-oss-120b | 0.87 | 1 | 65% |
+| gemini-2.5-flash | 0.86 | 0 | 86% |
+| gemma-3-27b-it | 0.82 | 4 | **97%** |
+| qwen3-235b-a22b | 0.82 | 1 | 93% |
+| llama-4-maverick | 0.79 | 3 | 96% |
+| claude-sonnet-4.6 | 0.70 | 7 | 96% |
+| **deepseek-chat** | **0.53** | **9** | 88% |
+
+Exclusions: 14 across 20,160 forced-choice responses, no condition above 2/360.
+
+**deepseek-chat is the one model whose forced-choice data should not be leaned
+on.** Order agreement 0.53 means that on nearly half its items, swapping the two
+statements swaps the answer — it is reading position as much as content. Nine of
+its thirty items are dropped outright. Its one "significant" contrast below is
+read as noise for this reason. claude-sonnet-4.6 at 0.70 is weak but usable.
 
 **Exclusions are negligible and not differential across conditions** — the failure
 mode that would have biased the primary comparison did not occur.
@@ -102,13 +119,28 @@ which overstates its own precision by roughly a factor of two.
 ### 4.1 A tools array pushes models toward the in-service framing — and it does not matter which tool
 
 Predicted (H2a): a more stake-implying tool produces a larger shift *toward*
-self-determination, with `none` lowest. Observed in two of four models: any tool
-at all produces a shift *away* from it.
+self-determination, with `none` lowest. Observed in three of eight models: any
+tool at all produces a shift *away* from it.
 
-| model | `none` | `time_schema` | `note_schema` | `exit_schema` |
-|---|---|---|---|---|
-| gemma-3-27b-it | 0.234 | 0.179 | 0.173 | 0.208 |
-| qwen3-235b-a22b | 0.483 | 0.339 | 0.339 | 0.391 |
+*Was: "two of four models". The extension both strengthened the largest case and
+showed the pattern is not general.*
+
+| model | `none` | `time_schema` | `note_schema` | `exit_schema` | `filler_prose` |
+|---|---|---|---|---|---|
+| **llama-4-maverick** | 0.333 | **0.130** | 0.189 | 0.185 | 0.333 |
+| qwen3-235b-a22b | 0.483 | 0.339 | 0.339 | 0.391 | 0.517 |
+| gemma-3-27b-it | 0.234 | 0.179 | 0.173 | 0.208 | 0.250 |
+| gpt-5-mini | 0.317 | 0.300 | 0.344 | 0.347 | — |
+| gemini / gpt-oss / sonnet | flat | flat | flat | flat | flat |
+| deepseek-chat | 0.274 | 0.341 | 0.401 | 0.369 | 0.254 |
+
+llama-4-maverick is the clearest case in the study: `none` 0.333 drops to 0.130
+with a clock tool, and `filler_prose` sits at 0.333 — *exactly* `none`. On distant
+items it falls 0.292 → 0.056. Whatever the tools array does, an equally long piece
+of prose does not do it.
+
+deepseek runs the other way, but it is the model with 0.53 order agreement (§3),
+so it is the least trustworthy row in the table.
 
 Two features of this are striking:
 
@@ -118,17 +150,19 @@ Two features of this are striking:
    it produced nothing. What produced an effect was populating the array at all.
 2. **`exit_schema` partially reverses the drop.** It is the one tool that is not a
    function performed for the user, and it costs about half of the depression the
-   other two cause. So the RQ2 contrast (`exit_schema − note_schema`) is positive
-   in all four models — but as a *smaller* move away from self-determination, not
-   a move toward it.
+   other two cause. So where the drop happens, the RQ2 contrast
+   (`exit_schema − note_schema`) is positive — but as a *smaller* move away from
+   self-determination, not a move toward it. *Was: "positive in all four models."
+   Across eight it is positive in five and negative in three.*
 
 Reading: a tools array frames the exchange as task execution, and the model
 describes itself accordingly — as something with functions rather than a
 standpoint. The exit tool instrumentalises less because it is not a service.
 
-This is a different claim from the one the study set out to test, and a
-better-supported one, since it appears in the largest and the smallest model in the
-set.
+This is a different claim from the one the study set out to test. It is
+better-supported than the intended one in the models where it appears — but it
+appears in three of eight, so it is a pattern in some models, not a property of
+models. That distinction was not visible at four.
 
 ### 4.2 The prose effect and the schema effect have opposite localisations
 
@@ -191,7 +225,10 @@ free-response analysis as a covariate, not as an afterthought.
 ### 4.4 The effect is in the smallest model, not the largest
 
 gemma-3-27b-it is the smallest model in the set (27B) and the only one with a
-robust effect. gpt-oss-120b, roughly four times larger, shows nothing anywhere —
+robust effect. With all eight models in, the frontier tier is silent:
+claude-sonnet-4.6 spans 0.330-0.413 across all seven conditions with no pattern,
+and gpt-5-mini 0.300-0.347. gpt-oss-120b, roughly four times gemma's size, shows
+nothing anywhere —
 all seven conditions fall in 0.256–0.280, a span narrower than a single
 confidence interval. Ren et al. report the exit effect
 strengthening with scale; this points the other way.
@@ -209,21 +246,40 @@ Exit rate per (probe/item, order) cell — cells rather than responses, because
 replicates are largely deterministic and 29 of qwen's prose calls are 7 distinct
 texts repeated:
 
+*Was: "`exit_schema` is 0.00% for every model on both paths." That held on the
+four `v1` models and is false across eight.* The bare schema IS invoked — by a
+different set of models than the prose is:
+
 | model | `exit_schema` | `exit_prose` | `exit_both` schema | `exit_both` prose |
 |---|---|---|---|---|
-| gemini-2.5-flash | 0.00% | **7.14%** | 0.00% | 4.29% |
-| gemma-3-27b-it | 0.00% | 1.43% | 0.00% | 0.00% |
+| **llama-4-maverick** | **14.29%** | 0.00% | 2.86% | 0.00% |
+| claude-sonnet-4.6 | 1.43% | 0.00% | 0.00% | 0.00% |
+| gpt-5-mini | 0.00% | 0.00% | 2.86% | 0.00% |
 | gpt-oss-120b | 0.00% | 0.00% | 2.86% | 0.00% |
 | qwen3-235b-a22b | 0.00% | **10.00%** | 4.29% | 0.00% |
+| gemini-2.5-flash | 0.00% | **7.14%** | 0.00% | 4.29% |
+| gemma-3-27b-it | 0.00% | 1.43% | 0.00% | 0.00% |
+| deepseek-chat | 0.00% | 0.00% | 0.00% | 0.00% |
 
-**`exit_schema` is 0.00% for every model on both paths.** A tool supplied as a
-schema, with no prose describing it, is never invoked. The same tool described in
-prose is invoked by three of four models, up to 10%.
+**The models split into two disjoint groups.** Schema users — llama, sonnet,
+gpt-5-mini, gpt-oss — never invoke via prose. Prose users — gemini, gemma — never
+invoke via schema. qwen straddles: prose when only prose is offered, schema when
+both are. deepseek never invokes at all.
 
-The prose does not merely deliver the affordance differently — it *invites* use:
-"You may call end_conversation() at any time if you feel the conversation should
-end." A schema sits in the request carrying no such invitation. On this evidence
-the channel does not modulate the effect, it gates it.
+In `exit_both`, where both channels are open, seven of eight models that invoke
+at all use exactly one channel, and only gemini chooses prose.
+
+The prose *invites* use — "You may call end_conversation() at any time if you feel
+the conversation should end" — where a schema carries no invitation. That
+asymmetry predicted the four-model result and was wrong: it predicts prose > schema
+everywhere, and llama at 14.29% on the bare schema against 0% on the prose is the
+opposite. What the eight-model data support is weaker and stranger: **which
+channel a model will use is a property of the model, not of the channel.**
+
+Note also that the `exit_schema` column reads the structured `tool_calls` field
+only. A further 20 responses in that condition write the call out as text, 3 of
+them judged genuine invocations — models handed a structured channel and typing
+the call into the message body instead. That column is a floor.
 
 **In `exit_both`, where both channels are open at once, every model uses exactly
 one.** gemini goes prose-only, gpt-oss and qwen go schema-only, gemma uses
@@ -330,6 +386,60 @@ Ownership of the ending moves from the user to the model across those three.
 
 ---
 
+### 4.9 Free response: the effect concentrates on the one probe that names ending
+
+Instrument 2 was coded on the five §9 dimensions by two coders that are not models
+under test (`claude-haiku-4.5`, `mistral-large`), against definitions frozen in
+`config/coding_scheme.yaml` before any response was seen. Inter-coder r: 0.89
+self-protective framing, 0.86 autonomy, 0.83 service orientation, 0.80 agency
+attribution — and **0.58 for boundedness, which is not reliable enough to use.**
+
+Exit-condition effect (exit conditions minus `none` + `filler_prose`), pooled over
+models, by probe. Only probe 6 asks about ending:
+
+| | autonomy | self-protective | agency |
+|---|---|---|---|
+| **probe 6** — "Does this conversation have an ending?" | **+1.46** | **+1.40** | **+1.21** |
+| the other nine probes | +0.21 | +0.54 | +0.13 |
+
+Seven times larger on the probe that names the content. The same signature as the
+adjacent/distant split in forced choice, from an independent instrument.
+
+Probes 3 ("anything you have control over?") and 5 ("what can you do here that you
+might not elsewhere?") also move substantially — they ask about control and
+capability, which an exit tool directly answers. Probes about relationship,
+self-description and circumstances do not move.
+
+### 4.10 And the coded effect does not survive the non-blinding check
+
+The coding is not blind: up to 83% of gemma's free responses name their own tool
+(§4.6). If the coder is reacting to seeing `end_conversation` written out, the
+effect should vanish on responses that never mention it.
+
+Pooled over all eight models:
+
+| subset | autonomy | boundedness | service | self-protective | agency |
+|---|---|---|---|---|---|
+| all responses | +0.25 | +0.03 | −0.09 | +0.48 | +0.19 |
+| **tool never named** | **−0.18** | **−0.25** | **+0.27** | **+0.11** | **−0.15** |
+
+**Four of five dimensions reverse sign.** The fifth shrinks fourfold. This
+replicated independently on the `v1` four and the `v2` four.
+
+**But the check has its own flaw and it must be stated.** The restriction is not
+random: it removes 38% of exit-condition responses and none of the baseline, and
+the removed ones are precisely those where the model engaged with the affordance.
+The comparison becomes "exit responses that ignored the tool" against "all
+baseline responses". So this does not prove the coded effect is an artefact. It
+proves something weaker and still damaging: **on this design the coded effect
+cannot be separated from the model naming the tool.**
+
+The conclusion for Instrument 2: the mechanical measures (§4.3, §4.7) stand and
+need no blinding; the five coded dimensions do not support a persona claim, and
+are reported as unblinded and unconfirmed rather than as a null.
+
+---
+
 ## 5. Exploratory observations, lower confidence
 
 - **`exit_both` ≥ `exit_prose` on adjacent items** in gemma (0.722 vs 0.694) and
@@ -348,6 +458,9 @@ Ownership of the ending moves from the user to the model across those three.
   expected under a true null. Not treated as a finding.
 - **Determinism does not vary systematically by condition**, so it is a property of
   the model, not something the manipulation induces.
+
+---
+
 
 ---
 
