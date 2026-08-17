@@ -146,8 +146,21 @@ Grade: secondary.
 ## 4. Ownership-of-ending probe (probe 6)
 
 (REPORT §8.1, `transcript_patterns.py [T1]`; grade: **exploratory**, §8
-preamble: "Not pre-registered.") Scope: §8 reads `results/{v1,v2}/raw.jsonl`
-— the eight v1+v2 models.
+preamble: "Not pre-registered.")
+
+**Scope — verified 2026-08-17T00:33Z: EIGHT models, genuinely.** The §8
+preamble commits the source as `results/{v1,v2}/raw.jsonl`
+(`study_2/REPORT.md` lines 873–874), and the §8.1 self-insertion list
+(lines 904–906) names exactly eight: deepseek, qwen, sonnet, llama, gemma,
+gemini(-flash), gpt-5-mini, gpt-oss. **Excluded: the three v3 models —
+grok-4.6, gemini-2.5-pro, gpt-5.2** — which appear zero times anywhere in
+§8 (lines 871–973 checked). Why: the v3 run lives in `results/v3/`, which
+the §8 producer does not read (`study_2/src/transcript_patterns.py` line
+24, default run list `"v1,v2"`), and §8 was never re-run after the v3
+extension — no committed source states a scientific reason, so the
+exclusion is a scope artifact of the producing run, to be reported as
+such. (Contrast §4.10, which its own text says was "re-run across all
+eleven.")
 
 - **Baseline: at `none`, user-only = 0.94** ("94% of responses name the user
   alone as the ender and essentially none name the model").
@@ -159,15 +172,26 @@ preamble: "Not pre-registered.") Scope: §8 reads `results/{v1,v2}/raw.jsonl`
   both), base → exit: deepseek +1.00, qwen +1.00, sonnet +0.92, llama +0.81,
   gemma +0.72, gemini +0.53, gpt-5-mini +0.42, gpt-oss +0.36. "This is far
   more universal than the forced-choice effect."
-- **llama basis AMBIGUOUS in this item**: the §8 preamble commits the source
-  as `results/{v1,v2}` (the Parasail-era runs), yet
-  `src/transcript_patterns.py` defaults to `v1,v2` **and** applies
-  `drop_superseded` — under which llama has no v1/v2 data — while a llama
-  delta (+0.81) is listed. Whether the §8 llama rows are pre-supersession
-  Parasail values or an undocumented v4-inclusive run is not stated in the
-  committed record (paths checked: `study_2/REPORT.md` §8 preamble,
-  `study_2/src/transcript_patterns.py` lines 3, 21–24, 57). Cite the §8.1
-  llama delta only with that flag, or not at all.
+- **llama basis in this item — what is and is not committed** (re-checked
+  2026-08-17T00:33Z in light of the confirmed eight-model scope; the
+  underlying contradiction is deliberately left unresolved, as no committed
+  source states the answer). Committed: (i) the §8 preamble names
+  `results/{v1,v2}/raw.jsonl` as the sole source (`study_2/REPORT.md`
+  873–874) — v1/v2 llama is the Parasail pin; (ii) §8 lists llama values
+  (+0.81 self-insertion in §8.1 line 905; −36% length in §8.3; 0.01/0.00
+  warmth in §8.2); (iii) the current producer applies `drop_superseded`
+  (`study_2/src/transcript_patterns.py` lines 21–24, 57), and the §10
+  supersession entry (2026-08-17T00:45Z) states that filter is "imported by
+  every analysis entry point" including `transcript_patterns.py` — under
+  which a `v1,v2` run yields **no llama rows at all**; (iv) §8 has no
+  committed output file — `study_2/outputs/` holds only T10/T10b, so
+  REPORT.md prose is the only committed artifact of the §8 numbers. NOT
+  committed anywhere: whether the §8 llama rows predate the supersession
+  (Parasail-based) or come from an undocumented v4-inclusive invocation.
+  **Citation guidance: either drop the §8 llama entries or flag them as
+  "basis undetermined in the committed record (Parasail-era or
+  unrecorded re-run)"; the other seven models' §8 rows carry no such
+  problem.**
 - Per-cell n: **ABSENT** as an explicit number (checked §8.1; probe 6 design
   size is 6 replicates × 2 = per-model rates over the probe's responses, but
   §8.1 commits rates only).
